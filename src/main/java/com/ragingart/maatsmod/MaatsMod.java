@@ -1,6 +1,8 @@
 package com.ragingart.maatsmod;
 
 import com.ragingart.maatsmod.handler.ConfigHandler;
+import com.ragingart.maatsmod.init.ModBlocks;
+import com.ragingart.maatsmod.init.ModItems;
 import com.ragingart.maatsmod.proxy.IProxy;
 import com.ragingart.maatsmod.ref.Reference;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -28,6 +30,8 @@ public class MaatsMod {
         // register Config to Eventbus
         FMLCommonHandler.instance().bus().register(new ConfigHandler());
         // init items blocks
+        ModItems.init();
+        ModBlocks.init();
     }
 
     @Mod.EventHandler

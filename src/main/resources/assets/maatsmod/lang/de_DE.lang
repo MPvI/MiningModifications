@@ -1,0 +1,8 @@
+// Items
+item.maatsmod:multitool.name=Multitool
+
+//Blocks
+tile.maatsmod:oreMM.name=Maats Erz
+
+// Creative Tab
+itemGroup.maatsmod=Maats Mod
