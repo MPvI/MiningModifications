@@ -3,6 +3,7 @@ package com.ragingart.maatsmod;
 import com.ragingart.maatsmod.handler.ConfigHandler;
 import com.ragingart.maatsmod.init.ModBlocks;
 import com.ragingart.maatsmod.init.ModItems;
+import com.ragingart.maatsmod.init.Recipes;
 import com.ragingart.maatsmod.proxy.IProxy;
 import com.ragingart.maatsmod.ref.Reference;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -37,6 +38,7 @@ public class MaatsMod {
     @Mod.EventHandler
     public void init(FMLInitializationEvent event)
     {
+        Recipes.init();
         // gui, TE, recipes
     }
 

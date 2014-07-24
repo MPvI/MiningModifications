@@ -14,6 +14,8 @@ import java.util.Set;
 public class ItemMultitool extends ItemToolMM
 {
     private static final Set blocksEffectiveAgainst = Sets.newHashSet(new Block[]{ModBlocks.Ore});
+
+
     public ItemMultitool()
     {
         super(3.0F,ToolMaterial.EMERALD,blocksEffectiveAgainst);

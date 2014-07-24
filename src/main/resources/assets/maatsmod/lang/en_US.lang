@@ -1,5 +1,6 @@
 // Items
 item.maatsmod:multitool.name=Multitool
+item.maatsmod:battery.name=Redstone Battery
 
 //Blocks
 tile.maatsmod:oreMM.name=Maats Ore

@@ -11,7 +11,7 @@ public class CreativeTabMM {
         @Override
         public Item getTabIconItem()
         {
-            return ModItems.Multitool;
+            return ModItems.multitool;
         }
     };
 }
