@@ -1,6 +1,6 @@
 package com.ragingart.maatsmod.init;
 
-import com.ragingart.maatsmod.block.BlockMM;
+import com.ragingart.maatsmod.generics.BlockMM;
 import com.ragingart.maatsmod.block.BlockMMOre;
 import com.ragingart.maatsmod.item.ItemBlockMMOre;
 import cpw.mods.fml.common.registry.GameRegistry;

@@ -2,6 +2,7 @@ package com.ragingart.maatsmod.item;
 
 
 import com.google.common.collect.Sets;
+import com.ragingart.maatsmod.generics.ItemToolMM;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 

@@ -1,4 +1,4 @@
-package com.ragingart.maatsmod.item;
+package com.ragingart.maatsmod.generics;
 
 import com.ragingart.maatsmod.creativetab.CreativeTabMM;
 import com.ragingart.maatsmod.ref.Reference;
@@ -39,4 +39,5 @@ public class ItemMM extends Item
     {
         return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
     }
+
 }

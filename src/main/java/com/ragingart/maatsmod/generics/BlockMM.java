@@ -1,4 +1,4 @@
-package com.ragingart.maatsmod.block;
+package com.ragingart.maatsmod.generics;
 
 import com.ragingart.maatsmod.creativetab.CreativeTabMM;
 import com.ragingart.maatsmod.ref.Reference;
