@@ -5,8 +5,7 @@ import com.ragingart.maatsmod.generics.BlockMM;
 public class BlockMMOre extends BlockMM {
     public BlockMMOre()
     {
-        super();
-        this.setBlockName("oreMM");
+        super("oreMM");
         this.setHardness(5.0F);
         this.setHarvestLevel("pickaxe",3);
     }

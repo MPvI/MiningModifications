@@ -2,6 +2,8 @@ package com.ragingart.maatsmod.item;
 
 
 import com.google.common.collect.Sets;
+import com.ragingart.maatsmod.block.BlockCharger;
+import com.ragingart.maatsmod.generics.BlockMM;
 import com.ragingart.maatsmod.generics.ItemToolMM;
 import com.ragingart.maatsmod.init.ModBlocks;
 import net.minecraft.block.Block;
@@ -13,13 +15,14 @@ import java.util.Set;
 
 public class ItemMultitool extends ItemToolMM
 {
-    private static final Set blocksEffectiveAgainst = Sets.newHashSet(new Block[]{ModBlocks.Ore});
+    private static final Set blocksEffectiveAgainst = Sets.newHashSet(new Block[]{ModBlocks.Ore,ModBlocks.Charger});
 
 
     public ItemMultitool()
     {
         super(3.0F,ToolMaterial.EMERALD,blocksEffectiveAgainst);
         this.setHarvestLevel("pickaxe",3);
+        this.setHarvestLevel("wrench",4);
         this.setUnlocalizedName("multitool");
     }
 
@@ -37,6 +40,10 @@ public class ItemMultitool extends ItemToolMM
     {
         System.out.println("rightclick on block");
         System.out.println(par4 + " / " + par5 + " / " + par6 + " / " + par7);
+        Block block = par3World.getBlock(par4,par5,par6);
+        if (block instanceof BlockCharger){
+            block.dropBlockAsItem(par3World,par4,par5,par6,0,1);
+        }
         return true;
     }
 

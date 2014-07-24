@@ -13,13 +13,13 @@ public class BlockMM extends Block
     public BlockMM(Material material)
     {
         super(material);
-
         this.setCreativeTab(CreativeTabMM.MM_TAB);
     }
 
-    public BlockMM()
+    public BlockMM(String name)
     {
         this(Material.rock);
+        this.setBlockName(name);
     }
 
     @Override

@@ -4,6 +4,7 @@ item.maatsmod:battery.name=Redstone Batterie
 
 //Blocks
 tile.maatsmod:oreMM.name=Maats Erz
+tile.maatsmod:charger.name=Ladegerät
 
 // Creative Tab
 itemGroup.maatsmod=Maats Mod
