@@ -1,8 +1,8 @@
 package com.ragingart.maatsmod.util;
 
 import com.ragingart.maatsmod.ref.Reference;
-import org.apache.logging.log4j.Level;
 import cpw.mods.fml.common.FMLLog;
+import org.apache.logging.log4j.Level;
 
 public class LogHelper {
 

@@ -1,7 +1,7 @@
 package com.ragingart.maatsmod.init;
 
-import com.ragingart.maatsmod.item.ItemMultitool;
 import com.ragingart.maatsmod.generics.ItemToolMM;
+import com.ragingart.maatsmod.item.ItemMultitool;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class ModItems {

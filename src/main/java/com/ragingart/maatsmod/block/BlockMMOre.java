@@ -8,5 +8,8 @@ public class BlockMMOre extends BlockMM {
         super();
         this.setBlockName("oreMM");
         this.setHardness(5.0F);
+        this.setHarvestLevel("pickaxe",3);
     }
+
+
 }

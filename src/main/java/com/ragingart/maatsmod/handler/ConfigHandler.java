@@ -1,7 +1,5 @@
 package com.ragingart.maatsmod.handler;
 
-import com.ragingart.maatsmod.ref.Reference;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.common.config.Configuration;
 
 import java.io.File;

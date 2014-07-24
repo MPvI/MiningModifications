@@ -1,8 +1,6 @@
 package com.ragingart.maatsmod.generics;
 
 import com.ragingart.maatsmod.creativetab.CreativeTabMM;
-import com.ragingart.maatsmod.init.ModItems;
-import com.ragingart.maatsmod.item.ItemMultitool;
 import com.ragingart.maatsmod.ref.Reference;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
