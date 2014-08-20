@@ -1,6 +1,7 @@
 package com.ragingart.maatsmod;
 
 import com.ragingart.maatsmod.handler.ConfigHandler;
+import com.ragingart.maatsmod.handler.GuiHandler;
 import com.ragingart.maatsmod.init.ModBlocks;
 import com.ragingart.maatsmod.init.ModItems;
 import com.ragingart.maatsmod.init.Recipes;
@@ -12,6 +13,7 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
 
 @Mod(modid= Reference.MOD_ID,name = Reference.MOD_NAME,version = Reference.VERSION,guiFactory = Reference.GUI_FACTORY)
 public class MaatsMod {
@@ -38,8 +40,12 @@ public class MaatsMod {
     @Mod.EventHandler
     public void init(FMLInitializationEvent event)
     {
+        //Recipes
         Recipes.init();
-        // gui, TE, recipes
+        //Tile Entities
+        proxy.registerTileEntities();
+        // gui
+        NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
     }
 
     @Mod.EventHandler

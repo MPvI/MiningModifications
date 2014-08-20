@@ -1,11 +1,12 @@
 package com.ragingart.maatsmod.client.gui;
 //TODO
-/*
+
 import com.ragingart.maatsmod.handler.ConfigHandler;
 import com.ragingart.maatsmod.ref.Reference;
+import cpw.mods.fml.client.config.GuiConfig;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.ConfigElement;
+import net.minecraftforge.common.config.Configuration;
 
 public class ModGuiConfig extends GuiConfig
 {
@@ -17,4 +18,4 @@ public class ModGuiConfig extends GuiConfig
                 false,
                 GuiConfig.getAbridgedConfigPath(ConfigHandler.config.toString()));
     }
-}*/
+}

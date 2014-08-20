@@ -1,19 +1,19 @@
 package com.ragingart.maatsmod.block;
 
 
-import cofh.api.energy.IEnergyHandler;
-import com.ragingart.maatsmod.generics.BlockContainerMM;
+import com.ragingart.maatsmod.MaatsMod;
 import com.ragingart.maatsmod.generics.BlockMM;
+import com.ragingart.maatsmod.tileentity.TileEntityCharger;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockCharger extends BlockContainerMM implements IEnergyHandler{
+public class BlockCharger extends BlockMM implements ITileEntityProvider{
     @SideOnly(Side.CLIENT)
     private IIcon front_txt_on;
     @SideOnly(Side.CLIENT)
@@ -63,30 +63,27 @@ public class BlockCharger extends BlockContainerMM implements IEnergyHandler{
         front_txt_off_bat = iconRegister.registerIcon("maatsmod:charger_front_off_bat");
     }
 
-
-
     @Override
-    public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate) {
-        return 0;
+    public TileEntity createNewTileEntity(World world, int meta){
+        return new TileEntityCharger();
     }
 
     @Override
-    public int extractEnergy(ForgeDirection from, int maxExtract, boolean simulate) {
-        return 0;
-    }
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9)
+    {
 
-    @Override
-    public int getEnergyStored(ForgeDirection from) {
-        return 0;
-    }
+            if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityCharger) {
+                player.openGui(MaatsMod.instance, 1, world, x, y, z);
+            }
+            /*
+            Block block = world.getBlock(x,y,z);
+            if (block instanceof BlockCharger){
+                 TileEntity te = world.getTileEntity(x,y,z);
+                    if(te instanceof TileEntityCharger){
+                        System.out.println(((TileEntityCharger) te).getEnergyStored(ForgeDirection.DOWN));
+                    }
+            }*/
+            return true;
 
-    @Override
-    public int getMaxEnergyStored(ForgeDirection from) {
-        return 0;
-    }
-
-    @Override
-    public boolean canConnectEnergy(ForgeDirection from) {
-        return from==ForgeDirection.DOWN ? true : false;
     }
 }

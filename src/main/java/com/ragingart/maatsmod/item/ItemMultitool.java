@@ -6,12 +6,15 @@ import com.google.common.collect.Sets;
 import com.ragingart.maatsmod.block.BlockCharger;
 import com.ragingart.maatsmod.generics.ItemToolMM;
 import com.ragingart.maatsmod.init.ModBlocks;
+import com.ragingart.maatsmod.tileentity.TileEntityCharger;
 import com.ragingart.maatsmod.util.LogHelper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.Set;
 
@@ -50,7 +53,10 @@ public class ItemMultitool extends ItemToolMM implements IEnergyContainerItem
         System.out.println(par4 + " / " + par5 + " / " + par6 + " / " + par7);
         Block block = par3World.getBlock(par4,par5,par6);
         if (block instanceof BlockCharger){
-            //block.dropBlockAsItem(par3World,par4,par5,par6,0,1);
+            TileEntity te = par3World.getTileEntity(par4, par5, par6);
+            if(te instanceof TileEntityCharger){
+                System.out.println(((TileEntityCharger) te).getEnergyStored(ForgeDirection.DOWN));
+            }
         }
         LogHelper.info("Energy:" + getEnergyStored(par1ItemStack));
         return true;
