@@ -16,6 +16,11 @@ public class ItemMM extends Item
         this.setCreativeTab(CreativeTabMM.MM_TAB);
     }
 
+    public ItemMM(String name){
+        this();
+        this.setUnlocalizedName(name);
+    }
+
     @Override
     public String getUnlocalizedName()
     {

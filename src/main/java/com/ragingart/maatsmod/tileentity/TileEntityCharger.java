@@ -1,7 +1,10 @@
 package com.ragingart.maatsmod.tileentity;
 
+import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyHandler;
+import cofh.api.energy.IEnergyStorage;
 import com.ragingart.maatsmod.generics.TileEntityMM;
+import com.ragingart.maatsmod.init.ModItems;
 import com.ragingart.maatsmod.ref.Names;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -11,37 +14,39 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityCharger extends TileEntityMM implements IEnergyHandler,IInventory {
 
-    private int capacity = 100000;
-    private int stored = 0;
+    private EnergyStorage energy = new EnergyStorage(100000);
     private ItemStack inventory;
+
+    public boolean getHasContainer(){
+        boolean tmp = false;
+        if(inventory != null){
+            tmp = inventory.getItem()==ModItems.battery;
+        }
+        return tmp;
+    }
 
     @Override
     public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate) {
-        if(stored + maxReceive <= capacity){
-            return maxReceive;
-        }else{
-            return capacity-stored;
-        }
+        return energy.receiveEnergy(maxReceive,simulate);
     }
 
     @Override
     public int extractEnergy(ForgeDirection from, int maxExtract, boolean simulate) {
-        if(stored >= maxExtract){
-            return maxExtract;
-        }
-        else {
-            return stored;
-        }
+        return energy.extractEnergy(maxExtract,simulate);
     }
 
     @Override
     public int getEnergyStored(ForgeDirection from) {
-        return stored;
+
+        return energy.getEnergyStored();
+
     }
 
     @Override
     public int getMaxEnergyStored(ForgeDirection from) {
-        return capacity;
+
+        return energy.getMaxEnergyStored();
+
     }
 
     @Override
@@ -51,16 +56,16 @@ public class TileEntityCharger extends TileEntityMM implements IEnergyHandler,II
 
     @Override
     public void writeSpecialNBT(NBTTagCompound cmpd) {
-        cmpd.setInteger(Names.NBT.ENERGY_STORED, stored);
-        cmpd.setTag("Inventory",inventory.writeToNBT(new NBTTagCompound()));
+        NBTTagCompound inv = new NBTTagCompound();
+        if(inventory != null)inventory.writeToNBT(inv);
+        cmpd.setTag("Inventory",inv);
+        energy.writeToNBT(cmpd);
     }
 
     @Override
     public void readSpecialNBT(NBTTagCompound cmpd) {
-        if(cmpd.hasKey(Names.NBT.ENERGY_STORED)){
-            stored=cmpd.getInteger(Names.NBT.ENERGY_STORED);
-        }
         inventory = ItemStack.loadItemStackFromNBT(cmpd.getCompoundTag("Inventory"));
+        energy = energy.readFromNBT(cmpd);
     }
 
     @Override

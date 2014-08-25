@@ -3,6 +3,7 @@ package com.ragingart.maatsmod.block;
 
 import com.ragingart.maatsmod.MaatsMod;
 import com.ragingart.maatsmod.generics.BlockMM;
+import com.ragingart.maatsmod.init.ModItems;
 import com.ragingart.maatsmod.tileentity.TileEntityCharger;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -22,14 +23,15 @@ public class BlockCharger extends BlockMM implements ITileEntityProvider{
     private IIcon front_txt_off_bat;
     @SideOnly(Side.CLIENT)
     private IIcon casing_energy;
+    private TileEntityCharger mTileEntity;
+    private boolean active = false;
+    private boolean hasEnergyContainer = false;
     /*
     @SideOnly(Side.CLIENT)
     private IIcon casing_output;
     @SideOnly(Side.CLIENT)
     private IIcon casing_input;
     */
-    private boolean active = true;
-    private boolean hasEnergyContainer = true;
 
        public BlockCharger()
        {
@@ -65,7 +67,9 @@ public class BlockCharger extends BlockMM implements ITileEntityProvider{
 
     @Override
     public TileEntity createNewTileEntity(World world, int meta){
-        return new TileEntityCharger();
+        mTileEntity= new TileEntityCharger();
+        hasEnergyContainer=mTileEntity.getHasContainer();
+        return mTileEntity;
     }
 
     @Override

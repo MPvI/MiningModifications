@@ -8,8 +8,7 @@ public class ItemRSBattery extends ItemMM implements IEnergyContainerItem
 {
     public ItemRSBattery()
     {
-        super();
-        this.setUnlocalizedName("battery");
+        super("battery");
     }
 
     @Override
