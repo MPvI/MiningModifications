@@ -2,10 +2,8 @@ package com.ragingart.maatsmod.tileentity;
 
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyHandler;
-import cofh.api.energy.IEnergyStorage;
 import com.ragingart.maatsmod.generics.TileEntityMM;
 import com.ragingart.maatsmod.init.ModItems;
-import com.ragingart.maatsmod.ref.Names;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -16,13 +14,19 @@ public class TileEntityCharger extends TileEntityMM implements IEnergyHandler,II
 
     private EnergyStorage energy = new EnergyStorage(100000);
     private ItemStack inventory;
+    private boolean activeState = true;
+
+    public boolean isActive(){
+        return activeState;
+    }
 
     public boolean getHasContainer(){
-        boolean tmp = false;
-        if(inventory != null){
-            tmp = inventory.getItem()==ModItems.battery;
+        if(inventory!=null){
+            if(inventory.getItem() == ModItems.battery){
+                return true;
+            }
         }
-        return tmp;
+        return false;
     }
 
     @Override
@@ -51,7 +55,7 @@ public class TileEntityCharger extends TileEntityMM implements IEnergyHandler,II
 
     @Override
     public boolean canConnectEnergy(ForgeDirection from) {
-      return from==ForgeDirection.DOWN ? true : false;
+      return from==ForgeDirection.DOWN;
     }
 
     @Override
@@ -110,6 +114,12 @@ public class TileEntityCharger extends TileEntityMM implements IEnergyHandler,II
             setInventorySlotContents(slotIndex, null);
         }
         return itemStack;
+    }
+
+    @Override
+    public void updateEntity()
+    {
+        this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
     }
 
     @Override

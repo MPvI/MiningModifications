@@ -4,6 +4,7 @@ package com.ragingart.maatsmod.item;
 import cofh.api.energy.IEnergyContainerItem;
 import com.google.common.collect.Sets;
 import com.ragingart.maatsmod.block.BlockCharger;
+import com.ragingart.maatsmod.generics.BlockMM;
 import com.ragingart.maatsmod.generics.ItemToolMM;
 import com.ragingart.maatsmod.init.ModBlocks;
 import com.ragingart.maatsmod.tileentity.TileEntityCharger;
@@ -47,18 +48,26 @@ public class ItemMultitool extends ItemToolMM implements IEnergyContainerItem
 
 
     @Override
-    public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
+    public boolean onItemUse(ItemStack itemStack, EntityPlayer entityPlayer, World world, int x, int y, int z, int meta, float par8, float par9, float par10)
     {
         System.out.println("rightclick on block");
-        System.out.println(par4 + " / " + par5 + " / " + par6 + " / " + par7);
-        Block block = par3World.getBlock(par4,par5,par6);
+        System.out.println(x + " / " + y + " / " + z + " / " + meta);
+
+        if(world.getBlock(x,y,z) instanceof BlockMM){
+        BlockMM block = (BlockMM) world.getBlock(x,y,z);
         if (block instanceof BlockCharger){
-            TileEntity te = par3World.getTileEntity(par4, par5, par6);
+            TileEntity te = world.getTileEntity(x, y, z);
             if(te instanceof TileEntityCharger){
                 System.out.println(((TileEntityCharger) te).getEnergyStored(ForgeDirection.DOWN));
             }
         }
-        LogHelper.info("Energy:" + getEnergyStored(par1ItemStack));
+        if(entityPlayer.isSneaking()) {
+            block.onBlockWrenched(world,x,y,z);
+            block.removedByPlayer(world,entityPlayer,x,y,z,false);
+
+        }
+        LogHelper.info("Energy:" + getEnergyStored(itemStack));
+        }
         return true;
     }
 

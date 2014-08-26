@@ -3,7 +3,6 @@ package com.ragingart.maatsmod.block;
 
 import com.ragingart.maatsmod.MaatsMod;
 import com.ragingart.maatsmod.generics.BlockMM;
-import com.ragingart.maatsmod.init.ModItems;
 import com.ragingart.maatsmod.tileentity.TileEntityCharger;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -12,26 +11,15 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockCharger extends BlockMM implements ITileEntityProvider{
+
+
     @SideOnly(Side.CLIENT)
-    private IIcon front_txt_on;
-    @SideOnly(Side.CLIENT)
-    private IIcon front_txt_off;
-    @SideOnly(Side.CLIENT)
-    private IIcon front_txt_off_bat;
-    @SideOnly(Side.CLIENT)
-    private IIcon casing_energy;
-    private TileEntityCharger mTileEntity;
-    private boolean active = false;
-    private boolean hasEnergyContainer = false;
-    /*
-    @SideOnly(Side.CLIENT)
-    private IIcon casing_output;
-    @SideOnly(Side.CLIENT)
-    private IIcon casing_input;
-    */
+    private IIcon[][] blockIcons = new IIcon[6][3];
+
 
        public BlockCharger()
        {
@@ -45,32 +33,46 @@ public class BlockCharger extends BlockMM implements ITileEntityProvider{
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(int side,int meta)
     {
-        //if(side==2) return casing_output;
-        //if(side==3) return casing_input;
-        if(side==5) return (active && hasEnergyContainer) ? front_txt_on : (!active && hasEnergyContainer) ? front_txt_off_bat : front_txt_off;
-        if(side==0) return casing_energy;
-        return blockIcon;
+        return blockIcons[0][0];
+    }
+
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public IIcon getIcon(IBlockAccess world,int x,int y,int z,int side){
+        if(side==5) {
+            if(world.getTileEntity(x,y,z) instanceof TileEntityCharger){
+               TileEntityCharger te = (TileEntityCharger) world.getTileEntity(x,y,z);
+               if(te.getHasContainer()){
+                   if(te.isActive()){
+                       return blockIcons[4][2];
+                   }
+                   else return blockIcons[4][1];
+               }
+               else return blockIcons[4][0];
+            }
+        }
+        return blockIcons[0][0];
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconRegister)
     {
-        blockIcon = iconRegister.registerIcon("maatsmod:casing");
-        casing_energy = iconRegister.registerIcon("maatsmod:casing_energy");
+        blockIcons[0][0]= iconRegister.registerIcon("maatsmod:casing");
+        blockIcons[1][0] = iconRegister.registerIcon("maatsmod:casing_energy");
         //casing_input = iconRegister.registerIcon("maatsmod:casing_input");
         //casing_output = iconRegister.registerIcon("maatsmod:casing_output");
-        front_txt_on = iconRegister.registerIcon("maatsmod:charger_front_on");
-        front_txt_off = iconRegister.registerIcon("maatsmod:charger_front_off");
-        front_txt_off_bat = iconRegister.registerIcon("maatsmod:charger_front_off_bat");
+        blockIcons[4][2] = iconRegister.registerIcon("maatsmod:charger_front_on");
+        blockIcons[4][0] = iconRegister.registerIcon("maatsmod:charger_front_off");
+        blockIcons[4][1] = iconRegister.registerIcon("maatsmod:charger_front_off_bat");
     }
 
     @Override
     public TileEntity createNewTileEntity(World world, int meta){
-        mTileEntity= new TileEntityCharger();
-        hasEnergyContainer=mTileEntity.getHasContainer();
-        return mTileEntity;
+        return new TileEntityCharger();
     }
+
 
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9)

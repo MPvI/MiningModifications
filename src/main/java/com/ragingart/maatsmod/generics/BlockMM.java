@@ -7,6 +7,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
 public class BlockMM extends Block
 {
@@ -38,5 +40,9 @@ public class BlockMM extends Block
     protected String getUnwrappedUnlocalizedName(String unlocalizedName)
     {
         return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
+    }
+
+    public void onBlockWrenched(World world,int x,int y,int z){
+        this.dropBlockAsItem(world,x,y,z,new ItemStack(this));
     }
 }
