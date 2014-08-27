@@ -14,12 +14,13 @@ buildscript {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
         classpath files('libs/cofhcore.jar')
         classpath files('libs/tf.jar')
+        classpath files('libs/cofhlib.jar')
     }
 }
 
 apply plugin: 'forge'
 
-version = "1.7.10-1.0"
+version = "1.7.10-0.1"
 group= "com.ragingart.maatsmod" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "MaatsMod"
 

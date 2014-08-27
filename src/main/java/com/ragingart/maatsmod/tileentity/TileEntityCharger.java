@@ -4,6 +4,7 @@ import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyHandler;
 import com.ragingart.maatsmod.generics.TileEntityMM;
 import com.ragingart.maatsmod.init.ModItems;
+import com.ragingart.maatsmod.item.ItemRSBattery;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -27,6 +28,10 @@ public class TileEntityCharger extends TileEntityMM implements IEnergyHandler,II
             }
         }
         return false;
+    }
+
+    public void loadContainer(){
+        ((ItemRSBattery)inventory.getItem()).receiveEnergy(inventory,energy.extractEnergy(100,false),false);
     }
 
     @Override
@@ -119,6 +124,7 @@ public class TileEntityCharger extends TileEntityMM implements IEnergyHandler,II
     @Override
     public void updateEntity()
     {
+        if(getHasContainer())loadContainer();
         this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
     }
 

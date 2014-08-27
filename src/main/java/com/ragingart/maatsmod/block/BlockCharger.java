@@ -13,6 +13,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockCharger extends BlockMM implements ITileEntityProvider{
 
@@ -37,6 +38,15 @@ public class BlockCharger extends BlockMM implements ITileEntityProvider{
     }
 
 
+    /*
+    sides
+    0 bot
+    1 top
+    2 right
+    3 left
+    4 back
+    5 front
+     */
     @Override
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(IBlockAccess world,int x,int y,int z,int side){
@@ -52,6 +62,7 @@ public class BlockCharger extends BlockMM implements ITileEntityProvider{
                else return blockIcons[4][0];
             }
         }
+        if(side==0) return blockIcons[1][0];
         return blockIcons[0][0];
     }
 
@@ -79,6 +90,7 @@ public class BlockCharger extends BlockMM implements ITileEntityProvider{
     {
 
             if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityCharger) {
+                System.out.println(((TileEntityCharger) world.getTileEntity(x, y, z)).getEnergyStored(ForgeDirection.DOWN));
                 player.openGui(MaatsMod.instance, 1, world, x, y, z);
             }
             /*
