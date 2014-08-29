@@ -1,5 +1,6 @@
 package com.ragingart.maatsmod.init;
 
+import com.ragingart.maatsmod.ref.Names;
 import com.ragingart.maatsmod.tileentity.TileEntityCharger;
 import com.ragingart.maatsmod.tileentity.TileEntityCreativeEnergy;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -9,7 +10,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
  */
 public class ModTiles {
     public static void init() {
-        GameRegistry.registerTileEntity(TileEntityCharger.class, "charger");
-        GameRegistry.registerTileEntity(TileEntityCreativeEnergy.class, "crenergy");
+        GameRegistry.registerTileEntity(TileEntityCharger.class,Names.Blocks.CHARGER);
+        GameRegistry.registerTileEntity(TileEntityCreativeEnergy.class,Names.Blocks.CENERGY);
     }
 }

@@ -6,6 +6,7 @@ import com.ragingart.maatsmod.block.BlockMMOre;
 import com.ragingart.maatsmod.generics.BlockMM;
 import com.ragingart.maatsmod.item.ItemBlockCharger;
 import com.ragingart.maatsmod.item.ItemBlockMMOre;
+import com.ragingart.maatsmod.ref.Names;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class ModBlocks {
@@ -16,7 +17,7 @@ public class ModBlocks {
     public static void init()
     {
         GameRegistry.registerBlock(Ore, ItemBlockMMOre.class ,"oreMM");
-        GameRegistry.registerBlock(Charger, ItemBlockCharger.class ,"charger");
-        GameRegistry.registerBlock(Energy,"crenergy");
+        GameRegistry.registerBlock(Charger,ItemBlockCharger.class,Names.Blocks.CHARGER);
+        GameRegistry.registerBlock(Energy,Names.Blocks.CENERGY);
     }
 }

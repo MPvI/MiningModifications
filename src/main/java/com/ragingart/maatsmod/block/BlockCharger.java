@@ -19,7 +19,7 @@ public class BlockCharger extends BlockMM implements ITileEntityProvider{
 
        public BlockCharger()
        {
-           super("charger");
+           super(Names.Blocks.CHARGER);
            this.setHardness(7.0F);
            this.setHarvestLevel("wrench", 4);
        }
