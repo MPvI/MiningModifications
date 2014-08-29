@@ -191,4 +191,5 @@ public class NBTHelper
 
         itemStack.stackTagCompound.setDouble(keyName, keyValue);
     }
+
 }

@@ -1,10 +1,13 @@
 // Items
 item.maatsmod:multitool.name=Multitool
 item.maatsmod:battery.name=Redstone Batterie
+item.maatsmod:casing.name=Hülle
+item.maatsmod:casing_energy.name=Energiehülle
 
 //Blocks
 tile.maatsmod:oreMM.name=Maats Erz
 tile.maatsmod:charger.name=Ladegerät
+tile.maatsmod:crenergy.name=Unendliche Energiequelle
 
 // Creative Tab
 itemGroup.maatsmod=Maats Mod

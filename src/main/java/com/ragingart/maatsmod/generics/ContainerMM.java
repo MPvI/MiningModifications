@@ -4,6 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 
 public abstract class ContainerMM extends Container {
 
@@ -26,5 +27,11 @@ public abstract class ContainerMM extends Container {
         {
             this.addSlotToContainer(new Slot(inventoryPlayer, actionBarSlotIndex, 8 + actionBarSlotIndex * 18, 116));
         }
+    }
+
+    @Override
+    public ItemStack transferStackInSlot(EntityPlayer player, int slotnr)
+    {
+        return null;
     }
 }

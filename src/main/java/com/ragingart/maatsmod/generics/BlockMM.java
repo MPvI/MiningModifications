@@ -7,11 +7,17 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 public class BlockMM extends Block
 {
+
+    @SideOnly(Side.CLIENT)
+    protected IIcon[] blockIcons;
+
     public BlockMM(Material material)
     {
         super(material);
@@ -42,7 +48,11 @@ public class BlockMM extends Block
         return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
     }
 
-    public void onBlockWrenched(World world,int x,int y,int z){
-        this.dropBlockAsItem(world,x,y,z,new ItemStack(this));
+    public boolean onBlockWrenched(World world,EntityPlayer entityPlayer,int x,int y,int z){
+        if(!world.isRemote) {
+            this.dropBlockAsItem(world, x, y, z, new ItemStack(this));
+            return this.removedByPlayer(world, entityPlayer, x, y, z, false);
+        }
+        return false;
     }
 }

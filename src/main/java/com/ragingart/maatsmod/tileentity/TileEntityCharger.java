@@ -1,10 +1,9 @@
 package com.ragingart.maatsmod.tileentity;
 
 import cofh.api.energy.EnergyStorage;
+import cofh.api.energy.IEnergyContainerItem;
 import cofh.api.energy.IEnergyHandler;
 import com.ragingart.maatsmod.generics.TileEntityMM;
-import com.ragingart.maatsmod.init.ModItems;
-import com.ragingart.maatsmod.item.ItemRSBattery;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -15,15 +14,16 @@ public class TileEntityCharger extends TileEntityMM implements IEnergyHandler,II
 
     private EnergyStorage energy = new EnergyStorage(100000);
     private ItemStack inventory;
-    private boolean activeState = true;
 
-    public boolean isActive(){
-        return activeState;
+    @Override
+    public void updateEntity()
+    {
+            loadContainer();
     }
 
     public boolean getHasContainer(){
         if(inventory!=null){
-            if(inventory.getItem() == ModItems.battery){
+            if(inventory.getItem() instanceof IEnergyContainerItem){
                 return true;
             }
         }
@@ -31,7 +31,26 @@ public class TileEntityCharger extends TileEntityMM implements IEnergyHandler,II
     }
 
     public void loadContainer(){
-        ((ItemRSBattery)inventory.getItem()).receiveEnergy(inventory,energy.extractEnergy(100,false),false);
+        if(!worldObj.isRemote) {
+            if (inventory != null && inventory.getItem() instanceof IEnergyContainerItem) {
+                IEnergyContainerItem item = (IEnergyContainerItem) inventory.getItem();
+
+                int maxExtract = energy.getEnergyStored();
+                int maxInsert = item.getMaxEnergyStored(inventory) - item.getEnergyStored(inventory);
+                int maxTransferRate = item.receiveEnergy(inventory, maxInsert, true);
+                int transferRate = Math.min(maxExtract, maxTransferRate);
+
+                int transfered = item.receiveEnergy(inventory, energy.extractEnergy(transferRate, false), false);
+
+                if (transfered > 0 && getHasContainer()) {
+                    worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 2, 3);
+                } else if (getHasContainer()) {
+                    worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 1, 3);
+                }
+            } else {
+                worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 3);
+            }
+        }
     }
 
     @Override
@@ -77,6 +96,8 @@ public class TileEntityCharger extends TileEntityMM implements IEnergyHandler,II
         energy = energy.readFromNBT(cmpd);
     }
 
+
+
     @Override
     public int getSizeInventory() {
         return 1;
@@ -121,12 +142,7 @@ public class TileEntityCharger extends TileEntityMM implements IEnergyHandler,II
         return itemStack;
     }
 
-    @Override
-    public void updateEntity()
-    {
-        if(getHasContainer())loadContainer();
-        this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
-    }
+
 
     @Override
     public void setInventorySlotContents(int p_70299_1_, ItemStack itemStack) {

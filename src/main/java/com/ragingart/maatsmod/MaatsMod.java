@@ -4,6 +4,7 @@ import com.ragingart.maatsmod.handler.ConfigHandler;
 import com.ragingart.maatsmod.handler.GuiHandler;
 import com.ragingart.maatsmod.init.ModBlocks;
 import com.ragingart.maatsmod.init.ModItems;
+import com.ragingart.maatsmod.init.ModTiles;
 import com.ragingart.maatsmod.init.Recipes;
 import com.ragingart.maatsmod.proxy.IProxy;
 import com.ragingart.maatsmod.ref.Reference;
@@ -43,7 +44,7 @@ public class MaatsMod {
         //Recipes
         Recipes.init();
         //Tile Entities
-        proxy.registerTileEntities();
+        ModTiles.init();
         // gui
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
     }
