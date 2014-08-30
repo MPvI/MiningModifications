@@ -11,6 +11,7 @@ public class Component {
     public static final String HANDLE = "stickWood";
     public static final String GEM = "gemDiamond";
     public static final String RS = "dustRedstone";
+    public static final String NORMAL_NICKEL = "ingotNickel";
 
     public static final ItemStack BATTERY = new ItemStack(ModItems.battery);
     public static final ItemStack CASING = new ItemStack(ModItems.casing);

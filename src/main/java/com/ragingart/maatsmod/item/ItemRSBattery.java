@@ -19,6 +19,7 @@ public class ItemRSBattery extends ItemMM implements IEnergyContainerItem
     public ItemRSBattery()
     {
         super("battery");
+        setMaxStackSize(1);
         cap=100000;
         maxIn=500;
         maxOut=500;

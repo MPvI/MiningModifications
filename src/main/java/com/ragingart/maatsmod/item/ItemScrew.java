@@ -9,7 +9,7 @@ import com.ragingart.maatsmod.ref.Names;
 public class ItemScrew extends ItemMM {
 
     public ItemScrew(){
-        super(Names.Items.SCREW);
+        super(Names.Items.SCREW_NICKEL);
         setMaxStackSize(64);
     }
 

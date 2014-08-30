@@ -3,10 +3,9 @@ package com.ragingart.maatsmod.item;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 
-public class ItemBlockMMOre extends ItemBlock{
-    public ItemBlockMMOre(Block block)
+public class ItemBlockNepouitOre extends ItemBlock{
+    public ItemBlockNepouitOre(Block block)
     {
         super(block);
     }
-
 }

@@ -1,13 +1,12 @@
 package com.ragingart.maatsmod.item;
 
 
-import cofh.api.energy.IEnergyContainerItem;
 import cofh.api.energy.IEnergyHandler;
 import com.google.common.collect.Sets;
 import com.ragingart.maatsmod.generics.BlockMM;
 import com.ragingart.maatsmod.generics.ItemToolMM;
 import com.ragingart.maatsmod.init.ModBlocks;
-import com.ragingart.maatsmod.util.NBTHelper;
+import com.ragingart.maatsmod.ref.Names;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,23 +19,16 @@ import net.minecraftforge.common.util.ForgeDirection;
 import java.util.List;
 import java.util.Set;
 
-public class ItemMultitool extends ItemToolMM implements IEnergyContainerItem
+public class ItemMultitool extends ItemToolMM
 {
     private static final Set blocksEffectiveAgainst = Sets.newHashSet(new Block[]{ModBlocks.Ore,ModBlocks.Charger});
-    private int cap;
-    private int maxIn;
-    private int maxOut;
+
 
 
     public ItemMultitool()
     {
-        super(3.0F,ToolMaterial.EMERALD,blocksEffectiveAgainst);
-        this.setHarvestLevel("pickaxe",3);
-        this.setHarvestLevel("wrench",4);
-        this.setUnlocalizedName("multitool");
-        this.cap=30000;
-        this.maxIn=500;
-        this.maxOut=25;
+        super(3.0F, ToolMaterial.EMERALD, blocksEffectiveAgainst);
+        this.setUnlocalizedName(Names.Items.MULTITOOL);
     }
 
 
@@ -85,37 +77,5 @@ public class ItemMultitool extends ItemToolMM implements IEnergyContainerItem
         list.add(info);
     }
 
-    /* IEnergyContainerItem */
-    @Override
-    public int receiveEnergy(ItemStack container, int maxReceive, boolean simulate) {
-        int energy = NBTHelper.getInt(container, "Energy");
-        int energyReceived = Math.min(cap - energy, Math.min(this.maxIn, maxReceive));
 
-        if (!simulate) {
-            energy += energyReceived;
-            NBTHelper.setInteger(container,"Energy",energy);
-        }
-        return energyReceived;
-    }
-
-    @Override
-    public int extractEnergy(ItemStack container, int maxExtract, boolean simulate) {
-        int energy = NBTHelper.getInt(container,"Energy");
-        int energyExtracted = Math.min(energy, Math.min(this.maxOut, maxExtract));
-        if (!simulate) {
-            energy -= energyExtracted;
-            NBTHelper.setInteger(container,"Energy",energy);
-        }
-        return energyExtracted;
-    }
-
-    @Override
-    public int getEnergyStored(ItemStack container) {
-        return NBTHelper.getInt(container, "Energy");
-    }
-
-    @Override
-    public int getMaxEnergyStored(ItemStack container) {
-        return cap;
-    }
 }

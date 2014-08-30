@@ -3,9 +3,12 @@ item.maatsmod:multitool.name=Multitool
 item.maatsmod:battery.name=Redstone Batterie
 item.maatsmod:casing.name=Hülle
 item.maatsmod:casing_energy.name=Energiehülle
+item.maatsmod:nickel_screw.name=Nickelschraube
+item.maatsmod:nickel_dust.name=Nickelstaub
+item.maatsmod:nickel_ingot.name=Nickelbarren
 
 //Blocks
-tile.maatsmod:oreMM.name=Maats Erz
+tile.maatsmod:nepouit_ore.name=Népouiterz
 tile.maatsmod:charger.name=Ladegerät
 tile.maatsmod:crenergy.name=Unendliche Energiequelle
 

@@ -114,8 +114,8 @@ public class TileEntityCharger extends TileEntityMachineMM implements IInventory
 
 
     @Override
-    public void setInventorySlotContents(int p_70299_1_, ItemStack itemStack) {
-        inventory=itemStack;
+    public void setInventorySlotContents(int slotIndex, ItemStack itemStack) {
+            inventory = itemStack;
     }
 
     @Override
@@ -149,7 +149,7 @@ public class TileEntityCharger extends TileEntityMachineMM implements IInventory
     }
 
     @Override
-    public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_) {
-        return true;
+    public boolean isItemValidForSlot(int slotIndex, ItemStack itemStack) {
+        return itemStack.getItem() instanceof IEnergyContainerItem;
     }
 }

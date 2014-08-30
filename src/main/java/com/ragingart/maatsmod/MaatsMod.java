@@ -2,10 +2,7 @@ package com.ragingart.maatsmod;
 
 import com.ragingart.maatsmod.handler.ConfigHandler;
 import com.ragingart.maatsmod.handler.GuiHandler;
-import com.ragingart.maatsmod.init.ModBlocks;
-import com.ragingart.maatsmod.init.ModItems;
-import com.ragingart.maatsmod.init.ModTiles;
-import com.ragingart.maatsmod.init.Recipes;
+import com.ragingart.maatsmod.init.*;
 import com.ragingart.maatsmod.proxy.IProxy;
 import com.ragingart.maatsmod.ref.Reference;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -41,8 +38,10 @@ public class MaatsMod {
     @Mod.EventHandler
     public void init(FMLInitializationEvent event)
     {
+        //
+        ModOreDict.init();
         //Recipes
-        Recipes.init();
+        ModRecipes.init();
         //Tile Entities
         ModTiles.init();
         // gui
