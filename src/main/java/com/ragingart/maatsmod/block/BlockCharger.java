@@ -5,7 +5,7 @@ import com.ragingart.maatsmod.MaatsMod;
 import com.ragingart.maatsmod.generics.BlockMachineMM;
 import com.ragingart.maatsmod.ref.Names;
 import com.ragingart.maatsmod.tileentity.TileEntityCharger;
-import com.ragingart.maatsmod.util.IconHelper;
+import com.ragingart.maatsmod.util.CasingHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.ITileEntityProvider;
@@ -27,7 +27,7 @@ public class BlockCharger extends BlockMachineMM implements ITileEntityProvider{
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iR)
     {
-        mIconHelper = new IconHelper(iR,Names.Textures.Blocks.Charger.FRONT);
+        mCasingHelper = new CasingHelper(iR,Names.Textures.Blocks.Charger.FRONT);
     }
 
     @Override

@@ -1,7 +1,7 @@
 package com.ragingart.maatsmod.item;
 
 
-import com.ragingart.maatsmod.util.IconHelper;
+import com.ragingart.maatsmod.util.CasingHelper;
 
 public class ItemCasingEnergy extends ItemCasing{
 
@@ -9,6 +9,6 @@ public class ItemCasingEnergy extends ItemCasing{
     {
         super();
         this.setUnlocalizedName("casing_energy");
-        this.mPort = IconHelper.Port.ENERGY;
+        this.mPort = CasingHelper.Port.ENERGY;
     }
 }

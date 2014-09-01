@@ -7,13 +7,13 @@ import net.minecraft.util.IIcon;
 /**
  * Created by MaaT on 01.09.2014.
  */
-public class IconHelper {
+public class CasingHelper {
 
     protected IIcon mFrontIcons[];
     protected IIcon mSideIcons[] = new IIcon[5];
     protected IIcon mPortIcons[] = new IIcon[4];
 
-    public IconHelper(IIconRegister iconRegister,String[] front){
+    public CasingHelper(IIconRegister iconRegister, String[] front){
         initSides(iconRegister);
         initFront(iconRegister, front);
     }

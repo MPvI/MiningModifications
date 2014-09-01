@@ -1,6 +1,6 @@
 package com.ragingart.maatsmod.generics;
 
-import com.ragingart.maatsmod.util.IconHelper;
+import com.ragingart.maatsmod.util.CasingHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -11,7 +11,7 @@ import net.minecraft.util.IIcon;
  */
 public abstract class BlockMachineMM extends BlockMM {
     @SideOnly(Side.CLIENT)
-    protected IconHelper mIconHelper;
+    protected CasingHelper mCasingHelper;
 
 
     public BlockMachineMM(String name){
@@ -23,18 +23,18 @@ public abstract class BlockMachineMM extends BlockMM {
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(int side,int meta)
     {
-        return mIconHelper.getIcon(side, meta);
+        return mCasingHelper.getIcon(side, meta);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconRegister)
     {
-        mIconHelper = new IconHelper(iconRegister,null);
+        mCasingHelper = new CasingHelper(iconRegister,null);
     }
 
     @SideOnly(Side.CLIENT)
-    public IconHelper getIconHelper(){
-        return mIconHelper;
+    public CasingHelper getIconHelper(){
+        return mCasingHelper;
     }
 }
