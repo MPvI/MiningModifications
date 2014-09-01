@@ -9,14 +9,10 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 public class BlockMM extends Block
 {
-
-    @SideOnly(Side.CLIENT)
-    protected IIcon[] blockIcons;
 
     public BlockMM(Material material)
     {
@@ -31,16 +27,17 @@ public class BlockMM extends Block
     }
 
     @Override
-    public String getUnlocalizedName()
-    {
-        return String.format("tile.%s%s", Names.MOD_PREFIX, getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
-    }
-
-    @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconRegister)
     {
         blockIcon = iconRegister.registerIcon(String.format("%s", getUnwrappedUnlocalizedName(this.getUnlocalizedName())));
+    }
+
+    // Names
+    @Override
+    public String getUnlocalizedName()
+    {
+        return String.format("tile.%s%s", Names.MOD_PREFIX, getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
     }
 
     protected String getUnwrappedUnlocalizedName(String unlocalizedName)
@@ -48,6 +45,7 @@ public class BlockMM extends Block
         return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
     }
 
+    // Custom
     public boolean onBlockWrenched(World world,EntityPlayer entityPlayer,int x,int y,int z){
         if(!world.isRemote) {
             this.dropBlockAsItem(world, x, y, z, new ItemStack(this));

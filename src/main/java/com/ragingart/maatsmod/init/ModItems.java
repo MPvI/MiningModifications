@@ -11,7 +11,7 @@ public class ModItems {
     public static final ItemToolMM multitool = new ItemMultitool();
     //Parts
     public static final ItemMM battery = new ItemRSBattery();
-    public static final ItemMM casing = new ItemCasingPlate();
+    public static final ItemMM casing = new ItemCasing();
     public static final ItemMM casing_energy = new ItemCasingEnergy();
     public static final ItemMM screw = new ItemScrew();
     //Worldgen

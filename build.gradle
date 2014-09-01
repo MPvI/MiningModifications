@@ -12,9 +12,6 @@ buildscript {
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
-        classpath files('libs/cofhcore.jar')
-        classpath files('libs/tf.jar')
-        classpath files('libs/cofhlib.jar')
     }
 }
 

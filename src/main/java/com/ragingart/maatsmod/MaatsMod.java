@@ -13,7 +13,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 
-@Mod(modid= Reference.MOD_ID,name = Reference.MOD_NAME,version = Reference.VERSION,guiFactory = Reference.GUI_FACTORY)
+@Mod(modid= Reference.MOD_ID,name = Reference.MOD_NAME,version = Reference.VERSION,guiFactory = Reference.GUI_FACTORY,dependencies = Reference.DEPENDENCIES)
 public class MaatsMod {
 
     @Mod.Instance(Reference.MOD_ID)

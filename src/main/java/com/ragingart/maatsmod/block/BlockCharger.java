@@ -2,74 +2,32 @@ package com.ragingart.maatsmod.block;
 
 
 import com.ragingart.maatsmod.MaatsMod;
-import com.ragingart.maatsmod.generics.BlockMM;
+import com.ragingart.maatsmod.generics.BlockMachineMM;
 import com.ragingart.maatsmod.ref.Names;
 import com.ragingart.maatsmod.tileentity.TileEntityCharger;
+import com.ragingart.maatsmod.util.IconHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-public class BlockCharger extends BlockMM implements ITileEntityProvider{
+public class BlockCharger extends BlockMachineMM implements ITileEntityProvider{
 
-
-       public BlockCharger()
-       {
-           super(Names.Blocks.CHARGER);
-           this.setHardness(7.0F);
-           this.setHarvestLevel("wrench", 4);
-       }
-
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public IIcon getIcon(int side,int meta)
+    public BlockCharger()
     {
-        switch(side) {
-            case 0: return blockIcons[1];
-            case 4: {
-                switch (meta) {
-                    case 0: return blockIcons[2];
-                    case 1: return blockIcons[3];
-                    case 2: return blockIcons[4];
-                }
-            }
-            default: return blockIcons[0];
-        }
+        super(Names.Blocks.CHARGER);
+        this.setHardness(7.0F);
+        this.setHarvestLevel("wrench", 4);
     }
-
-
-    /*
-    sides
-    0 bot
-    1 top
-    2 right
-    3 left
-    4 back
-    5 front
-     */
-
-    /*
-    @Override
-    @SideOnly(Side.CLIENT)
-    public IIcon getIcon(IBlockAccess world,int x,int y,int z,int side){
-
-    }*/
 
     @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iR)
     {
-        blockIcons = new IIcon[6];
-        blockIcons[0] = iR.registerIcon(Names.MOD_PREFIX+Names.Textures.Blocks.CASING);
-        blockIcons[1] = iR.registerIcon(Names.MOD_PREFIX+Names.Textures.Blocks.ENERGY);
-        blockIcons[2] = iR.registerIcon(Names.MOD_PREFIX+Names.Textures.Blocks.Charger.FRONT_OFF);
-        blockIcons[3] = iR.registerIcon(Names.MOD_PREFIX+Names.Textures.Blocks.Charger.FRONT_OFF_BAT);
-        blockIcons[4] = iR.registerIcon(Names.MOD_PREFIX+Names.Textures.Blocks.Charger.FRONT_ON);
+        mIconHelper = new IconHelper(iR,Names.Textures.Blocks.Charger.FRONT);
     }
 
     @Override
