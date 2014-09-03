@@ -3,6 +3,7 @@ package com.ragingart.maatsmod;
 import com.ragingart.maatsmod.handler.ConfigHandler;
 import com.ragingart.maatsmod.handler.GuiHandler;
 import com.ragingart.maatsmod.init.*;
+import com.ragingart.maatsmod.network.PacketHandler;
 import com.ragingart.maatsmod.proxy.IProxy;
 import com.ragingart.maatsmod.ref.Reference;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -26,6 +27,7 @@ public class MaatsMod {
     public void preInit(FMLPreInitializationEvent event)
     {
         // network handler
+        PacketHandler.init();
         // config
         ConfigHandler.init(event.getSuggestedConfigurationFile());
         // register Config to Eventbus

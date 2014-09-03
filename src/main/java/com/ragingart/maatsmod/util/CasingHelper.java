@@ -12,16 +12,19 @@ public class CasingHelper {
     protected IIcon mFrontIcons[];
     protected IIcon mSideIcons[] = new IIcon[5];
     protected IIcon mPortIcons[] = new IIcon[4];
+    protected Port[] mPorts = new Port[5];
+
 
     public CasingHelper(IIconRegister iconRegister, String[] front){
-        initSides(iconRegister);
+        initPorts(iconRegister);
         initFront(iconRegister, front);
     }
 
-    public IIcon getIcon(int side,int meta){
-        if(side==5 && meta <= mFrontIcons.length){
-            return mFrontIcons[meta];
+    public IIcon getIcon(int side,int state){
+        if(side==5){
+            return mFrontIcons[state];
         }else{
+            updateSideIcons();
             return mSideIcons[side];
         }
     }
@@ -38,25 +41,29 @@ public class CasingHelper {
         }
     }
 
-    public void initSides(IIconRegister iconRegister){
+    public void initPorts(IIconRegister iconRegister){
         mPortIcons[0]=iconRegister.registerIcon(Names.MOD_PREFIX+Names.Textures.Blocks.CASING);
         mPortIcons[1]=iconRegister.registerIcon(Names.MOD_PREFIX+Names.Textures.Blocks.ENERGY);
         mPortIcons[2]=iconRegister.registerIcon(Names.MOD_PREFIX+Names.Textures.Blocks.INPUT);
         mPortIcons[3]=iconRegister.registerIcon(Names.MOD_PREFIX+Names.Textures.Blocks.OUTPUT);
+    }
 
-        for(int i=0;i<5;i++){
-            mSideIcons[i]= mPortIcons[0];
+    public void setPort(int side,Port port){
+        if(side!=5)mPorts[side]=port;
+    }
+
+    public void updateSideIcons(){
+        for(int i=0;i<mSideIcons.length;i++){
+            if (mPorts[i]!=null){
+                mSideIcons[i]=mPortIcons[mPorts[i].ordinal()];
+            }else{
+                mSideIcons[i]=mPortIcons[0];
+            }
         }
     }
 
-
-    public void setSideIcon(int side,Port port){
-        if(side!=5)mSideIcons[side]=mPortIcons[port.ordinal()];
-    }
-
-
-    public static IIcon iconFromName(IIconRegister iconRegister,String name){
-        return iconRegister.registerIcon(Names.MOD_PREFIX+name);
+    public IIcon defaultIcon(){
+        return mPortIcons[0];
     }
 
     public static enum Port {

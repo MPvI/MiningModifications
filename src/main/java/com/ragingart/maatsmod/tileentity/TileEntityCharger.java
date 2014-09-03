@@ -14,7 +14,8 @@ public class TileEntityCharger extends TileEntityMachineMM implements IInventory
     @Override
     public void updateEntity()
     {
-            loadContainer();
+        super.updateEntity();
+        loadContainer();
     }
 
     public boolean getHasContainer(){
@@ -39,33 +40,31 @@ public class TileEntityCharger extends TileEntityMachineMM implements IInventory
                 int transfered = item.receiveEnergy(inventory, energy.extractEnergy(transferRate, false), false);
 
                 if (transfered > 0 && getHasContainer()) {
-                    worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 2, 3);
+                    machineHelper.setState(2);
+
                 } else if (getHasContainer()) {
-                    worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 1, 3);
+                    machineHelper.setState(1);
+
                 }
             } else {
-                worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 3);
+                machineHelper.setState(0);
             }
         }
     }
 
-
-
     @Override
-    public void writeSpecialNBT(NBTTagCompound cmpd) {
-        super.writeSpecialNBT(cmpd);
+    public void writeToNBT(NBTTagCompound cmpd) {
+        super.writeToNBT(cmpd);
         NBTTagCompound inv = new NBTTagCompound();
         if(inventory != null)inventory.writeToNBT(inv);
         cmpd.setTag("Inventory",inv);
     }
 
     @Override
-    public void readSpecialNBT(NBTTagCompound cmpd) {
-        super.readSpecialNBT(cmpd);
+    public void readFromNBT(NBTTagCompound cmpd) {
+        super.readFromNBT(cmpd);
         inventory = ItemStack.loadItemStackFromNBT(cmpd.getCompoundTag("Inventory"));
     }
-
-
 
     @Override
     public int getSizeInventory() {
@@ -110,8 +109,6 @@ public class TileEntityCharger extends TileEntityMachineMM implements IInventory
         }
         return itemStack;
     }
-
-
 
     @Override
     public void setInventorySlotContents(int slotIndex, ItemStack itemStack) {

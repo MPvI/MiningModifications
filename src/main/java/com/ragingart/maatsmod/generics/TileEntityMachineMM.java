@@ -2,6 +2,10 @@ package com.ragingart.maatsmod.generics;
 
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyHandler;
+import com.ragingart.maatsmod.network.PacketHandler;
+import com.ragingart.maatsmod.network.messages.MessageTileEntityMachineMM;
+import com.ragingart.maatsmod.util.CasingHelper;
+import com.ragingart.maatsmod.util.MachineHelper;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -12,15 +16,34 @@ import net.minecraftforge.common.util.ForgeDirection;
 public class TileEntityMachineMM extends TileEntityMM implements IEnergyHandler{
 
     protected EnergyStorage energy = new EnergyStorage(100000);
+    protected MachineHelper machineHelper = new MachineHelper();
 
+    protected int timer = -1;
     @Override
-    public void writeSpecialNBT(NBTTagCompound cmpd) {
-        energy.writeToNBT(cmpd);
+    public void updateEntity(){
+        if(timer == -1 || timer%20==0) {
+            PacketHandler.INSTANCE.sendToAll(new MessageTileEntityMachineMM(this));
+            timer=0;
+        }
+        timer++;
     }
 
     @Override
-    public void readSpecialNBT(NBTTagCompound cmpd) {
+    public void writeToNBT(NBTTagCompound cmpd) {
+        super.writeToNBT(cmpd);
+        energy.writeToNBT(cmpd);
+        machineHelper.writePortsToNBT(cmpd);
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound cmpd) {
+        super.readFromNBT(cmpd);
         energy = energy.readFromNBT(cmpd);
+        machineHelper.getPortsFromNBT(cmpd);
+    }
+
+    public MachineHelper getMachineHelper(){
+        return machineHelper;
     }
 
     /* IEnergyHandler */
@@ -53,6 +76,6 @@ public class TileEntityMachineMM extends TileEntityMM implements IEnergyHandler{
 
     @Override
     public boolean canConnectEnergy(ForgeDirection from) {
-        return from==ForgeDirection.DOWN;
+        return machineHelper.hasPort(from.ordinal(), CasingHelper.Port.ENERGY);
     }
 }

@@ -7,4 +7,5 @@ public class ItemBlockCharger extends ItemBlock{
     public ItemBlockCharger(Block block) {
         super(block);
     }
+
 }
