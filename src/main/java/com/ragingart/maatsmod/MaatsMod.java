@@ -1,6 +1,7 @@
 package com.ragingart.maatsmod;
 
 import com.ragingart.maatsmod.handler.ConfigHandler;
+import com.ragingart.maatsmod.handler.EventHandler;
 import com.ragingart.maatsmod.handler.GuiHandler;
 import com.ragingart.maatsmod.init.*;
 import com.ragingart.maatsmod.network.PacketHandler;
@@ -13,6 +14,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import net.minecraftforge.common.MinecraftForge;
 
 @Mod(modid= Reference.MOD_ID,name = Reference.MOD_NAME,version = Reference.VERSION,guiFactory = Reference.GUI_FACTORY,dependencies = Reference.DEPENDENCIES)
 public class MaatsMod {
@@ -26,12 +28,14 @@ public class MaatsMod {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
+
         // network handler
         PacketHandler.init();
         // config
         ConfigHandler.init(event.getSuggestedConfigurationFile());
         // register Config to Eventbus
         FMLCommonHandler.instance().bus().register(new ConfigHandler());
+        MinecraftForge.EVENT_BUS.register(new EventHandler());
         // init items blocks
         ModItems.init();
         ModBlocks.init();
@@ -40,6 +44,7 @@ public class MaatsMod {
     @Mod.EventHandler
     public void init(FMLInitializationEvent event)
     {
+        proxy.registerModels();
         //
         ModOreDict.init();
         //Recipes

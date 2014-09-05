@@ -1,12 +1,16 @@
-// Items
+//Tools
 item.maatsmod:multitool.name=Multitool
+item.maatsmod:weapon_spear.name=Fluxspear
+
+// Items
 item.maatsmod:battery.name=Redstonebattery
-item.maatsmod:casing.name=Casing
-item.maatsmod:casing_energy.name=Energycasing
+item.maatsmod:casing.name=Casing: Blank
+item.maatsmod:casing_energy.name=Casing: Energylink
+item.maatsmod:casing_input.name=Casing: Iteminput
+item.maatsmod:casing_output.name=Casing: Itemoutput
 item.maatsmod:nickel_screw.name= Nickel Screw
 item.maatsmod:nickel_dust.name= Nickel Dust
 item.maatsmod:nickel_ingot.name= Nickel Ingot
-
 
 //Blocks
 tile.maatsmod:nepouit_ore.name=Népouit Ore

@@ -1,6 +1,7 @@
 package com.ragingart.maatsmod.network.messages;
 
 import com.ragingart.maatsmod.generics.TileEntityMachineMM;
+import com.ragingart.maatsmod.util.CasingHelper;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
@@ -54,7 +55,9 @@ public class MessageItemCasing implements IMessage,IMessageHandler<MessageItemCa
         World world = ctx.getServerHandler().playerEntity.worldObj;
             TileEntity te = world.getTileEntity(message.x, message.y, message.z);
             if (te instanceof TileEntityMachineMM) {
-                if(((TileEntityMachineMM) te).getMachineHelper().setPort(message.side, message.port)) {
+                TileEntityMachineMM teMM = (TileEntityMachineMM) te;
+                CasingHelper.Port oldPort = teMM.getMachineHelper().setPort(message.side,message.port);
+                if(oldPort.ordinal()!=message.port){
                     te.markDirty();
                     return new MessageTileEntityMachineMM((TileEntityMachineMM) te);
                 }

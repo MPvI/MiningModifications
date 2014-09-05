@@ -19,6 +19,11 @@ public class ItemToolMM extends ItemTool implements IEnergyContainerItem
     private int maxIn;
     private int maxOut;
 
+    public ItemToolMM(String name,float dmg){
+        this(dmg,ToolMaterial.EMERALD,null);
+        setUnlocalizedName(name);
+    }
+
     public ItemToolMM(float dmgVsEntity, Item.ToolMaterial  material, Set blocksEffectiveAgainst)
     {
         super(dmgVsEntity,material,blocksEffectiveAgainst);

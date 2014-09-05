@@ -16,11 +16,15 @@ public class Names {
     public static final class Items{
         public static final String CASING ="casing";
         public static final String CASING_ENERGY ="casing_energy";
+        public static final String CASING_INPUT = "casing_input";
+        public static final String CASING_OUTPUT = "casing_output";
         public static final String BATTERY ="rsbattery";
         public static final String MULTITOOL = "multitool";
-        public static final String SCREW_NICKEL = "nickel_screw";
-        public static final String INGOT_NICKEL = "nickel_ingot";
-        public static final String DUST_NICKEL = "nickel_dust";
+        public static final String SCREW_NICKEL = "screw_nickel";
+        public static final String INGOT_NICKEL = "ingot_nickel";
+        public static final String DUST_NICKEL = "dust_nickel";
+
+        public static final String WEAPON_SPEAR = "weapon_spear";
     }
     
     public static final class Textures {

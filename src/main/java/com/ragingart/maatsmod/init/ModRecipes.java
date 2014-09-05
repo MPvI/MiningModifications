@@ -29,6 +29,7 @@ public class ModRecipes {
 
         /* Furnace */
         GameRegistry.addSmelting(new ItemStack(ModBlocks.Ore),new ItemStack(ModItems.ingot_nickel),0);
+        GameRegistry.addSmelting(new ItemStack(ModItems.dust_nickel),new ItemStack(ModItems.ingot_nickel),0);
 
 
         /* Thermal Expansion */

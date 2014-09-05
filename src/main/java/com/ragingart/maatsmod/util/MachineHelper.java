@@ -7,7 +7,9 @@ import net.minecraft.nbt.NBTTagCompound;
  */
 public class MachineHelper {
     protected CasingHelper.Port[] mPorts = new CasingHelper.Port[5];
+    protected boolean hasInventory=false;
     protected int state = 0;
+
 
     public MachineHelper(){
         this(new CasingHelper.Port[]{CasingHelper.Port.BLANK, CasingHelper.Port.BLANK, CasingHelper.Port.BLANK, CasingHelper.Port.BLANK, CasingHelper.Port.BLANK});
@@ -15,6 +17,11 @@ public class MachineHelper {
 
     public MachineHelper(CasingHelper.Port[] ports){
         mPorts = ports;
+    }
+
+    public MachineHelper(CasingHelper.Port[] ports,boolean hasInventory){
+        this(ports);
+        this.hasInventory=hasInventory;
     }
 
     public CasingHelper.Port getPort(int side){
@@ -29,16 +36,17 @@ public class MachineHelper {
         state = s;
     }
 
-    public boolean setPort(int side,int port){
+    public CasingHelper.Port setPort(int side,int port){
         if(side!=5) {
             CasingHelper.Port oldPort = mPorts[side];
             CasingHelper.Port newPort = CasingHelper.Port.values()[port];
             if(oldPort!=newPort){
                 mPorts[side] = newPort;
-                return true;
+                return newPort;
             }
+            return oldPort;
         }
-        return false;
+        return null;
     }
 
     public boolean hasPort(int side,CasingHelper.Port port){
