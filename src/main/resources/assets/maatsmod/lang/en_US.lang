@@ -8,9 +8,9 @@ item.maatsmod:casing.name=Casing: Blank
 item.maatsmod:casing_energy.name=Casing: Energylink
 item.maatsmod:casing_input.name=Casing: Iteminput
 item.maatsmod:casing_output.name=Casing: Itemoutput
-item.maatsmod:nickel_screw.name= Nickel Screw
-item.maatsmod:nickel_dust.name= Nickel Dust
-item.maatsmod:nickel_ingot.name= Nickel Ingot
+item.maatsmod:screw_nickel.name= Nickel Screw
+item.maatsmod:dust_nickel.name= Nickel Dust
+item.maatsmod:ingot_nickel.name= Nickel Ingot
 
 //Blocks
 tile.maatsmod:nepouit_ore.name=Népouit Ore
