@@ -1,7 +1,9 @@
 package com.ragingart.maatsmod.util;
 
+import com.ragingart.maatsmod.ref.Component;
 import com.ragingart.maatsmod.ref.Names;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
 /**
@@ -70,7 +72,24 @@ public class CasingHelper {
         BLANK,
         ENERGY,
         INPUT,
-        OUTPUT
+        OUTPUT;
+
+        public static ItemStack getNameFromPort(Port port){
+            return getItemFromPort(port.ordinal());
+        }
+
+        public static ItemStack getItemFromPort(int port){
+            switch (port){
+                case 1:
+                    return Component.CASING_ENERGY;
+                case 2:
+                    return Component.CASING_INPUT;
+                case 3:
+                    return Component.CASING_OUTPUT;
+                default:
+                    return Component.CASING;
+            }
+        }
     }
 }
 

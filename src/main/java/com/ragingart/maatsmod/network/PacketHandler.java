@@ -2,6 +2,7 @@ package com.ragingart.maatsmod.network;
 
 
 import com.ragingart.maatsmod.network.messages.MessageItemCasing;
+import com.ragingart.maatsmod.network.messages.MessageItemCasingChange;
 import com.ragingart.maatsmod.network.messages.MessageTileEntityMachineMM;
 import com.ragingart.maatsmod.ref.Reference;
 import cpw.mods.fml.common.network.NetworkRegistry;
@@ -17,5 +18,6 @@ public class PacketHandler {
     public static void init(){
         INSTANCE.registerMessage(MessageTileEntityMachineMM.class,MessageTileEntityMachineMM.class,0, Side.CLIENT);
         INSTANCE.registerMessage(MessageItemCasing.class,MessageItemCasing.class,1,Side.SERVER);
+        INSTANCE.registerMessage(MessageItemCasingChange.class,MessageItemCasingChange.class,2,Side.CLIENT);
     }
 }

@@ -6,6 +6,7 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -14,11 +15,11 @@ import net.minecraft.world.World;
  */
 public class MessageItemCasing implements IMessage,IMessageHandler<MessageItemCasing,IMessage> {
 
-    int side;
-    int port;
-    int x;
-    int y;
-    int z;
+    public int side;
+    public int port;
+    public int x;
+    public int y;
+    public int z;
 
     public MessageItemCasing(){
 
@@ -52,16 +53,16 @@ public class MessageItemCasing implements IMessage,IMessageHandler<MessageItemCa
 
     @Override
     public IMessage onMessage(MessageItemCasing message, MessageContext ctx) {
-        World world = ctx.getServerHandler().playerEntity.worldObj;
-            TileEntity te = world.getTileEntity(message.x, message.y, message.z);
-            if (te instanceof TileEntityMachineMM) {
-                TileEntityMachineMM teMM = (TileEntityMachineMM) te;
-                CasingHelper.Port oldPort = teMM.getMachineHelper().setPort(message.side,message.port);
-                if(oldPort.ordinal()!=message.port){
-                    te.markDirty();
-                    return new MessageTileEntityMachineMM((TileEntityMachineMM) te);
-                }
-            }
+        World world= ctx.getServerHandler().playerEntity.worldObj;
+        TileEntity te = world.getTileEntity(message.x, message.y, message.z);
+        if (te instanceof TileEntityMachineMM) {
+           CasingHelper.Port oldPort = ((TileEntityMachineMM)te).getMachineHelper().setPort(message.side,message.port);
+           if(oldPort!=null){
+              te.markDirty();
+              world.spawnEntityInWorld(new EntityItem(world,message.x,message.y+0.5D,message.z, CasingHelper.Port.getItemFromPort(message.port)));
+              return new MessageItemCasingChange(message.side,oldPort.ordinal(),message.x,message.y,message.z);
+           }
+        }
         return null;
     }
 }

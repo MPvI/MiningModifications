@@ -21,7 +21,7 @@ public class TileEntityMachineMM extends TileEntityMM implements IEnergyHandler{
     protected int timer = -1;
     @Override
     public void updateEntity(){
-        if(timer == -1 || timer%20==0) {
+        if(timer == -1 || timer%10==0) {
             PacketHandler.INSTANCE.sendToAll(new MessageTileEntityMachineMM(this));
             timer=0;
         }

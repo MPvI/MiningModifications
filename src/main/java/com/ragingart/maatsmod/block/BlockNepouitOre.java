@@ -9,7 +9,7 @@ public class BlockNepouitOre extends BlockMM {
     {
         super(Names.Blocks.ORE);
         this.setHardness(5.0F);
-        this.setHarvestLevel("pickaxe",3);
+        this.setHarvestLevel("pickaxe",2);
     }
 
 

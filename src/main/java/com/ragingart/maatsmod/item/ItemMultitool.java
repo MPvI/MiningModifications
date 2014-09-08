@@ -29,6 +29,7 @@ public class ItemMultitool extends ItemToolMM
     {
         super(3.0F, ToolMaterial.EMERALD, blocksEffectiveAgainst);
         this.setUnlocalizedName(Names.Items.MULTITOOL);
+        setHarvestLevel("pickaxe",3);
     }
 
 

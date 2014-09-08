@@ -42,9 +42,8 @@ public class MachineHelper {
             CasingHelper.Port newPort = CasingHelper.Port.values()[port];
             if(oldPort!=newPort){
                 mPorts[side] = newPort;
-                return newPort;
+                return oldPort;
             }
-            return oldPort;
         }
         return null;
     }

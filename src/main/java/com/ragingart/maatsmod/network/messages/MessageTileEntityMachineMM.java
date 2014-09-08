@@ -7,6 +7,7 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.client.Minecraft;
 import net.minecraft.tileentity.TileEntity;
 
 /**
@@ -58,15 +59,17 @@ public class MessageTileEntityMachineMM implements IMessage,IMessageHandler<Mess
 
     @Override
     public IMessage onMessage(MessageTileEntityMachineMM message, MessageContext ctx) {
-        TileEntity te = FMLClientHandler.instance().getClient().theWorld.getTileEntity(message.x,message.y,message.z);
+        Minecraft aClient = FMLClientHandler.instance().getClient();
+        TileEntity aTile = aClient.theWorld.getTileEntity(message.x,message.y,message.z);
 
-        if(te instanceof TileEntityMachineMM){
-            MachineHelper aHelper = ((TileEntityMachineMM) te).getMachineHelper();
+
+        if(aTile instanceof TileEntityMachineMM){
+            MachineHelper aHelper = ((TileEntityMachineMM) aTile).getMachineHelper();
             for(int i=0;i<ports.length;i++) {
                 aHelper.setPort(i,message.ports[i]);
             }
             aHelper.setState(message.state);
-            FMLClientHandler.instance().getClient().theWorld.markBlockForUpdate(message.x,message.y,message.z);
+            aClient.theWorld.markBlockForUpdate(message.x,message.y,message.z);
         }
         return null;
     }
