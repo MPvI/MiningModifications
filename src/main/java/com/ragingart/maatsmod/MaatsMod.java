@@ -1,5 +1,9 @@
 package com.ragingart.maatsmod;
 
+import api.player.client.ClientPlayerAPI;
+import api.player.render.RenderPlayerAPI;
+import com.ragingart.maatsmod.client.renderer.player.RenderPlayerMM;
+import com.ragingart.maatsmod.entity.player.ClientPlayerMM;
 import com.ragingart.maatsmod.handler.ConfigHandler;
 import com.ragingart.maatsmod.handler.EventHandler;
 import com.ragingart.maatsmod.handler.GuiHandler;
@@ -44,6 +48,13 @@ public class MaatsMod {
     @Mod.EventHandler
     public void init(FMLInitializationEvent event)
     {
+        try {
+            ClientPlayerAPI.register(Reference.MOD_ID, ClientPlayerMM.class);
+            RenderPlayerAPI.register(Reference.MOD_ID, RenderPlayerMM.class);
+        }catch (Throwable e){
+
+        }
+
         proxy.registerModels();
         //
         ModOreDict.init();

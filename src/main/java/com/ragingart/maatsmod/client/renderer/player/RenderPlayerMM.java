@@ -1,21 +1,24 @@
 package com.ragingart.maatsmod.client.renderer.player;
 
-import net.minecraft.client.entity.AbstractClientPlayer;
-import net.minecraft.client.renderer.entity.RenderPlayer;
+import api.player.render.RenderPlayerAPI;
+import api.player.render.RenderPlayerBase;
+import net.minecraft.entity.EntityLivingBase;
 
 /**
  * Created by MaaT on 04.09.2014.
  */
-public class RenderPlayerMM extends RenderPlayer{
+public class RenderPlayerMM extends RenderPlayerBase{
 
-    public RenderPlayerMM(){
-        super();
-
+    public RenderPlayerMM(RenderPlayerAPI renderPlayerAPI) {
+        super(renderPlayerAPI);
     }
 
-
     @Override
-    public void doRender(AbstractClientPlayer player, double d1, double d2, double d3, float f1, float f2) {
-
+    public void renderModel(EntityLivingBase paramEntityLivingBase, float paramFloat1, float paramFloat2, float paramFloat3, float paramFloat4, float paramFloat5, float paramFloat6) {
+        if(paramEntityLivingBase.isSneaking()){
+            super.renderModel(paramEntityLivingBase,paramFloat1,paramFloat2, paramFloat3, paramFloat4, paramFloat5, paramFloat6);
+        }else {
+            super.renderModel(paramEntityLivingBase, paramFloat1, paramFloat2, paramFloat3, paramFloat4, paramFloat5, paramFloat6);
+        }
     }
 }

@@ -74,20 +74,20 @@ public class CasingHelper {
         INPUT,
         OUTPUT;
 
-        public static ItemStack getNameFromPort(Port port){
+        public static ItemStack getItemFromPort(Port port){
             return getItemFromPort(port.ordinal());
         }
 
         public static ItemStack getItemFromPort(int port){
             switch (port){
                 case 1:
-                    return Component.CASING_ENERGY;
+                    return Component.CASING_ENERGY(1);
                 case 2:
-                    return Component.CASING_INPUT;
+                    return Component.CASING_INPUT(1);
                 case 3:
-                    return Component.CASING_OUTPUT;
+                    return Component.CASING_OUTPUT(1);
                 default:
-                    return Component.CASING;
+                    return Component.CASING(1);
             }
         }
     }

@@ -60,7 +60,7 @@ public class ItemRendererMultitool implements IItemRenderer {
                 GL11.glScalef(1.8F,1.8F,1.8F);
                 GL11.glRotatef(50.0F,0.0F,1.0F,0.0F);
                 GL11.glRotatef(180.0F,1.0F,0.0F,0.0F);
-                GL11.glRotatef(75.0F,0.0F,0.0F,-1.0F);
+                GL11.glRotatef(65.0F,0.0F,0.0F,-1.0F);
                 GL11.glTranslatef(1.0F,0.2F,-0.9F);
 
                 tool.render((Entity)data[1],0.0F,0.0F,0.0F,0.0F,0.0F,0.0625F);

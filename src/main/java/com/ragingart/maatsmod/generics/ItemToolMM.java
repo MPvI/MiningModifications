@@ -30,7 +30,7 @@ public class ItemToolMM extends ItemTool implements IEnergyContainerItem
         this.setCreativeTab(CreativeTabMM.MM_TAB);
         this.cap=30000;
         this.maxIn=500;
-        this.maxOut=25;
+        this.maxOut=500;
     }
 
     @Override

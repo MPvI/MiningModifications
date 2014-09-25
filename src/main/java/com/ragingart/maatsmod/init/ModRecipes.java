@@ -13,17 +13,17 @@ public class ModRecipes {
     {
         /* Items */
         // Shaped
-        GameRegistry.addRecipe(new ShapedOreRecipe(Component.MULTITOOL,"r d"," s ","s  ",'s', Component.HANDLE,'r',Component.BATTERY,'d',Component.GEM));
-        GameRegistry.addRecipe(new ShapedOreRecipe(Component.BATTERY," g ","iri","iri",'g', Component.SMALL_GOLD,'i', Component.NORMAL_IRON,'r',Component.RS));
-        GameRegistry.addRecipe(new ShapedOreRecipe(Component.CASING,"sis","iri","sis",'s',Component.SCREW,'i',Component.NORMAL_IRON,'r',Component.RS));
+        GameRegistry.addRecipe(new ShapedOreRecipe(Component.MULTITOOL(),"r d"," s ","s  ",'s', Component.HANDLE,'r',Component.BATTERY(1),'d',Component.GEM));
+        GameRegistry.addRecipe(new ShapedOreRecipe(Component.BATTERY(1)," g ","iri","iri",'g', Component.SMALL_GOLD,'i', Component.NORMAL_IRON,'r',Component.RS));
+        GameRegistry.addRecipe(new ShapedOreRecipe(Component.CASING(1),"sis","iri","sis",'s',Component.SCREW(1),'i',Component.NORMAL_IRON,'r',Component.RS));
         // Shapeless
-        GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.screw,4),Component.NORMAL_NICKEL));
-        GameRegistry.addRecipe(new ShapelessOreRecipe(Component.CASING_ENERGY,Component.CASING,Component.BATTERY,Component.SCREW));
+        GameRegistry.addRecipe(new ShapelessOreRecipe(Component.SCREW(4),Component.NORMAL_NICKEL));
+        GameRegistry.addRecipe(new ShapelessOreRecipe(Component.CASING_ENERGY(1),Component.CASING(1),Component.BATTERY(1),Component.SCREW(1)));
 
 
         /* Blocks */
         //Shaped
-        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.Charger)," cc","crc"," ce",'c',Component.CASING,'r',Component.RS,'e',Component.CASING_ENERGY));
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.Charger)," cc","crc"," ce",'c',Component.CASING(1),'r',Component.RS,'e',Component.CASING_ENERGY(1)));
         //Shapeless
 
 

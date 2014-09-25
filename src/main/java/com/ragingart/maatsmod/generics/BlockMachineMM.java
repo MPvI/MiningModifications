@@ -6,9 +6,14 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 
 /**
  * Created by MaaT on 01.09.2014.
@@ -52,4 +57,28 @@ public abstract class BlockMachineMM extends BlockMM implements ITileEntityProvi
         mCasingHelper = new CasingHelper(iconRegister,null);
     }
 
+    @Override
+    public boolean onBlockWrenched(World world,EntityPlayer entityPlayer,int x,int y,int z) {
+        if(!world.isRemote) {
+            try {
+                ItemStack block = new ItemStack(this);
+                block.setTagCompound(new NBTTagCompound());
+                ((TileEntityMachineMM) world.getTileEntity(x, y, z)).getMachineHelper().writePortsToNBT(block.getTagCompound());
+                this.dropBlockAsItem(world, x, y, z, block);
+            }catch (Throwable e){
+                //noop
+            }
+            return this.removedByPlayer(world, entityPlayer, x, y, z, false);
+        }
+        return false;
+    }
+
+    @Override
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLivingBase, ItemStack itemStack) {
+        try {
+            ((TileEntityMachineMM) world.getTileEntity(x, y, z)).getMachineHelper().getPortsFromNBT(itemStack.getTagCompound());
+        }catch (Throwable e){
+            //noop
+        }
+    }
 }

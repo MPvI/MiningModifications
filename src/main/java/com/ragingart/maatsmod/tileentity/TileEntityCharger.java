@@ -2,14 +2,12 @@ package com.ragingart.maatsmod.tileentity;
 
 import cofh.api.energy.IEnergyContainerItem;
 import com.ragingart.maatsmod.generics.TileEntityMachineMM;
-import com.ragingart.maatsmod.util.CasingHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-public class TileEntityCharger extends TileEntityMachineMM implements IInventory,ISidedInventory {
+public class TileEntityCharger extends TileEntityMachineMM implements IInventory {
 
     private ItemStack inventory;
 
@@ -149,26 +147,5 @@ public class TileEntityCharger extends TileEntityMachineMM implements IInventory
 
     }
 
-    @Override
-    public boolean isItemValidForSlot(int slotIndex, ItemStack itemStack) {
-        return itemStack.getItem() instanceof IEnergyContainerItem;
-    }
 
-    @Override
-    public int[] getAccessibleSlotsFromSide(int side) {
-        if(machineHelper.hasPort(side,CasingHelper.Port.INPUT) || machineHelper.hasPort(side, CasingHelper.Port.OUTPUT)) {
-            return new int[]{0};
-        }
-        return new int[0];
-    }
-
-    @Override
-    public boolean canInsertItem(int slot, ItemStack item, int side) {
-        return isItemValidForSlot(slot,item)&&machineHelper.hasPort(side,CasingHelper.Port.INPUT);
-    }
-
-    @Override
-    public boolean canExtractItem(int slot, ItemStack item, int side) {
-        return machineHelper.hasPort(side,CasingHelper.Port.OUTPUT);
-    }
 }

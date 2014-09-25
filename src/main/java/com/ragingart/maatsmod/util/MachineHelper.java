@@ -39,21 +39,14 @@ public class MachineHelper {
     public CasingHelper.Port setPort(int side,int port){
         if(side!=5) {
             CasingHelper.Port oldPort = mPorts[side];
-            CasingHelper.Port newPort = CasingHelper.Port.values()[port];
-            if(oldPort!=newPort){
-                mPorts[side] = newPort;
-                return oldPort;
-            }
+            mPorts[side] = CasingHelper.Port.values()[port];
+            return oldPort;
         }
         return null;
     }
 
     public boolean hasPort(int side,CasingHelper.Port port){
-        if(side!=5) {
-            return mPorts[side] == port;
-        }else{
-            return false;
-        }
+        return side != 5 && mPorts[side] == port;
     }
 
     public void writePortsToNBT(NBTTagCompound cmpd){

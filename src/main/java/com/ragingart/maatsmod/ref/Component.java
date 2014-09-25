@@ -13,12 +13,12 @@ public class Component {
     public static final String RS = "dustRedstone";
     public static final String NORMAL_NICKEL = "ingotNickel";
 
-    public static final ItemStack BATTERY = new ItemStack(ModItems.battery);
-    public static final ItemStack CASING = new ItemStack(ModItems.casing);
-    public static final ItemStack CASING_ENERGY = new ItemStack(ModItems.casing_energy);
-    public static final ItemStack CASING_INPUT = new ItemStack(ModItems.casing_input);
-    public static final ItemStack CASING_OUTPUT = new ItemStack(ModItems.casing_output);
-    public static final ItemStack MULTITOOL = new ItemStack(ModItems.multitool);
-    public static final ItemStack SCREW = new ItemStack(ModItems.screw);
+    public static ItemStack BATTERY(int x) {return new ItemStack(ModItems.battery,x);}
+    public static ItemStack CASING(int x) {return new ItemStack(ModItems.casing,x);}
+    public static ItemStack CASING_ENERGY(int x) {return new ItemStack(ModItems.casing_energy,x);}
+    public static ItemStack CASING_INPUT(int x) {return new ItemStack(ModItems.casing_input,x);}
+    public static ItemStack CASING_OUTPUT(int x) {return new ItemStack(ModItems.casing_output,x);}
+    public static ItemStack MULTITOOL() {return new ItemStack(ModItems.multitool);}
+    public static ItemStack SCREW(int x) {return new ItemStack(ModItems.screw,x);}
 
 }
