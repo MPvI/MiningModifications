@@ -67,9 +67,8 @@ public class ItemMultitool extends ItemToolMM
             ++runningTick;
             consume += runningTick;
 
-            //this.extractEnergy(itemStack,runningTick,false);
 
-            entityPlayer.addPotionEffect(new PotionEffect(1,3,3));
+            entityPlayer.addPotionEffect(new PotionEffect(1,5,3));
 
             MovingObjectPosition mOP = Minecraft.getMinecraft().objectMouseOver;
 
@@ -89,7 +88,9 @@ public class ItemMultitool extends ItemToolMM
                 int z = harvestField[i][2];
                 blocksToHarvest[i]=entityPlayer.worldObj.getBlock(x,y,z);
                 hardness += blocksToHarvest[i].getBlockHardness(entityPlayer.worldObj,0,0,0);
-                entityPlayer.worldObj.spawnParticle("blockcrack_" + Block.getIdFromBlock(blocksToHarvest[i]) + "_" + entityPlayer.worldObj.getBlockMetadata(x,y,z),x,y,z,0.5D,0.5D,0.5D);
+                if (runningTick % 10 == 0) {
+                    Minecraft.getMinecraft().effectRenderer.addBlockDestroyEffects(x, y, z, blocksToHarvest[i], 0);
+                }
             }
 
             int maxTick = (int)hardness*ConfigHandler.miningSpeedModificator/(EnchantmentHelper.getEfficiencyModifier(entityPlayer)+1);
@@ -113,7 +114,7 @@ public class ItemMultitool extends ItemToolMM
 
                 consume *= ConfigHandler.miningEnergyModificator;
 
-                if(extractEnergy(itemStack,consume,false)<consume){
+                if(consume > extractEnergy(itemStack,consume,false)){
                     entityPlayer.clearItemInUse();
                 }
 
@@ -162,7 +163,7 @@ public class ItemMultitool extends ItemToolMM
 
     @Override
     public void onPlayerStoppedUsing(ItemStack itemStack, World world, EntityPlayer entityPlayer, int p_77615_4_) {
-
+        entityPlayer.clearItemInUse();
     }
 
 }

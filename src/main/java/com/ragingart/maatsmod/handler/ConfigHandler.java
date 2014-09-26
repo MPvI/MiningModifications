@@ -10,10 +10,11 @@ import java.io.File;
 public class ConfigHandler {
     public static Configuration config;
 
-    public static boolean configValue = false;
-
     public static int miningEnergyModificator = 2;
     public static int miningSpeedModificator = 2;
+    public static int oreGenMax = 30;
+    public static int oreGenMin = 6;
+    public static boolean oreGen = true;
 
 
     public static void init(File configFile)
@@ -36,10 +37,14 @@ public class ConfigHandler {
 
     private static void loadConfig()
     {
-        configValue = config.getBoolean("configValue",Configuration.CATEGORY_GENERAL,false,"Example");
 
-        miningEnergyModificator = config.getInt("miningEnergyModificator",Configuration.CATEGORY_GENERAL,2,1,10,"Mining Energy Modificator MEM- Energy Consumption Multitool: (45+runningTick)*MEM - Range: 1 - 10");
-        miningSpeedModificator = config.getInt("miningSpeedModificator",Configuration.CATEGORY_GENERAL,2,1,10,"Mining Speed Modificator MSM- Harvest Duration Multitool: BlockHardness*MSM/EfficencyLevel in ticks - Range: 1 - 10");
+        oreGen = config.getBoolean("oreGen", Configuration.CATEGORY_GENERAL, true, "Should Népouit be generated");
+
+        oreGenMax = config.getInt("oreGenMax",Configuration.CATEGORY_GENERAL,30,1,50,"max y layer for Népouit");
+        oreGenMin = config.getInt("oreGenMin",Configuration.CATEGORY_GENERAL,6,1,30,"min y layer for Népouit");
+
+        miningEnergyModificator = config.getInt("miningEnergyModificator",Configuration.CATEGORY_GENERAL,2,1,10,"1 very low energy use - 10 very high energy use");
+        miningSpeedModificator = config.getInt("miningSpeedModificator",Configuration.CATEGORY_GENERAL,2,1,10,"1 extreme fast mining - 10 extreme slow mining");
 
 
         if(config.hasChanged())

@@ -15,10 +15,8 @@ public class RenderPlayerMM extends RenderPlayerBase{
 
     @Override
     public void renderModel(EntityLivingBase paramEntityLivingBase, float paramFloat1, float paramFloat2, float paramFloat3, float paramFloat4, float paramFloat5, float paramFloat6) {
-        if(paramEntityLivingBase.isSneaking()){
-            super.renderModel(paramEntityLivingBase,paramFloat1,paramFloat2, paramFloat3, paramFloat4, paramFloat5, paramFloat6);
-        }else {
+
             super.renderModel(paramEntityLivingBase, paramFloat1, paramFloat2, paramFloat3, paramFloat4, paramFloat5, paramFloat6);
-        }
+
     }
 }

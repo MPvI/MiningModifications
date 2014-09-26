@@ -55,6 +55,10 @@ public class MaatsMod {
 
         }
 
+        if(ConfigHandler.oreGen) {
+            new ModWorldgen();
+        }
+
         proxy.registerModels();
         //
         ModOreDict.init();
