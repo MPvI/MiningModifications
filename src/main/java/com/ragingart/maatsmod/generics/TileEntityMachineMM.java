@@ -49,6 +49,10 @@ public abstract class TileEntityMachineMM extends TileEntityMM implements IEnerg
         return machineHelper;
     }
 
+    public void setMachineHelper(MachineHelper aHelper){
+        this.machineHelper=aHelper;
+    }
+
     /* IEnergyHandler */
 
     @Override

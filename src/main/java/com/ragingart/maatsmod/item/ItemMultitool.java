@@ -28,7 +28,7 @@ import java.util.Set;
 
 public class ItemMultitool extends ItemToolMM
 {
-    private static final Set blocksEffectiveAgainst = Sets.newHashSet(new Block[]{ModBlocks.Ore,ModBlocks.Charger});
+    private static final Set blocksEffectiveAgainst = Sets.newHashSet(ModBlocks.Ore);
     private int runningTick = 0;
     private int consume = 45;
 
@@ -37,26 +37,37 @@ public class ItemMultitool extends ItemToolMM
         super(3.0F, ToolMaterial.EMERALD, blocksEffectiveAgainst);
         this.setUnlocalizedName(Names.Items.MULTITOOL);
         setHarvestLevel("pickaxe",3);
+        setHarvestLevel("shovel",3);
+        setHarvestLevel("axe",3);
     }
 
-    public void setMode(ItemStack itemStack,boolean mode){
-        NBTHelper.setBoolean(itemStack,"Mode",mode);
+    public void setMode(ItemStack itemStack,int mode){
+        NBTHelper.setInteger(itemStack, "Mode", mode);
     }
 
-    public boolean getMode(ItemStack itemStack){
-        return NBTHelper.getBoolean(itemStack,"Mode");
+    public int getMode(ItemStack itemStack){
+        return NBTHelper.getInt(itemStack, "Mode");
     }
 
 
     @Override
     public boolean onItemUse(ItemStack itemStack,EntityPlayer entityPlayer,World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ){
-        Block block = world.getBlock(x, y, z);
-        if(block instanceof BlockMM && entityPlayer.isSneaking()){
-            ((BlockMM) block).onBlockWrenched(world,entityPlayer,x,y,z);
-            return true;
-        }else {
-            return false;
+        Block aBlock = world.getBlock(x, y, z);
+        if(entityPlayer.isSneaking() && aBlock instanceof BlockMM){
+            switch(getMode(itemStack)){
+                case 0:
+                    return false;
+                case 1:
+                    ((BlockMM) aBlock).onBlockWrenched(world, entityPlayer, x, y, z);
+                    return true;
+                case 2:
+                    ((BlockMM) aBlock).onBlockRotate(world, x, y, z, side);
+                    return true;
+                default:
+                    return false;
+            }
         }
+        return false;
     }
 
 
@@ -128,20 +139,34 @@ public class ItemMultitool extends ItemToolMM
     public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer entityPlayer)
     {
             if (entityPlayer.isSneaking()) {
-                setMode(itemStack, !getMode(itemStack));
+                setMode(itemStack,getMode(itemStack)+1);
+
+                if(getMode(itemStack)>2){
+                    setMode(itemStack,0);
+                }
+
                 if(!world.isRemote) {
                     String message;
-                    if (getMode(itemStack)) {
-                        message = "Mining Mode";
-                    } else {
-                        message = "Normal Mode";
+                    switch(getMode(itemStack)){
+                        case 0:
+                            message = "Mining Mode";
+                            break;
+                        case 1:
+                            message = "Wrench Mode";
+                            break;
+                        case 2:
+                            message = "Rotation Mode";
+                            break;
+                        default:
+                            message = "";
+                            break;
                     }
                     Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(message));
                 }
-            } else if (getMode(itemStack) && !entityPlayer.isUsingItem() && this.getEnergyStored(itemStack)>0) {
+            } else if (getMode(itemStack)==0 && !entityPlayer.isUsingItem() && this.getEnergyStored(itemStack)>0) {
                 entityPlayer.setItemInUse(itemStack, this.getMaxItemUseDuration(itemStack));
             }
-            return itemStack;
+        return itemStack;
     }
 
     @Override

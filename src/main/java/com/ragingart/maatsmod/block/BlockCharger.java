@@ -26,11 +26,7 @@ public class BlockCharger extends BlockMachineMM{
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iR)
     {
-        //Check for TileEntity
-
         mCasingHelper = new CasingHelper(iR,Names.Textures.Blocks.Charger.FRONT);
-
-        // Default BlockIcon
     }
 
     @Override

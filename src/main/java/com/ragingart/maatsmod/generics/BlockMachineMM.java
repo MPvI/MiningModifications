@@ -28,26 +28,27 @@ public abstract class BlockMachineMM extends BlockMM implements ITileEntityProvi
     }
 
     // Textures
+    // Within Inventory
     @Override
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(int side,int meta)
     {
         if(side==4){
-            return mCasingHelper.getIcon(5,meta);
+            return mCasingHelper.getIcon(null, 0);
         }
         return mCasingHelper.defaultIcon();
     }
 
+    // Within World
     @Override
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
         TileEntity te = world.getTileEntity(x,y,z);
         if(te!=null && te instanceof TileEntityMachineMM){
             MachineHelper aHelper = ((TileEntityMachineMM) te).getMachineHelper();
-            if(side!=5) mCasingHelper.setPort(side, aHelper.getPort(side));
-            return mCasingHelper.getIcon(side,aHelper.getState());
+            return mCasingHelper.getIcon(aHelper.getPort(side), aHelper.getState());
         }
-        return mCasingHelper.getIcon(side,0);
+        return mCasingHelper.defaultIcon();
     }
 
     @Override
@@ -80,5 +81,10 @@ public abstract class BlockMachineMM extends BlockMM implements ITileEntityProvi
         }catch (Throwable e){
             //noop
         }
+    }
+
+    @Override
+    public boolean canPlaceBlockOnSide(World p_149707_1_, int p_149707_2_, int p_149707_3_, int p_149707_4_, int p_149707_5_) {
+        return super.canPlaceBlockOnSide(p_149707_1_, p_149707_2_, p_149707_3_, p_149707_4_, p_149707_5_);
     }
 }

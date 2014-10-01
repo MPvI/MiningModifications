@@ -37,7 +37,7 @@ public class ItemCasing extends ItemMM {
 
         TileEntity aTile = world.getTileEntity(x, y, z);
 
-        if(aTile instanceof TileEntityMachineMM && itemStack.getItem() instanceof ItemCasing && side !=5){
+        if(aTile instanceof TileEntityMachineMM && itemStack.getItem() instanceof ItemCasing){
                 PacketHandler.INSTANCE.sendToServer(new MessageItemCasing(side, getPort().ordinal(), x, y, z));
         }
         return true;

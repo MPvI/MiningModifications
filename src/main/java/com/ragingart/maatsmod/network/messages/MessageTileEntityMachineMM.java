@@ -9,52 +9,55 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * Created by MaaT on 02.09.2014.
  */
 public class MessageTileEntityMachineMM implements IMessage,IMessageHandler<MessageTileEntityMachineMM,IMessage>{
 
-    private int[] ports = new int[5];
+    private MachineHelper aHelper;
     private int x;
     private int y;
     private int z;
-    private int state;
 
     public MessageTileEntityMachineMM(){
-
+        aHelper=new MachineHelper();
     }
 
     public MessageTileEntityMachineMM(TileEntityMachineMM te){
-        for(int i=0;i<ports.length;i++) {
-            ports[i]=te.getMachineHelper().getPort(i).ordinal();
-        }
         x=te.xCoord;
         y=te.yCoord;
         z=te.zCoord;
-        state=te.getMachineHelper().getState();
+        aHelper=te.getMachineHelper();
     }
 
     @Override
     public void fromBytes(ByteBuf buf) {
-        for(int i=0;i<ports.length;i++) {
-            ports[i]=buf.readInt();
-        }
         x=buf.readInt();
         y=buf.readInt();
         z=buf.readInt();
-        state=buf.readInt();
+        aHelper.setState(buf.readInt());
+        aHelper.setFacing(ForgeDirection.getOrientation(buf.readInt()));
+        for (int i = 0; i < 6; i++) {
+            aHelper.setPort(i, buf.readInt());
+        }
     }
 
     @Override
     public void toBytes(ByteBuf buf) {
-        for(int k: ports){
-            buf.writeInt(k);
-        }
         buf.writeInt(x);
         buf.writeInt(y);
         buf.writeInt(z);
-        buf.writeInt(state);
+        buf.writeInt(aHelper.getState());
+        buf.writeInt(aHelper.getFacing().ordinal());
+        for (int i = 0; i < 6; i++) {
+            if(aHelper.getPort(i)==null){
+                buf.writeInt(6);
+            }else {
+                buf.writeInt(aHelper.getPort(i).ordinal());
+            }
+        }
     }
 
     @Override
@@ -64,11 +67,9 @@ public class MessageTileEntityMachineMM implements IMessage,IMessageHandler<Mess
 
 
         if(aTile instanceof TileEntityMachineMM){
-            MachineHelper aHelper = ((TileEntityMachineMM) aTile).getMachineHelper();
-            for(int i=0;i<ports.length;i++) {
-                aHelper.setPort(i,message.ports[i]);
-            }
-            aHelper.setState(message.state);
+
+            ((TileEntityMachineMM) aTile).setMachineHelper(message.aHelper);
+
             aClient.theWorld.markBlockForUpdate(message.x,message.y,message.z);
         }
         return null;

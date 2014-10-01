@@ -7,14 +7,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
 /**
+ * For Blocks
  * Created by MaaT on 01.09.2014.
  */
 public class CasingHelper {
 
     protected IIcon mFrontIcons[];
-    protected IIcon mSideIcons[] = new IIcon[5];
     protected IIcon mPortIcons[] = new IIcon[4];
-    protected Port[] mPorts = new Port[5];
 
 
     public CasingHelper(IIconRegister iconRegister, String[] front){
@@ -22,14 +21,18 @@ public class CasingHelper {
         initFront(iconRegister, front);
     }
 
-    public IIcon getIcon(int side,int state){
-        if(side==5){
-            return mFrontIcons[state];
+    public IIcon getIcon(Port p, int state){
+        if(p!=null) {
+            return mPortIcons[p.ordinal()];
         }else{
-            updateSideIcons();
-            return mSideIcons[side];
+            return mFrontIcons[state];
         }
     }
+
+    public IIcon defaultIcon(){
+        return mPortIcons[0];
+    }
+
 
     public void initFront(IIconRegister iconRegister, String[] front){
         if(front==null){
@@ -48,24 +51,6 @@ public class CasingHelper {
         mPortIcons[1]=iconRegister.registerIcon(Names.MOD_PREFIX+Names.Textures.Blocks.ENERGY);
         mPortIcons[2]=iconRegister.registerIcon(Names.MOD_PREFIX+Names.Textures.Blocks.INPUT);
         mPortIcons[3]=iconRegister.registerIcon(Names.MOD_PREFIX+Names.Textures.Blocks.OUTPUT);
-    }
-
-    public void setPort(int side,Port port){
-        if(side!=5)mPorts[side]=port;
-    }
-
-    public void updateSideIcons(){
-        for(int i=0;i<mSideIcons.length;i++){
-            if (mPorts[i]!=null){
-                mSideIcons[i]=mPortIcons[mPorts[i].ordinal()];
-            }else{
-                mSideIcons[i]=mPortIcons[0];
-            }
-        }
-    }
-
-    public IIcon defaultIcon(){
-        return mPortIcons[0];
     }
 
     public static enum Port {

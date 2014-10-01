@@ -226,13 +226,11 @@ public class ModelMultitool extends ModelBase
 
   private int rotHelper = 0;
 
-  public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+  public void render(Entity entity, float f5)
   {
-    super.render(entity, f, f1, f2, f3, f4, f5);
-    setRotationAngles(f, f1, f2, f3, f4, f5,entity);
     Griff.render(f5);
     // Rota
-    if(entity instanceof EntityPlayer && ((EntityPlayer) entity).isUsingItem()){
+    if(entity!= null && entity instanceof EntityPlayer && ((EntityPlayer) entity).isUsingItem()){
         GL11.glRotatef(rotHelper*3.0F,1.0F,0.0F,0.0F);
     }
     kern.render(f5);
@@ -257,7 +255,7 @@ public class ModelMultitool extends ModelBase
     r3.render(f5);
     r4.render(f5);
     r5.render(f5);
-    if(entity instanceof EntityPlayer && ((EntityPlayer) entity).isUsingItem()) {
+    if(entity!=null && entity instanceof EntityPlayer && ((EntityPlayer) entity).isUsingItem()) {
         GL11.glRotatef(rotHelper * 3.0F, -1.0F, 0.0F, 0.0F);
 
         rotHelper++;

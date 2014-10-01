@@ -51,12 +51,14 @@ public class MessageItemCasing implements IMessage,IMessageHandler<MessageItemCa
 
     @Override
     public IMessage onMessage(MessageItemCasing message, MessageContext ctx) {
-        EntityPlayerMP player       = ctx.getServerHandler().playerEntity;
-        TileEntityMachineMM aTile   = (TileEntityMachineMM) player.worldObj.getTileEntity(message.x, message.y, message.z);
+        EntityPlayerMP player = ctx.getServerHandler().playerEntity;
+        TileEntityMachineMM aTile = (TileEntityMachineMM) player.worldObj.getTileEntity(message.x, message.y, message.z);
 
-        if(player.inventory.consumeInventoryItem(player.getHeldItem().getItem())){
-            CasingHelper.Port oldPort = aTile.getMachineHelper().setPort(message.side,message.port);
-            player.inventory.addItemStackToInventory(CasingHelper.Port.getItemFromPort(oldPort));
+        if (message.side != aTile.getMachineHelper().getFacing().ordinal()){
+            if (player.inventory.consumeInventoryItem(player.getHeldItem().getItem())) {
+                CasingHelper.Port oldPort = aTile.getMachineHelper().setPort(message.side, message.port);
+                if (oldPort != null)player.inventory.addItemStackToInventory(CasingHelper.Port.getItemFromPort(oldPort));
+            }
         }
 
         aTile.markDirty();

@@ -9,7 +9,9 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockMM extends Block
 {
@@ -45,6 +47,11 @@ public class BlockMM extends Block
         return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
     }
 
+    @Override
+    public boolean onBlockActivated(World p_149727_1_, int p_149727_2_, int p_149727_3_, int p_149727_4_, EntityPlayer p_149727_5_, int p_149727_6_, float p_149727_7_, float p_149727_8_, float p_149727_9_) {
+        return super.onBlockActivated(p_149727_1_, p_149727_2_, p_149727_3_, p_149727_4_, p_149727_5_, p_149727_6_, p_149727_7_, p_149727_8_, p_149727_9_);
+    }
+
     // Custom
     public boolean onBlockWrenched(World world,EntityPlayer entityPlayer,int x,int y,int z){
         if(!world.isRemote) {
@@ -53,4 +60,19 @@ public class BlockMM extends Block
         }
         return false;
     }
+
+    public boolean onBlockRotate(World world, int x, int y, int z,int side){
+
+        if(!world.isRemote) {
+
+            TileEntity aTile = world.getTileEntity(x,y,z);
+            if(aTile instanceof TileEntityMachineMM){
+                ((TileEntityMachineMM) aTile).getMachineHelper().rotatePortsToFacing(ForgeDirection.getOrientation(side));
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 }

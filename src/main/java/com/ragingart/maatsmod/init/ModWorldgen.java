@@ -3,6 +3,8 @@ package com.ragingart.maatsmod.init;
 import com.ragingart.maatsmod.handler.ConfigHandler;
 import cpw.mods.fml.common.IWorldGenerator;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 
@@ -23,19 +25,25 @@ public class ModWorldgen implements IWorldGenerator {
         int x = chunkX*16 + random.nextInt(16);
         int y = random.nextInt(ConfigHandler.oreGenMax-ConfigHandler.oreGenMin)+ ConfigHandler.oreGenMin;
         int z = chunkZ*16 + random.nextInt(16);
-        world.setBlock(x,y,z,ModBlocks.Ore);
-        world.setBlock(x, y + 1, z, ModBlocks.Ore);
+        setBlock(world,x,y,z,ModBlocks.Ore);
+        setBlock(world,x, y + 1, z, ModBlocks.Ore);
 
         if(random.nextBoolean()) {
-            world.setBlock(x + 1, y, z, ModBlocks.Ore);
+            setBlock(world,x + 1, y, z, ModBlocks.Ore);
         }else{
-            world.setBlock(x - 1, y, z, ModBlocks.Ore);
+            setBlock(world,x - 1, y, z, ModBlocks.Ore);
         }
 
         if(random.nextBoolean()) {
-            world.setBlock(x, y, z + 1, ModBlocks.Ore);
+            setBlock(world,x, y, z + 1, ModBlocks.Ore);
         }else {
-            world.setBlock(x, y, z - 1, ModBlocks.Ore);
+            setBlock(world,x, y, z - 1, ModBlocks.Ore);
+        }
+    }
+
+    public void setBlock(World world,int x,int y,int z,Block block){
+        if(world.getBlock(x,y,z)==Blocks.stone){
+            world.setBlock(x,y,z,block);
         }
     }
 

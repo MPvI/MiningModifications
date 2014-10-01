@@ -9,6 +9,8 @@ public class Models {
 
     public static String MODEL_PREFIX = "textures/models/";
 
+    public static ResourceLocation Multitool = new ResourceLocation(Reference.MOD_ID.toLowerCase(),MODEL_PREFIX+"multitool.png");
+
     public static ResourceLocation PlatformExt = new ResourceLocation(Reference.MOD_ID.toLowerCase(),MODEL_PREFIX+"platform_ext.png");
     public static ResourceLocation PlatformBase = new ResourceLocation(Reference.MOD_ID.toLowerCase(),MODEL_PREFIX+"platform_base.png");
 }

@@ -26,7 +26,7 @@ public class ModItems {
     {
         //Tools
         GameRegistry.registerItem(multitool, Names.Items.MULTITOOL);
-        GameRegistry.registerItem(spear,Names.Items.WEAPON_SPEAR);
+        //GameRegistry.registerItem(spear,Names.Items.WEAPON_SPEAR);
         //Parts
         GameRegistry.registerItem(battery,Names.Items.BATTERY);
         GameRegistry.registerItem(casing,Names.Items.CASING);
