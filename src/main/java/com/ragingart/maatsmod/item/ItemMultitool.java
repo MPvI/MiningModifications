@@ -124,7 +124,7 @@ public class ItemMultitool extends ItemToolMM
                 }
 
                 consume *= ConfigHandler.miningEnergyModificator;
-                consume /= EnchantmentHelper.getEnchantmentLevel(34,itemStack);
+                consume /= (EnchantmentHelper.getEnchantmentLevel(34,itemStack)+1);
 
                 if(consume > extractEnergy(itemStack,consume,false)){
                     entityPlayer.clearItemInUse();
