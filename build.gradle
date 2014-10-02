@@ -17,12 +17,12 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.7.10-0.1"
+version = "1.7.10-0.2"
 group= "com.ragingart.maatsmod" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "MaatsMod"
 
 minecraft {
-    version = "1.7.10-10.13.0.1205"
+    version = "1.7.10-10.13.0.1208"
     assetDir = "eclipse/assets"
 }
 

@@ -1,6 +1,7 @@
 package com.ragingart.maatsmod.ref;
 
 
+import com.ragingart.maatsmod.init.ModBlocks;
 import com.ragingart.maatsmod.init.ModItems;
 import net.minecraft.item.ItemStack;
 
@@ -20,5 +21,6 @@ public class Component {
     public static ItemStack CASING_OUTPUT(int x) {return new ItemStack(ModItems.casing_output,x);}
     public static ItemStack MULTITOOL() {return new ItemStack(ModItems.multitool);}
     public static ItemStack SCREW(int x) {return new ItemStack(ModItems.screw,x);}
-
+    public static ItemStack PLATFORM(int x) {return new ItemStack(ModBlocks.PlatformBase,x);}
+    public static ItemStack PLATFORM_EXT(int x){return new ItemStack(ModBlocks.PlatformExt,x);}
 }

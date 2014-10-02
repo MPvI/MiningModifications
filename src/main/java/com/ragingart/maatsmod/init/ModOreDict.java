@@ -9,6 +9,6 @@ public class ModOreDict {
     public static void init(){
         OreDictionary.registerOre("dustNickel",ModItems.dust_nickel);
         OreDictionary.registerOre("ingotNickel",ModItems.ingot_nickel);
-        OreDictionary.registerOre("oreNepouit",ModBlocks.Ore);
+        OreDictionary.registerOre("oreNickel",ModBlocks.Ore);
     }
 }
