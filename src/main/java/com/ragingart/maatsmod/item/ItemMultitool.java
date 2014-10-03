@@ -10,7 +10,6 @@ import com.ragingart.maatsmod.ref.Names;
 import com.ragingart.maatsmod.util.NBTHelper;
 import com.ragingart.maatsmod.util.ToolHelper;
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -76,33 +75,32 @@ public class ItemMultitool extends ItemToolMM
     public void onUsingTick(ItemStack itemStack, EntityPlayer entityPlayer, int count) {
 
         if(!entityPlayer.worldObj.isRemote) {
+            int[] x = new int[9];
+            int[] y = new int[9];
+            int[] z = new int[9];
+            float hardness = 0;
+            Block[] blocksToHarvest = new Block[9];
+
             ++runningTick;
             consume += runningTick;
 
 
             entityPlayer.addPotionEffect(new PotionEffect(1,5,3));
 
-            MovingObjectPosition mOP = Minecraft.getMinecraft().objectMouseOver;
+            MovingObjectPosition mOP = this.getMovingObjectPositionFromPlayer(entityPlayer.worldObj,entityPlayer,true);
 
-            if(mOP.typeOfHit != MovingObjectPosition.MovingObjectType.BLOCK){
+            if(mOP==null || mOP.typeOfHit != MovingObjectPosition.MovingObjectType.BLOCK){
                 return;
             }
 
             int[][] harvestField = ToolHelper.getHarvestField(mOP.blockX,mOP.blockY,mOP.blockZ,mOP.sideHit);
 
-            Block[] blocksToHarvest = new Block[9];
-
-            float hardness = 0;
-
             for (int i = 0; i < 9; i++) {
-                int x = harvestField[i][0];
-                int y = harvestField[i][1];
-                int z = harvestField[i][2];
-                blocksToHarvest[i]=entityPlayer.worldObj.getBlock(x,y,z);
+                x[i] = harvestField[i][0];
+                y[i] = harvestField[i][1];
+                z[i] = harvestField[i][2];
+                blocksToHarvest[i]=entityPlayer.worldObj.getBlock(x[i],y[i],z[i]);
                 hardness += blocksToHarvest[i].getBlockHardness(entityPlayer.worldObj,0,0,0);
-                if (runningTick % 10 == 0) {
-                    Minecraft.getMinecraft().effectRenderer.addBlockDestroyEffects(x, y, z, blocksToHarvest[i], 0);
-                }
             }
 
             int maxTick = (int)hardness*ConfigHandler.miningSpeedModificator/(EnchantmentHelper.getEfficiencyModifier(entityPlayer)+1);
@@ -110,17 +108,13 @@ public class ItemMultitool extends ItemToolMM
             if(runningTick >= maxTick){
                 for (int i = 0; i < 9; i++) {
 
-                    int x = harvestField[i][0];
-                    int y = harvestField[i][1];
-                    int z = harvestField[i][2];
-
                     if(blocksToHarvest[i]!= Blocks.air && blocksToHarvest[i]!=Blocks.bedrock && blocksToHarvest[i]!=Blocks.lava && blocksToHarvest[i]!=Blocks.water) {
-                        ArrayList<ItemStack> drops = blocksToHarvest[i].getDrops(entityPlayer.worldObj,x,y,z,blocksToHarvest[i].getDamageValue(entityPlayer.worldObj,x,y,z),EnchantmentHelper.getFortuneModifier(entityPlayer));
+                        ArrayList<ItemStack> drops = blocksToHarvest[i].getDrops(entityPlayer.worldObj,x[i],y[i],z[i],blocksToHarvest[i].getDamageValue(entityPlayer.worldObj,x[i],y[i],z[i]),EnchantmentHelper.getFortuneModifier(entityPlayer));
                         for(ItemStack drop :drops) {
-                            EntityItem dropEntity = new EntityItem(entityPlayer.worldObj,x,y,z,drop);
+                            EntityItem dropEntity = new EntityItem(entityPlayer.worldObj,x[i],y[i],z[i],drop);
                             entityPlayer.worldObj.spawnEntityInWorld(dropEntity);
                         }
-                        blocksToHarvest[i].removedByPlayer(entityPlayer.worldObj,entityPlayer,x,y,z,false);
+                        blocksToHarvest[i].removedByPlayer(entityPlayer.worldObj,entityPlayer,x[i],y[i],z[i],false);
                     }
                 }
 
@@ -135,6 +129,7 @@ public class ItemMultitool extends ItemToolMM
                 consume = 45;
             }
         }
+
     }
 
     @Override
