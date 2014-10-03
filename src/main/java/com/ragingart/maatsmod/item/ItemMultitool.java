@@ -29,6 +29,7 @@ import java.util.Set;
 public class ItemMultitool extends ItemToolMM
 {
     private static final Set blocksEffectiveAgainst = Sets.newHashSet(ModBlocks.Ore);
+    private static final String[] modes = new String[]{"Mining Mode","Wrench Mode","Rotation Mode"};
     private int runningTick = 0;
     private int consume = 45;
 
@@ -139,34 +140,21 @@ public class ItemMultitool extends ItemToolMM
     @Override
     public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer entityPlayer)
     {
+
             if (entityPlayer.isSneaking()) {
-                setMode(itemStack,getMode(itemStack)+1);
+                setMode(itemStack, getMode(itemStack) + 1);
 
-                if(getMode(itemStack)>2){
-                    setMode(itemStack,0);
+                if (getMode(itemStack) > 2) {
+                    setMode(itemStack, 0);
                 }
-
                 if(!world.isRemote) {
-                    String message;
-                    switch(getMode(itemStack)){
-                        case 0:
-                            message = "Mining Mode";
-                            break;
-                        case 1:
-                            message = "Wrench Mode";
-                            break;
-                        case 2:
-                            message = "Rotation Mode";
-                            break;
-                        default:
-                            message = "";
-                            break;
-                    }
-                    Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(message));
+                    entityPlayer.addChatMessage(new ChatComponentText(modes[getMode(itemStack)]));
                 }
-            } else if (getMode(itemStack)==0 && !entityPlayer.isUsingItem() && this.getEnergyStored(itemStack)>0) {
+
+            } else if (getMode(itemStack) == 0 && !entityPlayer.isUsingItem() && this.getEnergyStored(itemStack) > 0) {
                 entityPlayer.setItemInUse(itemStack, this.getMaxItemUseDuration(itemStack));
             }
+
         return itemStack;
     }
 
