@@ -7,6 +7,7 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
+import net.minecraftforge.common.util.ForgeDirection;
 import org.lwjgl.opengl.GL11;
 
 public class GuiCharger extends GuiContainer{
@@ -26,6 +27,7 @@ public class GuiCharger extends GuiContainer{
         String containerName = StatCollector.translateToLocal(tileEntityCharger.getInventoryName());
         fontRendererObj.drawString(containerName, xSize / 2 - fontRendererObj.getStringWidth(containerName) / 2, 6, 4210752);
         fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 93, 4210752);
+        fontRendererObj.drawString(String.valueOf(tileEntityCharger.getEnergyStored(ForgeDirection.UNKNOWN)), xSize / 2 - fontRendererObj.getStringWidth(String.valueOf(tileEntityCharger.getEnergyStored(ForgeDirection.UNKNOWN))) / 2, 45, 4210752);
     }
 
     @Override

@@ -20,6 +20,7 @@ public class MessageTileEntityMachineMM implements IMessage,IMessageHandler<Mess
     private int x;
     private int y;
     private int z;
+    private int energy;
 
     public MessageTileEntityMachineMM(){
         aHelper=new MachineHelper();
@@ -29,6 +30,7 @@ public class MessageTileEntityMachineMM implements IMessage,IMessageHandler<Mess
         x=te.xCoord;
         y=te.yCoord;
         z=te.zCoord;
+        energy=te.getEnergyStored(ForgeDirection.UNKNOWN);
         aHelper=te.getMachineHelper();
     }
 
@@ -37,6 +39,7 @@ public class MessageTileEntityMachineMM implements IMessage,IMessageHandler<Mess
         x=buf.readInt();
         y=buf.readInt();
         z=buf.readInt();
+        energy=buf.readInt();
         aHelper.setState(buf.readInt());
         aHelper.setFacing(ForgeDirection.getOrientation(buf.readInt()));
         for (int i = 0; i < 6; i++) {
@@ -49,6 +52,7 @@ public class MessageTileEntityMachineMM implements IMessage,IMessageHandler<Mess
         buf.writeInt(x);
         buf.writeInt(y);
         buf.writeInt(z);
+        buf.writeInt(energy);
         buf.writeInt(aHelper.getState());
         buf.writeInt(aHelper.getFacing().ordinal());
         for (int i = 0; i < 6; i++) {
@@ -70,6 +74,7 @@ public class MessageTileEntityMachineMM implements IMessage,IMessageHandler<Mess
 
             ((TileEntityMachineMM) aTile).setMachineHelper(message.aHelper);
 
+            ((TileEntityMachineMM) aTile).setEnergy(message.energy);
             aClient.theWorld.markBlockForUpdate(message.x,message.y,message.z);
         }
         return null;

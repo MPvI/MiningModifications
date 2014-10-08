@@ -1,22 +1,41 @@
 package com.ragingart.maatsmod.handler;
 
 import com.ragingart.maatsmod.client.gui.container.GuiCharger;
+import com.ragingart.maatsmod.client.gui.container.GuiEnergyGen;
 import com.ragingart.maatsmod.container.ContainerCharger;
+import com.ragingart.maatsmod.container.ContainerEnergyGen;
+import com.ragingart.maatsmod.ref.Gui;
 import com.ragingart.maatsmod.tileentity.TileEntityCharger;
+import com.ragingart.maatsmod.tileentity.TileEntityEnergyGen;
 import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 public class GuiHandler implements IGuiHandler {
+
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-        TileEntityCharger tileEntityCharger = (TileEntityCharger) world.getTileEntity(x, y, z);
-        return new ContainerCharger(player.inventory,tileEntityCharger);
+
+        TileEntity tileEntity = world.getTileEntity(x, y, z);
+        if (ID == Gui.ID.GUICHARGER.ordinal()){
+            return new ContainerCharger(player.inventory, (TileEntityCharger) tileEntity);
+        }
+        else if(ID == Gui.ID.GUIENERGYGEN.ordinal()){
+            return new ContainerEnergyGen(player.inventory, (TileEntityEnergyGen) tileEntity);
+        }
+        return 0;
     }
 
     @Override
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-        TileEntityCharger tileEntityCharger = (TileEntityCharger) world.getTileEntity(x, y, z);
-        return new GuiCharger(player.inventory,tileEntityCharger);
+        TileEntity tileEntity = world.getTileEntity(x, y, z);
+        if (ID == Gui.ID.GUICHARGER.ordinal()){
+            return new GuiCharger(player.inventory,(TileEntityCharger)tileEntity);
+        }
+        else if(ID == Gui.ID.GUIENERGYGEN.ordinal()){
+            return new GuiEnergyGen(player.inventory,(TileEntityEnergyGen)tileEntity);
+        }
+        return 0;
     }
 }

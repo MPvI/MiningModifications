@@ -86,6 +86,12 @@ public abstract class TileEntityMachineMM extends TileEntityMM implements IEnerg
         return machineHelper.hasPort(from.ordinal(), CasingHelper.Port.ENERGY);
     }
 
+    public void setEnergy(int e)
+    {
+        this.energy.setEnergyStored(e);
+    }
+
+
     /* ISidedInventory */
 
     @Override
