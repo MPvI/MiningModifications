@@ -3,6 +3,7 @@ package com.ragingart.maatsmod.block;
 
 import com.ragingart.maatsmod.MaatsMod;
 import com.ragingart.maatsmod.generics.BlockMachineMM;
+import com.ragingart.maatsmod.ref.Gui;
 import com.ragingart.maatsmod.ref.Names;
 import com.ragingart.maatsmod.tileentity.TileEntityCharger;
 import com.ragingart.maatsmod.util.CasingHelper;
@@ -40,7 +41,7 @@ public class BlockCharger extends BlockMachineMM{
     {
 
             if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityCharger) {
-                player.openGui(MaatsMod.instance, 1, world, x, y, z);
+                player.openGui(MaatsMod.instance, Gui.ID.GUICHARGER.ordinal(), world, x, y, z);
             }
             return true;
 

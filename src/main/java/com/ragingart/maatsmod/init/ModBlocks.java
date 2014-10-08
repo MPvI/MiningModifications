@@ -2,10 +2,7 @@ package com.ragingart.maatsmod.init;
 
 import com.ragingart.maatsmod.block.*;
 import com.ragingart.maatsmod.generics.BlockMM;
-import com.ragingart.maatsmod.item.ItemBlockCharger;
-import com.ragingart.maatsmod.item.ItemBlockNepouitOre;
-import com.ragingart.maatsmod.item.ItemBlockPlatformBase;
-import com.ragingart.maatsmod.item.ItemBlockPlatformExt;
+import com.ragingart.maatsmod.item.*;
 import com.ragingart.maatsmod.ref.Names;
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -15,6 +12,7 @@ public class ModBlocks {
     public static final BlockMM Energy = new BlockCreativeEnergy();
     public static final BlockMM PlatformBase = new BlockPlatformBase();
     public static final BlockMM PlatformExt = new BlockPlatformExt();
+    public static final BlockMM EnergyGen = new BlockEnergyGen();
 
     public static void init()
     {
@@ -23,5 +21,6 @@ public class ModBlocks {
         GameRegistry.registerBlock(Energy,Names.Blocks.CENERGY);
         GameRegistry.registerBlock(PlatformBase,ItemBlockPlatformBase.class,Names.Blocks.PLATFORM_BASE);
         GameRegistry.registerBlock(PlatformExt, ItemBlockPlatformExt.class,Names.Blocks.PLATFORM_EXT);
+        GameRegistry.registerBlock(EnergyGen, ItemBlockEnergyGen.class,Names.Blocks.ENERGYGEN);
     }
 }
