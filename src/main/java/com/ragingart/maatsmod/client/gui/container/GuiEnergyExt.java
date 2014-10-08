@@ -1,8 +1,8 @@
 package com.ragingart.maatsmod.client.gui.container;
 
-import com.ragingart.maatsmod.container.ContainerEnergyExt;
+import com.ragingart.maatsmod.container.ContainerDischarger;
 import com.ragingart.maatsmod.ref.Reference;
-import com.ragingart.maatsmod.tileentity.TileEntityEnergyExt;
+import com.ragingart.maatsmod.tileentity.TileEntityDischarger;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
@@ -12,11 +12,11 @@ import org.lwjgl.opengl.GL11;
 
 public class GuiEnergyExt extends GuiContainer{
 
-    private TileEntityEnergyExt tileEntityEnergyExt;
+    private TileEntityDischarger tileEntityDischarger;
 
-    public GuiEnergyExt(InventoryPlayer invPlayer, TileEntityEnergyExt tileEntityEnergyExt){
-        super(new ContainerEnergyExt(invPlayer,tileEntityEnergyExt));
-        this.tileEntityEnergyExt = tileEntityEnergyExt;
+    public GuiEnergyExt(InventoryPlayer invPlayer, TileEntityDischarger tileEntityDischarger){
+        super(new ContainerDischarger(invPlayer, tileEntityDischarger));
+        this.tileEntityDischarger = tileEntityDischarger;
         xSize = 176;
         ySize = 140;
     }
@@ -24,10 +24,10 @@ public class GuiEnergyExt extends GuiContainer{
     @Override
     protected void drawGuiContainerForegroundLayer(int x, int y)
     {
-        String containerName = StatCollector.translateToLocal(tileEntityEnergyExt.getInventoryName());
+        String containerName = StatCollector.translateToLocal(tileEntityDischarger.getInventoryName());
         fontRendererObj.drawString(containerName, xSize / 2 - fontRendererObj.getStringWidth(containerName) / 2, 6, 4210752);
         fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 93, 4210752);
-        fontRendererObj.drawString(String.valueOf(tileEntityEnergyExt.getEnergyStored(ForgeDirection.UNKNOWN)), xSize / 2 - fontRendererObj.getStringWidth(String.valueOf(tileEntityEnergyExt.getEnergyStored(ForgeDirection.UNKNOWN))) / 2, 45, 4210752);
+        fontRendererObj.drawString(String.valueOf(tileEntityDischarger.getEnergyStored(ForgeDirection.UNKNOWN)), xSize / 2 - fontRendererObj.getStringWidth(String.valueOf(tileEntityDischarger.getEnergyStored(ForgeDirection.UNKNOWN))) / 2, 45, 4210752);
     }
 
     @Override

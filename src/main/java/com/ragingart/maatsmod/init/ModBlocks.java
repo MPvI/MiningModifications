@@ -13,16 +13,20 @@ public class ModBlocks {
     public static final BlockMM PlatformBase = new BlockPlatformBase();
     public static final BlockMM PlatformExt = new BlockPlatformExt();
     public static final BlockMM EnergyGen = new BlockEnergyGen();
-    public static final BlockMM EnergyExtractor = new BlockEnergyExt();
+    public static final BlockMM Discharger = new BlockDischarger();
 
     public static void init()
     {
         GameRegistry.registerBlock(Ore,ItemBlockNepouitOre.class ,Names.Blocks.ORE);
+
         GameRegistry.registerBlock(Charger,ItemBlockCharger.class,Names.Blocks.CHARGER);
+        GameRegistry.registerBlock(Discharger, ItemBlockDischarger.class,Names.Blocks.DISCHARGER);
+
         GameRegistry.registerBlock(Energy,Names.Blocks.CENERGY);
+        GameRegistry.registerBlock(EnergyGen, ItemBlockEnergyGen.class,Names.Blocks.ENERGYGEN);
+
         GameRegistry.registerBlock(PlatformBase,ItemBlockPlatformBase.class,Names.Blocks.PLATFORM_BASE);
         GameRegistry.registerBlock(PlatformExt, ItemBlockPlatformExt.class,Names.Blocks.PLATFORM_EXT);
-        GameRegistry.registerBlock(EnergyGen, ItemBlockEnergyGen.class,Names.Blocks.ENERGYGEN);
-        GameRegistry.registerBlock(EnergyExtractor, ItemBlockEnergyGen.class,Names.Blocks.ENERGYEXTRACTOR);
+
     }
 }

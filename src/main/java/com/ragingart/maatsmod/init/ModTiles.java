@@ -11,7 +11,7 @@ public class ModTiles {
     public static void init() {
         GameRegistry.registerTileEntity(TileEntityCharger.class,Names.Blocks.CHARGER);
         GameRegistry.registerTileEntity(TileEntityEnergyGen.class,Names.Blocks.ENERGYGEN);
-        GameRegistry.registerTileEntity(TileEntityEnergyExt.class,Names.Blocks.ENERGYEXTRACTOR);
+        GameRegistry.registerTileEntity(TileEntityDischarger.class,Names.Blocks.DISCHARGER);
         GameRegistry.registerTileEntity(TileEntityCreativeEnergy.class,Names.Blocks.CENERGY);
         GameRegistry.registerTileEntity(TileEntityPlatformBase.class,Names.Blocks.PLATFORM_BASE);
         GameRegistry.registerTileEntity(TileEntityPlatformExt.class,Names.Blocks.PLATFORM_EXT);

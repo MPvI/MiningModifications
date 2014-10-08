@@ -41,7 +41,7 @@ public class BlockEnergyGen extends BlockMachineMM{
     {
 
             if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityEnergyGen) {
-                player.openGui(MaatsMod.instance, Gui.ID.GUIENERGYGEN.ordinal(), world, x, y, z);
+                player.openGui(MaatsMod.instance, Gui.ID.GENERATOR.ordinal(), world, x, y, z);
             }
             return true;
 

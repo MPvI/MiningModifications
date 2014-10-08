@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityEnergyExt extends TileEntityMachineMM implements IInventory {
+public class TileEntityDischarger extends TileEntityMachineMM implements IInventory {
 
     private ItemStack inventory;
 
@@ -125,7 +125,7 @@ public class TileEntityEnergyExt extends TileEntityMachineMM implements IInvento
 
     @Override
     public String getInventoryName() {
-        return "EnergyExtractor";
+        return "Discharger";
     }
 
     @Override

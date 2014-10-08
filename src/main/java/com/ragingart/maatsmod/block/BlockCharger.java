@@ -41,7 +41,7 @@ public class BlockCharger extends BlockMachineMM{
     {
 
             if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityCharger) {
-                player.openGui(MaatsMod.instance, Gui.ID.GUICHARGER.ordinal(), world, x, y, z);
+                player.openGui(MaatsMod.instance, Gui.ID.CHARGER.ordinal(), world, x, y, z);
             }
             return true;
 

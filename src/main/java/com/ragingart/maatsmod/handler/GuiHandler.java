@@ -4,11 +4,11 @@ import com.ragingart.maatsmod.client.gui.container.GuiCharger;
 import com.ragingart.maatsmod.client.gui.container.GuiEnergyExt;
 import com.ragingart.maatsmod.client.gui.container.GuiEnergyGen;
 import com.ragingart.maatsmod.container.ContainerCharger;
-import com.ragingart.maatsmod.container.ContainerEnergyExt;
+import com.ragingart.maatsmod.container.ContainerDischarger;
 import com.ragingart.maatsmod.container.ContainerEnergyGen;
 import com.ragingart.maatsmod.ref.Gui;
 import com.ragingart.maatsmod.tileentity.TileEntityCharger;
-import com.ragingart.maatsmod.tileentity.TileEntityEnergyExt;
+import com.ragingart.maatsmod.tileentity.TileEntityDischarger;
 import com.ragingart.maatsmod.tileentity.TileEntityEnergyGen;
 import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,14 +21,14 @@ public class GuiHandler implements IGuiHandler {
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
 
         TileEntity tileEntity = world.getTileEntity(x, y, z);
-        if (ID == Gui.ID.GUICHARGER.ordinal()){
+        if (ID == Gui.ID.CHARGER.ordinal()){
             return new ContainerCharger(player.inventory, (TileEntityCharger) tileEntity);
         }
-        else if(ID == Gui.ID.GUIENERGYGEN.ordinal()){
+        else if(ID == Gui.ID.GENERATOR.ordinal()){
             return new ContainerEnergyGen(player.inventory, (TileEntityEnergyGen) tileEntity);
         }
-        else if(ID == Gui.ID.GUIENERGYEXT.ordinal()){
-            return new ContainerEnergyExt(player.inventory, (TileEntityEnergyExt) tileEntity);
+        else if(ID == Gui.ID.DISCHARGER.ordinal()){
+            return new ContainerDischarger(player.inventory, (TileEntityDischarger) tileEntity);
         }
         return 0;
     }
@@ -36,14 +36,14 @@ public class GuiHandler implements IGuiHandler {
     @Override
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         TileEntity tileEntity = world.getTileEntity(x, y, z);
-        if (ID == Gui.ID.GUICHARGER.ordinal()){
+        if (ID == Gui.ID.CHARGER.ordinal()){
             return new GuiCharger(player.inventory,(TileEntityCharger)tileEntity);
         }
-        else if(ID == Gui.ID.GUIENERGYGEN.ordinal()){
+        else if(ID == Gui.ID.GENERATOR.ordinal()){
             return new GuiEnergyGen(player.inventory,(TileEntityEnergyGen)tileEntity);
         }
-        else if(ID == Gui.ID.GUIENERGYEXT.ordinal()){
-            return new GuiEnergyExt(player.inventory,(TileEntityEnergyExt)tileEntity);
+        else if(ID == Gui.ID.DISCHARGER.ordinal()){
+            return new GuiEnergyExt(player.inventory,(TileEntityDischarger)tileEntity);
         }
         return 0;
     }
