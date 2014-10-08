@@ -2,6 +2,7 @@ package com.ragingart.maatsmod.tileentity;
 
 import cofh.api.energy.IEnergyContainerItem;
 import com.ragingart.maatsmod.generics.TileEntityMachineMM;
+import com.ragingart.maatsmod.util.MachineHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -32,14 +33,7 @@ public class TileEntityCharger extends TileEntityMachineMM implements IInventory
     public void loadContainer(){
         if(!worldObj.isRemote) {
             if (inventory != null && inventory.getItem() instanceof IEnergyContainerItem) {
-                IEnergyContainerItem item = (IEnergyContainerItem) inventory.getItem();
-
-                int maxExtract = energy.getEnergyStored();
-                int maxInsert = item.getMaxEnergyStored(inventory) - item.getEnergyStored(inventory);
-                int maxTransferRate = item.receiveEnergy(inventory, maxInsert, true);
-                int transferRate = Math.min(maxExtract, maxTransferRate);
-
-                int transfered = item.receiveEnergy(inventory, energy.extractEnergy(transferRate, false), false);
+               int transfered = MachineHelper.transferEnergy(energy, inventory);
 
                 if (transfered > 0 && getHasContainer()) {
                     machineHelper.setState(2);

@@ -1,5 +1,8 @@
 package com.ragingart.maatsmod.util;
 
+import cofh.api.energy.EnergyStorage;
+import cofh.api.energy.IEnergyContainerItem;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -111,5 +114,32 @@ public class MachineHelper {
 
     public void setFacing(ForgeDirection facing) {
         this.facing = facing;
+    }
+
+    public static int transferEnergy(ItemStack inventory, EnergyStorage energy){
+        IEnergyContainerItem item = (IEnergyContainerItem) inventory.getItem();
+
+        int maxExtract = item.getEnergyStored(inventory);
+        maxExtract = item.extractEnergy(inventory ,maxExtract, true);
+        int maxInsert = energy.getMaxEnergyStored()-energy.getEnergyStored();
+        int transferRate = Math.min(maxExtract, maxInsert);
+
+        item.extractEnergy(inventory ,transferRate, false);
+        energy.modifyEnergyStored(transferRate);
+        return transferRate;
+    }
+
+    public static int transferEnergy(EnergyStorage energy, ItemStack inventory){
+        IEnergyContainerItem item = (IEnergyContainerItem) inventory.getItem();
+
+        int maxExtract = energy.getEnergyStored();
+        int maxInsert = item.getMaxEnergyStored(inventory)-item.getEnergyStored(inventory);
+        maxInsert = item.receiveEnergy(inventory ,maxInsert, true);
+        int transferRate = Math.min(maxExtract, maxInsert);
+
+        energy.extractEnergy(transferRate, false);
+        item.receiveEnergy(inventory, transferRate, false);
+
+        return transferRate;
     }
 }
