@@ -17,10 +17,11 @@ public class TileRendererPlatformExt extends TileEntitySpecialRenderer {
     @Override
     public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float tick) {
         GL11.glPushMatrix();
-        GL11.glTranslated(x, y, z);
-        GL11.glScalef(-0.5F,-1,0.5F);
-        this.bindTexture(Models.PlatformExt);
+        GL11.glTranslated(x+0.5, y, z+0.5);
+        GL11.glScalef(0.5F,1, 0.5F);
         GL11.glEnable(GL11.GL_BLEND);
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA,GL11.GL_ONE_MINUS_SRC_ALPHA);
+        this.bindTexture(Models.PlatformExt);
         model.render();
         GL11.glPopMatrix();
     }

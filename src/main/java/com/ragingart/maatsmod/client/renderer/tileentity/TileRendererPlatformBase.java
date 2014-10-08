@@ -1,6 +1,6 @@
 package com.ragingart.maatsmod.client.renderer.tileentity;
 
-import com.ragingart.maatsmod.client.renderer.model.ModelPlatformExt;
+import com.ragingart.maatsmod.client.renderer.model.ModelPlatformBase;
 import com.ragingart.maatsmod.ref.Models;
 import com.ragingart.maatsmod.tileentity.TileEntityPlatformBase;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -11,7 +11,7 @@ import org.lwjgl.opengl.GL11;
  * Created by MaaT on 26.09.2014.
  */
 public class TileRendererPlatformBase extends TileEntitySpecialRenderer {
-    public ModelPlatformExt model= new ModelPlatformExt();
+    public ModelPlatformBase model= new ModelPlatformBase();
 
 
     @Override

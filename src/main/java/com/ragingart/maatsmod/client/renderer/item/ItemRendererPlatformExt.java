@@ -1,6 +1,6 @@
 package com.ragingart.maatsmod.client.renderer.item;
 
-import com.ragingart.maatsmod.client.renderer.model.ModelPlatformExt;
+import com.ragingart.maatsmod.client.renderer.model.ModelPlatformBase;
 import com.ragingart.maatsmod.ref.Models;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
@@ -12,7 +12,7 @@ import org.lwjgl.opengl.GL11;
  */
 public class ItemRendererPlatformExt implements IItemRenderer {
 
-    public ModelPlatformExt model = new ModelPlatformExt();
+    public ModelPlatformBase model = new ModelPlatformBase();
 
     @Override
     public boolean handleRenderType(ItemStack item, ItemRenderType type) {

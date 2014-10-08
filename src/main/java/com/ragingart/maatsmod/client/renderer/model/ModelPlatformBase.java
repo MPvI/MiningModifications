@@ -13,8 +13,9 @@ package com.ragingart.maatsmod.client.renderer.model;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import org.lwjgl.opengl.GL11;
 
-public class ModelPlatformExt extends ModelBase
+public class ModelPlatformBase extends ModelBase
 {
   //fields
   public ModelRenderer Shape1;
@@ -22,13 +23,13 @@ public class ModelPlatformExt extends ModelBase
   public ModelRenderer Shape3;
   public ModelRenderer Shape4;
   
-  public ModelPlatformExt()
+  public ModelPlatformBase()
   {
     textureWidth = 128;
     textureHeight = 50;
     
       Shape1 = new ModelRenderer(this, 0, 0);
-      Shape1.addBox(-16F, 0F, -16F, 32, 0, 32);
+      Shape1.addBox(-16F, 0F, -16F, 32, 1, 32);
       Shape1.setRotationPoint(0F, 0F, 0F);
       Shape1.setTextureSize(128,32);
       Shape1.mirror = false;
@@ -39,7 +40,6 @@ public class ModelPlatformExt extends ModelBase
       Shape2.setTextureSize(128, 50);
       Shape2.mirror = false;
       setRotation(Shape2, 0F, 0F, 0F);
-      /*
       Shape3 = new ModelRenderer(this, 20, 34);
       Shape3.addBox(-0.5F, 3F, -1.5F, 1, 7, 1);
       Shape3.setRotationPoint(0F, 0F, 0F);
@@ -52,22 +52,21 @@ public class ModelPlatformExt extends ModelBase
       Shape4.setTextureSize(128, 50);
       Shape4.mirror = false;
       setRotation(Shape4, 0F, 0F, 0F);
-      */
   }
 
   public void render(float f,float rotHelper)
   {
     Shape1.render(f);
-    /*
+
     Shape2.render(f);
 
     GL11.glRotatef(rotHelper,0,1,0);
       for (int i = 0; i < 4; i++) {
           Shape3.render(f);
           Shape4.render(f);
-          GL11.glRotatef(90,0,1,0);
+          GL11.glRotatef(90, 0, 1, 0);
       }
-    */
+
   }
   
   private void setRotation(ModelRenderer model, float x, float y, float z)
