@@ -1,7 +1,7 @@
 package com.ragingart.maatsmod.handler;
 
 import com.ragingart.maatsmod.client.gui.container.GuiCharger;
-import com.ragingart.maatsmod.client.gui.container.GuiEnergyExt;
+import com.ragingart.maatsmod.client.gui.container.GuiDischarger;
 import com.ragingart.maatsmod.client.gui.container.GuiEnergyGen;
 import com.ragingart.maatsmod.container.ContainerCharger;
 import com.ragingart.maatsmod.container.ContainerDischarger;
@@ -43,7 +43,7 @@ public class GuiHandler implements IGuiHandler {
             return new GuiEnergyGen(player.inventory,(TileEntityEnergyGen)tileEntity);
         }
         else if(ID == Gui.ID.DISCHARGER.ordinal()){
-            return new GuiEnergyExt(player.inventory,(TileEntityDischarger)tileEntity);
+            return new GuiDischarger(player.inventory,(TileEntityDischarger)tileEntity);
         }
         return 0;
     }

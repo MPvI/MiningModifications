@@ -10,11 +10,11 @@ import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.util.ForgeDirection;
 import org.lwjgl.opengl.GL11;
 
-public class GuiEnergyExt extends GuiContainer{
+public class GuiDischarger extends GuiContainer{
 
     private TileEntityDischarger tileEntityDischarger;
 
-    public GuiEnergyExt(InventoryPlayer invPlayer, TileEntityDischarger tileEntityDischarger){
+    public GuiDischarger(InventoryPlayer invPlayer, TileEntityDischarger tileEntityDischarger){
         super(new ContainerDischarger(invPlayer, tileEntityDischarger));
         this.tileEntityDischarger = tileEntityDischarger;
         xSize = 176;

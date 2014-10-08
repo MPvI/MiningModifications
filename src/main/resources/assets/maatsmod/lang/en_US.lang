@@ -15,7 +15,7 @@ item.maatsmod:ingot_nickel.name= Nickel Ingot
 //Blocks
 tile.maatsmod:nepouit_ore.name=Népouit Ore
 tile.maatsmod:charger.name=Charger
-tile.maatsmod:energyext.name=Discharger
+tile.maatsmod:discharger.name=Discharger
 tile.maatsmod:energygen.name=Energy Generator
 tile.maatsmod:crenergy.name=Creative Energysource
 
