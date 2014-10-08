@@ -104,6 +104,9 @@ public class ItemMultitool extends ItemToolMM
             }
 
             int maxTick = (int)hardness*ConfigHandler.miningSpeedModificator/(EnchantmentHelper.getEfficiencyModifier(entityPlayer)+1);
+            if(maxTick>ConfigHandler.maxMiningTime){
+                maxTick=ConfigHandler.maxMiningTime;
+            }
 
             if(runningTick >= maxTick){
                 for (int i = 0; i < 9; i++) {

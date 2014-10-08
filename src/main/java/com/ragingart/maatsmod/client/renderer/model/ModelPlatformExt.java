@@ -28,9 +28,9 @@ public class ModelPlatformExt extends ModelBase
     textureHeight = 50;
     
       Shape1 = new ModelRenderer(this, 0, 0);
-      Shape1.addBox(-16F, 0F, -16F, 32, 1, 32);
+      Shape1.addBox(-16F, 0F, -16F, 32, 0, 32);
       Shape1.setRotationPoint(0F, 0F, 0F);
-      Shape1.setTextureSize(128, 50);
+      Shape1.setTextureSize(128,32);
       Shape1.mirror = false;
       setRotation(Shape1, 0F, 0F, 0F);
       Shape2 = new ModelRenderer(this, 0, 34);
@@ -58,8 +58,9 @@ public class ModelPlatformExt extends ModelBase
   public void render(float f,float rotHelper)
   {
     Shape1.render(f);
+    /*
     Shape2.render(f);
-     /*
+
     GL11.glRotatef(rotHelper,0,1,0);
       for (int i = 0; i < 4; i++) {
           Shape3.render(f);

@@ -17,6 +17,7 @@ public class ConfigHandler {
     public static boolean oreGen = true;
     public static int maxPlatformSize = 608;
     public static int maxPlatformRadius = 14;
+    public static int maxMiningTime;
 
 
     public static void init(File configFile)
@@ -47,6 +48,7 @@ public class ConfigHandler {
 
         miningEnergyModificator = config.getInt("miningEnergyModificator",Configuration.CATEGORY_GENERAL,2,1,10,"1 very low energy use - 10 very high energy use");
         miningSpeedModificator = config.getInt("miningSpeedModificator",Configuration.CATEGORY_GENERAL,2,1,10,"1 extreme fast mining - 10 extreme slow mining");
+        maxMiningTime = config.getInt("maxMiningTime",Configuration.CATEGORY_GENERAL,240,60,4800,"Maximum time in ticks until the multitool will break a 3x3");
 
         maxPlatformSize = config.getInt("maxPlatformSize",Configuration.CATEGORY_GENERAL,608,10,1000,"max Size for the Platform");
         maxPlatformRadius = config.getInt("maxPlatformRadius",Configuration.CATEGORY_GENERAL,14,1,100,"max Radius for the Platform");
