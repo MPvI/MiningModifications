@@ -1,11 +1,14 @@
 package com.ragingart.maatsmod.handler;
 
 import com.ragingart.maatsmod.client.gui.container.GuiCharger;
+import com.ragingart.maatsmod.client.gui.container.GuiEnergyExt;
 import com.ragingart.maatsmod.client.gui.container.GuiEnergyGen;
 import com.ragingart.maatsmod.container.ContainerCharger;
+import com.ragingart.maatsmod.container.ContainerEnergyExt;
 import com.ragingart.maatsmod.container.ContainerEnergyGen;
 import com.ragingart.maatsmod.ref.Gui;
 import com.ragingart.maatsmod.tileentity.TileEntityCharger;
+import com.ragingart.maatsmod.tileentity.TileEntityEnergyExt;
 import com.ragingart.maatsmod.tileentity.TileEntityEnergyGen;
 import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,6 +27,9 @@ public class GuiHandler implements IGuiHandler {
         else if(ID == Gui.ID.GUIENERGYGEN.ordinal()){
             return new ContainerEnergyGen(player.inventory, (TileEntityEnergyGen) tileEntity);
         }
+        else if(ID == Gui.ID.GUIENERGYEXT.ordinal()){
+            return new ContainerEnergyExt(player.inventory, (TileEntityEnergyExt) tileEntity);
+        }
         return 0;
     }
 
@@ -35,6 +41,9 @@ public class GuiHandler implements IGuiHandler {
         }
         else if(ID == Gui.ID.GUIENERGYGEN.ordinal()){
             return new GuiEnergyGen(player.inventory,(TileEntityEnergyGen)tileEntity);
+        }
+        else if(ID == Gui.ID.GUIENERGYEXT.ordinal()){
+            return new GuiEnergyExt(player.inventory,(TileEntityEnergyExt)tileEntity);
         }
         return 0;
     }

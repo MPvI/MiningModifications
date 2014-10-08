@@ -6,6 +6,7 @@ package com.ragingart.maatsmod.ref;
 public class Gui {
     public static enum ID {
         GUICHARGER,
-        GUIENERGYGEN;
+        GUIENERGYGEN,
+        GUIENERGYEXT;
     }
 }

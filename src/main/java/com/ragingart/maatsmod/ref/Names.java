@@ -14,7 +14,7 @@ public class Names {
         public static final String ORE = "nepouit_ore";
         public static final String PLATFORM_BASE = "platformBase";
         public static final String PLATFORM_EXT = "platformExt";
-
+        public static final String ENERGYEXTRACTOR = "energyextractor";
     }
     
     public static final class Items{
@@ -53,6 +53,14 @@ public class Names {
                 public static final String FRONT_ON= "energygen_front_on";
 
                 public static final String[] FRONT = new String[]{FRONT_OFF,FRONT_ON};
+            }
+            public static final class EnergyExtractor{
+
+                public static final String FRONT_OFF = "extractor_front_off";
+                public static final String FRONT_OFF_BAT = "extractor_front_off_bat";
+                public static final String FRONT_ON= "extractor_front_on";
+
+                public static final String[] FRONT = new String[]{FRONT_OFF, FRONT_OFF_BAT,FRONT_ON};
             }
             
             

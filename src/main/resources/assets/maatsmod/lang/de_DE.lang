@@ -16,6 +16,7 @@ item.maatsmod:ingot_nickel.name=Nickelbarren
 tile.maatsmod:nepouit_ore.name=Népouiterz
 tile.maatsmod:charger.name=Ladegerät
 tile.maatsmod:energygen.name=Stromgenerator
+tile.maatsmod:energyext.name=Entladegerät
 tile.maatsmod:crenergy.name=Unendliche Energiequelle
 
 // Creative Tab

@@ -1,25 +1,16 @@
 package com.ragingart.maatsmod.tileentity;
 
 import cofh.api.energy.IEnergyContainerItem;
-import cofh.lib.util.helpers.EnergyHelper;
 import com.ragingart.maatsmod.generics.TileEntityMachineMM;
-import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.*;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityEnergyGen extends TileEntityMachineMM implements IInventory {
+public class TileEntityEnergyExt extends TileEntityMachineMM implements IInventory {
 
     private ItemStack inventory;
-    private int burntime = 0;
 
 
 
@@ -27,55 +18,41 @@ public class TileEntityEnergyGen extends TileEntityMachineMM implements IInvento
     public void updateEntity()
     {
         super.updateEntity();
+        extractContainer();
+    }
+
+    public boolean getHasContainer(){
+        if(inventory!=null){
+            if(inventory.getItem() instanceof IEnergyContainerItem){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void extractContainer(){
         if(!worldObj.isRemote) {
-            this.handleBurnTime();
-            this.handleEnergyTransfer();
-        }
-    }
+            if (inventory != null && inventory.getItem() instanceof IEnergyContainerItem) {
+                IEnergyContainerItem item = (IEnergyContainerItem) inventory.getItem();
 
-    public void handleBurnTime(){
-        int burnenergy = 1;
-        int add_burntime = TileEntityFurnace.getItemBurnTime(inventory);
-        int get_energy = getEnergyStored(ForgeDirection.UNKNOWN);
-        int get_maxenergy = getMaxEnergyStored(ForgeDirection.UNKNOWN);
-        if (burntime == 0 && add_burntime != 0 && get_energy + add_burntime <= get_maxenergy) {
-            if (decrStackSize(0, 1) != null) {
-                burntime = add_burntime / burnenergy;
-            }
-        }
-        if (burntime > 0) {
-            energy.modifyEnergyStored(burnenergy);
-            burntime--;
-        }
-    }
+                int maxExtract = item.getEnergyStored(inventory);
+                int maxInsert = energy.getMaxEnergyStored()-energy.getEnergyStored();
+                int transferRate = Math.min(maxExtract, maxInsert);
 
-    public void handleEnergyTransfer(){
-        int num_consum = 0;
-        int id_consum[] = new int[6];
-        for (int i = 0; i < 6; i++) {
-            if (EnergyHelper.isAdjacentEnergyHandlerFromSide(this, i) && canConnectEnergy(ForgeDirection.values()[i])) {
-                id_consum[num_consum]=i;
-                num_consum++;
-            }
-        }
-        if (num_consum > 0 && getEnergyStored(ForgeDirection.UNKNOWN) >= 10*num_consum){
-            for (int i = 0; i < num_consum; i++) {
-                int getTransferedEnergy = EnergyHelper.insertEnergyIntoAdjacentEnergyHandler(this, id_consum[i], 10, false);
-                extractEnergy(ForgeDirection.UNKNOWN, getTransferedEnergy, false);
-            }
-        }
-        else if(num_consum > 0){
-            int max_output = getEnergyStored(ForgeDirection.UNKNOWN)/num_consum;
-            for (int i = 0; i < num_consum; i++) {
-                int getTransferedEnergy = EnergyHelper.insertEnergyIntoAdjacentEnergyHandler(this, id_consum[i], max_output, false);
-                extractEnergy(ForgeDirection.UNKNOWN, getTransferedEnergy, false);
-            }
-        }
-    }
+                energy.modifyEnergyStored(transferRate);
+                item.extractEnergy(inventory ,transferRate, false);
 
-    @Override
-    public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate){
-        return 0;
+                if (transferRate > 0 && getHasContainer()) {
+                    machineHelper.setState(2);
+
+                } else if (getHasContainer()) {
+                    machineHelper.setState(1);
+
+                }
+            } else {
+                machineHelper.setState(0);
+            }
+        }
     }
 
     @Override
@@ -84,14 +61,17 @@ public class TileEntityEnergyGen extends TileEntityMachineMM implements IInvento
         NBTTagCompound inv = new NBTTagCompound();
         if(inventory != null)inventory.writeToNBT(inv);
         cmpd.setTag("Inventory",inv);
-        cmpd.setInteger("Burntime",burntime);
     }
 
     @Override
     public void readFromNBT(NBTTagCompound cmpd) {
         super.readFromNBT(cmpd);
         inventory = ItemStack.loadItemStackFromNBT(cmpd.getCompoundTag("Inventory"));
-        burntime = cmpd.getInteger("Burntime");
+    }
+
+    @Override
+    public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate){
+        return 0;
     }
 
     @Override
@@ -145,7 +125,7 @@ public class TileEntityEnergyGen extends TileEntityMachineMM implements IInvento
 
     @Override
     public String getInventoryName() {
-        return "EnergyGen";
+        return "EnergyExtractor";
     }
 
     @Override
@@ -155,7 +135,7 @@ public class TileEntityEnergyGen extends TileEntityMachineMM implements IInvento
 
     @Override
     public int getInventoryStackLimit() {
-        return 64;
+        return 1;
     }
 
     @Override

@@ -13,6 +13,7 @@ public class ModBlocks {
     public static final BlockMM PlatformBase = new BlockPlatformBase();
     public static final BlockMM PlatformExt = new BlockPlatformExt();
     public static final BlockMM EnergyGen = new BlockEnergyGen();
+    public static final BlockMM EnergyExtractor = new BlockEnergyExt();
 
     public static void init()
     {
@@ -22,5 +23,6 @@ public class ModBlocks {
         GameRegistry.registerBlock(PlatformBase,ItemBlockPlatformBase.class,Names.Blocks.PLATFORM_BASE);
         GameRegistry.registerBlock(PlatformExt, ItemBlockPlatformExt.class,Names.Blocks.PLATFORM_EXT);
         GameRegistry.registerBlock(EnergyGen, ItemBlockEnergyGen.class,Names.Blocks.ENERGYGEN);
+        GameRegistry.registerBlock(EnergyExtractor, ItemBlockEnergyGen.class,Names.Blocks.ENERGYEXTRACTOR);
     }
 }
