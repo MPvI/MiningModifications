@@ -1,39 +1,26 @@
 package com.ragingart.maatsmod.handler;
 
-import com.ragingart.maatsmod.client.gui.container.GuiCharger;
-import com.ragingart.maatsmod.client.gui.container.GuiDischarger;
-import com.ragingart.maatsmod.client.gui.container.GuiEnergyGen;
-import com.ragingart.maatsmod.container.ContainerCharger;
-import com.ragingart.maatsmod.container.ContainerDischarger;
-import com.ragingart.maatsmod.container.ContainerEnergyGen;
+import com.ragingart.maatsmod.ref.Gui;
 import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 public class GuiHandler implements IGuiHandler {
 
-    private final Class[] container= new Class[]{
-            ContainerCharger.class,
-            ContainerEnergyGen.class,
-            ContainerDischarger.class
-    };
-    private final Class[] gui= new Class[]{
-            GuiCharger.class,
-            GuiEnergyGen.class,
-            GuiDischarger.class
-    };
-
-    @Override
-    public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+    public Object getSidedGuiElement(Class sideType, InventoryPlayer inv, TileEntity aTile){
         try {
-            return container[ID].getDeclaredConstructors()[0].newInstance(player.inventory,world.getTileEntity(x, y, z));
+            return sideType.getDeclaredConstructors()[0].newInstance(inv,aTile);
         }catch(Exception e){return 0;}
     }
 
     @Override
+    public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+        return getSidedGuiElement(Gui.container[ID], player.inventory, world.getTileEntity(x, y, z));
+    }
+    @Override
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-        try{
-            return gui[ID].getDeclaredConstructors()[0].newInstance(player.inventory,world.getTileEntity(x, y, z));
-        }catch (Exception e){return 0;}
+        return getSidedGuiElement(Gui.gui[ID], player.inventory, world.getTileEntity(x, y, z));
     }
 }
