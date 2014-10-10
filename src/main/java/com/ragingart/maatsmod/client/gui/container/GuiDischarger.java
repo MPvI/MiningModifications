@@ -15,7 +15,6 @@ public class GuiDischarger extends GuiContainer {
 
     private TileEntityDischarger tileEntityDischarger;
 
-
     public GuiDischarger(InventoryPlayer invPlayer, TileEntity tileEntity){
         super(new ContainerDischarger(invPlayer,tileEntity));
         this.tileEntityDischarger = (TileEntityDischarger)tileEntity;

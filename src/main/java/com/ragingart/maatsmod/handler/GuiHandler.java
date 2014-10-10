@@ -1,6 +1,7 @@
 package com.ragingart.maatsmod.handler;
 
 import com.ragingart.maatsmod.ref.Gui;
+import com.ragingart.maatsmod.util.LogHelper;
 import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -12,7 +13,10 @@ public class GuiHandler implements IGuiHandler {
     public Object getSidedGuiElement(Class sideType, InventoryPlayer inv, TileEntity aTile){
         try {
             return sideType.getDeclaredConstructors()[0].newInstance(inv,aTile);
-        }catch(Exception e){return 0;}
+        }catch(Exception e){
+            LogHelper.info("Missing correct implementation for "+sideType.toString());
+            return 0;
+        }
     }
 
     @Override
