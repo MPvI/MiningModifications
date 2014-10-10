@@ -16,6 +16,7 @@ public class TileRendererPlatformExt extends TileEntitySpecialRenderer {
 
     @Override
     public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float tick) {
+
         GL11.glPushMatrix();
         GL11.glTranslated(x+0.5, y, z+0.5);
         GL11.glScalef(0.5F,1, 0.5F);

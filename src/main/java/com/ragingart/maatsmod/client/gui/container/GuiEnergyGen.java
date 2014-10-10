@@ -5,6 +5,7 @@ import com.ragingart.maatsmod.ref.Reference;
 import com.ragingart.maatsmod.tileentity.TileEntityEnergyGen;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -13,12 +14,13 @@ import org.lwjgl.opengl.GL11;
 /**
  * Created by XtraX on 07.10.2014.
  */
-public class GuiEnergyGen extends GuiContainer{
+public class GuiEnergyGen extends GuiContainer {
     private TileEntityEnergyGen tileEntityEnergyGen;
 
-    public GuiEnergyGen(InventoryPlayer invPlayer, TileEntityEnergyGen tileEntityEnergyGen){
-        super(new ContainerEnergyGen(invPlayer,tileEntityEnergyGen));
-        this.tileEntityEnergyGen = tileEntityEnergyGen;
+
+    public GuiEnergyGen(InventoryPlayer invPlayer, TileEntity tileEntity){
+        super(new ContainerEnergyGen(invPlayer,tileEntity));
+        this.tileEntityEnergyGen = (TileEntityEnergyGen)tileEntity;
         xSize = 176;
         ySize = 140;
     }

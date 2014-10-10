@@ -14,7 +14,7 @@ public class ModelFluxField extends ModelBase {
         model.setTextureSize(128,33);
         model.setRotationPoint(0,0,0);
         model.addBox(-16,15,-16,
-                      32,0,32);
+                      32,1,32);
     }
 
     public void render() {

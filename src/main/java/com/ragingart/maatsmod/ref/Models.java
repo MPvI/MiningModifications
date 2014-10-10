@@ -13,4 +13,5 @@ public class Models {
 
     public static ResourceLocation PlatformExt = new ResourceLocation(Reference.MOD_ID.toLowerCase(),MODEL_PREFIX+"platform_ext.png");
     public static ResourceLocation PlatformBase = new ResourceLocation(Reference.MOD_ID.toLowerCase(),MODEL_PREFIX+"platform_base.png");
+    public static ResourceLocation FluxField = new ResourceLocation(Reference.MOD_ID.toLowerCase(),MODEL_PREFIX+"fluxfield.png");
 }

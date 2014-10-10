@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 public class BlockPlatformExt extends BlockMM implements ITileEntityProvider {
     public BlockPlatformExt() {
         super(Names.Blocks.PLATFORM_EXT);
-        this.setBlockBounds(0,0.9F,0,1,1,1);
+        this.setBlockBounds(0,0.95F,0,1,1,1);
         this.setHardness(-1);
     }
 

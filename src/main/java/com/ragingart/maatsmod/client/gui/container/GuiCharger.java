@@ -5,18 +5,19 @@ import com.ragingart.maatsmod.ref.Reference;
 import com.ragingart.maatsmod.tileentity.TileEntityCharger;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.util.ForgeDirection;
 import org.lwjgl.opengl.GL11;
 
-public class GuiCharger extends GuiContainer{
+public class GuiCharger extends GuiContainer {
 
     private TileEntityCharger tileEntityCharger;
 
-    public GuiCharger(InventoryPlayer invPlayer, TileEntityCharger tileEntityCharger){
-        super(new ContainerCharger(invPlayer,tileEntityCharger));
-        this.tileEntityCharger = tileEntityCharger;
+    public GuiCharger(InventoryPlayer invPlayer,TileEntity tileEntity){
+        super(new ContainerCharger(invPlayer,tileEntity));
+        this.tileEntityCharger = (TileEntityCharger)tileEntity;
         xSize = 176;
         ySize = 140;
     }
