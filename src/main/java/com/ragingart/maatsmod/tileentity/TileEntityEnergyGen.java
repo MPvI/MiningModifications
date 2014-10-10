@@ -1,18 +1,11 @@
 package com.ragingart.maatsmod.tileentity;
 
-import cofh.api.energy.IEnergyContainerItem;
-import cofh.lib.util.helpers.EnergyHelper;
 import com.ragingart.maatsmod.generics.TileEntityMachineMM;
-import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
+import com.ragingart.maatsmod.util.MachineHelper;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.*;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -29,7 +22,7 @@ public class TileEntityEnergyGen extends TileEntityMachineMM implements IInvento
         super.updateEntity();
         if(!worldObj.isRemote) {
             this.handleBurnTime();
-            this.handleEnergyTransfer();
+            MachineHelper.transferEnergyToAdjacent(this);
         }
     }
 
@@ -46,30 +39,6 @@ public class TileEntityEnergyGen extends TileEntityMachineMM implements IInvento
         if (burntime > 0) {
             energy.modifyEnergyStored(burnenergy);
             burntime--;
-        }
-    }
-
-    public void handleEnergyTransfer(){
-        int num_consum = 0;
-        int id_consum[] = new int[6];
-        for (int i = 0; i < 6; i++) {
-            if (EnergyHelper.isAdjacentEnergyHandlerFromSide(this, i) && canConnectEnergy(ForgeDirection.values()[i])) {
-                id_consum[num_consum]=i;
-                num_consum++;
-            }
-        }
-        if (num_consum > 0 && getEnergyStored(ForgeDirection.UNKNOWN) >= 10*num_consum){
-            for (int i = 0; i < num_consum; i++) {
-                int getTransferedEnergy = EnergyHelper.insertEnergyIntoAdjacentEnergyHandler(this, id_consum[i], 10, false);
-                extractEnergy(ForgeDirection.UNKNOWN, getTransferedEnergy, false);
-            }
-        }
-        else if(num_consum > 0){
-            int max_output = getEnergyStored(ForgeDirection.UNKNOWN)/num_consum;
-            for (int i = 0; i < num_consum; i++) {
-                int getTransferedEnergy = EnergyHelper.insertEnergyIntoAdjacentEnergyHandler(this, id_consum[i], max_output, false);
-                extractEnergy(ForgeDirection.UNKNOWN, getTransferedEnergy, false);
-            }
         }
     }
 

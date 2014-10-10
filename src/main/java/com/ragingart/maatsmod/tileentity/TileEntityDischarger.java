@@ -19,7 +19,11 @@ public class TileEntityDischarger extends TileEntityMachineMM implements IInvent
     public void updateEntity()
     {
         super.updateEntity();
-        extractContainer();
+        if(!worldObj.isRemote)
+        {
+            extractContainer();
+            MachineHelper.transferEnergyToAdjacent(this);
+        }
     }
 
     public boolean getHasContainer(){

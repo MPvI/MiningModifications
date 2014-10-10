@@ -2,6 +2,8 @@ package com.ragingart.maatsmod.util;
 
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyContainerItem;
+import cofh.lib.util.helpers.EnergyHelper;
+import com.ragingart.maatsmod.generics.TileEntityMachineMM;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -141,5 +143,29 @@ public class MachineHelper {
         item.receiveEnergy(inventory, transferRate, false);
 
         return transferRate;
+    }
+
+    public static void transferEnergyToAdjacent(TileEntityMachineMM tile){
+        int num_consum = 0;
+        int id_consum[] = new int[6];
+        for (int i = 0; i < 6; i++) {
+            if (EnergyHelper.isAdjacentEnergyHandlerFromSide(tile, i) && tile.canConnectEnergy(ForgeDirection.values()[i])) {
+                id_consum[num_consum]=i;
+                num_consum++;
+            }
+        }
+        if (num_consum > 0 && tile.getEnergyStored(ForgeDirection.UNKNOWN) >= 10*num_consum){
+            for (int i = 0; i < num_consum; i++) {
+                int getTransferedEnergy = EnergyHelper.insertEnergyIntoAdjacentEnergyHandler(tile, id_consum[i], 10, false);
+                tile.extractEnergy(ForgeDirection.UNKNOWN, getTransferedEnergy, false);
+            }
+        }
+        else if(num_consum > 0){
+            int max_output = tile.getEnergyStored(ForgeDirection.UNKNOWN)/num_consum;
+            for (int i = 0; i < num_consum; i++) {
+                int getTransferedEnergy = EnergyHelper.insertEnergyIntoAdjacentEnergyHandler(tile, id_consum[i], max_output, false);
+                tile.extractEnergy(ForgeDirection.UNKNOWN, getTransferedEnergy, false);
+            }
+        }
     }
 }
