@@ -13,7 +13,7 @@ import net.minecraft.util.IIcon;
 public class CasingHelper {
 
     protected IIcon mFrontIcons[];
-    protected IIcon mPortIcons[] = new IIcon[4];
+    protected IIcon mPortIcons[] = new IIcon[6];
 
 
     public CasingHelper(IIconRegister iconRegister, String[] front){
@@ -47,17 +47,21 @@ public class CasingHelper {
     }
 
     public void initPorts(IIconRegister iconRegister){
-        mPortIcons[0]=iconRegister.registerIcon(Names.MOD_PREFIX+Names.Textures.Blocks.CASING);
-        mPortIcons[1]=iconRegister.registerIcon(Names.MOD_PREFIX+Names.Textures.Blocks.ENERGY);
-        mPortIcons[2]=iconRegister.registerIcon(Names.MOD_PREFIX+Names.Textures.Blocks.INPUT);
-        mPortIcons[3]=iconRegister.registerIcon(Names.MOD_PREFIX+Names.Textures.Blocks.OUTPUT);
+        mPortIcons[0]=iconRegister.registerIcon(Names.MOD_PREFIX+Names.Items.CASING);
+        mPortIcons[1]=iconRegister.registerIcon(Names.MOD_PREFIX+Names.Items.CASING_ENERGY);
+        mPortIcons[2]=iconRegister.registerIcon(Names.MOD_PREFIX+Names.Items.CASING_INPUT);
+        mPortIcons[3]=iconRegister.registerIcon(Names.MOD_PREFIX+Names.Items.CASING_OUTPUT);
+        mPortIcons[4]=iconRegister.registerIcon(Names.MOD_PREFIX+Names.Items.CASING_FINPUT);
+        mPortIcons[5]=iconRegister.registerIcon(Names.MOD_PREFIX+Names.Items.CASING_FOUTPUT);
     }
 
     public static enum Port {
         BLANK,
         ENERGY,
         INPUT,
-        OUTPUT;
+        OUTPUT,
+        FINPUT,
+        FOUTPUT;
 
         public static ItemStack getItemFromPort(Port port){
             return getItemFromPort(port.ordinal());
@@ -71,6 +75,10 @@ public class CasingHelper {
                     return Component.CASING_INPUT(1);
                 case 3:
                     return Component.CASING_OUTPUT(1);
+                case 4:
+                    return Component.CASING_FINPUT(1);
+                case 5:
+                    return Component.CASING_FOUTPUT(1);
                 default:
                     return Component.CASING(1);
             }

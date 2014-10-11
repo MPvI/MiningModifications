@@ -20,7 +20,7 @@ public class TileEntityWaterTurbine extends TileEntityEnergyGen {
 
     @Override
     public int[] validPorts() {
-        return new int[]{};
+        return new int[]{0,1,4,5};
     }
 
     @Override

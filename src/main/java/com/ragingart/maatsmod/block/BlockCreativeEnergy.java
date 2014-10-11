@@ -20,7 +20,7 @@ public class BlockCreativeEnergy extends BlockMM implements ITileEntityProvider{
     @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconRegister){
-        blockIcon=iconRegister.registerIcon(Names.MOD_PREFIX+Names.Textures.Blocks.ENERGY);
+        blockIcon=iconRegister.registerIcon(Names.MOD_PREFIX+Names.Items.CASING_ENERGY);
     }
 
     @Override

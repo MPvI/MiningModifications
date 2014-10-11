@@ -16,10 +16,13 @@ public class ModItems {
     public static final ItemMM casing_energy = new ItemCasing(Names.Items.CASING_ENERGY,1);
     public static final ItemMM casing_input = new ItemCasing(Names.Items.CASING_INPUT,2);
     public static final ItemMM casing_output = new ItemCasing(Names.Items.CASING_OUTPUT,3);
+    public static final ItemMM casing_finput = new ItemCasing(Names.Items.CASING_FINPUT,4);
+    public static final ItemMM casing_foutput = new ItemCasing(Names.Items.CASING_FOUTPUT,5);
     public static final ItemMM screw = new ItemScrew();
     //Worldgen
     public static final ItemMM ingot_nickel = new ItemIngotNickel();
     public static final ItemMM dust_nickel = new ItemDustNickel();
+
 
 
     public static void init()
@@ -33,6 +36,8 @@ public class ModItems {
         GameRegistry.registerItem(casing_energy,Names.Items.CASING_ENERGY);
         GameRegistry.registerItem(casing_input,Names.Items.CASING_INPUT);
         GameRegistry.registerItem(casing_output,Names.Items.CASING_OUTPUT);
+        GameRegistry.registerItem(casing_finput,Names.Items.CASING_FINPUT);
+        GameRegistry.registerItem(casing_foutput,Names.Items.CASING_FOUTPUT);
         GameRegistry.registerItem(screw,Names.Items.SCREW_NICKEL);
         //Worldgen
         GameRegistry.registerItem(ingot_nickel,Names.Items.INGOT_NICKEL);

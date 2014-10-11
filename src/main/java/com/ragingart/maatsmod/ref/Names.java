@@ -19,6 +19,8 @@ public class Names {
         public static final String CASING_ENERGY ="casing_energy";
         public static final String CASING_INPUT = "casing_input";
         public static final String CASING_OUTPUT = "casing_output";
+        public static final String CASING_FINPUT = "casing_finput";
+        public static final String CASING_FOUTPUT = "casing_foutput";
         public static final String BATTERY ="rsbattery";
         public static final String MULTITOOL = "multitool";
         public static final String SCREW_NICKEL = "screw_nickel";
@@ -30,11 +32,6 @@ public class Names {
     
     public static final class Textures {
         public static final class Blocks{
-
-            public static final String CASING ="casing";
-            public static final String ENERGY ="casing_energy";
-            public static final String INPUT = "casing_input";
-            public static final String OUTPUT = "casing_output";
 
             public static final class Charger{
 

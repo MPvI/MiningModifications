@@ -13,14 +13,16 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.*;
 
 /**
  * Created by MaaT on 29.08.2014.
  */
 
-public abstract class TileEntityMachineMM extends TileEntityMM implements IEnergyHandler,ISidedInventory,IInventory {
+public abstract class TileEntityMachineMM extends TileEntityMM implements IEnergyHandler,ISidedInventory,IInventory,IFluidHandler {
 
     protected EnergyStorage energy = new EnergyStorage(100000);
+    protected FluidTank tank = new FluidTank(50000);
     protected MachineHelper machineHelper = new MachineHelper();
     protected ItemStack inventory;
 
@@ -138,20 +140,12 @@ public abstract class TileEntityMachineMM extends TileEntityMM implements IEnerg
 
     @Override
     public boolean canInsertItem(int slot, ItemStack item, int side) {
-        if(isWorkDone()) {
-            return isItemValidForSlot(slot, item) && machineHelper.hasPort(side, CasingHelper.Port.INPUT);
-        }else {
-            return false;
-        }
+        return isWorkDone() && isItemValidForSlot(slot, item) && machineHelper.hasPort(side, CasingHelper.Port.INPUT);
     }
 
     @Override
     public boolean canExtractItem(int slot, ItemStack item, int side) {
-        if(isWorkDone()) {
-            return machineHelper.hasPort(side, CasingHelper.Port.OUTPUT);
-        }else{
-            return false;
-        }
+        return isWorkDone() && machineHelper.hasPort(side, CasingHelper.Port.OUTPUT);
     }
 
 
@@ -231,4 +225,42 @@ public abstract class TileEntityMachineMM extends TileEntityMM implements IEnerg
 
     @Override
     public void closeInventory() {}
+
+    /* IFluidHandler */
+
+    @Override
+    public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
+        if(machineHelper.hasPort(from.ordinal(),CasingHelper.Port.FINPUT))
+            return tank.fill(resource,doFill);
+        return 0;
+    }
+
+    @Override
+    public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
+        if(machineHelper.hasPort(from.ordinal(),CasingHelper.Port.FOUTPUT))
+            return tank.drain(1000,doDrain);
+        return null;
+    }
+
+    @Override
+    public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
+        if(machineHelper.hasPort(from.ordinal(),CasingHelper.Port.FOUTPUT))
+            return tank.drain(maxDrain>1000?1000:maxDrain,doDrain);
+        return null;
+    }
+
+    @Override
+    public boolean canFill(ForgeDirection from, Fluid fluid) {
+        return machineHelper.hasPort(from.ordinal(), CasingHelper.Port.FINPUT);
+    }
+
+    @Override
+    public boolean canDrain(ForgeDirection from, Fluid fluid) {
+        return machineHelper.hasPort(from.ordinal(), CasingHelper.Port.FOUTPUT);
+    }
+
+    @Override
+    public FluidTankInfo[] getTankInfo(ForgeDirection from) {
+        return new FluidTankInfo[0];
+    }
 }

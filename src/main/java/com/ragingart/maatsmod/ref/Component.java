@@ -19,8 +19,11 @@ public class Component {
     public static ItemStack CASING_ENERGY(int x) {return new ItemStack(ModItems.casing_energy,x);}
     public static ItemStack CASING_INPUT(int x) {return new ItemStack(ModItems.casing_input,x);}
     public static ItemStack CASING_OUTPUT(int x) {return new ItemStack(ModItems.casing_output,x);}
+    public static ItemStack CASING_FINPUT(int x) {return new ItemStack(ModItems.casing_finput,x);}
+    public static ItemStack CASING_FOUTPUT(int x) {return new ItemStack(ModItems.casing_foutput,x);}
     public static ItemStack MULTITOOL() {return new ItemStack(ModItems.multitool);}
     public static ItemStack SCREW(int x) {return new ItemStack(ModItems.screw,x);}
     public static ItemStack PLATFORM(int x) {return new ItemStack(ModBlocks.PlatformBase,x);}
     public static ItemStack PLATFORM_EXT(int x){return new ItemStack(ModBlocks.PlatformExt,x);}
+
 }
