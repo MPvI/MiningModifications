@@ -39,6 +39,7 @@ public class MaatsMod {
         // init items blocks
         ModItems.init();
         ModBlocks.init();
+        ModFluids.init();
     }
 
     @Mod.EventHandler

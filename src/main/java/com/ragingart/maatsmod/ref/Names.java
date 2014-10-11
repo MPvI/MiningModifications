@@ -1,5 +1,6 @@
 package com.ragingart.maatsmod.ref;
 
+
 public class Names {
     public static final String MOD_PREFIX = Reference.MOD_ID.toLowerCase() + ":";
 
@@ -63,5 +64,9 @@ public class Names {
             
             
         }
+    }
+
+    public static final class Fluids{
+        public static final String HIGHHELDWATER = "highheldwater";
     }
 }

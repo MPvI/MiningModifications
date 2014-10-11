@@ -1,20 +1,21 @@
 package com.ragingart.maatsmod.tileentity;
 
+import com.ragingart.maatsmod.ref.Fluids;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.FluidStack;
 
 public class TileEntityWaterTurbine extends TileEntityEnergyGen {
+
 
     @Override
     public void updateEntity()
     {
         super.updateEntity();
-    }
-
-
-    @Override
-    public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate){
-        return 0;
+        if(!worldObj.isRemote){
+            if(tank.getFluidAmount() != 0 && tank.getFluid().getFluid().getID() == Fluids.ID.HIGHHELDWATER.ordinal()){
+                energy.modifyEnergyStored(tank.drain(100, true).amount);
+            }
+        }
     }
 
 

@@ -19,13 +19,10 @@ public abstract class TileEntityEnergyGen extends TileEntityMachineMM {
         }
     }
 
-
-
     @Override
     public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate){
         return 0;
     }
-
 
     @Override
     public int[] validPorts() {
