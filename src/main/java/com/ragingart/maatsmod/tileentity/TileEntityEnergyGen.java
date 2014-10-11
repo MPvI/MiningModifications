@@ -1,7 +1,7 @@
 package com.ragingart.maatsmod.tileentity;
 
 import com.ragingart.maatsmod.generics.TileEntityMachineMM;
-import com.ragingart.maatsmod.util.MachineHelper;
+import com.ragingart.maatsmod.util.RFHelper;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -18,7 +18,7 @@ public class TileEntityEnergyGen extends TileEntityMachineMM {
         super.updateEntity();
         if(!worldObj.isRemote) {
             this.handleBurnTime();
-            MachineHelper.transferEnergyToAdjacent(this);
+            RFHelper.transferEnergyToAdjacent(this);
         }
     }
 

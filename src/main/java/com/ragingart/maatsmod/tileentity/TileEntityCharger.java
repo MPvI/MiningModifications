@@ -2,7 +2,7 @@ package com.ragingart.maatsmod.tileentity;
 
 import cofh.api.energy.IEnergyContainerItem;
 import com.ragingart.maatsmod.generics.TileEntityMachineMM;
-import com.ragingart.maatsmod.util.MachineHelper;
+import com.ragingart.maatsmod.util.RFHelper;
 
 public class TileEntityCharger extends TileEntityMachineMM {
 
@@ -27,9 +27,9 @@ public class TileEntityCharger extends TileEntityMachineMM {
 
     public void loadContainer(){
         if(!worldObj.isRemote) {
-            if (inventory != null && MachineHelper.itemNeedsCharge(inventory)) {
+            if (inventory != null && RFHelper.itemNeedsCharge(inventory)) {
                hasWork=true;
-               int transfered = MachineHelper.transferEnergyToItem(energy, inventory);
+               int transfered = RFHelper.transferEnergyToItem(energy, inventory);
 
                 if (transfered > 0 && getHasContainer()) {
                     machineHelper.setState(2);

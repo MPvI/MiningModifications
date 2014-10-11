@@ -2,7 +2,7 @@ package com.ragingart.maatsmod.tileentity;
 
 import cofh.api.energy.IEnergyContainerItem;
 import com.ragingart.maatsmod.generics.TileEntityMachineMM;
-import com.ragingart.maatsmod.util.MachineHelper;
+import com.ragingart.maatsmod.util.RFHelper;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityDischarger extends TileEntityMachineMM {
@@ -15,7 +15,7 @@ public class TileEntityDischarger extends TileEntityMachineMM {
         if(!worldObj.isRemote)
         {
             extractContainer();
-            MachineHelper.transferEnergyToAdjacent(this);
+            RFHelper.transferEnergyToAdjacent(this);
         }
     }
 
@@ -30,8 +30,8 @@ public class TileEntityDischarger extends TileEntityMachineMM {
 
     public void extractContainer(){
         if(!worldObj.isRemote) {
-            if (inventory != null && MachineHelper.itemCanCharge(inventory)) {
-                int transferRate = MachineHelper.transferEnergyFromItem(inventory, energy);
+            if (inventory != null && RFHelper.itemCanCharge(inventory)) {
+                int transferRate = RFHelper.transferEnergyFromItem(inventory, energy);
 
                 if (transferRate > 0 && getHasContainer()) {
                     machineHelper.setState(2);
