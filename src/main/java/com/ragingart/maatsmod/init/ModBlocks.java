@@ -12,7 +12,7 @@ public class ModBlocks {
     public static final BlockMM Energy = new BlockCreativeEnergy();
     public static final BlockMM PlatformBase = new BlockPlatformBase();
     public static final BlockMM PlatformExt = new BlockPlatformExt();
-    public static final BlockMM EnergyGen = new BlockEnergyGen();
+    public static final BlockMM WaterTurbine = new BlockWaterTurbine();
     public static final BlockMM Discharger = new BlockDischarger();
 
     public static void init()
@@ -23,7 +23,7 @@ public class ModBlocks {
         GameRegistry.registerBlock(Discharger, ItemBlockDischarger.class,Names.Blocks.DISCHARGER);
 
         GameRegistry.registerBlock(Energy,Names.Blocks.CENERGY);
-        GameRegistry.registerBlock(EnergyGen, ItemBlockEnergyGen.class,Names.Blocks.ENERGYGEN);
+        GameRegistry.registerBlock(WaterTurbine, ItemBlockWaterTurbine.class,Names.Blocks.WATERTURBINE);
 
         GameRegistry.registerBlock(PlatformBase,ItemBlockPlatformBase.class,Names.Blocks.PLATFORM_BASE);
         GameRegistry.registerBlock(PlatformExt, ItemBlockPlatformExt.class,Names.Blocks.PLATFORM_EXT);

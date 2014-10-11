@@ -1,24 +1,15 @@
 package com.ragingart.maatsmod.tileentity;
 
-import com.ragingart.maatsmod.generics.TileEntityMachineMM;
-import com.ragingart.maatsmod.util.RFHelper;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public abstract class TileEntityEnergyGen extends TileEntityMachineMM {
-
-    protected boolean hasWork = false;
-
+public class TileEntityWaterTurbine extends TileEntityEnergyGen {
 
     @Override
     public void updateEntity()
     {
         super.updateEntity();
-        if(!worldObj.isRemote) {
-            RFHelper.transferEnergyToAdjacent(this);
-        }
     }
-
 
 
     @Override
@@ -29,7 +20,7 @@ public abstract class TileEntityEnergyGen extends TileEntityMachineMM {
 
     @Override
     public int[] validPorts() {
-        return new int[]{0,1,2};
+        return new int[]{};
     }
 
     @Override

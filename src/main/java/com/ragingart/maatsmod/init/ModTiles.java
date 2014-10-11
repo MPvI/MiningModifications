@@ -10,7 +10,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class ModTiles {
     public static void init() {
         GameRegistry.registerTileEntity(TileEntityCharger.class,Names.Blocks.CHARGER);
-        GameRegistry.registerTileEntity(TileEntityEnergyGen.class,Names.Blocks.ENERGYGEN);
+        GameRegistry.registerTileEntity(TileEntityWaterTurbine.class,Names.Blocks.WATERTURBINE);
         GameRegistry.registerTileEntity(TileEntityDischarger.class,Names.Blocks.DISCHARGER);
         GameRegistry.registerTileEntity(TileEntityCreativeEnergy.class,Names.Blocks.CENERGY);
         GameRegistry.registerTileEntity(TileEntityPlatformBase.class,Names.Blocks.PLATFORM_BASE);

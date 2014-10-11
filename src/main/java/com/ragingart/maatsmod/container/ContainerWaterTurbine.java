@@ -9,9 +9,9 @@ import net.minecraft.tileentity.TileEntity;
 /**
  * Created by XtraX on 07.10.2014.
  */
-public class ContainerEnergyGen extends ContainerMM{
+public class ContainerWaterTurbine extends ContainerMM{
 
-    public ContainerEnergyGen(InventoryPlayer invPlayer, TileEntity tileEntity){
+    public ContainerWaterTurbine(InventoryPlayer invPlayer, TileEntity tileEntity){
         this.addSlotToContainer(new SlotMM((TileEntityEnergyGen)tileEntity,0,80,22));
         this.addPlayerInventory(invPlayer);
     }

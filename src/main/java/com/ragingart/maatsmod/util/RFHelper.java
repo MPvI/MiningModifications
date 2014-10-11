@@ -22,24 +22,17 @@ public class RFHelper {
     public static int transferEnergyFromItem(ItemStack inventory, EnergyStorage energy){
         IEnergyContainerItem item = (IEnergyContainerItem) inventory.getItem();
 
-        int maxExtract = item.getEnergyStored(inventory);
-        maxExtract = item.extractEnergy(inventory ,maxExtract, true);
-        int maxInsert = energy.getMaxEnergyStored()-energy.getEnergyStored();
-        int transferRate = Math.min(maxExtract, maxInsert);
-
+        int transferRate = Math.min(item.extractEnergy(inventory ,item.getEnergyStored(inventory), true), energy.getMaxEnergyStored()-energy.getEnergyStored());
         item.extractEnergy(inventory ,transferRate, false);
         energy.modifyEnergyStored(transferRate);
+
         return transferRate;
     }
 
     public static int transferEnergyToItem(EnergyStorage energy, ItemStack inventory){
         IEnergyContainerItem item = (IEnergyContainerItem) inventory.getItem();
 
-        int maxExtract = energy.getEnergyStored();
-        int maxInsert = item.getMaxEnergyStored(inventory)-item.getEnergyStored(inventory);
-        maxInsert = item.receiveEnergy(inventory ,maxInsert, true);
-        int transferRate = Math.min(maxExtract, maxInsert);
-
+        int transferRate = Math.min(energy.getEnergyStored(), item.receiveEnergy(inventory ,item.getMaxEnergyStored(inventory)-item.getEnergyStored(inventory), true));
         energy.extractEnergy(transferRate, false);
         item.receiveEnergy(inventory, transferRate, false);
 
@@ -57,15 +50,13 @@ public class RFHelper {
         }
         if (num_consum > 0 && aTile.getEnergyStored(ForgeDirection.UNKNOWN) >= 10*num_consum){
             for (int i = 0; i < num_consum; i++) {
-                int getTransferedEnergy = EnergyHelper.insertEnergyIntoAdjacentEnergyHandler(aTile, id_consum[i], 10, false);
-                aTile.extractEnergy(ForgeDirection.UNKNOWN, getTransferedEnergy, false);
+                aTile.extractEnergy(ForgeDirection.UNKNOWN, EnergyHelper.insertEnergyIntoAdjacentEnergyHandler(aTile, id_consum[i], 10, false), false);
             }
         }
         else if(num_consum > 0){
             int max_output = aTile.getEnergyStored(ForgeDirection.UNKNOWN)/num_consum;
             for (int i = 0; i < num_consum; i++) {
-                int getTransferedEnergy = EnergyHelper.insertEnergyIntoAdjacentEnergyHandler(aTile, id_consum[i], max_output, false);
-                aTile.extractEnergy(ForgeDirection.UNKNOWN, getTransferedEnergy, false);
+                aTile.extractEnergy(ForgeDirection.UNKNOWN, EnergyHelper.insertEnergyIntoAdjacentEnergyHandler(aTile, id_consum[i], max_output, false), false);
             }
         }
     }
