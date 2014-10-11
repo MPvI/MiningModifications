@@ -208,7 +208,7 @@ public abstract class TileEntityMachineMM extends TileEntityMM implements IEnerg
 
     @Override
     public String getInventoryName() {
-        return "";
+        return worldObj.getBlock(xCoord,yCoord,zCoord).getLocalizedName();
     }
 
     @Override

@@ -9,6 +9,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 public class TileEntityEnergyGen extends TileEntityMachineMM {
 
     private int burntime = 0;
+    private boolean hasWork = false;
 
 
     @Override
@@ -27,6 +28,7 @@ public class TileEntityEnergyGen extends TileEntityMachineMM {
         int get_energy = getEnergyStored(ForgeDirection.UNKNOWN);
         int get_maxenergy = getMaxEnergyStored(ForgeDirection.UNKNOWN);
         if (burntime == 0 && add_burntime != 0 && get_energy + add_burntime <= get_maxenergy) {
+            hasWork=true;
             if (decrStackSize(0, 1) != null) {
                 burntime = add_burntime / burnenergy;
             }
@@ -50,7 +52,7 @@ public class TileEntityEnergyGen extends TileEntityMachineMM {
 
     @Override
     public boolean isWorkDone() {
-        return true;
+        return hasWork;
     }
 
     @Override
@@ -65,18 +67,9 @@ public class TileEntityEnergyGen extends TileEntityMachineMM {
         burntime = cmpd.getInteger("Burntime");
     }
 
-
-    @Override
-    public String getInventoryName() {
-        return "EnergyGen";
-    }
-
-
     @Override
     public int getInventoryStackLimit() {
         return 64;
     }
-
-
 
 }

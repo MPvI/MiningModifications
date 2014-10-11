@@ -30,8 +30,8 @@ public class TileEntityDischarger extends TileEntityMachineMM {
 
     public void extractContainer(){
         if(!worldObj.isRemote) {
-            if (inventory != null && inventory.getItem() instanceof IEnergyContainerItem) {
-                int transferRate = MachineHelper.transferEnergy(inventory, energy);
+            if (inventory != null && MachineHelper.itemCanCharge(inventory)) {
+                int transferRate = MachineHelper.transferEnergyFromItem(inventory, energy);
 
                 if (transferRate > 0 && getHasContainer()) {
                     machineHelper.setState(2);
@@ -60,11 +60,6 @@ public class TileEntityDischarger extends TileEntityMachineMM {
     @Override
     public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate){
         return 0;
-    }
-
-    @Override
-    public String getInventoryName() {
-        return "Discharger";
     }
 
 }

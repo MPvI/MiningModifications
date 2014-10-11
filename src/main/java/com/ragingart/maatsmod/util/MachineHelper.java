@@ -118,7 +118,15 @@ public class MachineHelper {
         this.facing = facing;
     }
 
-    public static int transferEnergy(ItemStack inventory, EnergyStorage energy){
+    public static boolean itemNeedsCharge(ItemStack itemStack){
+        return itemStack.getItem() instanceof IEnergyContainerItem && ((IEnergyContainerItem) itemStack.getItem()).getMaxEnergyStored(itemStack) - ((IEnergyContainerItem) itemStack.getItem()).getEnergyStored(itemStack) > 0;
+    }
+
+    public static boolean itemCanCharge(ItemStack itemStack){
+        return itemStack.getItem() instanceof IEnergyContainerItem && ((IEnergyContainerItem) itemStack.getItem()).getEnergyStored(itemStack)>0;
+    }
+
+    public static int transferEnergyFromItem(ItemStack inventory, EnergyStorage energy){
         IEnergyContainerItem item = (IEnergyContainerItem) inventory.getItem();
 
         int maxExtract = item.getEnergyStored(inventory);
@@ -131,7 +139,7 @@ public class MachineHelper {
         return transferRate;
     }
 
-    public static int transferEnergy(EnergyStorage energy, ItemStack inventory){
+    public static int transferEnergyToItem(EnergyStorage energy, ItemStack inventory){
         IEnergyContainerItem item = (IEnergyContainerItem) inventory.getItem();
 
         int maxExtract = energy.getEnergyStored();
@@ -145,26 +153,26 @@ public class MachineHelper {
         return transferRate;
     }
 
-    public static void transferEnergyToAdjacent(TileEntityMachineMM tile){
+    public static void transferEnergyToAdjacent(TileEntityMachineMM aTile){
         int num_consum = 0;
         int id_consum[] = new int[6];
         for (int i = 0; i < 6; i++) {
-            if (EnergyHelper.isAdjacentEnergyHandlerFromSide(tile, i) && tile.canConnectEnergy(ForgeDirection.values()[i])) {
+            if (EnergyHelper.isAdjacentEnergyHandlerFromSide(aTile, i) && aTile.canConnectEnergy(ForgeDirection.values()[i])) {
                 id_consum[num_consum]=i;
                 num_consum++;
             }
         }
-        if (num_consum > 0 && tile.getEnergyStored(ForgeDirection.UNKNOWN) >= 10*num_consum){
+        if (num_consum > 0 && aTile.getEnergyStored(ForgeDirection.UNKNOWN) >= 10*num_consum){
             for (int i = 0; i < num_consum; i++) {
-                int getTransferedEnergy = EnergyHelper.insertEnergyIntoAdjacentEnergyHandler(tile, id_consum[i], 10, false);
-                tile.extractEnergy(ForgeDirection.UNKNOWN, getTransferedEnergy, false);
+                int getTransferedEnergy = EnergyHelper.insertEnergyIntoAdjacentEnergyHandler(aTile, id_consum[i], 10, false);
+                aTile.extractEnergy(ForgeDirection.UNKNOWN, getTransferedEnergy, false);
             }
         }
         else if(num_consum > 0){
-            int max_output = tile.getEnergyStored(ForgeDirection.UNKNOWN)/num_consum;
+            int max_output = aTile.getEnergyStored(ForgeDirection.UNKNOWN)/num_consum;
             for (int i = 0; i < num_consum; i++) {
-                int getTransferedEnergy = EnergyHelper.insertEnergyIntoAdjacentEnergyHandler(tile, id_consum[i], max_output, false);
-                tile.extractEnergy(ForgeDirection.UNKNOWN, getTransferedEnergy, false);
+                int getTransferedEnergy = EnergyHelper.insertEnergyIntoAdjacentEnergyHandler(aTile, id_consum[i], max_output, false);
+                aTile.extractEnergy(ForgeDirection.UNKNOWN, getTransferedEnergy, false);
             }
         }
     }

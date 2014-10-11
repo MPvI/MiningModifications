@@ -3,10 +3,6 @@ package com.ragingart.maatsmod.ref;
 public class Names {
     public static final String MOD_PREFIX = Reference.MOD_ID.toLowerCase() + ":";
 
-    public static final class NBT {
-
-    }
-
     public static final class Blocks{
         public static final String CHARGER = "charger";
         public static final String DISCHARGER = "discharger";
@@ -64,10 +60,6 @@ public class Names {
                 public static final String[] FRONT = new String[]{FRONT_OFF, FRONT_OFF_BAT,FRONT_ON};
             }
             
-            
-        }
-        
-        public static final class Items{
             
         }
     }
