@@ -15,12 +15,12 @@ public class Component {
     public static final String NORMAL_NICKEL = "ingotNickel";
 
     public static ItemStack BATTERY(int x) {return new ItemStack(ModItems.battery,x);}
-    public static ItemStack CASING(int x) {return new ItemStack(ModItems.casing,x);}
-    public static ItemStack CASING_ENERGY(int x) {return new ItemStack(ModItems.casing_energy,x);}
-    public static ItemStack CASING_INPUT(int x) {return new ItemStack(ModItems.casing_input,x);}
-    public static ItemStack CASING_OUTPUT(int x) {return new ItemStack(ModItems.casing_output,x);}
-    public static ItemStack CASING_FINPUT(int x) {return new ItemStack(ModItems.casing_finput,x);}
-    public static ItemStack CASING_FOUTPUT(int x) {return new ItemStack(ModItems.casing_foutput,x);}
+    public static ItemStack CASING(int x) {return new ItemStack(ModItems.casing,x,0);}
+    public static ItemStack CASING_ENERGY(int x) {return new ItemStack(ModItems.casing,x,1);}
+    public static ItemStack CASING_INPUT(int x) {return new ItemStack(ModItems.casing,x,2);}
+    public static ItemStack CASING_OUTPUT(int x) {return new ItemStack(ModItems.casing,x,3);}
+    public static ItemStack CASING_FINPUT(int x) {return new ItemStack(ModItems.casing,x,4);}
+    public static ItemStack CASING_FOUTPUT(int x) {return new ItemStack(ModItems.casing,x,5);}
     public static ItemStack MULTITOOL() {return new ItemStack(ModItems.multitool);}
     public static ItemStack SCREW(int x) {return new ItemStack(ModItems.screw,x);}
     public static ItemStack PLATFORM(int x) {return new ItemStack(ModBlocks.PlatformBase,x);}

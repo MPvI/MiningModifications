@@ -47,12 +47,9 @@ public class CasingHelper {
     }
 
     public void initPorts(IIconRegister iconRegister){
-        mPortIcons[0]=iconRegister.registerIcon(Names.MOD_PREFIX+Names.Items.CASING);
-        mPortIcons[1]=iconRegister.registerIcon(Names.MOD_PREFIX+Names.Items.CASING_ENERGY);
-        mPortIcons[2]=iconRegister.registerIcon(Names.MOD_PREFIX+Names.Items.CASING_INPUT);
-        mPortIcons[3]=iconRegister.registerIcon(Names.MOD_PREFIX+Names.Items.CASING_OUTPUT);
-        mPortIcons[4]=iconRegister.registerIcon(Names.MOD_PREFIX+Names.Items.CASING_FINPUT);
-        mPortIcons[5]=iconRegister.registerIcon(Names.MOD_PREFIX+Names.Items.CASING_FOUTPUT);
+        for (int i = 0; i < Port.values().length; i++) {
+            mPortIcons[i]=iconRegister.registerIcon(Names.MOD_PREFIX+Names.Items.CASING[i]);
+        }
     }
 
     public static enum Port {

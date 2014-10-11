@@ -15,12 +15,14 @@ public class Names {
     }
     
     public static final class Items{
-        public static final String CASING ="casing";
-        public static final String CASING_ENERGY ="casing_energy";
-        public static final String CASING_INPUT = "casing_input";
-        public static final String CASING_OUTPUT = "casing_output";
-        public static final String CASING_FINPUT = "casing_finput";
-        public static final String CASING_FOUTPUT = "casing_foutput";
+        public static final String CASING[] = new String[]{
+            "casing",
+            "casing_energy",
+            "casing_input",
+            "casing_output",
+            "casing_finput",
+            "casing_foutput"
+        };
         public static final String BATTERY ="rsbattery";
         public static final String MULTITOOL = "multitool";
         public static final String SCREW_NICKEL = "screw_nickel";
