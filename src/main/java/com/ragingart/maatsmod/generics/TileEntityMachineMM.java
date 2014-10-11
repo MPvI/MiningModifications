@@ -42,6 +42,7 @@ public abstract class TileEntityMachineMM extends TileEntityMM implements IEnerg
         super.writeToNBT(cmpd);
         energy.writeToNBT(cmpd);
         machineHelper.writePortsToNBT(cmpd);
+        tank.writeToNBT(cmpd);
         NBTTagCompound inv = new NBTTagCompound();
         if(inventory != null)inventory.writeToNBT(inv);
         cmpd.setTag("Inventory",inv);
@@ -52,6 +53,7 @@ public abstract class TileEntityMachineMM extends TileEntityMM implements IEnerg
         super.readFromNBT(cmpd);
         energy = energy.readFromNBT(cmpd);
         machineHelper.getPortsFromNBT(cmpd);
+        tank = tank.readFromNBT(cmpd);
         inventory = ItemStack.loadItemStackFromNBT(cmpd.getCompoundTag("Inventory"));
     }
 
