@@ -6,13 +6,17 @@ item.maatsmod:weapon_spear.name=Fluxspear
 item.maatsmod:battery.name=Redstonebattery
 item.maatsmod:casing.name=Casing: Blank
 item.maatsmod:casing_energy.name=Casing: Energylink
-item.maatsmod:casing_input.name=Casing: Iteminput
-item.maatsmod:casing_output.name=Casing: Itemoutput
+item.maatsmod:casing_input.name=Casing: Inputgrate
+item.maatsmod:casing_output.name=Casing: Outputgrate
+item.maatsmod:casing_finput.name=Casing: Inputvalve
+item.maatsmod:casing_foutput.name=Casing: Outputvalve
 item.maatsmod:screw_nickel.name= Nickel Screw
 item.maatsmod:dust_nickel.name= Nickel Dust
 item.maatsmod:ingot_nickel.name= Nickel Ingot
 
 //Blocks
+tile.maatsmod:fluxfield.name=Fluxfield
+tile.maatsmod:platformBase.name=Platform
 tile.maatsmod:nepouit_ore.name=Népouit Ore
 tile.maatsmod:charger.name=Charger
 tile.maatsmod:discharger.name=Discharger

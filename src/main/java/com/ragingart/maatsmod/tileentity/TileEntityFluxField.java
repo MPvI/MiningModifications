@@ -7,7 +7,7 @@ import net.minecraft.util.Vec3;
 /**
  * Created by MaaT on 26.09.2014.
  */
-public class TileEntityPlatformExt extends TileEntityMM {
+public class TileEntityFluxField extends TileEntityMM {
 
     public Vec3 origin;
 

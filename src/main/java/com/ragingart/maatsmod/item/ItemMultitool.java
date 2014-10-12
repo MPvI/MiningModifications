@@ -50,6 +50,7 @@ public class ItemMultitool extends ItemToolMM
     }
 
 
+
     @Override
     public boolean onItemUse(ItemStack itemStack,EntityPlayer entityPlayer,World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ){
         Block aBlock = world.getBlock(x, y, z);

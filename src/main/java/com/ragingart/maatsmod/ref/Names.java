@@ -11,7 +11,7 @@ public class Names {
         public static final String CENERGY = "crenergy";
         public static final String ORE = "nepouit_ore";
         public static final String PLATFORM_BASE = "platformBase";
-        public static final String PLATFORM_EXT = "platformExt";
+        public static final String FLUXFIELD = "fluxfield";
 
     }
     

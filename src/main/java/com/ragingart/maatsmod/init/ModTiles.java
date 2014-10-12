@@ -14,6 +14,6 @@ public class ModTiles {
         GameRegistry.registerTileEntity(TileEntityDischarger.class,Names.Blocks.DISCHARGER);
         GameRegistry.registerTileEntity(TileEntityCreativeEnergy.class,Names.Blocks.CENERGY);
         GameRegistry.registerTileEntity(TileEntityPlatformBase.class,Names.Blocks.PLATFORM_BASE);
-        GameRegistry.registerTileEntity(TileEntityPlatformExt.class,Names.Blocks.PLATFORM_EXT);
+        GameRegistry.registerTileEntity(TileEntityFluxField.class,Names.Blocks.FLUXFIELD);
     }
 }

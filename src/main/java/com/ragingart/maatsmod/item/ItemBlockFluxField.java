@@ -9,8 +9,8 @@ import net.minecraft.world.World;
 /**
  * Created by MaaT on 26.09.2014.
  */
-public class ItemBlockPlatformExt extends ItemBlock {
-    public ItemBlockPlatformExt(Block p_i45328_1_) {
+public class ItemBlockFluxField extends ItemBlock {
+    public ItemBlockFluxField(Block p_i45328_1_) {
         super(p_i45328_1_);
     }
 

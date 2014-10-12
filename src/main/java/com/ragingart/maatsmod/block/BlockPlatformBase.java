@@ -17,6 +17,7 @@ public class BlockPlatformBase extends BlockMM implements ITileEntityProvider {
 
     public BlockPlatformBase() {
         super(Names.Blocks.PLATFORM_BASE);
+        setHarvestLevel("shovel",0);
     }
 
     @Override

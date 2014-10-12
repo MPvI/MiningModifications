@@ -9,8 +9,8 @@ import com.ragingart.maatsmod.client.renderer.tileentity.TileRendererPlatformExt
 import com.ragingart.maatsmod.init.ModBlocks;
 import com.ragingart.maatsmod.init.ModItems;
 import com.ragingart.maatsmod.ref.RenderIds;
+import com.ragingart.maatsmod.tileentity.TileEntityFluxField;
 import com.ragingart.maatsmod.tileentity.TileEntityPlatformBase;
-import com.ragingart.maatsmod.tileentity.TileEntityPlatformExt;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import net.minecraft.item.Item;
@@ -27,6 +27,6 @@ public class ClientProxy extends CommonProxy{
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.PlatformBase),new ItemRendererPlatformBase());
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPlatformBase.class,new TileRendererPlatformBase());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPlatformExt.class,new TileRendererPlatformExt());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFluxField.class,new TileRendererPlatformExt());
     }
 }
