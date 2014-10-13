@@ -15,11 +15,11 @@ import org.lwjgl.opengl.GL11;
  * Created by XtraX on 07.10.2014.
  */
 public class GuiWaterTurbine extends GuiContainer {
+
     private TileEntityWaterTurbine tileEntityWaterTurbine;
 
-
     public GuiWaterTurbine(InventoryPlayer invPlayer, TileEntity tileEntity){
-        super(new ContainerWaterTurbine(invPlayer,tileEntity));
+        super(new ContainerWaterTurbine(invPlayer, tileEntity));
         this.tileEntityWaterTurbine = (TileEntityWaterTurbine)tileEntity;
         xSize = 176;
         ySize = 140;
@@ -30,8 +30,12 @@ public class GuiWaterTurbine extends GuiContainer {
     {
         String containerName = StatCollector.translateToLocal(tileEntityWaterTurbine.getInventoryName());
         fontRendererObj.drawString(containerName, xSize / 2 - fontRendererObj.getStringWidth(containerName) / 2, 6, 4210752);
-        fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 93, 4210752);
-        fontRendererObj.drawString(String.valueOf(tileEntityWaterTurbine.getEnergyStored(ForgeDirection.UNKNOWN)), xSize / 2 - fontRendererObj.getStringWidth(String.valueOf(tileEntityWaterTurbine.getEnergyStored(ForgeDirection.UNKNOWN))) / 2, 45, 4210752);
+
+        String astring = "HHWater: "+String.valueOf(tileEntityWaterTurbine.getFluidAmount())+"/"+String.valueOf(tileEntityWaterTurbine.getFluidCapacity());
+        fontRendererObj.drawString(astring, (xSize/2) - (fontRendererObj.getStringWidth(astring)/2), 35, 4210752);
+
+        astring = "RF: "+String.valueOf(tileEntityWaterTurbine.getEnergyStored(ForgeDirection.UNKNOWN))+"/"+String.valueOf(tileEntityWaterTurbine.getMaxEnergyStored(ForgeDirection.UNKNOWN));
+        fontRendererObj.drawString(astring, (xSize/2) - (fontRendererObj.getStringWidth(astring)/2), 45, 4210752);
     }
 
     @Override

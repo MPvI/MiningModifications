@@ -2,7 +2,7 @@ package com.ragingart.maatsmod.container;
 
 import com.ragingart.maatsmod.generics.ContainerMM;
 import com.ragingart.maatsmod.generics.SlotMM;
-import com.ragingart.maatsmod.tileentity.TileEntityEnergyGen;
+import com.ragingart.maatsmod.tileentity.TileEntityWaterTurbine;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.tileentity.TileEntity;
 
@@ -12,7 +12,7 @@ import net.minecraft.tileentity.TileEntity;
 public class ContainerWaterTurbine extends ContainerMM{
 
     public ContainerWaterTurbine(InventoryPlayer invPlayer, TileEntity tileEntity){
-        this.addSlotToContainer(new SlotMM((TileEntityEnergyGen)tileEntity,0,80,22));
+        this.addSlotToContainer(new SlotMM((TileEntityWaterTurbine)tileEntity, 0, 80, 22));
         this.addPlayerInventory(invPlayer);
     }
 }

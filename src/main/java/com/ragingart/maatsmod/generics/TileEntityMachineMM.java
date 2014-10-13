@@ -265,4 +265,8 @@ public abstract class TileEntityMachineMM extends TileEntityMM implements IEnerg
     public FluidTankInfo[] getTankInfo(ForgeDirection from) {
         return new FluidTankInfo[0];
     }
+
+    public int getFluidAmount(){return tank.getFluidAmount();}
+
+    public int getFluidCapacity(){return tank.getCapacity();}
 }
