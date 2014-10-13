@@ -2,7 +2,6 @@ package com.ragingart.maatsmod.tileentity;
 
 import com.ragingart.maatsmod.ref.Fluids;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.fluids.FluidStack;
 
 public class TileEntityWaterTurbine extends TileEntityEnergyGen {
 
