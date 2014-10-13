@@ -12,7 +12,7 @@ import net.minecraft.tileentity.TileEntity;
 public class ContainerWaterTurbine extends ContainerMM{
 
     public ContainerWaterTurbine(InventoryPlayer invPlayer, TileEntity tileEntity){
-        this.addSlotToContainer(new SlotMM((TileEntityWaterTurbine)tileEntity, 0, 80, 22));
+       // this.addSlotToContainer(new SlotMM((TileEntityWaterTurbine)tileEntity, 0, 80, 22));
         this.addPlayerInventory(invPlayer);
     }
 }

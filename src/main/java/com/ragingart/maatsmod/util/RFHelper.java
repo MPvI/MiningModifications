@@ -12,11 +12,11 @@ import net.minecraftforge.common.util.ForgeDirection;
  */
 public class RFHelper {
     public static boolean itemNeedsCharge(ItemStack itemStack){
-        return itemStack.getItem() instanceof IEnergyContainerItem && ((IEnergyContainerItem) itemStack.getItem()).getMaxEnergyStored(itemStack) - ((IEnergyContainerItem) itemStack.getItem()).getEnergyStored(itemStack) > 0;
+        return itemStack != null && itemStack.getItem() instanceof IEnergyContainerItem && ((IEnergyContainerItem) itemStack.getItem()).getMaxEnergyStored(itemStack) - ((IEnergyContainerItem) itemStack.getItem()).getEnergyStored(itemStack) > 0;
     }
 
     public static boolean itemCanCharge(ItemStack itemStack){
-        return itemStack.getItem() instanceof IEnergyContainerItem && ((IEnergyContainerItem) itemStack.getItem()).getEnergyStored(itemStack)>0;
+        return itemStack != null && itemStack.getItem() instanceof IEnergyContainerItem && ((IEnergyContainerItem) itemStack.getItem()).getEnergyStored(itemStack) > 0;
     }
 
     public static int transferEnergyFromItem(ItemStack inventory, EnergyStorage energy){

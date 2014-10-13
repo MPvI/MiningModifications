@@ -7,8 +7,6 @@ import com.ragingart.maatsmod.util.RFHelper;
 public class TileEntityCharger extends TileEntityMachineMM {
 
 
-    private boolean hasWork=false;
-
     @Override
     public void updateEntity()
     {
@@ -28,15 +26,12 @@ public class TileEntityCharger extends TileEntityMachineMM {
     public void loadContainer(){
         if(!worldObj.isRemote) {
             if (inventory != null && RFHelper.itemNeedsCharge(inventory)) {
-               hasWork=true;
-               int transfered = RFHelper.transferEnergyToItem(energy, inventory);
+                int transfered = RFHelper.transferEnergyToItem(energy, inventory);
 
                 if (transfered > 0 && getHasContainer()) {
                     machineHelper.setState(2);
-
-                } else if (getHasContainer()) {
+                } else if (getHasContainer()){
                     machineHelper.setState(1);
-
                 }
             } else {
                 machineHelper.setState(0);
@@ -51,7 +46,7 @@ public class TileEntityCharger extends TileEntityMachineMM {
 
     @Override
     public boolean isWorkDone() {
-        return !hasWork;
+        return !RFHelper.itemNeedsCharge(inventory);
     }
 
 }

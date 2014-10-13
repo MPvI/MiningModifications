@@ -7,7 +7,6 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityDischarger extends TileEntityMachineMM {
 
-
     @Override
     public void updateEntity()
     {
@@ -35,10 +34,8 @@ public class TileEntityDischarger extends TileEntityMachineMM {
 
                 if (transferRate > 0 && getHasContainer()) {
                     machineHelper.setState(2);
-
                 } else if (getHasContainer()) {
                     machineHelper.setState(1);
-
                 }
             } else {
                 machineHelper.setState(0);
@@ -54,7 +51,7 @@ public class TileEntityDischarger extends TileEntityMachineMM {
 
     @Override
     public boolean isWorkDone() {
-        return false;
+        return !RFHelper.itemCanCharge(inventory);
     }
 
     @Override
