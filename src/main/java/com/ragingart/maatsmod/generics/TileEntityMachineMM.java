@@ -269,4 +269,13 @@ public abstract class TileEntityMachineMM extends TileEntityMM implements IEnerg
     public int getFluidAmount(){return tank.getFluidAmount();}
 
     public int getFluidCapacity(){return tank.getCapacity();}
+
+    public int getFluidID(){
+        if(tank.getFluid() != null) {
+            return tank.getFluid().fluidID;
+        }
+        return 0;
+    }
+
+    public FluidTank getTank(){return tank;}
 }
