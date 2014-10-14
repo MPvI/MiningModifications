@@ -15,19 +15,38 @@ public class TileEntityWaterTurbine extends TileEntityEnergyGen {
     {
         if(tank.getCapacity() != 1000)
             tank.setCapacity(1000);
+
         super.updateEntity();
         if(!worldObj.isRemote){
-            Block aBlock = this.worldObj.getBlock(this.xCoord + ForgeDirection.UP.offsetX, this.yCoord + ForgeDirection.UP.offsetY, this.zCoord + ForgeDirection.UP.offsetZ);
-            int aMeta = worldObj.getBlockMetadata(this.xCoord + ForgeDirection.UP.offsetX, this.yCoord + ForgeDirection.UP.offsetY, this.zCoord + ForgeDirection.UP.offsetZ);
+            updateActivity();
+        }
+    }
 
-            if(aMeta == 8  && aBlock.getMaterial()== Material.water) {
-                tank.fill(new FluidStack(Fluids.ID.HIGHHELDWATER.ordinal(), 1000), true);
-                this.worldObj.setBlock(this.xCoord + ForgeDirection.DOWN.offsetX, this.yCoord + ForgeDirection.DOWN.offsetY, this.zCoord + ForgeDirection.DOWN.offsetZ, Blocks.water);
-            }
+    private void updateActivity(){
+        int x_up = this.xCoord + ForgeDirection.UP.offsetX;
+        int y_up = this.yCoord + ForgeDirection.UP.offsetY;
+        int z_up = this.zCoord + ForgeDirection.UP.offsetZ;
+        int x_down = this.xCoord + ForgeDirection.DOWN.offsetX;
+        int y_down = this.yCoord + ForgeDirection.DOWN.offsetY;
+        int z_down = this.zCoord + ForgeDirection.DOWN.offsetZ;
 
-            if(tank.getFluidAmount() != 0 && tank.getFluid().getFluid().getID() == Fluids.ID.HIGHHELDWATER.ordinal()){
-                energy.receiveEnergy(tank.drain(1000, true).amount, false);
+        Block aBlock = this.worldObj.getBlock(x_up, y_up, z_up);
+        int aMeta = worldObj.getBlockMetadata(x_up, y_up, z_up);
+
+        if(aBlock.getMaterial() != Material.water && aMeta != 8) {
+            if(this.worldObj.getBlock(x_down, y_down, z_down).getMaterial() == Material.water)
+                this.worldObj.setBlockToAir(x_down, y_down, z_down);
+        } else if(aMeta == 8  && aBlock.getMaterial()== Material.water) {
+            tank.fill(new FluidStack(Fluids.ID.HIGHHELDWATER.ordinal(), 1000), true);
+            aBlock = this.worldObj.getBlock(x_down, y_down, z_down);
+            if(aBlock.getMaterial() == Material.air) {
+                this.worldObj.setBlock(x_down, y_down, z_down, Blocks.flowing_water);
+                aBlock = this.worldObj.getBlock(x_down, y_down, z_down);
+                worldObj.scheduleBlockUpdate(x_down, y_down, z_down, aBlock, 1);
             }
+        }
+        if(tank.getFluidAmount() != 0 && tank.getFluid().getFluid().getID() == Fluids.ID.HIGHHELDWATER.ordinal()){
+            energy.receiveEnergy(tank.drain(1000, true).amount, false);
         }
     }
 
