@@ -42,7 +42,7 @@ public class TileEntityWaterTurbine extends TileEntityEnergyGen {
         if(tank.getFluidAmount() != 0 && tank.getFluid().getFluid().getID() == Fluids.ID.HIGHHELDWATER.ordinal()){
             aBlock = this.worldObj.getBlock(x_down, y_down, z_down);
             if(aBlock.getMaterial() == Material.air || aBlock.getMaterial() == Material.water) {
-                this.worldObj.setBlock(x_down, y_down, z_down, Blocks.water);
+                this.worldObj.setBlock(x_down, y_down, z_down, Blocks.flowing_water);
                 aBlock = this.worldObj.getBlock(x_down, y_down, z_down);
                 worldObj.scheduleBlockUpdate(x_down, y_down, z_down, aBlock, 1);
                 energy.receiveEnergy(tank.drain(1000, true).amount, false);
