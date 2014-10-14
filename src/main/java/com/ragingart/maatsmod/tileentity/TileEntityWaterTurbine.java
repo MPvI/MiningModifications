@@ -10,12 +10,15 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class TileEntityWaterTurbine extends TileEntityEnergyGen {
 
+    public TileEntityWaterTurbine(){
+        super();
+        tank.setCapacity(1000);
+    }
+
+
     @Override
     public void updateEntity()
     {
-        if(tank.getCapacity() != 1000)
-            tank.setCapacity(1000);
-
         super.updateEntity();
         if(!worldObj.isRemote){
             checkWaterFlow();
