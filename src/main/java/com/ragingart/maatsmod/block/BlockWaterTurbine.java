@@ -9,10 +9,13 @@ import com.ragingart.maatsmod.tileentity.TileEntityWaterTurbine;
 import com.ragingart.maatsmod.util.CasingHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockWaterTurbine extends BlockMachineMM{
 
@@ -43,5 +46,12 @@ public class BlockWaterTurbine extends BlockMachineMM{
             }
             return true;
 
+    }
+
+    @Override
+    public void breakBlock(World wobj, int x, int y, int z, Block aBlock, int meta){
+        super.breakBlock(wobj, x, y, z , aBlock, meta);
+        if(wobj.getBlock(x+ ForgeDirection.DOWN.offsetX, y+ ForgeDirection.DOWN.offsetY, z+ForgeDirection.DOWN.offsetZ).getMaterial() == Material.water)
+            wobj.setBlockToAir(x+ ForgeDirection.DOWN.offsetX, y+ ForgeDirection.DOWN.offsetY, z+ForgeDirection.DOWN.offsetZ);
     }
 }

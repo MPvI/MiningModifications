@@ -18,11 +18,11 @@ public class TileEntityWaterTurbine extends TileEntityEnergyGen {
 
         super.updateEntity();
         if(!worldObj.isRemote){
-            updateActivity();
+            checkWaterFlow();
         }
     }
 
-    private void updateActivity(){
+    private void checkWaterFlow(){
         int x_up = this.xCoord + ForgeDirection.UP.offsetX;
         int y_up = this.yCoord + ForgeDirection.UP.offsetY;
         int z_up = this.zCoord + ForgeDirection.UP.offsetZ;
@@ -38,22 +38,22 @@ public class TileEntityWaterTurbine extends TileEntityEnergyGen {
                 this.worldObj.setBlockToAir(x_down, y_down, z_down);
         } else if(aMeta == 8  && aBlock.getMaterial()== Material.water) {
             tank.fill(new FluidStack(Fluids.ID.HIGHHELDWATER.ordinal(), 1000), true);
-            aBlock = this.worldObj.getBlock(x_down, y_down, z_down);
-            if(aBlock.getMaterial() == Material.air) {
-                this.worldObj.setBlock(x_down, y_down, z_down, Blocks.flowing_water);
-                aBlock = this.worldObj.getBlock(x_down, y_down, z_down);
-                worldObj.scheduleBlockUpdate(x_down, y_down, z_down, aBlock, 1);
-            }
         }
         if(tank.getFluidAmount() != 0 && tank.getFluid().getFluid().getID() == Fluids.ID.HIGHHELDWATER.ordinal()){
-            energy.receiveEnergy(tank.drain(1000, true).amount, false);
+            aBlock = this.worldObj.getBlock(x_down, y_down, z_down);
+            if(aBlock.getMaterial() == Material.air || aBlock.getMaterial() == Material.water) {
+                this.worldObj.setBlock(x_down, y_down, z_down, Blocks.water);
+                aBlock = this.worldObj.getBlock(x_down, y_down, z_down);
+                worldObj.scheduleBlockUpdate(x_down, y_down, z_down, aBlock, 1);
+                energy.receiveEnergy(tank.drain(1000, true).amount, false);
+            }
         }
     }
 
 
     @Override
     public int[] validPorts() {
-        return new int[]{0,1,4,5};
+        return new int[]{0,1};
     }
 
     @Override
@@ -75,5 +75,6 @@ public class TileEntityWaterTurbine extends TileEntityEnergyGen {
     public int getInventoryStackLimit() {
         return 64;
     }
+
 
 }
