@@ -20,6 +20,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +63,7 @@ public class ItemMultitool extends ItemToolMM
                     ((BlockMM) aBlock).onBlockWrenched(world, entityPlayer, x, y, z);
                     return true;
                 case 2:
-                    ((BlockMM) aBlock).onBlockRotate(world, x, y, z, side);
+                    aBlock.rotateBlock(world, x, y, z, ForgeDirection.getOrientation(side));
                     return true;
                 default:
                     return false;

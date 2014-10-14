@@ -52,24 +52,23 @@ public class BlockMM extends Block
         return super.onBlockActivated(p_149727_1_, p_149727_2_, p_149727_3_, p_149727_4_, p_149727_5_, p_149727_6_, p_149727_7_, p_149727_8_, p_149727_9_);
     }
 
+    @Override
+    public boolean rotateBlock(World worldObj, int x, int y, int z, ForgeDirection axis) {
+            if(!worldObj.isRemote) {
+                TileEntity aTile = worldObj.getTileEntity(x,y,z);
+                if(aTile instanceof TileEntityMachineMM){
+                    ((TileEntityMachineMM) aTile).getMachineHelper().rotatePortsToFacing(axis);
+                    return true;
+                }
+            }
+            return false;
+    }
+
     // Custom
     public boolean onBlockWrenched(World world,EntityPlayer entityPlayer,int x,int y,int z){
         if(!world.isRemote) {
             this.dropBlockAsItem(world, x, y, z, new ItemStack(this));
             return this.removedByPlayer(world, entityPlayer, x, y, z, false);
-        }
-        return false;
-    }
-
-    public boolean onBlockRotate(World world, int x, int y, int z,int side){
-
-        if(!world.isRemote) {
-
-            TileEntity aTile = world.getTileEntity(x,y,z);
-            if(aTile instanceof TileEntityMachineMM){
-                ((TileEntityMachineMM) aTile).getMachineHelper().rotatePortsToFacing(ForgeDirection.getOrientation(side));
-                return true;
-            }
         }
         return false;
     }

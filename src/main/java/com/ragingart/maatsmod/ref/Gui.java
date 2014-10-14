@@ -14,7 +14,8 @@ public class Gui {
     public static enum ID {
         CHARGER,
         DISCHARGER,
-        WATERTURBINE
+        WATERTURBINE,
+        VOIDPACK
     }
 
     public static final Class[] container= new Class[]{

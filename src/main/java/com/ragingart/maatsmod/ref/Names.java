@@ -31,6 +31,7 @@ public class Names {
         public static final String DUST_NICKEL = "dust_nickel";
 
         public static final String WEAPON_SPEAR = "weapon_spear";
+        public static final String VOIDPACK = "voidpack";
     }
     
     public static final class Textures {
