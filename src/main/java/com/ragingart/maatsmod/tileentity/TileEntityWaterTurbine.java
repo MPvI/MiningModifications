@@ -1,7 +1,7 @@
 package com.ragingart.maatsmod.tileentity;
 
 import com.ragingart.maatsmod.ref.Fluids;
-import com.ragingart.maatsmod.util.LogHelper;
+import com.ragingart.maatsmod.util.CasingHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
@@ -34,13 +34,18 @@ public class TileEntityWaterTurbine extends TileEntityEnergyGen {
         int y_down = this.yCoord + ForgeDirection.DOWN.offsetY;
         int z_down = this.zCoord + ForgeDirection.DOWN.offsetZ;
 
-        Block aBlock = this.worldObj.getBlock(x_up, y_up, z_up);
+        Block aBlock = worldObj.getBlock(x_up, y_up, z_up);
         int aMeta = worldObj.getBlockMetadata(x_up, y_up, z_up);
 
         if(aBlock.getMaterial() != Material.water && aMeta != 8) {
-            if(this.worldObj.getBlock(x_down, y_down, z_down).getMaterial() == Material.water)
-                this.worldObj.setBlockToAir(x_down, y_down, z_down);
-        } else if(aMeta == 8  && aBlock.getMaterial()== Material.water && tank.getFluidAmount() == 0) {
+            machineHelper.setState(0);
+            // Bug 1: Wenn Machine Outputvalve hat und läuft und Output valve dann getauscht wird auf blank wird wasserblock nicht entfernt
+            // Bug 2: Wenn 2 Turbinen nebeneinander sind #Erklärung
+            if(worldObj.getBlock(x_down, y_down, z_down).getMaterial() == Material.water) // TODO this no good
+                worldObj.setBlockToAir(x_down, y_down, z_down);
+
+        } else if(machineHelper.hasPort(1,CasingHelper.Port.FINPUT) && aMeta == 8  && aBlock.getMaterial()== Material.water && tank.getFluidAmount() == 0) {
+            machineHelper.setState(1);
             int new_x_up = x_up;
             int new_y_up = y_up;
             int new_z_up = z_up;
@@ -49,7 +54,7 @@ public class TileEntityWaterTurbine extends TileEntityEnergyGen {
                 new_x_up += ForgeDirection.UP.offsetX;
                 new_y_up += ForgeDirection.UP.offsetY;
                 new_z_up += ForgeDirection.UP.offsetZ;
-                aBlock = this.worldObj.getBlock(new_x_up, new_y_up, new_z_up);
+                aBlock = worldObj.getBlock(new_x_up, new_y_up, new_z_up);
                 aMeta = worldObj.getBlockMetadata(new_x_up, new_y_up, new_z_up);
                 if(aMeta == 8  && aBlock.getMaterial()== Material.water)
                 {
@@ -58,14 +63,14 @@ public class TileEntityWaterTurbine extends TileEntityEnergyGen {
                 }
             }
             tank.fill(new FluidStack(Fluids.ID.HIGHHELDWATER.ordinal(), waterAbove), true);
-            LogHelper.info(waterAbove);
+            //LogHelper.info(waterAbove);
         }
-        if(tank.getFluidAmount() != 0 && tank.getFluid().getFluid().getID() == Fluids.ID.HIGHHELDWATER.ordinal()){
-            aBlock = this.worldObj.getBlock(x_down, y_down, z_down);
+        if(machineHelper.hasPort(0, CasingHelper.Port.FOUTPUT) && tank.getFluidAmount() != 0 && tank.getFluid().getFluid().getID() == Fluids.ID.HIGHHELDWATER.ordinal()){
+            aBlock = worldObj.getBlock(x_down, y_down, z_down);
             if(aBlock.getMaterial() == Material.air || aBlock.getMaterial() == Material.water) {
-                this.worldObj.setBlock(x_down, y_down, z_down, Blocks.flowing_water);
-                aBlock = this.worldObj.getBlock(x_down, y_down, z_down);
-                worldObj.scheduleBlockUpdate(x_down, y_down, z_down, aBlock, 1);
+                machineHelper.setState(2);
+                worldObj.setBlock(x_down, y_down, z_down, Blocks.flowing_water);
+                worldObj.markBlockForUpdate(x_down,y_down,z_down);
                 energy.receiveEnergy(tank.drain(1000, true).amount, false);
             }
         }
@@ -74,7 +79,7 @@ public class TileEntityWaterTurbine extends TileEntityEnergyGen {
 
     @Override
     public int[] validPorts() {
-        return new int[]{0,1};
+        return new int[]{0,1,4,5};
     }
 
     @Override

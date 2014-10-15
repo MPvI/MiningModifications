@@ -56,11 +56,10 @@ public class Names {
             public static final class WaterTurbine {
 
                 public static final String FRONT_OFF = "waterturbine_front_off";
-                public static final String FRONT_OFF_WATER = "waterturbine_front_off";
+                public static final String FRONT_OFF_WATER = "waterturbine_front_off_bat";
                 public static final String FRONT_ON = "waterturbine_front_on";
 
-
-                public static final String[] FRONT = new String[]{FRONT_OFF,FRONT_OFF_WATER, FRONT_ON};
+                public static final String[] FRONT = new String[]{FRONT_OFF,FRONT_OFF_WATER,FRONT_ON};
             }
             
             

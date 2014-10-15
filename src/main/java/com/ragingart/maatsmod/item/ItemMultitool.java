@@ -144,7 +144,7 @@ public class ItemMultitool extends ItemToolMM
             if (entityPlayer.isSneaking()) {
                 setMode(itemStack, getMode(itemStack) + 1);
 
-                if (getMode(itemStack) > 2) {
+                if (getMode(itemStack) > modes.length-1) {
                     setMode(itemStack, 0);
                 }
                 if(!world.isRemote) {
