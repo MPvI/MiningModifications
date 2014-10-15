@@ -1,6 +1,7 @@
 package com.ragingart.maatsmod.tileentity;
 
 import com.ragingart.maatsmod.ref.Fluids;
+import com.ragingart.maatsmod.util.LogHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
@@ -39,8 +40,25 @@ public class TileEntityWaterTurbine extends TileEntityEnergyGen {
         if(aBlock.getMaterial() != Material.water && aMeta != 8) {
             if(this.worldObj.getBlock(x_down, y_down, z_down).getMaterial() == Material.water)
                 this.worldObj.setBlockToAir(x_down, y_down, z_down);
-        } else if(aMeta == 8  && aBlock.getMaterial()== Material.water) {
-            tank.fill(new FluidStack(Fluids.ID.HIGHHELDWATER.ordinal(), 1000), true);
+        } else if(aMeta == 8  && aBlock.getMaterial()== Material.water && tank.getFluidAmount() == 0) {
+            int new_x_up = x_up;
+            int new_y_up = y_up;
+            int new_z_up = z_up;
+            int waterAbove = 1;
+            for(int i = 0; i < 7; i++) {
+                new_x_up += ForgeDirection.UP.offsetX;
+                new_y_up += ForgeDirection.UP.offsetY;
+                new_z_up += ForgeDirection.UP.offsetZ;
+                aBlock = this.worldObj.getBlock(new_x_up, new_y_up, new_z_up);
+                aMeta = worldObj.getBlockMetadata(new_x_up, new_y_up, new_z_up);
+                if(aMeta == 8  && aBlock.getMaterial()== Material.water)
+                {
+                    waterAbove += i;
+                    break;
+                }
+            }
+            tank.fill(new FluidStack(Fluids.ID.HIGHHELDWATER.ordinal(), waterAbove), true);
+            LogHelper.info(waterAbove);
         }
         if(tank.getFluidAmount() != 0 && tank.getFluid().getFluid().getID() == Fluids.ID.HIGHHELDWATER.ordinal()){
             aBlock = this.worldObj.getBlock(x_down, y_down, z_down);
