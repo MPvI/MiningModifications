@@ -45,17 +45,17 @@ public class TileEntityWaterTurbine extends TileEntityEnergyGen {
             int new_y_up = y_up;
             int new_z_up = z_up;
             int waterAbove = 1;
-            for(int i = 0; i < 7; i++) {
+            for(int i = 1; i < 7; i++) {
                 new_x_up += ForgeDirection.UP.offsetX;
                 new_y_up += ForgeDirection.UP.offsetY;
                 new_z_up += ForgeDirection.UP.offsetZ;
                 aBlock = this.worldObj.getBlock(new_x_up, new_y_up, new_z_up);
                 aMeta = worldObj.getBlockMetadata(new_x_up, new_y_up, new_z_up);
-                if(aMeta == 8  && aBlock.getMaterial()== Material.water)
+                if(aMeta != 8  || aBlock.getMaterial() != Material.water)
                 {
-                    waterAbove += i;
                     break;
                 }
+                waterAbove++;
             }
             tank.fill(new FluidStack(Fluids.ID.HIGHHELDWATER.ordinal(), waterAbove), true);
             LogHelper.info(waterAbove);
