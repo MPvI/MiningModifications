@@ -1,7 +1,7 @@
 package com.ragingart.maatsmod.tileentity;
 
 import com.ragingart.maatsmod.ref.Fluids;
-import com.ragingart.maatsmod.util.LogHelper;
+import com.ragingart.maatsmod.util.CasingHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
@@ -16,65 +16,67 @@ public class TileEntityWaterTurbine extends TileEntityEnergyGen {
         tank.setCapacity(1000);
     }
 
-
     @Override
     public void updateEntity()
     {
         super.updateEntity();
         if(!worldObj.isRemote){
             checkWaterFlow();
+            isAktive();
+        }
+    }
+
+    private void isAktive(){
+        int y_down = this.yCoord + ForgeDirection.DOWN.offsetY;
+        Block aBlock = worldObj.getBlock(xCoord, y_down, zCoord);
+        int aMeta = worldObj.getBlockMetadata(xCoord, y_down, zCoord);
+        if(tank.getFluidAmount() != 0 && tank.getFluid().getFluid().getID() == Fluids.ID.HIGHHELDWATER.ordinal()) {
+            if (machineHelper.hasPort(0, CasingHelper.Port.FOUTPUT) && (aBlock.getMaterial() == Material.air || aBlock.getMaterial() == Material.water)) {
+                machineHelper.setState(2);
+                worldObj.setBlock(xCoord, y_down, zCoord, Blocks.flowing_water);
+                worldObj.markBlockForUpdate(xCoord, y_down, zCoord);
+                energy.receiveEnergy(tank.drain(1000, true).amount, false);
+            } else {
+                machineHelper.setState(1);
+                if (aBlock.getMaterial() == Material.water && aMeta == 0) {
+                    worldObj.setBlockToAir(xCoord, y_down, zCoord);
+                }
+            }
+        }
+        else{
+            machineHelper.setState(0);
+            if (aBlock.getMaterial() == Material.water && aMeta == 0) {
+                worldObj.setBlockToAir(xCoord, y_down, zCoord);
+            }
         }
     }
 
     private void checkWaterFlow(){
-        int x_up = this.xCoord + ForgeDirection.UP.offsetX;
+        int x = this.xCoord;
+        int z = this.zCoord;
         int y_up = this.yCoord + ForgeDirection.UP.offsetY;
-        int z_up = this.zCoord + ForgeDirection.UP.offsetZ;
-        int x_down = this.xCoord + ForgeDirection.DOWN.offsetX;
-        int y_down = this.yCoord + ForgeDirection.DOWN.offsetY;
-        int z_down = this.zCoord + ForgeDirection.DOWN.offsetZ;
-
-        Block aBlock = this.worldObj.getBlock(x_up, y_up, z_up);
-        int aMeta = worldObj.getBlockMetadata(x_up, y_up, z_up);
-
-        if(aBlock.getMaterial() != Material.water && aMeta != 8) {
-            if(this.worldObj.getBlock(x_down, y_down, z_down).getMaterial() == Material.water)
-                this.worldObj.setBlockToAir(x_down, y_down, z_down);
-        } else if(aMeta == 8  && aBlock.getMaterial()== Material.water && tank.getFluidAmount() == 0) {
-            int new_x_up = x_up;
+        Block aBlock = worldObj.getBlock(x, y_up, z);
+        int aMeta = worldObj.getBlockMetadata(x, y_up, z);
+        if(machineHelper.hasPort(1,CasingHelper.Port.FINPUT) && aMeta >= 8  && aBlock.getMaterial()== Material.water && tank.getFluidAmount() == 0) {
+            machineHelper.setState(1);
             int new_y_up = y_up;
-            int new_z_up = z_up;
+
             int waterAbove = 1;
-            for(int i = 1; i < 7; i++) {
-                new_x_up += ForgeDirection.UP.offsetX;
+            for(int i = 0; i < 7; i++) {
                 new_y_up += ForgeDirection.UP.offsetY;
-                new_z_up += ForgeDirection.UP.offsetZ;
-                aBlock = this.worldObj.getBlock(new_x_up, new_y_up, new_z_up);
-                aMeta = worldObj.getBlockMetadata(new_x_up, new_y_up, new_z_up);
-                if(aMeta != 8  || aBlock.getMaterial() != Material.water)
-                {
+                aBlock = worldObj.getBlock(x, new_y_up, z);
+                aMeta = worldObj.getBlockMetadata(x, new_y_up, z);
+                if(aMeta < 8  || aBlock.getMaterial()!= Material.water)
                     break;
-                }
                 waterAbove++;
             }
             tank.fill(new FluidStack(Fluids.ID.HIGHHELDWATER.ordinal(), waterAbove), true);
-            LogHelper.info(waterAbove);
-        }
-        if(tank.getFluidAmount() != 0 && tank.getFluid().getFluid().getID() == Fluids.ID.HIGHHELDWATER.ordinal()){
-            aBlock = this.worldObj.getBlock(x_down, y_down, z_down);
-            if(aBlock.getMaterial() == Material.air || aBlock.getMaterial() == Material.water) {
-                this.worldObj.setBlock(x_down, y_down, z_down, Blocks.flowing_water);
-                aBlock = this.worldObj.getBlock(x_down, y_down, z_down);
-                worldObj.scheduleBlockUpdate(x_down, y_down, z_down, aBlock, 1);
-                energy.receiveEnergy(tank.drain(1000, true).amount, false);
-            }
         }
     }
 
-
     @Override
     public int[] validPorts() {
-        return new int[]{0,1};
+        return new int[]{0,1,4,5};
     }
 
     @Override

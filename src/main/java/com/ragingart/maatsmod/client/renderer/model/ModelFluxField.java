@@ -15,6 +15,7 @@ public class ModelFluxField extends ModelBase {
         model.setRotationPoint(0,0,0);
         model.addBox(-16,15,-16,
                       32,1,32);
+        model.mirror=false;
     }
 
     public void render() {

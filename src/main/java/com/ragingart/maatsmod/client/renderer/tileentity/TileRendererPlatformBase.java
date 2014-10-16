@@ -20,17 +20,11 @@ public class TileRendererPlatformBase extends TileEntitySpecialRenderer {
     public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float tick) {
         if(tileEntity instanceof TileEntityPlatformBase) {
             GL11.glPushMatrix();
-            GL11.glTranslated(x + 0.5, y + 0.5, z + 0.5);
+            GL11.glTranslated(x + 0.5, y + 1, z + 0.5);
             GL11.glScalef(0.5F, 0.5F, 0.5F);
+            GL11.glRotatef(180,0,0,1);
             this.bindTexture(Models.PlatformBase);
             model.render(0.0625F, ((TileEntityPlatformBase) tileEntity).getAnimationTimer());
-            /*if(((TileEntityPlatformBase) tileEntity).getExtractedState()){
-                GL11.glScalef(-0.5F + ConfigHandler.maxPlatformRadius*2F, 1F, -0.5F +ConfigHandler.maxPlatformRadius*2F);
-                GL11.glEnable(GL11.GL_BLEND);
-                GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-                this.bindTexture(Models.FluxField);
-                field.render();
-            }*/
             GL11.glPopMatrix();
         }
     }

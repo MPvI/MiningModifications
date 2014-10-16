@@ -1,7 +1,10 @@
 package com.ragingart.maatsmod.util;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.common.util.ForgeDirection;
+
+import java.util.List;
 
 /**
  * For TileEntities
@@ -105,6 +108,19 @@ public class MachineHelper {
             for(int i=0;i<mPorts.length;i++) {
                     String key = "Port " + i;
                     setPort(i,Ports.getInteger(key));
+            }
+        }
+    }
+
+    public static void addInformationString(NBTTagCompound cmpd, List list){
+        if(cmpd.hasKey("Ports")){
+            NBTTagCompound Ports = cmpd.getCompoundTag("Ports");
+            for(int i=0;i<6;i++) {
+                String key = "Port " + i;
+                int k = Ports.getInteger(key);
+                if(k<6 && k>0) {
+                    list.add(EnumChatFormatting.values()[3+i] + ForgeDirection.getOrientation(i).toString() + ": "+ EnumChatFormatting.values()[9+k] + CasingHelper.Port.values()[k].toString());
+                }
             }
         }
     }

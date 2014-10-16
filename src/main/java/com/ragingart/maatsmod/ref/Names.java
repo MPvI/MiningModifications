@@ -8,6 +8,7 @@ public class Names {
         public static final String CHARGER = "charger";
         public static final String DISCHARGER = "discharger";
         public static final String WATERTURBINE = "waterturbine";
+        public static final String RFENERGYSTORAGE = "rfenergystorage";
         public static final String CENERGY = "crenergy";
         public static final String ORE = "nepouit_ore";
         public static final String PLATFORM_BASE = "platformBase";
@@ -56,11 +57,18 @@ public class Names {
             public static final class WaterTurbine {
 
                 public static final String FRONT_OFF = "waterturbine_front_off";
-                public static final String FRONT_OFF_WATER = "waterturbine_front_off";
+                public static final String FRONT_OFF_WATER = "waterturbine_front_off_bat";
                 public static final String FRONT_ON = "waterturbine_front_on";
 
+                public static final String[] FRONT = new String[]{FRONT_OFF,FRONT_OFF_WATER,FRONT_ON};
+            }
+            public static final class RFEnergyStorage {
 
-                public static final String[] FRONT = new String[]{FRONT_OFF,FRONT_OFF_WATER, FRONT_ON};
+                public static final String FRONT_OFF = "waterturbine_front_off";
+                public static final String FRONT_OFF_WATER = "waterturbine_front_off_bat";
+                public static final String FRONT_ON = "waterturbine_front_on";
+
+                public static final String[] FRONT = new String[]{FRONT_OFF,FRONT_OFF_WATER,FRONT_ON};
             }
             
             
