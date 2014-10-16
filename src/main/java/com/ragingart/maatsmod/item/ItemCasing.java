@@ -22,11 +22,10 @@ import java.util.List;
 
 public class ItemCasing extends ItemMM {
 
-    @SideOnly(Side.CLIENT)
     protected IIcon[] casing_textures = new IIcon[CasingHelper.Port.values().length];
 
-    public ItemCasing(String name) {
-        super(name);
+    public ItemCasing() {
+        super(Names.Items.CASING[0]);
         setHasSubtypes(true);
     }
 
