@@ -30,10 +30,6 @@ public class ItemCasing extends ItemMM {
         setHasSubtypes(true);
     }
 
-    @Override
-    public IIcon getIconFromDamage(int meta) {
-        return casing_textures[meta];
-    }
 
     @Override
     public void getSubItems(Item item, CreativeTabs p_150895_2_, List list) {
@@ -48,6 +44,13 @@ public class ItemCasing extends ItemMM {
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
+    public IIcon getIconFromDamage(int meta) {
+        return casing_textures[meta];
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister iconRegister) {
         for (int i = 0; i < CasingHelper.Port.values().length; i++) {
             casing_textures[i]=iconRegister.registerIcon(Names.MOD_PREFIX+Names.Items.CASING[i]);
