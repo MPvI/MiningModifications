@@ -26,6 +26,8 @@ public class TileEntityWaterTurbine extends TileEntityEnergyGen {
         }
     }
 
+
+
     private void checkWaterFlow(){
         int x_up = this.xCoord + ForgeDirection.UP.offsetX;
         int y_up = this.yCoord + ForgeDirection.UP.offsetY;

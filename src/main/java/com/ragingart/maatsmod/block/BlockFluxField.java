@@ -6,6 +6,7 @@ import com.ragingart.maatsmod.ref.RenderIds;
 import com.ragingart.maatsmod.tileentity.TileEntityFluxField;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -22,10 +23,9 @@ import java.util.Random;
 public class BlockFluxField extends BlockMM implements ITileEntityProvider {
     public BlockFluxField() {
         super(Names.Blocks.FLUXFIELD);
-        this.setBlockBounds(0,0.95F,0,1,1,1);
+        this.setBlockBounds(0, 0.95F, 0, 1, 1, 1);
         this.setHardness(-1);
         this.setLightOpacity(1);
-        this.setLightLevel(0.8F);
     }
 
     @Override
@@ -46,6 +46,13 @@ public class BlockFluxField extends BlockMM implements ITileEntityProvider {
     @Override
     public boolean renderAsNormalBlock() {
         return false;
+    }
+
+    @Override
+    public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
+
+        super.breakBlock(world, x, y, z, block, meta);
+        world.setBlockToAir(x,y,z);
     }
 
     @Override

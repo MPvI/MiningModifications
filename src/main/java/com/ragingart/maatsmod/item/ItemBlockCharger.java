@@ -1,9 +1,9 @@
 package com.ragingart.maatsmod.item;
 
+import com.ragingart.maatsmod.generics.ItemBlockMachineMM;
 import net.minecraft.block.Block;
-import net.minecraft.item.ItemBlock;
 
-public class ItemBlockCharger extends ItemBlock {
+public class ItemBlockCharger extends ItemBlockMachineMM {
     public ItemBlockCharger(Block block) {
         super(block);
     }

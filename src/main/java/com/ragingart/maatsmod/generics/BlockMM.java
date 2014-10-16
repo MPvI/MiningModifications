@@ -22,11 +22,17 @@ public class BlockMM extends Block
         this.setCreativeTab(CreativeTabMM.MM_TAB);
     }
 
-    public BlockMM(String name)
+    public BlockMM(Material material,String name)
     {
-        this(Material.rock);
+        this(material);
         this.setBlockName(name);
     }
+
+    public BlockMM(String name)
+    {
+        this(Material.rock,name);
+    }
+
 
     @Override
     @SideOnly(Side.CLIENT)

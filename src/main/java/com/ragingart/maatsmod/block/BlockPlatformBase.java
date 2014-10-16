@@ -6,6 +6,7 @@ import com.ragingart.maatsmod.ref.RenderIds;
 import com.ragingart.maatsmod.tileentity.TileEntityPlatformBase;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -16,8 +17,7 @@ import net.minecraft.world.World;
 public class BlockPlatformBase extends BlockMM implements ITileEntityProvider {
 
     public BlockPlatformBase() {
-        super(Names.Blocks.PLATFORM_BASE);
-        setHarvestLevel("shovel",0);
+        super(Material.circuits,Names.Blocks.PLATFORM_BASE);
     }
 
     @Override
