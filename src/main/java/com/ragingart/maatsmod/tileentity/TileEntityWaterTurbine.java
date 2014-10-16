@@ -67,9 +67,7 @@ public class TileEntityWaterTurbine extends TileEntityEnergyGen {
                 aBlock = worldObj.getBlock(x, new_y_up, z);
                 aMeta = worldObj.getBlockMetadata(x, new_y_up, z);
                 if(aMeta < 8  || aBlock.getMaterial()!= Material.water)
-                {
                     break;
-                }
                 waterAbove++;
             }
             tank.fill(new FluidStack(Fluids.ID.HIGHHELDWATER.ordinal(), waterAbove), true);

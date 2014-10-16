@@ -2,9 +2,11 @@ package com.ragingart.maatsmod.ref;
 
 import com.ragingart.maatsmod.client.gui.container.GuiCharger;
 import com.ragingart.maatsmod.client.gui.container.GuiDischarger;
+import com.ragingart.maatsmod.client.gui.container.GuiRFEnergyStorage;
 import com.ragingart.maatsmod.client.gui.container.GuiWaterTurbine;
 import com.ragingart.maatsmod.container.ContainerCharger;
 import com.ragingart.maatsmod.container.ContainerDischarger;
+import com.ragingart.maatsmod.container.ContainerRFEnergyStorage;
 import com.ragingart.maatsmod.container.ContainerWaterTurbine;
 
 /**
@@ -15,18 +17,21 @@ public class Gui {
         CHARGER,
         DISCHARGER,
         WATERTURBINE,
+        RFENERGYSTORAGE,
         VOIDPACK
     }
 
     public static final Class[] container= new Class[]{
             ContainerCharger.class,
             ContainerDischarger.class,
-            ContainerWaterTurbine.class
+            ContainerWaterTurbine.class,
+            ContainerRFEnergyStorage.class
     };
 
     public static final Class[] gui= new Class[]{
             GuiCharger.class,
             GuiDischarger.class,
-            GuiWaterTurbine.class
+            GuiWaterTurbine.class,
+            GuiRFEnergyStorage.class
     };
 }
