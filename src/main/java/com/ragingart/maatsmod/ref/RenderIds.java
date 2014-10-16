@@ -5,5 +5,6 @@ package com.ragingart.maatsmod.ref;
  */
 public class RenderIds {
     public static int PlatformBase;
-    public static int PlatformExt;
+    public static int FluxField;
+    public static int Cable;
 }

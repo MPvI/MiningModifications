@@ -9,5 +9,6 @@ import net.minecraft.item.ItemBlock;
 public class ItemBlockPlatformBase extends ItemBlock{
     public ItemBlockPlatformBase(Block block) {
         super(block);
+        setMaxStackSize(1);
     }
 }

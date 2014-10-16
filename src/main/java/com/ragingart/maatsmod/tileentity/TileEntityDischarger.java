@@ -14,7 +14,7 @@ public class TileEntityDischarger extends TileEntityMachineMM {
         if(!worldObj.isRemote)
         {
             extractContainer();
-            RFHelper.transferEnergyToAdjacent(this);
+            RFHelper.transferEnergyToAdjacent(this,100);
         }
     }
 

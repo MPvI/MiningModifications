@@ -22,6 +22,8 @@ tile.maatsmod:charger.name=Ladegerät
 tile.maatsmod:waterturbine.name=Wasser Turbine
 tile.maatsmod:discharger.name=Entladegerät
 tile.maatsmod:crenergy.name=Unendliche Energiequelle
+tile.maatsmod:rfenergystorage.name=Energiespeicher
+tile.maatsmod:cable.name=Energiekabel
 
 // Creative Tab
 itemGroup.maatsmod=Maats Mod

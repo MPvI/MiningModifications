@@ -10,7 +10,7 @@ import org.lwjgl.opengl.GL11;
 /**
  * Created by MaaT on 26.09.2014.
  */
-public class ItemRendererPlatformExt implements IItemRenderer {
+public class ItemRendererFluxField implements IItemRenderer {
 
     public ModelPlatformBase model = new ModelPlatformBase();
 
@@ -43,7 +43,7 @@ public class ItemRendererPlatformExt implements IItemRenderer {
 
                 GL11.glPushMatrix();
 
-                Minecraft.getMinecraft().renderEngine.bindTexture(Models.PlatformExt);
+                Minecraft.getMinecraft().renderEngine.bindTexture(Models.FluxField);
 
                 GL11.glRotatef(180, -1.0F, 0.0F, 0.0F);
                 GL11.glScalef(0.5F, 0.5F, 0.5F);
@@ -55,7 +55,7 @@ public class ItemRendererPlatformExt implements IItemRenderer {
 
                 GL11.glPushMatrix();
 
-                Minecraft.getMinecraft().renderEngine.bindTexture(Models.PlatformExt);
+                Minecraft.getMinecraft().renderEngine.bindTexture(Models.FluxField);
 
                 GL11.glRotatef(180, -1.0F, 0.0F, 0.0F);
                 GL11.glScalef(0.5F, 0.5F, 0.5F);
@@ -69,7 +69,7 @@ public class ItemRendererPlatformExt implements IItemRenderer {
 
                 GL11.glPushMatrix();
 
-                Minecraft.getMinecraft().renderEngine.bindTexture(Models.PlatformExt);
+                Minecraft.getMinecraft().renderEngine.bindTexture(Models.FluxField);
 
                 GL11.glRotatef(180, -1.0F, 0.0F, 0.0F);
                 GL11.glScalef(0.5F, 0.5F, 0.5F);
@@ -81,7 +81,7 @@ public class ItemRendererPlatformExt implements IItemRenderer {
 
                 GL11.glPushMatrix();
 
-                Minecraft.getMinecraft().renderEngine.bindTexture(Models.PlatformExt);
+                Minecraft.getMinecraft().renderEngine.bindTexture(Models.FluxField);
 
                 GL11.glRotatef(180, -1.0F, 0.0F, 0.0F);
                 GL11.glScalef(0.5F, 0.5F, 0.5F);

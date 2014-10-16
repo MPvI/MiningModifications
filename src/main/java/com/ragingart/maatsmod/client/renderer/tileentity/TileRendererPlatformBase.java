@@ -1,6 +1,5 @@
 package com.ragingart.maatsmod.client.renderer.tileentity;
 
-import com.ragingart.maatsmod.client.renderer.model.ModelFluxField;
 import com.ragingart.maatsmod.client.renderer.model.ModelPlatformBase;
 import com.ragingart.maatsmod.ref.Models;
 import com.ragingart.maatsmod.tileentity.TileEntityPlatformBase;
@@ -12,9 +11,8 @@ import org.lwjgl.opengl.GL11;
  * Created by MaaT on 26.09.2014.
  */
 public class TileRendererPlatformBase extends TileEntitySpecialRenderer {
-    public ModelPlatformBase model= new ModelPlatformBase();
-    public ModelFluxField field = new ModelFluxField();
 
+    public ModelPlatformBase model= new ModelPlatformBase();
 
     @Override
     public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float tick) {

@@ -22,6 +22,8 @@ tile.maatsmod:charger.name=Charger
 tile.maatsmod:discharger.name=Discharger
 tile.maatsmod:waterturbine.name=Water Turbine
 tile.maatsmod:crenergy.name=Creative Energysource
+tile.maatsmod:rfenergystorage.name=Energystorage
+tile.maatsmod:cable.name=Energycabel
 
 // Creative Tab
 itemGroup.maatsmod=Maats Mod

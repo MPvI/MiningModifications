@@ -9,7 +9,7 @@ import org.lwjgl.opengl.GL11;
 /**
  * Created by MaaT on 26.09.2014.
  */
-public class TileRendererPlatformExt extends TileEntitySpecialRenderer {
+public class TileRendererFluxField extends TileEntitySpecialRenderer {
 
     public static ModelFluxField model= new ModelFluxField();
 
@@ -22,7 +22,7 @@ public class TileRendererPlatformExt extends TileEntitySpecialRenderer {
         GL11.glScalef(0.5F,1, 0.5F);
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA,GL11.GL_ONE_MINUS_SRC_ALPHA);
-        this.bindTexture(Models.PlatformExt);
+        this.bindTexture(Models.FluxField);
         model.render();
         GL11.glPopMatrix();
     }
