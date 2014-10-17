@@ -10,8 +10,7 @@ public class Models {
     public static String MODEL_PREFIX = "textures/models/";
 
     public static ResourceLocation Multitool = new ResourceLocation(Reference.MOD_ID.toLowerCase(),MODEL_PREFIX+"multitool.png");
-
-    public static ResourceLocation PlatformExt = new ResourceLocation(Reference.MOD_ID.toLowerCase(),MODEL_PREFIX+"platform_ext.png");
     public static ResourceLocation PlatformBase = new ResourceLocation(Reference.MOD_ID.toLowerCase(),MODEL_PREFIX+"platform_base.png");
     public static ResourceLocation FluxField = new ResourceLocation(Reference.MOD_ID.toLowerCase(),MODEL_PREFIX+"fluxfield.png");
+    public static ResourceLocation Cable = new ResourceLocation(Reference.MOD_ID.toLowerCase(),MODEL_PREFIX+"cable.png");
 }

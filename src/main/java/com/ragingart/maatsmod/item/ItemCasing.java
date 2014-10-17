@@ -22,18 +22,13 @@ import java.util.List;
 
 public class ItemCasing extends ItemMM {
 
-    @SideOnly(Side.CLIENT)
     protected IIcon[] casing_textures = new IIcon[CasingHelper.Port.values().length];
 
-    public ItemCasing(String name) {
-        super(name);
+    public ItemCasing() {
+        super(Names.Items.CASING[0]);
         setHasSubtypes(true);
     }
 
-    @Override
-    public IIcon getIconFromDamage(int meta) {
-        return casing_textures[meta];
-    }
 
     @Override
     public void getSubItems(Item item, CreativeTabs p_150895_2_, List list) {
@@ -48,6 +43,13 @@ public class ItemCasing extends ItemMM {
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
+    public IIcon getIconFromDamage(int meta) {
+        return casing_textures[meta];
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister iconRegister) {
         for (int i = 0; i < CasingHelper.Port.values().length; i++) {
             casing_textures[i]=iconRegister.registerIcon(Names.MOD_PREFIX+Names.Items.CASING[i]);

@@ -12,7 +12,7 @@ public class ModItems {
     public static final ItemToolMM spear = new ItemSpear();
     //Parts
     public static final ItemMM battery = new ItemRSBattery();
-    public static final ItemMM casing = new ItemCasing(Names.Items.CASING[0]);
+    public static final ItemMM casing = new ItemCasing();
     public static final ItemMM screw = new ItemScrew();
     //Worldgen
     public static final ItemMM ingot_nickel = new ItemIngotNickel();

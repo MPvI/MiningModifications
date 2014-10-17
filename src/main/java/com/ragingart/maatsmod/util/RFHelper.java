@@ -2,9 +2,10 @@ package com.ragingart.maatsmod.util;
 
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyContainerItem;
+import cofh.api.energy.IEnergyHandler;
 import cofh.lib.util.helpers.EnergyHelper;
-import com.ragingart.maatsmod.generics.TileEntityMachineMM;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
 /**
@@ -39,24 +40,29 @@ public class RFHelper {
         return transferRate;
     }
 
-    public static void transferEnergyToAdjacent(TileEntityMachineMM aTile){
-        int num_consum = 0;
-        int id_consum[] = new int[6];
-        for (int i = 0; i < 6; i++) {
-            if (EnergyHelper.isAdjacentEnergyHandlerFromSide(aTile, i) && aTile.canConnectEnergy(ForgeDirection.values()[i])) {
-                id_consum[num_consum]=i;
-                num_consum++;
+    public static void transferEnergyToAdjacent(TileEntity aTile){
+        transferEnergyToAdjacent(aTile,10);
+    }
+
+    public static void transferEnergyToAdjacent(TileEntity aTile,int perTick){
+        if(aTile instanceof IEnergyHandler) {
+            int num_consum = 0;
+            int id_consum[] = new int[6];
+            for (int i = 0; i < 6; i++) {
+                if (EnergyHelper.isAdjacentEnergyHandlerFromSide(aTile, i) && ((IEnergyHandler)aTile).canConnectEnergy(ForgeDirection.values()[i])) {
+                    id_consum[num_consum] = i;
+                    num_consum++;
+                }
             }
-        }
-        if (num_consum > 0 && aTile.getEnergyStored(ForgeDirection.UNKNOWN) >= 10*num_consum){
-            for (int i = 0; i < num_consum; i++) {
-                aTile.extractEnergy(ForgeDirection.UNKNOWN, EnergyHelper.insertEnergyIntoAdjacentEnergyHandler(aTile, id_consum[i], 10, false), false);
-            }
-        }
-        else if(num_consum > 0){
-            int max_output = aTile.getEnergyStored(ForgeDirection.UNKNOWN)/num_consum;
-            for (int i = 0; i < num_consum; i++) {
-                aTile.extractEnergy(ForgeDirection.UNKNOWN, EnergyHelper.insertEnergyIntoAdjacentEnergyHandler(aTile, id_consum[i], max_output, false), false);
+            if (num_consum > 0 && ((IEnergyHandler)aTile).getEnergyStored(ForgeDirection.UNKNOWN) >= perTick * num_consum) {
+                for (int i = 0; i < num_consum; i++) {
+                    ((IEnergyHandler)aTile).extractEnergy(ForgeDirection.UNKNOWN, EnergyHelper.insertEnergyIntoAdjacentEnergyHandler(aTile, id_consum[i], perTick, false), false);
+                }
+            } else if (num_consum > 0) {
+                int max_output = ((IEnergyHandler)aTile).getEnergyStored(ForgeDirection.UNKNOWN) / num_consum;
+                for (int i = 0; i < num_consum; i++) {
+                    ((IEnergyHandler)aTile).extractEnergy(ForgeDirection.UNKNOWN, EnergyHelper.insertEnergyIntoAdjacentEnergyHandler(aTile, id_consum[i], max_output, false), false);
+                }
             }
         }
     }

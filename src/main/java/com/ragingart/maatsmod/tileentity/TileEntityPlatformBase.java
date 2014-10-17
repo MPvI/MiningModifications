@@ -110,7 +110,7 @@ public class TileEntityPlatformBase extends TileEntityMM {
                 if(world.getBlock(x,y,z).isReplaceable(world,x,y,z)){
                     Vec3 target = Vec3.createVectorHelper(x,y,z);
                     if(platform.get(0).distanceTo(target)< ConfigHandler.maxPlatformRadius && platform.size()<= ConfigHandler.maxPlatformSize) {
-                        world.setBlock(x, y, z, ModBlocks.PlatformExt);
+                        world.setBlock(x, y, z, ModBlocks.FluxField);
                         platform.add(target);
                         fillAdjAirBlocks(world,target);
                     }

@@ -25,7 +25,7 @@ public class BlockFluxField extends BlockMM implements ITileEntityProvider {
         super(Names.Blocks.FLUXFIELD);
         this.setBlockBounds(0, 0.95F, 0, 1, 1, 1);
         this.setHardness(-1);
-        this.setLightOpacity(1);
+        this.setLightOpacity(0);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class BlockFluxField extends BlockMM implements ITileEntityProvider {
 
     @Override
     public int getRenderType() {
-        return RenderIds.PlatformExt;
+        return RenderIds.FluxField;
     }
 
     @Override

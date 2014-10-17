@@ -13,7 +13,7 @@ public class Names {
         public static final String ORE = "nepouit_ore";
         public static final String PLATFORM_BASE = "platformBase";
         public static final String FLUXFIELD = "fluxfield";
-
+        public static final String CABLE = "cable";
     }
     
     public static final class Items{
@@ -64,11 +64,11 @@ public class Names {
             }
             public static final class RFEnergyStorage {
 
-                public static final String FRONT_OFF = "waterturbine_front_off";
-                public static final String FRONT_OFF_WATER = "waterturbine_front_off_bat";
-                public static final String FRONT_ON = "waterturbine_front_on";
+                public static final String FRONT_EMPTY = "rfcell_front_off";
+                public static final String FRONT_WORKING = "rfcell_front_working";
+                public static final String FRONT_FULL = "rfcell_front_full";
 
-                public static final String[] FRONT = new String[]{FRONT_OFF,FRONT_OFF_WATER,FRONT_ON};
+                public static final String[] FRONT = new String[]{FRONT_EMPTY,FRONT_WORKING,FRONT_FULL};
             }
             
             

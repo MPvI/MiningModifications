@@ -14,7 +14,7 @@ public class TileEntityDischarger extends TileEntityMachineMM {
         if(!worldObj.isRemote)
         {
             extractContainer();
-            RFHelper.transferEnergyToAdjacent(this);
+            RFHelper.transferEnergyToAdjacent(this,100);
         }
     }
 
@@ -29,14 +29,14 @@ public class TileEntityDischarger extends TileEntityMachineMM {
 
     public void extractContainer(){
         if(!worldObj.isRemote) {
-            if (inventory != null && RFHelper.itemCanCharge(inventory)) {
+            if (RFHelper.itemCanCharge(inventory)) {
                 int transferRate = RFHelper.transferEnergyFromItem(inventory, energy);
 
                 if (transferRate > 0 && getHasContainer()) {
                     machineHelper.setState(2);
-                } else if (getHasContainer()) {
-                    machineHelper.setState(1);
                 }
+            }else if (getHasContainer()) {
+                machineHelper.setState(1);
             } else {
                 machineHelper.setState(0);
             }
