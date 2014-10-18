@@ -60,10 +60,9 @@ public class ItemCasing extends ItemMM {
 
     @Override
     public void addSpecialInfo(ItemStack itemStack, EntityPlayer entityPlayer, List list, boolean b) {
-
+        super.addSpecialInfo(itemStack,entityPlayer,list,b);
         String info = StatCollector.translateToLocal(Names.INFO_PREFIX + Names.getUnwrappedUnlocalizedName(getUnlocalizedName())+"."+itemStack.getItemDamage());
         Collections.addAll(list, info.split("%"));
-
     }
 
     @Override

@@ -28,6 +28,7 @@ public class ItemRSBattery extends ItemMM implements IEnergyContainerItem
 
     @Override
     public void addSpecialInfo(ItemStack itemStack, EntityPlayer entityPlayer, List list, boolean b) {
+        super.addSpecialInfo(itemStack,entityPlayer,list,b);
         list.add(EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "Energy:");
         list.add("   "+EnumChatFormatting.GREEN+getEnergyStored(itemStack)+EnumChatFormatting.GRAY+" / "+EnumChatFormatting.RED+getMaxEnergyStored(itemStack));
     }

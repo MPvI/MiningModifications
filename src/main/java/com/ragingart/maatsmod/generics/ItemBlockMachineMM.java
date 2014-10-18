@@ -22,6 +22,7 @@ public class ItemBlockMachineMM extends ItemBlockMM {
 
     @Override
     public void addSpecialInfo(ItemStack itemStack, EntityPlayer entityPlayer, List list, boolean b) {
+        super.addSpecialInfo(itemStack,entityPlayer,list,b);
         list.add(EnumChatFormatting.GREEN+""+EnumChatFormatting.ITALIC+"Ports:");
         if(MachineHelper.isHelperSavedToItemStack(itemStack)) {
             MachineHelper.addInformationString(itemStack, list);

@@ -97,16 +97,16 @@ public abstract class ItemToolMM extends ItemTool implements IEnergyContainerIte
         return cap;
     }
 
-    public abstract void addSpecialInfo(ItemStack itemStack, EntityPlayer entityPlayer, List list, boolean b);
+    public void addSpecialInfo(ItemStack itemStack, EntityPlayer entityPlayer, List list, boolean b){
+        String info = StatCollector.translateToLocal(Names.INFO_PREFIX + Names.getUnwrappedUnlocalizedName(getUnlocalizedName()));
+        Collections.addAll(list, info.split("%"));
+    }
 
     @Override
     public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List list, boolean b) {
-        list.clear();
         if(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
             list.add(EnumChatFormatting.WHITE + "Release " + EnumChatFormatting.RED + "Shift" + EnumChatFormatting.WHITE + " for less Information");
             list.add(EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "Info:");
-            String info = StatCollector.translateToLocal(Names.INFO_PREFIX + Names.getUnwrappedUnlocalizedName(getUnlocalizedName()));
-            Collections.addAll(list, info.split("%"));
             addSpecialInfo(itemStack,entityPlayer,list,b);
         }else{
             list.add(EnumChatFormatting.WHITE + "Hold " + EnumChatFormatting.GREEN + "Shift" + EnumChatFormatting.WHITE + " for more Information");

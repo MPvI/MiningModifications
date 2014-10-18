@@ -7,7 +7,6 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.util.ForgeDirection;
 import org.lwjgl.opengl.GL11;
 
@@ -28,7 +27,7 @@ public class GuiWaterTurbine extends GuiContainer {
     @Override
     protected void drawGuiContainerForegroundLayer(int x, int y)
     {
-        String containerName = StatCollector.translateToLocal(tileEntityWaterTurbine.getInventoryName());
+        String containerName = tileEntityWaterTurbine.getInventoryName();
         fontRendererObj.drawString(containerName, xSize / 2 - fontRendererObj.getStringWidth(containerName) / 2, 6, 4210752);
 
         String astring = "HHWater: "+String.valueOf(tileEntityWaterTurbine.getFluidAmount())+"/"+String.valueOf(tileEntityWaterTurbine.getFluidCapacity());

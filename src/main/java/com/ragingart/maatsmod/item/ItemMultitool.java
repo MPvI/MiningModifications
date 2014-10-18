@@ -23,7 +23,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 public class ItemMultitool extends ItemToolMM
@@ -156,10 +155,6 @@ public class ItemMultitool extends ItemToolMM
             }
 
         return itemStack;
-    }
-
-    @Override
-    public void addSpecialInfo(ItemStack itemStack, EntityPlayer entityPlayer, List list, boolean b) {
     }
 
     @Override
