@@ -10,7 +10,7 @@ public class Gui {
         WATERTURBINE,
         RFENERGYSTORAGE,
         LIS,
-        VOIDPACK
+        COMPACTOR
     }
 
 }

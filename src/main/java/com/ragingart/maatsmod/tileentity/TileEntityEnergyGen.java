@@ -15,7 +15,7 @@ public abstract class TileEntityEnergyGen extends TileEntityMachineMM {
     {
         super.updateEntity();
         if(!worldObj.isRemote) {
-            RFHelper.transferEnergyToAdjacent(this);
+            RFHelper.transferEnergyToAdjacent(this, 100);
         }
     }
 

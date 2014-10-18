@@ -8,6 +8,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 public class ModBlocks {
     public static final BlockMM Ore = new BlockPecoraitOre();
+
     public static final BlockMM Charger = new BlockCharger();
     public static final BlockMM Energy = new BlockCreativeEnergy();
     public static final BlockMM PlatformBase = new BlockPlatformBase();
@@ -17,6 +18,8 @@ public class ModBlocks {
     public static final BlockMM Discharger = new BlockDischarger();
     public static final BlockMM Cable = new BlockCable();
     public static final BlockMM LIS = new BlockLaserIsotopeSeperator();
+    public static final BlockMM Crank = new BlockCrank();
+    public static final BlockMM Compactor = new BlockCompactor();
 
     public static void init()
     {
@@ -33,6 +36,9 @@ public class ModBlocks {
 
         GameRegistry.registerBlock(PlatformBase,ItemBlockPlatformBase.class,Names.Blocks.PLATFORM_BASE);
         GameRegistry.registerBlock(FluxField, ItemBlockFluxField.class,Names.Blocks.FLUXFIELD);
+
+        GameRegistry.registerBlock(Crank, ItemBlockCrank.class, Names.Blocks.CRANK);
+        GameRegistry.registerBlock(Compactor, ItemBlockCompactor.class, Names.Blocks.COMPACTOR);
 
     }
 }

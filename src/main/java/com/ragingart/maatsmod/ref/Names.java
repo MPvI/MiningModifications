@@ -22,6 +22,8 @@ public class Names {
         public static final String FLUXFIELD = "fluxfield";
         public static final String CABLE = "cable";
         public static final String LIS = "laserisotopeseparator";
+        public static final String CRANK = "crank";
+        public static final String COMPACTOR = "compactor";
     }
     
     public static final class Items{

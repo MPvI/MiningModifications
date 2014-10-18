@@ -14,11 +14,11 @@ public class TileEntityWaterTurbine extends TileEntityEnergyGen {
     public TileEntityWaterTurbine(){
         super();
         tank.setCapacity(1000);
+        energy.setCapacity(1000);
     }
 
     @Override
-    public void updateEntity()
-    {
+    public void updateEntity(){
         super.updateEntity();
         if(!worldObj.isRemote){
             checkWaterFlow();
@@ -42,8 +42,7 @@ public class TileEntityWaterTurbine extends TileEntityEnergyGen {
                     worldObj.setBlockToAir(xCoord, y_down, zCoord);
                 }
             }
-        }
-        else{
+        } else{
             machineHelper.setState(0);
             if (aBlock.getMaterial() == Material.water && aMeta == 0) {
                 worldObj.setBlockToAir(xCoord, y_down, zCoord);

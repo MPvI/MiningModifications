@@ -29,6 +29,9 @@ public class GuiHandler implements IGuiHandler {
         else if(ID == Gui.ID.LIS.ordinal()){
             return new ContainerLaserIsotopeSeperator(player.inventory,tileEntity);
         }
+        else if(ID == Gui.ID.COMPACTOR.ordinal()){
+            return new ContainerCompactor(player.inventory,tileEntity);
+        }
         return 0;
     }
 
@@ -49,6 +52,9 @@ public class GuiHandler implements IGuiHandler {
         }
         else if(ID == Gui.ID.LIS.ordinal()){
             return new GuiLaserIsotopeSeperator(player.inventory,tileEntity);
+        }
+        else if(ID == Gui.ID.COMPACTOR.ordinal()){
+            return new GuiCompactor(player.inventory,tileEntity);
         }
         return 0;
     }
