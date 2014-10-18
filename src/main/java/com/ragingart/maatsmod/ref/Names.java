@@ -24,6 +24,7 @@ public class Names {
         public static final String LIS = "laserisotopeseparator";
         public static final String CRANK = "crank";
         public static final String COMPACTOR = "compactor";
+        public static final String SHARPENINGWHEEL = "sharpeningwheel";
     }
     
     public static final class Items{

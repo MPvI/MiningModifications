@@ -10,7 +10,8 @@ public class Gui {
         WATERTURBINE,
         RFENERGYSTORAGE,
         LIS,
-        COMPACTOR
+        COMPACTOR,
+        SHARPENINGWHEEL
     }
 
 }

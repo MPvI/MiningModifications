@@ -20,6 +20,7 @@ public class ModBlocks {
     public static final BlockMM LIS = new BlockLaserIsotopeSeperator();
     public static final BlockMM Crank = new BlockCrank();
     public static final BlockMM Compactor = new BlockCompactor();
+    public static final BlockMM SharpeningWheel = new BlockSharpeningWheel();
 
     public static void init()
     {
@@ -39,6 +40,7 @@ public class ModBlocks {
 
         GameRegistry.registerBlock(Crank, ItemBlockCrank.class, Names.Blocks.CRANK);
         GameRegistry.registerBlock(Compactor, ItemBlockCompactor.class, Names.Blocks.COMPACTOR);
+        GameRegistry.registerBlock(SharpeningWheel, ItemBlockSharpeningWheel.class, Names.Blocks.SHARPENINGWHEEL);
 
     }
 }

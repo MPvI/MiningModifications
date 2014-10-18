@@ -1,5 +1,6 @@
 package com.ragingart.maatsmod.init;
 
+
 import net.minecraftforge.oredict.OreDictionary;
 
 /**
@@ -10,5 +11,6 @@ public class ModOreDict {
         OreDictionary.registerOre("dustNickel",ModItems.dust_nickel);
         OreDictionary.registerOre("ingotNickel",ModItems.ingot_nickel);
         OreDictionary.registerOre("oreNickel",ModBlocks.Ore);
+        OreDictionary.registerOre("plateIron",ModItems.plate_iron);
     }
 }

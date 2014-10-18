@@ -27,7 +27,4 @@ public class Component {
     public static ItemStack SCREW(int x) {return new ItemStack(ModItems.screw,x);}
     public static ItemStack PLATFORM(int x) {return new ItemStack(ModBlocks.PlatformBase,x);}
     public static ItemStack FLUXFIELD(int x){return new ItemStack(ModBlocks.FluxField,x);}
-    public static ItemStack PLATE_IRON(int x) {return new ItemStack(ModItems.plate_iron,x,0);}
-
-
 }

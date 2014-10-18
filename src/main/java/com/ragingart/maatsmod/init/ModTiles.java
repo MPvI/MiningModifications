@@ -20,5 +20,6 @@ public class ModTiles {
         GameRegistry.registerTileEntity(TileEntityLaserIsotopeSeperator.class,Names.Blocks.LIS);
         GameRegistry.registerTileEntity(TileEntityCrank.class,Names.Blocks.CRANK);
         GameRegistry.registerTileEntity(TileEntityCompactor.class,Names.Blocks.COMPACTOR);
+        GameRegistry.registerTileEntity(TileEntitySharpeningWheel.class,Names.Blocks.SHARPENINGWHEEL);
     }
 }

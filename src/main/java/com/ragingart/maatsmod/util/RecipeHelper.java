@@ -13,15 +13,53 @@ import net.minecraft.nbt.NBTTagCompound;
 public class RecipeHelper {
 
     public static class RecipeCompactor{
-        public final int[] duration = new int[]{
+        public static final int[] duration = new int[]{
                 0};
-        public final Item[] input = new Item[]{
+        public static final Item[] input = new Item[]{
                 Items.iron_ingot};
-        public final Item[] output = new Item[]{
+        public static final Item[] output = new Item[]{
                 ModItems.plate_iron};
 
-
+        public static boolean checkItem(Item item){
+            for(int i = 0; i < duration.length; i++){
+                if(input[i] == item)
+                    return true;
+            }
+            return false;
+        }
+        public static Item getOutputByInput(Item item){
+            for(int i = 0; i < duration.length; i++){
+                if(input[i] == item)
+                    return output[i];
+            }
+            return null;
+        }
     }
+
+    public static class RecipeSharpeningWheel{
+        public static final int[] duration = new int[]{
+                0};
+        public static final Item[] input = new Item[]{
+                ModItems.ingot_nickel};
+        public static final Item[] output = new Item[]{
+                ModItems.screw};
+
+        public static boolean checkItem(Item item){
+            for(int i = 0; i < duration.length; i++){
+                if(input[i] == item)
+                    return true;
+            }
+            return false;
+        }
+        public static Item getOutputByInput(Item item){
+            for(int i = 0; i < duration.length; i++){
+                if(input[i] == item)
+                    return output[i];
+            }
+            return null;
+        }
+    }
+
     public static void addCompactorRecipe(int duration, ItemStack input, ItemStack output){
 
         if (input == null || output == null) {

@@ -36,6 +36,8 @@ public class ModRecipes {
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.WaterTurbine),"bcc"," rc","bcc",'c',Component.CASING(1),'r',Component.BIG_RS,'b',Items.bucket));
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.RFEnergyStorage),"bcc"," rc","bcc",'c',Component.CASING(1),'r',Component.BIG_RS,'b',Component.BATTERY(1)));
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.Cable,16),"rgr","nnn","rgr",'r',Component.BIG_RS,'g',Component.SMALL_GOLD,'n',Component.NORMAL_NICKEL));
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.Crank), "aaa", " b ", " c ", 'a', "stickWood", 'b', "cobblestone", 'c', "ingotIron"));
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.Compactor), "bcb", "a a", "bcb", 'a', "logWood", 'b', "cobblestone", 'c', "ingotIron"));
         //Shapeless
 
 
