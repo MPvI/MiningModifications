@@ -197,11 +197,10 @@ public class NBTHelper
     public static void saveInventoryToNBT(NBTTagCompound cmpd,ItemStack... inv){
         if(inv != null) {
             for (int i = 0; i < inv.length; i++) {
-                if(inv[i]!=null) {
                     NBTTagCompound tmp = new NBTTagCompound();
-                    inv[i].writeToNBT(tmp);
+                    if(inv[i] instanceof ItemStack) //&& inv[i].stackSize!=0)
+                        inv[i].writeToNBT(tmp);
                     cmpd.setTag("Inventory" + i, tmp);
-                }
             }
         }
     }
