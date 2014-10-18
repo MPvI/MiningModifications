@@ -19,7 +19,7 @@ public class ModItems {
     public static final ItemMM dust_nickel = new ItemDustNickel();
 
     //
-    public static final ItemMM plate_iron = new ItemIngotPlate();
+    public static final ItemMM plate_iron = new ItemPlateIron();
 
 
 

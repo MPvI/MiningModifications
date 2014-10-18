@@ -1,7 +1,11 @@
 package com.ragingart.maatsmod.handler;
 
-import com.ragingart.maatsmod.client.gui.container.*;
-import com.ragingart.maatsmod.container.*;
+import com.ragingart.maatsmod.client.gui.container.handmachines.GuiCompactor;
+import com.ragingart.maatsmod.client.gui.container.handmachines.GuiSharpeningWheel;
+import com.ragingart.maatsmod.client.gui.container.machines.*;
+import com.ragingart.maatsmod.container.handmachines.ContainerCompactor;
+import com.ragingart.maatsmod.container.handmachines.ContainerSharpeningWheel;
+import com.ragingart.maatsmod.container.machines.*;
 import com.ragingart.maatsmod.ref.Gui;
 import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
@@ -27,7 +31,7 @@ public class GuiHandler implements IGuiHandler {
             return new ContainerRFEnergyStorage(player.inventory,tileEntity);
         }
         else if(ID == Gui.ID.LIS.ordinal()){
-            return new ContainerLaserIsotopeSeperator(player.inventory,tileEntity);
+            return new ContainerLaserSeperator(player.inventory,tileEntity);
         }
         else if(ID == Gui.ID.COMPACTOR.ordinal()){
             return new ContainerCompactor(player.inventory,tileEntity);
@@ -54,7 +58,7 @@ public class GuiHandler implements IGuiHandler {
             return new GuiRFEnergyStorage(player.inventory,tileEntity);
         }
         else if(ID == Gui.ID.LIS.ordinal()){
-            return new GuiLaserIsotopeSeperator(player.inventory,tileEntity);
+            return new GuiLaserSeperator(player.inventory,tileEntity);
         }
         else if(ID == Gui.ID.COMPACTOR.ordinal()){
             return new GuiCompactor(player.inventory,tileEntity);

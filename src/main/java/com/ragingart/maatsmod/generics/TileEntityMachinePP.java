@@ -1,27 +1,40 @@
 package com.ragingart.maatsmod.generics;
 
-import com.ragingart.maatsmod.inter.IMusclePower;
+import com.ragingart.maatsmod.api.IMusclePower;
+import com.ragingart.maatsmod.util.NBTHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * Created by XtraX on 18.10.2014.
  */
-public class TileEntityMachinePP extends TileEntityMM implements IMusclePower,IInventory {
+public abstract class TileEntityMachinePP extends TileEntityMM implements IMusclePower,IInventory {
 
     protected ItemStack inventory[] = new ItemStack[2];
+    private ForgeDirection facing=ForgeDirection.NORTH;
 
     public TileEntityMachinePP(){
         super();
     }
 
+    public void setFacing(ForgeDirection forgeDirection){
+        switch(forgeDirection){
+            case UP:
+            case DOWN:
+                facing = facing.getRotation(forgeDirection);
+            default:
+                facing = forgeDirection;
+        }
+
+    }
 
     /*IMusclePower*/
 
     @Override
-    public boolean canAcceptMusclePower(){
+    public boolean canAcceptMusclePower(ForgeDirection from){
         return true;
     }
 
@@ -111,18 +124,14 @@ public class TileEntityMachinePP extends TileEntityMM implements IMusclePower,II
     @Override
     public void writeToNBT(NBTTagCompound cmpd){
         super.writeToNBT(cmpd);
-        NBTTagCompound inv = new NBTTagCompound();
-        if(inventory[0] != null)inventory[0].writeToNBT(inv);
-        cmpd.setTag("Inventory0",inv);
-        NBTTagCompound inv2 = new NBTTagCompound();
-        if(inventory[1] != null)inventory[1].writeToNBT(inv2);
-        cmpd.setTag("Inventory1",inv2);
+        NBTHelper.saveInventoryToNBT(cmpd,inventory);
+        cmpd.setInteger("Facing",facing.ordinal());
     }
 
     @Override
     public void readFromNBT(NBTTagCompound cmpd){
         super.readFromNBT(cmpd);
-        inventory[0] = ItemStack.loadItemStackFromNBT(cmpd.getCompoundTag("Inventory0"));
-        inventory[1] = ItemStack.loadItemStackFromNBT(cmpd.getCompoundTag("Inventory1"));
+        inventory = NBTHelper.getInventoryFromNBT(cmpd);
+        facing = ForgeDirection.getOrientation(cmpd.getInteger("Facing"));
     }
 }

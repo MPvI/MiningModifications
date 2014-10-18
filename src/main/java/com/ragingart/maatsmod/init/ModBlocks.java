@@ -1,8 +1,16 @@
 package com.ragingart.maatsmod.init;
 
 import com.ragingart.maatsmod.block.*;
+import com.ragingart.maatsmod.block.handmachines.BlockCompactor;
+import com.ragingart.maatsmod.block.handmachines.BlockCrank;
+import com.ragingart.maatsmod.block.handmachines.BlockSharpeningWheel;
+import com.ragingart.maatsmod.block.machines.*;
 import com.ragingart.maatsmod.generics.BlockMM;
 import com.ragingart.maatsmod.item.*;
+import com.ragingart.maatsmod.item.handmachines.ItemBlockCompactor;
+import com.ragingart.maatsmod.item.handmachines.ItemBlockCrank;
+import com.ragingart.maatsmod.item.handmachines.ItemBlockSharpeningWheel;
+import com.ragingart.maatsmod.item.machines.*;
 import com.ragingart.maatsmod.ref.Names;
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -17,7 +25,7 @@ public class ModBlocks {
     public static final BlockMM RFEnergyStorage = new BlockRFEnergyStorage();
     public static final BlockMM Discharger = new BlockDischarger();
     public static final BlockMM Cable = new BlockCable();
-    public static final BlockMM LIS = new BlockLaserIsotopeSeperator();
+    public static final BlockMM LIS = new BlockLaserSeperator();
     public static final BlockMM Crank = new BlockCrank();
     public static final BlockMM Compactor = new BlockCompactor();
     public static final BlockMM SharpeningWheel = new BlockSharpeningWheel();
@@ -28,7 +36,7 @@ public class ModBlocks {
 
         GameRegistry.registerBlock(Charger,ItemBlockCharger.class,Names.Blocks.CHARGER);
         GameRegistry.registerBlock(Discharger, ItemBlockDischarger.class,Names.Blocks.DISCHARGER);
-        GameRegistry.registerBlock(LIS,ItemBlockLaserIsotopeSeperator.class,Names.Blocks.LIS);
+        GameRegistry.registerBlock(LIS,ItemBlockLaserSeperator.class,Names.Blocks.LIS);
 
         GameRegistry.registerBlock(Energy,Names.Blocks.CENERGY);
         GameRegistry.registerBlock(WaterTurbine, ItemBlockWaterTurbine.class,Names.Blocks.WATERTURBINE);

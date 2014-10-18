@@ -3,6 +3,8 @@ package com.ragingart.maatsmod.util;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
+import java.util.ArrayList;
+
 public class NBTHelper
 {
     public static boolean hasTag(ItemStack itemStack, String keyName)
@@ -192,4 +194,30 @@ public class NBTHelper
         itemStack.stackTagCompound.setDouble(keyName, keyValue);
     }
 
+    public static void saveInventoryToNBT(NBTTagCompound cmpd,ItemStack... inv){
+        if(inv != null) {
+            for (int i = 0; i < inv.length; i++) {
+                if(inv[i]!=null) {
+                    NBTTagCompound tmp = new NBTTagCompound();
+                    inv[i].writeToNBT(tmp);
+                    cmpd.setTag("Inventory" + i, tmp);
+                }
+            }
+        }
+    }
+
+    public static ItemStack[] getInventoryFromNBT(NBTTagCompound cmpd){
+        ArrayList<ItemStack> inventory = new ArrayList<ItemStack>();
+        int i = 0;
+        while(cmpd.hasKey("Inventory"+i)){
+            inventory.add(ItemStack.loadItemStackFromNBT(cmpd.getCompoundTag("Inventory" + i)));
+            i++;
+        }
+
+        ItemStack[] inv = new ItemStack[i];
+        for (int j = 0; j < i; j++) {
+            inv[j]=inventory.get(j);
+        }
+        return inv;
+    }
 }
