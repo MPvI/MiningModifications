@@ -7,13 +7,19 @@ import com.ragingart.maatsmod.util.NBTHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
+import org.lwjgl.input.Keyboard;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
-public class ItemToolMM extends ItemTool implements IEnergyContainerItem
+public abstract class ItemToolMM extends ItemTool implements IEnergyContainerItem
 {
     private int cap;
     private int maxIn;
@@ -89,5 +95,24 @@ public class ItemToolMM extends ItemTool implements IEnergyContainerItem
     @Override
     public int getMaxEnergyStored(ItemStack container) {
         return cap;
+    }
+
+    public void addSpecialInfo(ItemStack itemStack, EntityPlayer entityPlayer, List list, boolean b){
+        String info = StatCollector.translateToLocal(Names.INFO_PREFIX + Names.getUnwrappedUnlocalizedName(getUnlocalizedName()));
+        Collections.addAll(list, info.split("%"));
+    }
+
+    @Override
+    public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List list, boolean b) {
+        if(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
+            list.add(EnumChatFormatting.WHITE + "Release " + EnumChatFormatting.RED + "Shift" + EnumChatFormatting.WHITE + " for less Information");
+            list.add(EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "Info:");
+            addSpecialInfo(itemStack,entityPlayer,list,b);
+        }else{
+            list.add(EnumChatFormatting.WHITE + "Hold " + EnumChatFormatting.GREEN + "Shift" + EnumChatFormatting.WHITE + " for more Information");
+            list.add(EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "Energy:");
+            list.add("   "+EnumChatFormatting.GREEN+getEnergyStored(itemStack)+EnumChatFormatting.GRAY+" / "+EnumChatFormatting.RED+getMaxEnergyStored(itemStack));
+        }
+
     }
 }

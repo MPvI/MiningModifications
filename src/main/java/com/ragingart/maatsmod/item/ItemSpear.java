@@ -45,16 +45,9 @@ public class ItemSpear extends ItemToolMM {
         return p_77659_1_;
     }
 
-
     @Override
     public boolean onItemUse(ItemStack itemStack,EntityPlayer entityPlayer,World world, int x, int y, int z, int meta, float hitX, float hitY, float hitZ){
-
-
-
         return false;
     }
-
-
-
 
 }

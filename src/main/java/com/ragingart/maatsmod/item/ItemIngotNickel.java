@@ -11,4 +11,5 @@ public class ItemIngotNickel extends ItemMM {
     public ItemIngotNickel(){
         super(Names.Items.INGOT_NICKEL);
     }
+
 }

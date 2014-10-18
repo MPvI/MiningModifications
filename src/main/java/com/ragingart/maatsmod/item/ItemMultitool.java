@@ -23,7 +23,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 public class ItemMultitool extends ItemToolMM
@@ -60,7 +59,7 @@ public class ItemMultitool extends ItemToolMM
                 case 0:
                     return false;
                 case 1:
-                    ((BlockMM) aBlock).onBlockWrenched(world, entityPlayer, x, y, z);
+                    ((BlockMM) aBlock).dismantleBlock(entityPlayer,world, x, y, z,true);
                     return true;
                 case 2:
                     aBlock.rotateBlock(world, x, y, z, ForgeDirection.getOrientation(side));
@@ -156,12 +155,6 @@ public class ItemMultitool extends ItemToolMM
             }
 
         return itemStack;
-    }
-
-    @Override
-    public void addInformation(ItemStack itemStack,EntityPlayer entityPlayer, List list, boolean b){
-        String info = "Energy: "+getEnergyStored(itemStack)+" / "+getMaxEnergyStored(itemStack);
-        list.add(info);
     }
 
     @Override

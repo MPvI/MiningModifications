@@ -16,8 +16,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
+import java.util.Collections;
 import java.util.List;
 
 public class ItemCasing extends ItemMM {
@@ -54,6 +56,13 @@ public class ItemCasing extends ItemMM {
         for (int i = 0; i < CasingHelper.Port.values().length; i++) {
             casing_textures[i]=iconRegister.registerIcon(Names.MOD_PREFIX+Names.Items.CASING[i]);
         }
+    }
+
+    @Override
+    public void addSpecialInfo(ItemStack itemStack, EntityPlayer entityPlayer, List list, boolean b) {
+        super.addSpecialInfo(itemStack,entityPlayer,list,b);
+        String info = StatCollector.translateToLocal(Names.INFO_PREFIX + Names.getUnwrappedUnlocalizedName(getUnlocalizedName())+"."+itemStack.getItemDamage());
+        Collections.addAll(list, info.split("%"));
     }
 
     @Override

@@ -9,6 +9,7 @@ public class Gui {
         DISCHARGER,
         WATERTURBINE,
         RFENERGYSTORAGE,
+        LIS,
         VOIDPACK
     }
 

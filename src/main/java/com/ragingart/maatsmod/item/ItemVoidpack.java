@@ -20,5 +20,4 @@ public class ItemVoidpack extends ItemMM {
         return itemStack;
     }
 
-
 }

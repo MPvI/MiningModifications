@@ -11,4 +11,5 @@ public class ItemDustNickel extends ItemMM {
     {
         super(Names.Items.DUST_NICKEL);
     }
+
 }

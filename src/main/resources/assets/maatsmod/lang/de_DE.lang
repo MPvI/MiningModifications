@@ -17,7 +17,7 @@ item.maatsmod:ingot_nickel.name=Nickelbarren
 //Blocks
 tile.maatsmod:fluxfield.name=Fluxfeld
 tile.maatsmod:platformBase.name=Plattform
-tile.maatsmod:nepouit_ore.name=Népouiterz
+tile.maatsmod:pecorait_ore.name=Pecorait
 tile.maatsmod:charger.name=Ladegerät
 tile.maatsmod:waterturbine.name=Wasser Turbine
 tile.maatsmod:discharger.name=Entladegerät

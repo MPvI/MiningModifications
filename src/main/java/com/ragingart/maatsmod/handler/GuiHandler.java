@@ -1,13 +1,7 @@
 package com.ragingart.maatsmod.handler;
 
-import com.ragingart.maatsmod.client.gui.container.GuiCharger;
-import com.ragingart.maatsmod.client.gui.container.GuiDischarger;
-import com.ragingart.maatsmod.client.gui.container.GuiRFEnergyStorage;
-import com.ragingart.maatsmod.client.gui.container.GuiWaterTurbine;
-import com.ragingart.maatsmod.container.ContainerCharger;
-import com.ragingart.maatsmod.container.ContainerDischarger;
-import com.ragingart.maatsmod.container.ContainerRFEnergyStorage;
-import com.ragingart.maatsmod.container.ContainerWaterTurbine;
+import com.ragingart.maatsmod.client.gui.container.*;
+import com.ragingart.maatsmod.container.*;
 import com.ragingart.maatsmod.ref.Gui;
 import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
@@ -32,6 +26,9 @@ public class GuiHandler implements IGuiHandler {
         else if(ID == Gui.ID.RFENERGYSTORAGE.ordinal()){
             return new ContainerRFEnergyStorage(player.inventory,tileEntity);
         }
+        else if(ID == Gui.ID.LIS.ordinal()){
+            return new ContainerLaserIsotopeSeperator(player.inventory,tileEntity);
+        }
         return 0;
     }
 
@@ -49,6 +46,9 @@ public class GuiHandler implements IGuiHandler {
         }
         else if(ID == Gui.ID.RFENERGYSTORAGE.ordinal()){
             return new GuiRFEnergyStorage(player.inventory,tileEntity);
+        }
+        else if(ID == Gui.ID.LIS.ordinal()){
+            return new GuiLaserIsotopeSeperator(player.inventory,tileEntity);
         }
         return 0;
     }

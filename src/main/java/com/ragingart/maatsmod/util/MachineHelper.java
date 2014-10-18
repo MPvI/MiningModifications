@@ -1,5 +1,6 @@
 package com.ragingart.maatsmod.util;
 
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -51,7 +52,25 @@ public class MachineHelper {
         }
 
     }
-
+    public void rotatePortsDirectlyToFace(ForgeDirection face){
+        if(face==facing.getOpposite()){
+            switch (face) {
+                case UP:
+                case DOWN:
+                    rotatePortsToFacing(ForgeDirection.NORTH);
+                    break;
+                case NORTH:
+                case SOUTH:
+                    rotatePortsToFacing(ForgeDirection.EAST);
+                    break;
+                case WEST:
+                case EAST:
+                    rotatePortsToFacing(ForgeDirection.NORTH);
+                    break;
+            }
+        }
+        rotatePortsToFacing(face);
+    }
     public void rotatePortsToFacing(ForgeDirection facing){
         rotatePortsAroundAxis(this.facing.getRotation(facing));
     }
@@ -112,15 +131,21 @@ public class MachineHelper {
         }
     }
 
-    public static void addInformationString(NBTTagCompound cmpd, List list){
-        if(cmpd.hasKey("Ports")){
-            NBTTagCompound Ports = cmpd.getCompoundTag("Ports");
-            for(int i=0;i<6;i++) {
-                String key = "Port " + i;
-                int k = Ports.getInteger(key);
-                if(k<6 && k>0) {
-                    list.add(EnumChatFormatting.values()[3+i] + ForgeDirection.getOrientation(i).toString() + ": "+ EnumChatFormatting.values()[9+k] + CasingHelper.Port.values()[k].toString());
-                }
+    public static boolean isHelperSavedToItemStack(ItemStack itemStack){
+        if(itemStack.hasTagCompound()){
+            NBTTagCompound TagCmpd = itemStack.getTagCompound();
+            return TagCmpd.hasKey("State") && TagCmpd.hasKey("Facing") && TagCmpd.hasKey("Ports");
+        }
+        return false;
+    }
+
+    public static void addInformationString(ItemStack itemStack, List list) {
+        NBTTagCompound Ports = itemStack.getTagCompound().getCompoundTag("Ports");
+        for (int i = 0; i < 6; i++) {
+            String key = "Port " + i;
+            int k = Ports.getInteger(key);
+            if (k < 6 && k > 0) {
+                list.add(EnumChatFormatting.values()[3 + i] + ForgeDirection.getOrientation(i).toString() + ": " + EnumChatFormatting.values()[9 + k] + CasingHelper.Port.values()[k].toString());
             }
         }
     }
