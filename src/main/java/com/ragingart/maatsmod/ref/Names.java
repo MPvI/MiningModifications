@@ -40,6 +40,7 @@ public class Names {
         public static final String SCREW_NICKEL = "screw_nickel";
         public static final String INGOT_NICKEL = "ingot_nickel";
         public static final String DUST_NICKEL = "dust_nickel";
+        public static final String PLATE_IRON = "plate_iron";
 
         public static final String WEAPON_SPEAR = "weapon_spear";
         public static final String VOIDPACK = "voidpack";

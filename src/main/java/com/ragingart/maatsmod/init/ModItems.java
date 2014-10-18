@@ -18,6 +18,9 @@ public class ModItems {
     public static final ItemMM ingot_nickel = new ItemIngotNickel();
     public static final ItemMM dust_nickel = new ItemDustNickel();
 
+    //
+    public static final ItemMM plate_iron = new ItemIngotPlate();
+
 
 
     public static void init()
@@ -32,5 +35,9 @@ public class ModItems {
         //Worldgen
         GameRegistry.registerItem(ingot_nickel,Names.Items.INGOT_NICKEL);
         GameRegistry.registerItem(dust_nickel,Names.Items.DUST_NICKEL);
+
+        //
+        GameRegistry.registerItem(plate_iron,Names.Items.PLATE_IRON);
+
     }
 }

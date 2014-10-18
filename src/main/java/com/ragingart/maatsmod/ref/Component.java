@@ -14,6 +14,7 @@ public class Component {
     public static final String SMALL_RS = "dustRedstone";
     public static final String BIG_RS = "blockRedstone";
     public static final String NORMAL_NICKEL = "ingotNickel";
+    public static final String PLATE_IRON = "plateIron";
 
     public static ItemStack BATTERY(int x) {return new ItemStack(ModItems.battery,x);}
     public static ItemStack CASING(int x) {return new ItemStack(ModItems.casing,x,0);}
@@ -26,5 +27,7 @@ public class Component {
     public static ItemStack SCREW(int x) {return new ItemStack(ModItems.screw,x);}
     public static ItemStack PLATFORM(int x) {return new ItemStack(ModBlocks.PlatformBase,x);}
     public static ItemStack FLUXFIELD(int x){return new ItemStack(ModBlocks.FluxField,x);}
+    public static ItemStack PLATE_IRON(int x) {return new ItemStack(ModItems.plate_iron,x,0);}
+
 
 }
