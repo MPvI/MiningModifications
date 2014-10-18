@@ -17,7 +17,7 @@ item.maatsmod:ingot_nickel.name= Nickel Ingot
 //Blocks
 tile.maatsmod:fluxfield.name=Fluxfield
 tile.maatsmod:platformBase.name=Platform
-tile.maatsmod:nepouit_ore.name=Népouit Ore
+tile.maatsmod:pecorait_ore.name=Pecorait
 tile.maatsmod:charger.name=Charger
 tile.maatsmod:discharger.name=Discharger
 tile.maatsmod:waterturbine.name=Water Turbine
@@ -27,3 +27,12 @@ tile.maatsmod:cable.name=Energycabel
 
 // Creative Tab
 itemGroup.maatsmod=Maats Mod
+
+// Machine Descriptions
+description.maatsmod:charger=A block that charges any RF container!
+description.maatsmod:fluxfield=Component for platform.%Cannot be placed in the world!
+description.maatsmod:platformBase=Creates a cohesive circular area%out of redstone to form a platform.%Rightclick to activate!%Radius: 5,10,15
+description.maatsmod:discharger=A block that emptys any RF container!
+description.maatsmod:waterturbine=Generates RF based on waterfall height.%Place water source at least 2 blocks above turbine.%Requires inputvalve at top and outputvalve at bottom to work!
+description.maatsmod:rfenergystorage=A block to store RF.
+description.maatsmod:pecorait_ore=§eNi₃Si₂O₅(OH)₄%§7Furnace:%   §c1 §aIngot §e(Ni)%§7Pulverizer:%   §c2 §aDust §e(Ni)%§7Laser Isotope Seperator:%   §c1 §aDust §e(Ni)%   §c1 §aOlivin §e(Ni₂SiO₄)%   §b1 §aHot silicon monoxid §e(SiO)%   §b2 §aDistilled water §e(H₂O)%   §b1 §aOxygen §e(O₂)

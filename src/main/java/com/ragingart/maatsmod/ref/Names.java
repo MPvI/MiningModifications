@@ -3,6 +3,13 @@ package com.ragingart.maatsmod.ref;
 
 public class Names {
     public static final String MOD_PREFIX = Reference.MOD_ID.toLowerCase() + ":";
+    public static final String INFO_PREFIX = "description.";
+
+
+    public static String getUnwrappedUnlocalizedName(String unlocalizedName)
+    {
+        return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
+    }
 
     public static final class Blocks{
         public static final String CHARGER = "charger";
@@ -10,10 +17,11 @@ public class Names {
         public static final String WATERTURBINE = "waterturbine";
         public static final String RFENERGYSTORAGE = "rfenergystorage";
         public static final String CENERGY = "crenergy";
-        public static final String ORE = "nepouit_ore";
+        public static final String ORE = "pecorait_ore";
         public static final String PLATFORM_BASE = "platformBase";
         public static final String FLUXFIELD = "fluxfield";
         public static final String CABLE = "cable";
+        public static final String LIS = "laserisotopeseparator";
     }
     
     public static final class Items{

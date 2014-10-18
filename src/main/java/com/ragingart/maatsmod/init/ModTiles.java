@@ -17,5 +17,6 @@ public class ModTiles {
         GameRegistry.registerTileEntity(TileEntityPlatformBase.class,Names.Blocks.PLATFORM_BASE);
         GameRegistry.registerTileEntity(TileEntityFluxField.class,Names.Blocks.FLUXFIELD);
         GameRegistry.registerTileEntity(TileEntityCable.class,Names.Blocks.CABLE);
+        GameRegistry.registerTileEntity(TileEntityLaserIsotopeSeperator.class,Names.Blocks.LIS);
     }
 }

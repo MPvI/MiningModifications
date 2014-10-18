@@ -6,6 +6,7 @@ import com.ragingart.maatsmod.util.LogHelper;
 import com.ragingart.maatsmod.util.NBTHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -26,9 +27,9 @@ public class ItemRSBattery extends ItemMM implements IEnergyContainerItem
     }
 
     @Override
-    public void addInformation(ItemStack itemStack,EntityPlayer entityPlayer, List list, boolean b){
-        String info = "Energy: "+getEnergyStored(itemStack)+" / "+getMaxEnergyStored(itemStack);
-        list.add(info);
+    public void addSpecialInfo(ItemStack itemStack, EntityPlayer entityPlayer, List list, boolean b) {
+        list.add(EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "Energy:");
+        list.add("   "+EnumChatFormatting.GREEN+getEnergyStored(itemStack)+EnumChatFormatting.GRAY+" / "+EnumChatFormatting.RED+getMaxEnergyStored(itemStack));
     }
 
 

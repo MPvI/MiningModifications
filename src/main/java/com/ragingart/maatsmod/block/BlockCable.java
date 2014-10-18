@@ -15,6 +15,7 @@ import net.minecraft.world.World;
 public class BlockCable extends BlockMM implements ITileEntityProvider{
     public BlockCable() {
         super(Material.circuits, Names.Blocks.CABLE);
+        this.setBlockBounds(6.0F/16.0F,6.0F/16.0F,6.0F/16.0F,10.0F/16.0F,10.0F/16.0F,10.0F/16.0F);
     }
 
     @Override

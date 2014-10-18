@@ -8,6 +8,8 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import java.util.List;
+
 /**
  * Created by MaaT on 04.09.2014.
  */
@@ -55,6 +57,8 @@ public class ItemSpear extends ItemToolMM {
     }
 
 
+    @Override
+    public void addSpecialInfo(ItemStack itemStack, EntityPlayer entityPlayer, List list, boolean b) {
 
-
+    }
 }

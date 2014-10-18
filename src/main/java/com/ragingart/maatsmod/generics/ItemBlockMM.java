@@ -1,12 +1,9 @@
 package com.ragingart.maatsmod.generics;
 
-import com.ragingart.maatsmod.creativetab.CreativeTabMM;
 import com.ragingart.maatsmod.ref.Names;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
@@ -15,38 +12,13 @@ import org.lwjgl.input.Keyboard;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class ItemMM extends Item
-{
-    public ItemMM()
-    {
-        super();
-        this.setCreativeTab(CreativeTabMM.MM_TAB);
+/**
+ * Created by MaaT on 18.10.2014.
+ */
+public abstract class ItemBlockMM extends ItemBlock {
+    public ItemBlockMM(Block block) {
+        super(block);
     }
-
-    public ItemMM(String name){
-        this();
-        this.setUnlocalizedName(name);
-    }
-
-    @Override
-    public String getUnlocalizedName()
-    {
-        return String.format("item.%s%s", Names.MOD_PREFIX, Names.getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
-    }
-
-    @Override
-    public String getUnlocalizedName(ItemStack itemStack)
-    {
-        return String.format("item.%s%s", Names.MOD_PREFIX, Names.getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister iconRegister)
-    {
-        itemIcon = iconRegister.registerIcon(this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".") + 1));
-    }
-
 
     public abstract void addSpecialInfo(ItemStack itemStack, EntityPlayer entityPlayer, List list, boolean b);
 
@@ -63,4 +35,5 @@ public abstract class ItemMM extends Item
         }
 
     }
+
 }

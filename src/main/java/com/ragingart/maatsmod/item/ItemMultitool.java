@@ -60,7 +60,7 @@ public class ItemMultitool extends ItemToolMM
                 case 0:
                     return false;
                 case 1:
-                    ((BlockMM) aBlock).onBlockWrenched(world, entityPlayer, x, y, z);
+                    ((BlockMM) aBlock).dismantleBlock(entityPlayer,world, x, y, z,true);
                     return true;
                 case 2:
                     aBlock.rotateBlock(world, x, y, z, ForgeDirection.getOrientation(side));
@@ -159,9 +159,7 @@ public class ItemMultitool extends ItemToolMM
     }
 
     @Override
-    public void addInformation(ItemStack itemStack,EntityPlayer entityPlayer, List list, boolean b){
-        String info = "Energy: "+getEnergyStored(itemStack)+" / "+getMaxEnergyStored(itemStack);
-        list.add(info);
+    public void addSpecialInfo(ItemStack itemStack, EntityPlayer entityPlayer, List list, boolean b) {
     }
 
     @Override

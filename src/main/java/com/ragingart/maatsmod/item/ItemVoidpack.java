@@ -6,12 +6,19 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import java.util.List;
+
 /**
  * Created by MaaT on 12.10.2014.
  */
 public class ItemVoidpack extends ItemMM {
     public ItemVoidpack() {
         super(Names.Items.VOIDPACK);
+    }
+
+    @Override
+    public void addSpecialInfo(ItemStack itemStack, EntityPlayer entityPlayer, List list, boolean b) {
+
     }
 
     @Override
