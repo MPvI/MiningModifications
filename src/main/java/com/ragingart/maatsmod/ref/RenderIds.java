@@ -7,4 +7,6 @@ public class RenderIds {
     public static int PlatformBase;
     public static int FluxField;
     public static int Cable;
+    public static int Compactor;
+    public static int Crank;
 }

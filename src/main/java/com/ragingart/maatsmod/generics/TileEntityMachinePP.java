@@ -1,6 +1,8 @@
 package com.ragingart.maatsmod.generics;
 
 import com.ragingart.maatsmod.api.IMusclePower;
+import com.ragingart.maatsmod.network.PacketHandler;
+import com.ragingart.maatsmod.network.messages.MessageTileEntityMachinePP;
 import com.ragingart.maatsmod.util.NBTHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -14,10 +16,21 @@ import net.minecraftforge.common.util.ForgeDirection;
 public abstract class TileEntityMachinePP extends TileEntityMM implements IMusclePower,IInventory {
 
     protected ItemStack inventory[] = new ItemStack[2];
-    private ForgeDirection facing=ForgeDirection.NORTH;
+    private ForgeDirection facing=ForgeDirection.EAST;
+
+    protected int timer = -1;
 
     public TileEntityMachinePP(){
         super();
+    }
+
+    @Override
+    public void updateEntity() {
+        if(!worldObj.isRemote && (timer == -1 || timer%10==0)) {
+            PacketHandler.INSTANCE.sendToAll(new MessageTileEntityMachinePP(this));
+            timer=0;
+        }
+        timer++;
     }
 
     public void setFacing(ForgeDirection forgeDirection){
@@ -25,10 +38,16 @@ public abstract class TileEntityMachinePP extends TileEntityMM implements IMuscl
             case UP:
             case DOWN:
                 facing = facing.getRotation(forgeDirection);
+                break;
             default:
                 facing = forgeDirection;
+                break;
         }
 
+    }
+
+    public ForgeDirection getFacing() {
+        return facing;
     }
 
     /*IMusclePower*/

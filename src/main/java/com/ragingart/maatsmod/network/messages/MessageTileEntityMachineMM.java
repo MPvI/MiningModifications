@@ -78,7 +78,6 @@ public class MessageTileEntityMachineMM implements IMessage,IMessageHandler<Mess
         Minecraft aClient = FMLClientHandler.instance().getClient();
         TileEntity aTile = aClient.theWorld.getTileEntity(message.x,message.y,message.z);
 
-
         if(aTile instanceof TileEntityMachineMM){
 
             ((TileEntityMachineMM) aTile).setMachineHelper(message.aHelper);

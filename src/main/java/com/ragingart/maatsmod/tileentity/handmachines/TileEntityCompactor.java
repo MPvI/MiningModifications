@@ -11,26 +11,38 @@ import net.minecraftforge.common.util.ForgeDirection;
  */
 public class TileEntityCompactor extends TileEntityMachinePP {
 
-    public TileEntityCompactor(){
-        super();
-    }
+    private int animTimer = 0;
+    private int remainingActiveTime = 0;
 
     @Override
     public void updateEntity() {
         super.updateEntity();
+
+        if(remainingActiveTime > 0){
+            animTimer++;
+            remainingActiveTime--;
+        }
+
+        if(animTimer == 100){
+            animTimer=0;
+        }
     }
 
+    public int getAnimTimer(){
+        return this.animTimer;
+    }
 
     /*IMusclePower*/
 
     @Override
     public boolean canAcceptMusclePower(ForgeDirection from){
-        return true;
+        return from==getFacing();
     }
 
     @Override
     public void receiveMusclePower(int amount){
         if(inventory[0] != null && RecipeHelper.RecipeCompactor.checkItem(inventory[0].getItem())){
+            remainingActiveTime=85;
             if(inventory[1] != null && RecipeHelper.RecipeCompactor.getOutputByInput(inventory[0].getItem()) == inventory[1].getItem())
                 inventory[1] = new ItemStack(inventory[1].getItem(), inventory[1].stackSize+1);
             else

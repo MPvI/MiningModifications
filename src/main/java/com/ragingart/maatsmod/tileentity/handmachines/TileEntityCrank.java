@@ -1,6 +1,9 @@
 package com.ragingart.maatsmod.tileentity.handmachines;
 
 import com.ragingart.maatsmod.api.IMusclePower;
+import com.ragingart.maatsmod.init.ModBlocks;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -13,10 +16,29 @@ public class TileEntityCrank extends TileEntity implements IMusclePower{
         super();
     }
 
+    private int animTimer = 0;
+    private int remainingActiveTime = 0;
 
     @Override
     public void updateEntity() {
         super.updateEntity();
+
+        if(remainingActiveTime > 0){
+            animTimer++;
+            remainingActiveTime--;
+        }
+
+        if(animTimer == 100){
+            animTimer=0;
+        }
+        if(!worldObj.isRemote && checkLink()==ForgeDirection.UNKNOWN){
+            worldObj.setBlockToAir(xCoord,yCoord,zCoord);
+            worldObj.spawnEntityInWorld(new EntityItem(worldObj,xCoord,yCoord,zCoord,new ItemStack(ModBlocks.Crank)));
+        }
+    }
+
+    public int getAnimTimer() {
+        return animTimer;
     }
 
     public ForgeDirection checkLink(){
@@ -37,10 +59,13 @@ public class TileEntityCrank extends TileEntity implements IMusclePower{
 
     public boolean provideMusclePower()
     {
-        ForgeDirection dir = checkLink();
-        if(dir!=ForgeDirection.UNKNOWN){
-            ((IMusclePower)worldObj.getTileEntity(xCoord+dir.offsetX,yCoord+dir.offsetY,zCoord+dir.offsetZ)).receiveMusclePower(1);
-            return true;
+        if(remainingActiveTime == 0) {
+            ForgeDirection dir = checkLink();
+            if (dir != ForgeDirection.UNKNOWN) {
+                ((IMusclePower) worldObj.getTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ)).receiveMusclePower(1);
+                remainingActiveTime=20;
+                return true;
+            }
         }
         return false;
     }

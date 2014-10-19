@@ -1,8 +1,8 @@
 package com.ragingart.maatsmod.item;
 
 
+import cofh.api.block.IDismantleable;
 import com.google.common.collect.Sets;
-import com.ragingart.maatsmod.generics.BlockMM;
 import com.ragingart.maatsmod.generics.ItemToolMM;
 import com.ragingart.maatsmod.handler.ConfigHandler;
 import com.ragingart.maatsmod.init.ModBlocks;
@@ -54,13 +54,16 @@ public class ItemMultitool extends ItemToolMM
     @Override
     public boolean onItemUse(ItemStack itemStack,EntityPlayer entityPlayer,World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ){
         Block aBlock = world.getBlock(x, y, z);
-        if(entityPlayer.isSneaking() && aBlock instanceof BlockMM){
+        if(entityPlayer.isSneaking()){
             switch(getMode(itemStack)){
                 case 0:
                     return false;
                 case 1:
-                    ((BlockMM) aBlock).dismantleBlock(entityPlayer,world, x, y, z,true);
-                    return true;
+                    if(aBlock instanceof IDismantleable){
+                        ((IDismantleable) aBlock).dismantleBlock(entityPlayer,world, x, y, z,true);
+                        return true;
+                    }
+                    return false;
                 case 2:
                     aBlock.rotateBlock(world, x, y, z, ForgeDirection.getOrientation(side));
                     return true;
