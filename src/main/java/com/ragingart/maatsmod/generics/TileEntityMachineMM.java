@@ -8,7 +8,6 @@ import com.ragingart.maatsmod.network.messages.MessageTileEntityMachineMM;
 import com.ragingart.maatsmod.util.CasingHelper;
 import com.ragingart.maatsmod.util.MachineHelper;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -19,7 +18,7 @@ import net.minecraftforge.fluids.*;
  * Created by MaaT on 29.08.2014.
  */
 
-public abstract class TileEntityMachineMM extends TileEntityMM implements IEnergyHandler,ISidedInventory,IInventory,IFluidHandler {
+public abstract class TileEntityMachineMM extends TileEntityMM implements IEnergyHandler,ISidedInventory,IFluidHandler {
 
     protected EnergyStorage energy = new EnergyStorage(100000);
     protected FluidTank tank = new FluidTank(50000);
