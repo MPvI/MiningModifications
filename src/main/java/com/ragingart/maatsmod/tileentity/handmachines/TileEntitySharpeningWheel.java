@@ -29,7 +29,7 @@ public class TileEntitySharpeningWheel extends TileEntityMachinePP {
     }
 
     @Override
-    public void receiveMusclePower(int amount){
+    public int receiveMusclePower(int amount){
         if(inventory[0] != null && RecipeHelper.RecipeSharpeningWheel.checkItem(inventory[0].getItem())){
             if(inventory[1] != null && RecipeHelper.RecipeSharpeningWheel.getOutputByInput(inventory[0].getItem()) == inventory[1].getItem())
                 inventory[1] = new ItemStack(inventory[1].getItem(), inventory[1].stackSize+1);
@@ -40,6 +40,7 @@ public class TileEntitySharpeningWheel extends TileEntityMachinePP {
             else
                 inventory[0] = new ItemStack(inventory[0].getItem(), inventory[0].stackSize-1);
         }
+        return 0;
     }
 
     /* IInventory */

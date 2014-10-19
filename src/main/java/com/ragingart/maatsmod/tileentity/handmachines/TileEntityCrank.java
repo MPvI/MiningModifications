@@ -62,8 +62,7 @@ public class TileEntityCrank extends TileEntity implements IMusclePower{
         if(remainingActiveTime == 0) {
             ForgeDirection dir = checkLink();
             if (dir != ForgeDirection.UNKNOWN) {
-                ((IMusclePower) worldObj.getTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ)).receiveMusclePower(1);
-                remainingActiveTime=20;
+                remainingActiveTime=((IMusclePower) worldObj.getTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ)).receiveMusclePower(1);
                 return true;
             }
         }
@@ -76,5 +75,5 @@ public class TileEntityCrank extends TileEntity implements IMusclePower{
     }
 
     @Override
-    public void receiveMusclePower(int amount){}
+    public int receiveMusclePower(int amount){return 0;}
 }

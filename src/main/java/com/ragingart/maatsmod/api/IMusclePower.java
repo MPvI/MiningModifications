@@ -9,6 +9,6 @@ public abstract interface IMusclePower {
 
     public abstract boolean canAcceptMusclePower(ForgeDirection from);
 
-    public abstract void receiveMusclePower(int amount);
+    public abstract int receiveMusclePower(int amount);
 
 }

@@ -57,8 +57,6 @@ public abstract class TileEntityMachinePP extends TileEntityMM implements IMuscl
         return true;
     }
 
-    @Override
-    public void receiveMusclePower(int amount){}
 
     /* IInventory */
 

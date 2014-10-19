@@ -40,7 +40,7 @@ public class TileEntityCompactor extends TileEntityMachinePP {
     }
 
     @Override
-    public void receiveMusclePower(int amount){
+    public int receiveMusclePower(int amount){
         if(inventory[0] != null && RecipeHelper.RecipeCompactor.checkItem(inventory[0].getItem())){
             remainingActiveTime=85;
             if(inventory[1] != null && RecipeHelper.RecipeCompactor.getOutputByInput(inventory[0].getItem()) == inventory[1].getItem())
@@ -52,6 +52,7 @@ public class TileEntityCompactor extends TileEntityMachinePP {
             else
                 inventory[0] = new ItemStack(inventory[0].getItem(), inventory[0].stackSize-1);
         }
+        return  remainingActiveTime;
     }
 
     /* IInventory */
