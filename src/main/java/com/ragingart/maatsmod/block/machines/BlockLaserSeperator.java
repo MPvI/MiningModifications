@@ -2,6 +2,7 @@ package com.ragingart.maatsmod.block.machines;
 
 import com.ragingart.maatsmod.generics.BlockMachineMM;
 import com.ragingart.maatsmod.ref.Names;
+import com.ragingart.maatsmod.ref.RenderIds;
 import com.ragingart.maatsmod.tileentity.machines.TileEntityLaserSeperator;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
@@ -23,5 +24,24 @@ public class BlockLaserSeperator extends BlockMachineMM {
     @Override
     public TileEntity createNewTileEntity(World world, int meta) {
         return new TileEntityLaserSeperator();
+    }
+
+
+    @Override
+    public int getRenderType()
+    {
+        return RenderIds.LSC;
+    }
+
+    @Override
+    public boolean isOpaqueCube()
+    {
+        return false;
+    }
+
+    @Override
+    public boolean renderAsNormalBlock()
+    {
+        return false;
     }
 }

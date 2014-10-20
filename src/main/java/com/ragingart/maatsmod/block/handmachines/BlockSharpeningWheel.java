@@ -5,6 +5,7 @@ import com.ragingart.maatsmod.MaatsMod;
 import com.ragingart.maatsmod.generics.BlockMachinePP;
 import com.ragingart.maatsmod.ref.Gui;
 import com.ragingart.maatsmod.ref.Names;
+import com.ragingart.maatsmod.ref.RenderIds;
 import com.ragingart.maatsmod.tileentity.handmachines.TileEntitySharpeningWheel;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,6 +21,21 @@ public class BlockSharpeningWheel extends BlockMachinePP implements ITileEntityP
         super(Names.Blocks.SHARPENINGWHEEL);
         this.setHarvestLevel("wrench", 4);
         this.setHardness(7.0F);
+    }
+
+    @Override
+    public boolean isOpaqueCube() {
+        return false;
+    }
+
+    @Override
+    public int getRenderType() {
+        return RenderIds.Compactor;
+    }
+
+    @Override
+    public boolean renderAsNormalBlock() {
+        return false;
     }
 
     @Override

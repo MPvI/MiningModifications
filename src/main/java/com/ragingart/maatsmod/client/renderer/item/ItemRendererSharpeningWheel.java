@@ -1,6 +1,6 @@
 package com.ragingart.maatsmod.client.renderer.item;
 
-import com.ragingart.maatsmod.client.renderer.model.ModelCrank;
+import com.ragingart.maatsmod.client.renderer.model.ModelSharpeningWheel;
 import com.ragingart.maatsmod.ref.Models;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
@@ -8,10 +8,10 @@ import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 
 /**
- * Created by MaaT on 19.10.2014.
+ * Created by MaaT on 20.10.2014.
  */
-public class ItemRendererCrank implements IItemRenderer {
-    ModelCrank model = new ModelCrank();
+public class ItemRendererSharpeningWheel implements IItemRenderer {
+    ModelSharpeningWheel model = new ModelSharpeningWheel();
 
     @Override
     public boolean handleRenderType(ItemStack item, ItemRenderType type) {
@@ -38,23 +38,27 @@ public class ItemRendererCrank implements IItemRenderer {
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
 
         GL11.glPushMatrix();
-        Minecraft.getMinecraft().renderEngine.bindTexture(Models.Crank);
-        switch (type){
+        GL11.glScalef(0.5F,0.5F,0.5F);
+        GL11.glRotatef(180,1,0,0);
+        Minecraft.getMinecraft().renderEngine.bindTexture(Models.SharpeningWheel);
+        switch (type) {
             case EQUIPPED:
-                model.render(20,0.0625F);
+                GL11.glTranslatef(1,-0.5F,-1);
+                model.render(0,0.0625F);
                 break;
             case EQUIPPED_FIRST_PERSON:
-                model.render(20,0.0625F);
+                model.render(0,0.0625F);
                 break;
             case INVENTORY:
-                model.render(20,0.0625F);
+                model.render(0,0.0625F);
                 break;
             case ENTITY:
-                model.render(20,0.0625F);
+                model.render(0,0.0625F);
                 break;
             default:
                 break;
         }
         GL11.glPopMatrix();
     }
+
 }
