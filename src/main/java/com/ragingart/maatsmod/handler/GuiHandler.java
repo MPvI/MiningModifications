@@ -1,9 +1,11 @@
 package com.ragingart.maatsmod.handler;
 
 import com.ragingart.maatsmod.client.gui.container.handmachines.GuiCompactor;
+import com.ragingart.maatsmod.client.gui.container.handmachines.GuiGrinder;
 import com.ragingart.maatsmod.client.gui.container.handmachines.GuiSharpeningWheel;
 import com.ragingart.maatsmod.client.gui.container.machines.*;
 import com.ragingart.maatsmod.container.handmachines.ContainerCompactor;
+import com.ragingart.maatsmod.container.handmachines.ContainerGrinder;
 import com.ragingart.maatsmod.container.handmachines.ContainerSharpeningWheel;
 import com.ragingart.maatsmod.container.machines.*;
 import com.ragingart.maatsmod.ref.Gui;
@@ -39,6 +41,9 @@ public class GuiHandler implements IGuiHandler {
         else if(ID == Gui.ID.SHARPENINGWHEEL.ordinal()){
             return new ContainerSharpeningWheel(player.inventory,tileEntity);
         }
+        else if(ID == Gui.ID.GRINDER.ordinal()){
+            return new ContainerGrinder(player.inventory,tileEntity);
+        }
         return 0;
     }
 
@@ -65,6 +70,9 @@ public class GuiHandler implements IGuiHandler {
         }
         else if(ID == Gui.ID.SHARPENINGWHEEL.ordinal()){
             return new GuiSharpeningWheel(player.inventory,tileEntity);
+        }
+        else if(ID == Gui.ID.GRINDER.ordinal()){
+            return new GuiGrinder(player.inventory,tileEntity);
         }
         return 0;
     }

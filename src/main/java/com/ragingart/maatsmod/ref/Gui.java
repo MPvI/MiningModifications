@@ -11,7 +11,8 @@ public class Gui {
         RFENERGYSTORAGE,
         LIS,
         COMPACTOR,
-        SHARPENINGWHEEL
+        SHARPENINGWHEEL,
+        GRINDER
     }
 
 }
