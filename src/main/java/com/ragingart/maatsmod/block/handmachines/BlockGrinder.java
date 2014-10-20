@@ -5,6 +5,7 @@ import com.ragingart.maatsmod.MaatsMod;
 import com.ragingart.maatsmod.generics.BlockMachinePP;
 import com.ragingart.maatsmod.ref.Gui;
 import com.ragingart.maatsmod.ref.Names;
+import com.ragingart.maatsmod.ref.RenderIds;
 import com.ragingart.maatsmod.tileentity.handmachines.TileEntityGrinder;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,18 +24,20 @@ public class BlockGrinder extends BlockMachinePP implements ITileEntityProvider 
         this.setHardness(7.0F);
     }
 
-
     @Override
     public boolean isOpaqueCube() {
         return false;
     }
 
+    @Override
+    public int getRenderType() {
+        return RenderIds.Grinder;
+    }
 
     @Override
     public boolean renderAsNormalBlock() {
-        return true;
+        return false;
     }
-
 
     @Override
     public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {

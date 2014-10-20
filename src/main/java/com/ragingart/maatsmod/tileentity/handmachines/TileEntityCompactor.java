@@ -50,7 +50,7 @@ public class TileEntityCompactor extends TileEntityMachinePP {
             if(inventory[0].stackSize == RecipeHelper.Compactor.getOutputAmount(inventory[0].getItem()))
                 inventory[0] = null;
             else
-                inventory[0] = new ItemStack(inventory[0].getItem(), inventory[0].stackSize-RecipeHelper.Compactor.getOutputAmount(inventory[0].getItem()));
+                inventory[0] = new ItemStack(inventory[0].getItem(), inventory[0].stackSize-RecipeHelper.Compactor.getInputAmount(inventory[0].getItem()));
             return remainingActiveTime;
         }
         return 0;

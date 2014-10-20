@@ -15,4 +15,5 @@ public class Models {
     public static ResourceLocation Cable = new ResourceLocation(Reference.MOD_ID.toLowerCase(),MODEL_PREFIX+"cable.png");
     public static ResourceLocation Compactor = new ResourceLocation(Reference.MOD_ID.toLowerCase(),MODEL_PREFIX+"compactor.png");
     public static ResourceLocation Crank = new ResourceLocation(Reference.MOD_ID.toLowerCase(),MODEL_PREFIX+"crank.png");
+    public static ResourceLocation Grinder = new ResourceLocation(Reference.MOD_ID.toLowerCase(),MODEL_PREFIX+"grinder.png");
 }

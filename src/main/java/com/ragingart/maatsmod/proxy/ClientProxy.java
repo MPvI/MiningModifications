@@ -10,6 +10,7 @@ import com.ragingart.maatsmod.tileentity.TileEntityFluxField;
 import com.ragingart.maatsmod.tileentity.TileEntityPlatformBase;
 import com.ragingart.maatsmod.tileentity.handmachines.TileEntityCompactor;
 import com.ragingart.maatsmod.tileentity.handmachines.TileEntityCrank;
+import com.ragingart.maatsmod.tileentity.handmachines.TileEntityGrinder;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import net.minecraft.item.Item;
@@ -22,6 +23,7 @@ public class ClientProxy extends CommonProxy{
         RenderIds.Cable = RenderingRegistry.getNextAvailableRenderId();
         RenderIds.Compactor = RenderingRegistry.getNextAvailableRenderId();
         RenderIds.Crank = RenderingRegistry.getNextAvailableRenderId();
+        RenderIds.Grinder = RenderingRegistry.getNextAvailableRenderId();
 
         MinecraftForgeClient.registerItemRenderer(ModItems.spear,new ItemRendererSpear());
         MinecraftForgeClient.registerItemRenderer(ModItems.multitool,new ItemRendererMultitool());
@@ -30,11 +32,13 @@ public class ClientProxy extends CommonProxy{
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.Cable),new ItemRendererCable());
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.Compactor),new ItemRendererCompactor());
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.Crank),new ItemRendererCrank());
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.Grinder),new ItemRendererGrinder());
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPlatformBase.class,new TileRendererPlatformBase());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFluxField.class,new TileRendererFluxField());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCable.class,new TileRendererCable());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCompactor.class,new TileRendererCompactor());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCrank.class,new TileRendererCrank());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGrinder.class,new TileRendererGrinder());
     }
 }
