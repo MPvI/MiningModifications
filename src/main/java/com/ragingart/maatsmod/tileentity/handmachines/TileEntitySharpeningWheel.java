@@ -36,8 +36,6 @@ public class TileEntitySharpeningWheel extends TileEntityMachinePP {
         return this.animTimer;
     }
 
-
-
     /*IMusclePower*/
 
     @Override
@@ -47,18 +45,19 @@ public class TileEntitySharpeningWheel extends TileEntityMachinePP {
 
     @Override
     public int receiveMusclePower(int amount){
-        if(inventory[0] != null && RecipeHelper.RecipeSharpeningWheel.checkItem(inventory[0].getItem())){
-            remainingActiveTime=40;
-            if(inventory[1] != null && RecipeHelper.RecipeSharpeningWheel.getOutputByInput(inventory[0].getItem()) == inventory[1].getItem())
-                inventory[1] = new ItemStack(inventory[1].getItem(), inventory[1].stackSize+1);
+        if(inventory[0] != null && RecipeHelper.SharpeningWheel.checkItem(inventory[0].getItem()) && RecipeHelper.SharpeningWheel.getInputAmount(inventory[0].getItem()) <= inventory[0].stackSize && inventory[1].stackSize+RecipeHelper.SharpeningWheel.getOutputAmount(inventory[0].getItem()) <= 64){
+            remainingActiveTime=RecipeHelper.SharpeningWheel.getDuration(inventory[0].getItem());
+            if(inventory[1] != null && RecipeHelper.SharpeningWheel.getOutputByInput(inventory[0].getItem()) == inventory[1].getItem())
+                inventory[1] = new ItemStack(inventory[1].getItem(), inventory[1].stackSize+RecipeHelper.SharpeningWheel.getOutputAmount(inventory[0].getItem()));
             else
-                inventory[1] = new ItemStack(RecipeHelper.RecipeSharpeningWheel.getOutputByInput(inventory[0].getItem()), 1);
-            if(inventory[0].stackSize == 1)
+                inventory[1] = new ItemStack(RecipeHelper.SharpeningWheel.getOutputByInput(inventory[0].getItem()), RecipeHelper.SharpeningWheel.getOutputAmount(inventory[0].getItem()));
+            if(inventory[0].stackSize == RecipeHelper.SharpeningWheel.getOutputAmount(inventory[0].getItem()))
                 inventory[0] = null;
             else
-                inventory[0] = new ItemStack(inventory[0].getItem(), inventory[0].stackSize-1);
+                inventory[0] = new ItemStack(inventory[0].getItem(), inventory[0].stackSize-RecipeHelper.SharpeningWheel.getInputAmount(inventory[0].getItem()));
+            return remainingActiveTime;
         }
-        return remainingActiveTime;
+        return 0;
     }
 
     /* IInventory */

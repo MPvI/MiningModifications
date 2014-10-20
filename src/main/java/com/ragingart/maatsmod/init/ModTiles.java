@@ -4,6 +4,7 @@ import com.ragingart.maatsmod.ref.Names;
 import com.ragingart.maatsmod.tileentity.*;
 import com.ragingart.maatsmod.tileentity.handmachines.TileEntityCompactor;
 import com.ragingart.maatsmod.tileentity.handmachines.TileEntityCrank;
+import com.ragingart.maatsmod.tileentity.handmachines.TileEntityGrinder;
 import com.ragingart.maatsmod.tileentity.handmachines.TileEntitySharpeningWheel;
 import com.ragingart.maatsmod.tileentity.machines.*;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -25,5 +26,6 @@ public class ModTiles {
         GameRegistry.registerTileEntity(TileEntityCrank.class,Names.Blocks.CRANK);
         GameRegistry.registerTileEntity(TileEntityCompactor.class,Names.Blocks.COMPACTOR);
         GameRegistry.registerTileEntity(TileEntitySharpeningWheel.class,Names.Blocks.SHARPENINGWHEEL);
+        GameRegistry.registerTileEntity(TileEntityGrinder.class,Names.Blocks.GRINDER);
     }
 }

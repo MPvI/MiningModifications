@@ -3,12 +3,14 @@ package com.ragingart.maatsmod.init;
 import com.ragingart.maatsmod.block.*;
 import com.ragingart.maatsmod.block.handmachines.BlockCompactor;
 import com.ragingart.maatsmod.block.handmachines.BlockCrank;
+import com.ragingart.maatsmod.block.handmachines.BlockGrinder;
 import com.ragingart.maatsmod.block.handmachines.BlockSharpeningWheel;
 import com.ragingart.maatsmod.block.machines.*;
 import com.ragingart.maatsmod.generics.BlockMM;
 import com.ragingart.maatsmod.item.*;
 import com.ragingart.maatsmod.item.handmachines.ItemBlockCompactor;
 import com.ragingart.maatsmod.item.handmachines.ItemBlockCrank;
+import com.ragingart.maatsmod.item.handmachines.ItemBlockGrinder;
 import com.ragingart.maatsmod.item.handmachines.ItemBlockSharpeningWheel;
 import com.ragingart.maatsmod.item.machines.*;
 import com.ragingart.maatsmod.ref.Names;
@@ -29,6 +31,7 @@ public class ModBlocks {
     public static final BlockMM Crank = new BlockCrank();
     public static final BlockMM Compactor = new BlockCompactor();
     public static final BlockMM SharpeningWheel = new BlockSharpeningWheel();
+    public static final BlockMM Grinder = new BlockGrinder();
 
     public static void init()
     {
@@ -49,6 +52,7 @@ public class ModBlocks {
         GameRegistry.registerBlock(Crank, ItemBlockCrank.class, Names.Blocks.CRANK);
         GameRegistry.registerBlock(Compactor, ItemBlockCompactor.class, Names.Blocks.COMPACTOR);
         GameRegistry.registerBlock(SharpeningWheel, ItemBlockSharpeningWheel.class, Names.Blocks.SHARPENINGWHEEL);
+        GameRegistry.registerBlock(Grinder, ItemBlockGrinder.class, Names.Blocks.GRINDER);
 
     }
 }

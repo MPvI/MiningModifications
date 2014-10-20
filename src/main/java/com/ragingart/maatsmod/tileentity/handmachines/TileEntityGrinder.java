@@ -9,7 +9,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 /**
  * Created by MaaT on 16.10.2014.
  */
-public class TileEntityCompactor extends TileEntityMachinePP {
+public class TileEntityGrinder extends TileEntityMachinePP {
 
     private int animTimer = 0;
     private int remainingActiveTime = 0;
@@ -36,21 +36,21 @@ public class TileEntityCompactor extends TileEntityMachinePP {
 
     @Override
     public boolean canAcceptMusclePower(ForgeDirection from){
-        return from==getFacing();
+        return true;//from==getFacing();
     }
 
     @Override
     public int receiveMusclePower(int amount){
-        if(inventory[0] != null && RecipeHelper.Compactor.checkItem(inventory[0].getItem()) && RecipeHelper.Compactor.getInputAmount(inventory[0].getItem()) <= inventory[0].stackSize){
-            remainingActiveTime = RecipeHelper.Compactor.getDuration(inventory[0].getItem());
-            if(inventory[1] != null && RecipeHelper.Compactor.getOutputByInput(inventory[0].getItem()) == inventory[1].getItem() && inventory[1].stackSize+RecipeHelper.Compactor.getOutputAmount(inventory[0].getItem()) <= 64)
-                inventory[1] = new ItemStack(inventory[1].getItem(), inventory[1].stackSize+RecipeHelper.Compactor.getOutputAmount(inventory[0].getItem()));
+        if(inventory[0] != null && RecipeHelper.Grinder.checkItem(inventory[0].getItem()) && RecipeHelper.Grinder.getInputAmount(inventory[0].getItem()) <= inventory[0].stackSize){
+            remainingActiveTime = RecipeHelper.Grinder.getDuration(inventory[0].getItem());
+            if(inventory[1] != null && RecipeHelper.Grinder.getOutputByInput(inventory[0].getItem()) == inventory[1].getItem() && inventory[1].stackSize+RecipeHelper.Grinder.getOutputAmount(inventory[0].getItem()) <= 64)
+                inventory[1] = new ItemStack(inventory[1].getItem(), inventory[1].stackSize+RecipeHelper.Grinder.getOutputAmount(inventory[0].getItem()));
             else
-                inventory[1] = new ItemStack(RecipeHelper.Compactor.getOutputByInput(inventory[0].getItem()), RecipeHelper.Compactor.getOutputAmount(inventory[0].getItem()));
-            if(inventory[0].stackSize == RecipeHelper.Compactor.getOutputAmount(inventory[0].getItem()))
+                inventory[1] = new ItemStack(RecipeHelper.Grinder.getOutputByInput(inventory[0].getItem()), RecipeHelper.Grinder.getOutputAmount(inventory[0].getItem()));
+            if(inventory[0].stackSize == RecipeHelper.Grinder.getOutputAmount(inventory[0].getItem()))
                 inventory[0] = null;
             else
-                inventory[0] = new ItemStack(inventory[0].getItem(), inventory[0].stackSize-RecipeHelper.Compactor.getInputAmount(inventory[0].getItem()));
+                inventory[0] = new ItemStack(inventory[0].getItem(), inventory[0].stackSize-RecipeHelper.Grinder.getInputAmount(inventory[0].getItem()));
             return remainingActiveTime;
         }
         return 0;

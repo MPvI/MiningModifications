@@ -25,6 +25,7 @@ public class Names {
         public static final String CRANK = "crank";
         public static final String COMPACTOR = "compactor";
         public static final String SHARPENINGWHEEL = "sharpeningwheel";
+        public static final String GRINDER = "grinder";
     }
     
     public static final class Items{
@@ -82,8 +83,6 @@ public class Names {
 
                 public static final String[] FRONT = new String[]{FRONT_EMPTY,FRONT_WORKING,FRONT_FULL};
             }
-            
-            
         }
     }
 
