@@ -1,5 +1,6 @@
 package com.ragingart.maatsmod.proxy;
 
+import com.ragingart.maatsmod.client.renderer.block.BlockRendererLSC;
 import com.ragingart.maatsmod.client.renderer.item.*;
 import com.ragingart.maatsmod.client.renderer.tileentity.*;
 import com.ragingart.maatsmod.init.ModBlocks;
