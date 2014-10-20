@@ -11,6 +11,7 @@ import net.minecraft.item.Item;
  */
 public class RecipeHelper {
 
+
     public static class Compactor{
         public static final int[] duration = new int[]{
                 85};

@@ -18,7 +18,7 @@ public class ModelGrinder extends ModelBase {
 
     //Rotation Group
     ModelRenderer WelleRot;
-    ModelRenderer FlugeRot;
+    ModelRenderer FlunschRot;
     ModelRenderer GrinderRot;
 
     public ModelGrinder() {
@@ -86,12 +86,13 @@ public class ModelGrinder extends ModelBase {
     }
 
     private void initRotatorGroup() {
-        FlugeRot = new ModelRenderer(this, 4, 64);
-        FlugeRot.addBox(-0.5F, -2F, 0.5F, 1, 4, 2);
-        FlugeRot.setRotationPoint(0F, -30F, 0F);
-        FlugeRot.setTextureSize(128, 128);
-        FlugeRot.mirror = true;
-        setRotation(FlugeRot, 0F, 0F, 0F);
+
+        FlunschRot = new ModelRenderer(this, 5, 65);
+        FlunschRot.addBox(0.5F, -2F, -0.5F, 1, 4, 1);
+        FlunschRot.setRotationPoint(0F, -30F, 0F);
+        FlunschRot.setTextureSize(128, 128);
+        FlunschRot.mirror = true;
+        setRotation(FlunschRot, 0F, 0F, 0F);
         GrinderRot = new ModelRenderer(this, 0, 0);
         GrinderRot.addBox(-10F, -4F, 0F, 10, 6, 4);
         GrinderRot.setRotationPoint(0F, -9F, 0F);
@@ -139,13 +140,13 @@ public class ModelGrinder extends ModelBase {
         WelleRot.rotateAngleY=-anim;
         WelleRot.render(f);
         renderRotatorPart(GrinderRot,8 ,f,-anim);
-        renderRotatorPart(FlugeRot,4, f,-anim);
+        renderRotatorPart(FlunschRot,8, f,-anim);
     }
 
     private void renderRotatorPart(ModelRenderer model,int num, float f,float anim){
-        float quarterCake = 2.0F/num*(float)Math.PI;
+        float segment = 2.0F/num*(float)Math.PI;
         for (int i = 0; i < num; i++) {
-            model.rotateAngleY=quarterCake*i+anim;
+            model.rotateAngleY=segment*i+anim;
             model.render(f);
         }
 
