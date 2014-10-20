@@ -1,24 +1,26 @@
 package com.ragingart.maatsmod.util;
 
 import com.ragingart.maatsmod.init.ModItems;
-import cpw.mods.fml.common.event.FMLInterModComms;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 
 /**
  * Created by XtraX on 18.10.2014.
  */
 public class RecipeHelper {
 
-    public static class RecipeCompactor{
+    public static class Compactor{
         public static final int[] duration = new int[]{
-                0};
+                85};
         public static final Item[] input = new Item[]{
                 Items.iron_ingot};
         public static final Item[] output = new Item[]{
                 ModItems.plate_iron};
+        public static int[] inputamount =new int[]{
+                1};
+        public static int[] outputamount =new int[]{
+                1};
+
 
         public static boolean checkItem(Item item){
             for(int i = 0; i < duration.length; i++){
@@ -27,6 +29,7 @@ public class RecipeHelper {
             }
             return false;
         }
+
         public static Item getOutputByInput(Item item){
             for(int i = 0; i < duration.length; i++){
                 if(input[i] == item)
@@ -34,15 +37,43 @@ public class RecipeHelper {
             }
             return null;
         }
+
+        public static int getInputAmount(Item iteminput){
+            for(int i = 0; i < duration.length; i++){
+                if(input[i] == iteminput)
+                    return inputamount[i];
+            }
+            return 100;
+        }
+        public static int getOutputAmount(Item iteminput){
+            for(int i = 0; i < duration.length; i++){
+                if(input[i] == iteminput)
+                    return outputamount[i];
+            }
+            return 0;
+        }
+        public static int getDuration(Item iteminput){
+            for(int i = 0; i < duration.length; i++){
+                if(input[i] == iteminput)
+                    return duration[i];
+            }
+            return 0;
+        }
     }
 
-    public static class RecipeSharpeningWheel{
+
+    public static class SharpeningWheel{
         public static final int[] duration = new int[]{
-                0};
+                100};
         public static final Item[] input = new Item[]{
                 ModItems.ingot_nickel};
         public static final Item[] output = new Item[]{
                 ModItems.screw};
+        public static int[] inputamount =new int[]{
+                2};
+        public static int[] outputamount =new int[]{
+                4};
+
 
         public static boolean checkItem(Item item){
             for(int i = 0; i < duration.length; i++){
@@ -51,6 +82,7 @@ public class RecipeHelper {
             }
             return false;
         }
+
         public static Item getOutputByInput(Item item){
             for(int i = 0; i < duration.length; i++){
                 if(input[i] == item)
@@ -58,20 +90,27 @@ public class RecipeHelper {
             }
             return null;
         }
-    }
 
-    public static void addCompactorRecipe(int duration, ItemStack input, ItemStack output){
-
-        if (input == null || output == null) {
-            return;
+        public static int getInputAmount(Item iteminput){
+            for(int i = 0; i < duration.length; i++){
+                if(input[i] == iteminput)
+                    return inputamount[i];
+            }
+            return 100;
         }
-
-        NBTTagCompound toSend = new NBTTagCompound();
-        toSend.setInteger("MP", duration);
-        toSend.setTag("input", new NBTTagCompound());
-        toSend.setTag("output", new NBTTagCompound());
-        input.writeToNBT(toSend.getCompoundTag("input"));
-        output.writeToNBT(toSend.getCompoundTag("output"));
-        FMLInterModComms.sendMessage("MaatsMod", "CompactorRecipe", toSend);
+        public static int getOutputAmount(Item iteminput){
+            for(int i = 0; i < duration.length; i++){
+                if(input[i] == iteminput)
+                    return outputamount[i];
+            }
+            return 0;
+        }
+        public static int getDuration(Item iteminput){
+            for(int i = 0; i < duration.length; i++){
+                if(input[i] == iteminput)
+                    return duration[i];
+            }
+            return 0;
+        }
     }
 }

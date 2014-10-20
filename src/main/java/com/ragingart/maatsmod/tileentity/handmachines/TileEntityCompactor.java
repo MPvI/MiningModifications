@@ -41,18 +41,19 @@ public class TileEntityCompactor extends TileEntityMachinePP {
 
     @Override
     public int receiveMusclePower(int amount){
-        if(inventory[0] != null && RecipeHelper.RecipeCompactor.checkItem(inventory[0].getItem())){
-            remainingActiveTime=85;
-            if(inventory[1] != null && RecipeHelper.RecipeCompactor.getOutputByInput(inventory[0].getItem()) == inventory[1].getItem())
-                inventory[1] = new ItemStack(inventory[1].getItem(), inventory[1].stackSize+1);
+        if(inventory[0] != null && RecipeHelper.Compactor.checkItem(inventory[0].getItem()) && RecipeHelper.Compactor.getInputAmount(inventory[0].getItem()) <= inventory[0].stackSize){
+            remainingActiveTime = RecipeHelper.Compactor.getDuration(inventory[0].getItem());
+            if(inventory[1] != null && RecipeHelper.Compactor.getOutputByInput(inventory[0].getItem()) == inventory[1].getItem() && inventory[1].stackSize+RecipeHelper.Compactor.getOutputAmount(inventory[0].getItem()) <= 64)
+                inventory[1] = new ItemStack(inventory[1].getItem(), inventory[1].stackSize+RecipeHelper.Compactor.getOutputAmount(inventory[0].getItem()));
             else
-                inventory[1] = new ItemStack(RecipeHelper.RecipeCompactor.getOutputByInput(inventory[0].getItem()), 1);
-            if(inventory[0].stackSize == 1)
+                inventory[1] = new ItemStack(RecipeHelper.Compactor.getOutputByInput(inventory[0].getItem()), RecipeHelper.Compactor.getOutputAmount(inventory[0].getItem()));
+            if(inventory[0].stackSize == RecipeHelper.Compactor.getOutputAmount(inventory[0].getItem()))
                 inventory[0] = null;
             else
-                inventory[0] = new ItemStack(inventory[0].getItem(), inventory[0].stackSize-1);
+                inventory[0] = new ItemStack(inventory[0].getItem(), inventory[0].stackSize-RecipeHelper.Compactor.getOutputAmount(inventory[0].getItem()));
+            return remainingActiveTime;
         }
-        return  remainingActiveTime;
+        return 0;
     }
 
     /* IInventory */
