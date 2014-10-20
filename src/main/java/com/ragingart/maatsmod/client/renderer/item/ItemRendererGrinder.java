@@ -43,28 +43,28 @@ public class ItemRendererGrinder implements IItemRenderer {
                 GL11.glPushMatrix();
                 GL11.glScalef(0.5F,0.5F,0.5F);
                 GL11.glRotatef(180,1,0,0);
-                Minecraft.getMinecraft().renderEngine.bindTexture(Models.Compactor);
+                Minecraft.getMinecraft().renderEngine.bindTexture(Models.Grinder);
                 model.render(0, 0.0625F);
                 GL11.glPopMatrix();
             case EQUIPPED_FIRST_PERSON:
                 GL11.glPushMatrix();
                 GL11.glScalef(0.5F,0.5F,0.5F);
                 GL11.glRotatef(180,1,0,0);
-                Minecraft.getMinecraft().renderEngine.bindTexture(Models.Compactor);
+                Minecraft.getMinecraft().renderEngine.bindTexture(Models.Grinder);
                 model.render(0, 0.0625F);
                 GL11.glPopMatrix();
             case INVENTORY:
                 GL11.glPushMatrix();
                 GL11.glScalef(0.5F,0.5F,0.5F);
                 GL11.glRotatef(180,1,0,0);
-                Minecraft.getMinecraft().renderEngine.bindTexture(Models.Compactor);
+                Minecraft.getMinecraft().renderEngine.bindTexture(Models.Grinder);
                 model.render(0, 0.0625F);
                 GL11.glPopMatrix();
             case ENTITY:
                 GL11.glPushMatrix();
                 GL11.glScalef(0.5F,0.5F,0.5F);
                 GL11.glRotatef(180,1,0,0);
-                Minecraft.getMinecraft().renderEngine.bindTexture(Models.Compactor);
+                Minecraft.getMinecraft().renderEngine.bindTexture(Models.Grinder);
                 model.render(0, 0.0625F);
                 GL11.glPopMatrix();
             default:

@@ -19,7 +19,7 @@ public class TileRendererGrinder extends TileEntitySpecialRenderer {
     @Override
     public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float tick) {
         GL11.glPushMatrix();
-        GL11.glTranslated(x + 0.5, y + 0.5, z + 0.5);
+        GL11.glTranslated(x + 0.5, y + 0.0625, z + 0.5);
         GL11.glScalef(0.5F, 0.5F, 0.5F);
         GL11.glRotatef(180,1,0,0);
         bindTexture(Models.Grinder);

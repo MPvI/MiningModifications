@@ -4,7 +4,8 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
 public class ModelGrinder extends ModelBase {
-    //fields
+
+    //Static Group
     ModelRenderer Base;
     ModelRenderer Sockel;
     ModelRenderer Sockel2;
@@ -14,13 +15,20 @@ public class ModelGrinder extends ModelBase {
     ModelRenderer Stutze1;
     ModelRenderer Stutze2;
     ModelRenderer Quertrager;
+
+    //Rotation Group
     ModelRenderer WelleRot;
     ModelRenderer FlugeRot;
+    ModelRenderer GrinderRot;
 
     public ModelGrinder() {
         textureWidth = 128;
         textureHeight = 128;
+        initStaticGroup();
+        initRotatorGroup();
+    }
 
+    private void initStaticGroup() {
         Base = new ModelRenderer(this, 0, 92);
         Base.addBox(-16F, -2F, -16F, 32, 4, 32);
         Base.setRotationPoint(0F, 0F, 0F);
@@ -75,21 +83,40 @@ public class ModelGrinder extends ModelBase {
         Quertrager.setTextureSize(128, 128);
         Quertrager.mirror = true;
         setRotation(Quertrager, 0F, 0F, 0F);
+    }
+
+    private void initRotatorGroup() {
+        FlugeRot = new ModelRenderer(this, 4, 64);
+        FlugeRot.addBox(-0.5F, -2F, 0.5F, 1, 4, 2);
+        FlugeRot.setRotationPoint(0F, -30F, 0F);
+        FlugeRot.setTextureSize(128, 128);
+        FlugeRot.mirror = true;
+        setRotation(FlugeRot, 0F, 0F, 0F);
+        GrinderRot = new ModelRenderer(this, 0, 0);
+        GrinderRot.addBox(-10F, -4F, 0F, 10, 6, 4);
+        GrinderRot.setRotationPoint(0F, -9F, 0F);
+        GrinderRot.setTextureSize(128, 128);
+        GrinderRot.mirror = true;
+        setRotation(GrinderRot, 0F, 0F, 0F);
         WelleRot = new ModelRenderer(this, 0, 64);
         WelleRot.addBox(-0.5F, -10F, -0.5F, 1, 20, 1);
         WelleRot.setRotationPoint(0F, -20F, 0F);
         WelleRot.setTextureSize(128, 128);
         WelleRot.mirror = true;
         setRotation(WelleRot, 0F, 0F, 0F);
-        FlugeRot = new ModelRenderer(this, 4, 64);
-        FlugeRot.addBox(-0.5F, -2F, 0.5F, 1, 3, 1);
-        FlugeRot.setRotationPoint(0F, -29F, 0F);
-        FlugeRot.setTextureSize(128, 128);
-        FlugeRot.mirror = true;
-        setRotation(FlugeRot, 0F, 0F, 0F);
     }
 
-    public void render(int anim, float f5) {
+    public void render(int animProgress, float f) {
+
+        float anim = (float) Math.PI / 50.0F * animProgress;
+        renderStaticGroup(f);
+
+        renderRotatorGroup(f, -anim);
+
+    }
+
+
+    public void renderStaticGroup(float f5){
         Base.render(f5);
         Sockel.render(f5);
         Sockel2.render(f5);
@@ -99,13 +126,28 @@ public class ModelGrinder extends ModelBase {
         Stutze1.render(f5);
         Stutze2.render(f5);
         Quertrager.render(f5);
-        WelleRot.render(f5);
-        FlugeRot.render(f5);
     }
 
     private void setRotation(ModelRenderer model, float x, float y, float z) {
         model.rotateAngleX = x;
         model.rotateAngleY = y;
         model.rotateAngleZ = z;
+    }
+
+
+    private void renderRotatorGroup(float f,float anim) {
+        WelleRot.rotateAngleY=-anim;
+        WelleRot.render(f);
+        renderRotatorPart(GrinderRot,8 ,f,-anim);
+        renderRotatorPart(FlugeRot,4, f,-anim);
+    }
+
+    private void renderRotatorPart(ModelRenderer model,int num, float f,float anim){
+        float quarterCake = 2.0F/num*(float)Math.PI;
+        for (int i = 0; i < num; i++) {
+            model.rotateAngleY=quarterCake*i+anim;
+            model.render(f);
+        }
+
     }
 }
