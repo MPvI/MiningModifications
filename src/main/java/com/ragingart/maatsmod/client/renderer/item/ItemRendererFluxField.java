@@ -1,6 +1,6 @@
 package com.ragingart.maatsmod.client.renderer.item;
 
-import com.ragingart.maatsmod.client.renderer.model.ModelPlatformBase;
+import com.ragingart.maatsmod.client.renderer.model.ModelFluxField;
 import com.ragingart.maatsmod.ref.Models;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
@@ -12,7 +12,7 @@ import org.lwjgl.opengl.GL11;
  */
 public class ItemRendererFluxField implements IItemRenderer {
 
-    public ModelPlatformBase model = new ModelPlatformBase();
+    public ModelFluxField model = new ModelFluxField();
 
     @Override
     public boolean handleRenderType(ItemStack item, ItemRenderType type) {
@@ -38,60 +38,31 @@ public class ItemRendererFluxField implements IItemRenderer {
 
     @Override
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+
+        GL11.glPushMatrix();
+
+        Minecraft.getMinecraft().renderEngine.bindTexture(Models.FluxField);
+
+        GL11.glRotatef(180, -1.0F, 0.0F, 0.0F);
+        GL11.glScalef(0.5F, 0.5F, 0.5F);
+
         switch (type){
             case EQUIPPED:
-
-                GL11.glPushMatrix();
-
-                Minecraft.getMinecraft().renderEngine.bindTexture(Models.FluxField);
-
-                GL11.glRotatef(180, -1.0F, 0.0F, 0.0F);
-                GL11.glScalef(0.5F, 0.5F, 0.5F);
-                model.render(0.0625F,0);
-
-                GL11.glPopMatrix();
+                model.render();
                 break;
             case EQUIPPED_FIRST_PERSON:
-
-                GL11.glPushMatrix();
-
-                Minecraft.getMinecraft().renderEngine.bindTexture(Models.FluxField);
-
-                GL11.glRotatef(180, -1.0F, 0.0F, 0.0F);
-                GL11.glScalef(0.5F, 0.5F, 0.5F);
-
-
-                model.render(0.0625F,0);
-
-                GL11.glPopMatrix();
+                model.render();
                 break;
             case INVENTORY:
-
-                GL11.glPushMatrix();
-
-                Minecraft.getMinecraft().renderEngine.bindTexture(Models.FluxField);
-
-                GL11.glRotatef(180, -1.0F, 0.0F, 0.0F);
-                GL11.glScalef(0.5F, 0.5F, 0.5F);
-                model.render(0.0625F,0);
-
-                GL11.glPopMatrix();
+                GL11.glTranslatef(0,-0.5F,0);
+                model.render();
                 break;
             case ENTITY:
-
-                GL11.glPushMatrix();
-
-                Minecraft.getMinecraft().renderEngine.bindTexture(Models.FluxField);
-
-                GL11.glRotatef(180, -1.0F, 0.0F, 0.0F);
-                GL11.glScalef(0.5F, 0.5F, 0.5F);
-
-                model.render(0.0625F,0);
-
-                GL11.glPopMatrix();
+                model.render();
                 break;
             default:
                 break;
         }
+        GL11.glPopMatrix();
     }
 }

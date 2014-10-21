@@ -47,9 +47,11 @@ public class ItemRendererSharpeningWheel implements IItemRenderer {
                 model.render(0,0.0625F);
                 break;
             case EQUIPPED_FIRST_PERSON:
+                GL11.glTranslatef(1,-0.5F,-1);
                 model.render(0,0.0625F);
                 break;
             case INVENTORY:
+                GL11.glTranslatef(0,0.8F,0);
                 model.render(0,0.0625F);
                 break;
             case ENTITY:

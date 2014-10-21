@@ -25,6 +25,9 @@ public class ModelCable extends ModelBase {
         connection.addBox(-8,-2,-2,6,4,4);
     }
 
+    public void render(float f){
+        mainBox.render(f);
+    }
 
     public void render(float f,TileEntityCable aTile) {
         mainBox.render(f);

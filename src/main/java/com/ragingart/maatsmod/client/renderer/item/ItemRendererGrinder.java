@@ -42,18 +42,23 @@ public class ItemRendererGrinder implements IItemRenderer {
         GL11.glPushMatrix();
         GL11.glScalef(0.5F,0.5F,0.5F);
         GL11.glRotatef(180,1,0,0);
-        GL11.glTranslatef(0,0.5F,0);
         Minecraft.getMinecraft().renderEngine.bindTexture(Models.Grinder);
 
         switch (type) {
             case EQUIPPED:
                 model.render(0, 0.0625F);
+                break;
             case EQUIPPED_FIRST_PERSON:
+                GL11.glTranslatef(1,-0.5F,-1);
                 model.render(0, 0.0625F);
+                break;
             case INVENTORY:
-                model.render(0, 0.0625F);
+                GL11.glTranslatef(0,0.8F,0);
+                model.render(0, 0.06F);
+                break;
             case ENTITY:
                 model.render(0, 0.0625F);
+                break;
             default:
                 break;
         }

@@ -36,7 +36,7 @@ public class TileEntityGrinder extends TileEntityMachinePP {
 
     @Override
     public boolean canAcceptMusclePower(ForgeDirection from){
-        return true;//from==getFacing();
+        return from==ForgeDirection.UP;
     }
 
     @Override

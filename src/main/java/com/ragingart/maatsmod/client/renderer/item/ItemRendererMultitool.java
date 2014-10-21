@@ -16,6 +16,7 @@ public class ItemRendererMultitool implements IItemRenderer {
     protected ModelMultitool tool = new ModelMultitool();
 
 
+
     @Override
     public boolean handleRenderType(ItemStack item, ItemRenderType type) {
         switch(type){
@@ -56,6 +57,7 @@ public class ItemRendererMultitool implements IItemRenderer {
                 tool.render(0.0625F, anim);
                 break;
             case EQUIPPED_FIRST_PERSON:
+                GL11.glTranslatef(-1,-0.5F,11);
                 tool.render(0.0625F, anim);
                 break;
             case INVENTORY:

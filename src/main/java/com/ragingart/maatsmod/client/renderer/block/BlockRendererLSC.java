@@ -10,6 +10,7 @@ import net.minecraft.world.IBlockAccess;
  * Created by MaaT on 20.10.2014.
  */
 public class BlockRendererLSC implements ISimpleBlockRenderingHandler {
+
     @Override
     public void renderInventoryBlock(Block block, int metadata, int modelId, RenderBlocks renderer) {
 
@@ -17,6 +18,7 @@ public class BlockRendererLSC implements ISimpleBlockRenderingHandler {
 
     @Override
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
+
         return false;
     }
 

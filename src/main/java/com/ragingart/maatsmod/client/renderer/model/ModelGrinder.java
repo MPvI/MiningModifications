@@ -78,7 +78,7 @@ public class ModelGrinder extends ModelBase {
         Stutze2.mirror = true;
         setRotation(Stutze2, 0F, 0F, 0F);
         Quertrager = new ModelRenderer(this, 52, 92);
-        Quertrager.addBox(-3F, -2F, -16F, 6, 4, 32);
+        Quertrager.addBox(-3F, -0.5F, -16F, 6, 4, 32);
         Quertrager.setRotationPoint(0F, -26F, 0F);
         Quertrager.setTextureSize(128, 128);
         Quertrager.mirror = true;
