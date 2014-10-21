@@ -1,13 +1,12 @@
 package com.ragingart.maatsmod.proxy;
 
-import com.ragingart.maatsmod.client.renderer.block.BlockRendererLSC;
+import com.ragingart.maatsmod.client.renderer.block.BlockRendererFluxField;
 import com.ragingart.maatsmod.client.renderer.item.*;
 import com.ragingart.maatsmod.client.renderer.tileentity.*;
 import com.ragingart.maatsmod.init.ModBlocks;
 import com.ragingart.maatsmod.init.ModItems;
 import com.ragingart.maatsmod.ref.RenderIds;
 import com.ragingart.maatsmod.tileentity.TileEntityCable;
-import com.ragingart.maatsmod.tileentity.TileEntityFluxField;
 import com.ragingart.maatsmod.tileentity.TileEntityPlatformBase;
 import com.ragingart.maatsmod.tileentity.handmachines.TileEntityCompactor;
 import com.ragingart.maatsmod.tileentity.handmachines.TileEntityCrank;
@@ -28,10 +27,11 @@ public class ClientProxy extends CommonProxy{
         RenderIds.Grinder = RenderingRegistry.getNextAvailableRenderId();
         RenderIds.LSC = RenderingRegistry.getNextAvailableRenderId();
 
-        RenderingRegistry.registerBlockHandler(RenderIds.LSC,new BlockRendererLSC());
+        RenderingRegistry.registerBlockHandler(RenderIds.FluxField,new BlockRendererFluxField());
+        RenderingRegistry.registerBlockHandler(RenderIds.LSC,new BlockRendererFluxField());
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPlatformBase.class, new TileRendererPlatformBase());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFluxField.class,new TileRendererFluxField());
+        //ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFluxField.class,new TileRendererFluxField());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCable.class,new TileRendererCable());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCompactor.class,new TileRendererCompactor());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCrank.class,new TileRendererCrank());
@@ -40,7 +40,7 @@ public class ClientProxy extends CommonProxy{
 
         MinecraftForgeClient.registerItemRenderer(ModItems.spear,new ItemRendererSpear());
         MinecraftForgeClient.registerItemRenderer(ModItems.multitool,new ItemRendererMultitool());
-        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.FluxField),new ItemRendererFluxField());
+        //MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.FluxField),new ItemRendererFluxField());
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.PlatformBase),new ItemRendererPlatformBase());
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.Cable),new ItemRendererCable());
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.Compactor),new ItemRendererCompactor());

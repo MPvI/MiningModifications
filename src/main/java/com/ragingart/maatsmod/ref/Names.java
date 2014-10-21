@@ -12,16 +12,22 @@ public class Names {
     }
 
     public static final class Blocks{
+        // Creative
+        public static final String CENERGY = "crenergy";
+        // Worldgen
+        public static final String ORE = "pecorait_ore";
+        // Utility
+        public static final String PLATFORM_BASE = "platformBase";
+        public static final String FLUXFIELD = "fluxfield";
+        // Energy
         public static final String CHARGER = "charger";
         public static final String DISCHARGER = "discharger";
         public static final String WATERTURBINE = "waterturbine";
         public static final String RFENERGYSTORAGE = "rfenergystorage";
-        public static final String CENERGY = "crenergy";
-        public static final String ORE = "pecorait_ore";
-        public static final String PLATFORM_BASE = "platformBase";
-        public static final String FLUXFIELD = "fluxfield";
         public static final String CABLE = "cable";
-        public static final String LIS = "laserisotopeseparator";
+        // Machines
+        public static final String LS = "laserseparator";
+        // Handmachines
         public static final String CRANK = "crank";
         public static final String COMPACTOR = "compactor";
         public static final String SHARPENINGWHEEL = "sharpeningwheel";

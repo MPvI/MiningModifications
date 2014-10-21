@@ -20,9 +20,8 @@ public class ModTiles {
         GameRegistry.registerTileEntity(TileEntityDischarger.class,Names.Blocks.DISCHARGER);
         GameRegistry.registerTileEntity(TileEntityCreativeEnergy.class,Names.Blocks.CENERGY);
         GameRegistry.registerTileEntity(TileEntityPlatformBase.class,Names.Blocks.PLATFORM_BASE);
-        GameRegistry.registerTileEntity(TileEntityFluxField.class,Names.Blocks.FLUXFIELD);
         GameRegistry.registerTileEntity(TileEntityCable.class,Names.Blocks.CABLE);
-        GameRegistry.registerTileEntity(TileEntityLaserSeperator.class,Names.Blocks.LIS);
+        GameRegistry.registerTileEntity(TileEntityLaserSeperator.class,Names.Blocks.LS);
         GameRegistry.registerTileEntity(TileEntityCrank.class,Names.Blocks.CRANK);
         GameRegistry.registerTileEntity(TileEntityCompactor.class,Names.Blocks.COMPACTOR);
         GameRegistry.registerTileEntity(TileEntitySharpeningWheel.class,Names.Blocks.SHARPENINGWHEEL);

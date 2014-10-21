@@ -39,7 +39,7 @@ public class ModBlocks {
 
         GameRegistry.registerBlock(Charger,ItemBlockCharger.class,Names.Blocks.CHARGER);
         GameRegistry.registerBlock(Discharger, ItemBlockDischarger.class,Names.Blocks.DISCHARGER);
-        GameRegistry.registerBlock(LIS,ItemBlockLaserSeperator.class,Names.Blocks.LIS);
+        GameRegistry.registerBlock(LIS,ItemBlockLaserSeperator.class,Names.Blocks.LS);
 
         GameRegistry.registerBlock(Energy,Names.Blocks.CENERGY);
         GameRegistry.registerBlock(WaterTurbine, ItemBlockWaterTurbine.class,Names.Blocks.WATERTURBINE);
