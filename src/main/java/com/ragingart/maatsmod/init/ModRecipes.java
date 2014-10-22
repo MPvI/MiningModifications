@@ -1,7 +1,12 @@
 package com.ragingart.maatsmod.init;
 
 import cofh.api.modhelpers.ThermalExpansionHelper;
+import com.ragingart.maatsmod.generics.ItemBlockMM;
 import com.ragingart.maatsmod.ref.Component;
+import com.ragingart.maatsmod.ref.Recipes;
+import com.ragingart.maatsmod.tileentity.handmachines.recipe.RecipeCompactor;
+import com.ragingart.maatsmod.tileentity.handmachines.recipe.RecipeGrinder;
+import com.ragingart.maatsmod.tileentity.handmachines.recipe.RecipeSharpeningWheel;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -55,5 +60,19 @@ public class ModRecipes {
         /* Furnace */
         ThermalExpansionHelper.addFurnaceRecipe(500, new ItemStack(ModItems.dust_nickel), new ItemStack(ModItems.ingot_nickel));
         ThermalExpansionHelper.addFurnaceRecipe(1000, new ItemStack(ModBlocks.Ore), new ItemStack(ModItems.ingot_nickel));
+
+
+        /* MachineRecipes*/
+
+        //Compactor
+        Recipes.compactor = new RecipeCompactor(85, 2, 1, Items.iron_ingot, ModItems.plate_iron);
+
+
+        //Sharpening Wheel
+        Recipes.sharpeningwheel = new RecipeSharpeningWheel(100, 1, 2, ModItems.ingot_nickel, ModItems.screw);
+
+
+        //Grinder
+        Recipes.grinder = new RecipeGrinder(200, 2, 3, ItemBlockMM.getItemFromBlock(ModBlocks.Ore), ModItems.dust_nickel);
     }
 }

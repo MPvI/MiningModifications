@@ -15,7 +15,8 @@ import net.minecraftforge.common.util.ForgeDirection;
  */
 public abstract class TileEntityMachinePP extends TileEntityMM implements IMusclePower,IInventory {
 
-    protected ItemStack inventory[] = new ItemStack[2];
+    protected ItemStack input;
+    protected ItemStack output;
     private ForgeDirection facing=ForgeDirection.EAST;
 
     protected int timer = -1;
@@ -70,7 +71,10 @@ public abstract class TileEntityMachinePP extends TileEntityMM implements IMuscl
 
     @Override
     public ItemStack getStackInSlot(int slot) {
-        return inventory[slot];
+        if(slot == 0)
+            return input;
+        else
+            return output;
     }
 
     @Override
@@ -109,7 +113,10 @@ public abstract class TileEntityMachinePP extends TileEntityMM implements IMuscl
 
     @Override
     public void setInventorySlotContents(int slotIndex, ItemStack itemStack) {
-        inventory[slotIndex] = itemStack;
+        if(slotIndex == 0)
+            input = itemStack;
+        else
+            output = itemStack;
     }
 
     @Override
@@ -141,14 +148,16 @@ public abstract class TileEntityMachinePP extends TileEntityMM implements IMuscl
     @Override
     public void writeToNBT(NBTTagCompound cmpd){
         super.writeToNBT(cmpd);
-        NBTHelper.saveInventoryToNBT(cmpd,inventory);
+        NBTHelper.saveItemstackToNBT(cmpd,"input", input);
+        NBTHelper.saveItemstackToNBT(cmpd,"output", output);
         cmpd.setInteger("Facing",facing.ordinal());
     }
 
     @Override
     public void readFromNBT(NBTTagCompound cmpd){
         super.readFromNBT(cmpd);
-        inventory = NBTHelper.getInventoryFromNBT(cmpd);
+        input = NBTHelper.getItemstackFromNBT(cmpd, "input");
+        input = NBTHelper.getItemstackFromNBT(cmpd, "output");
         facing = ForgeDirection.getOrientation(cmpd.getInteger("Facing"));
     }
 }
