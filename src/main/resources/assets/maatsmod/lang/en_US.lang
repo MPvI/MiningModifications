@@ -13,6 +13,7 @@ item.maatsmod:casing_foutput.name=Casing: Outputvalve
 item.maatsmod:screw_nickel.name= Nickel Screw
 item.maatsmod:dust_nickel.name= Nickel Dust
 item.maatsmod:ingot_nickel.name= Nickel Ingot
+item.maatsmod:plate_iron.name= Iron Plate
 
 //Blocks
 tile.maatsmod:fluxfield.name=Fluxfield
@@ -24,6 +25,11 @@ tile.maatsmod:waterturbine.name=Water Turbine
 tile.maatsmod:crenergy.name=Creative Energysource
 tile.maatsmod:rfenergystorage.name=Energystorage
 tile.maatsmod:cable.name=Energycabel
+tile.maatsmod:sharpeningwheel.name=Sharpening Wheel
+tile.maatsmod:grinder.name=Grinder
+tile.maatsmod:crank.name=Crank
+tile.maatsmod:compactor=Compactor
+
 
 // Creative Tab
 itemGroup.maatsmod=Maats Mod
@@ -35,4 +41,12 @@ description.maatsmod:platformBase=Creates a cohesive circular area%out of redsto
 description.maatsmod:discharger=A block that emptys any RF container!
 description.maatsmod:waterturbine=Generates RF based on waterfall height.%Place water source at least 2 blocks above turbine.%Requires inputvalve at top and outputvalve at bottom to work!
 description.maatsmod:rfenergystorage=A block to store RF.
-description.maatsmod:pecorait_ore=§eNi₃Si₂O₅(OH)₄%§7Furnace:%   §c1 §aIngot §e(Ni)%§7Pulverizer:%   §c2 §aDust §e(Ni)%§7Laser Isotope Seperator:%   §c1 §aDust §e(Ni)%   §c1 §aOlivin §e(Ni₂SiO₄)%   §b1 §aHot silicon monoxid §e(SiO)%   §b2 §aDistilled water §e(H₂O)%   §b1 §aOxygen §e(O₂)
+description.maatsmod:pecorait_ore=§eNi₃Si₂O₅(OH)₄%§7Furnace:%   §c1 §aIngot §e(Ni)%§7Pulverizer:%   §c2 §aDust §e(Ni)%§7Laser Seperator:%   §c1 §aDust §e(Ni)%   §c1 §aOlivin §e(Ni₂SiO₄)%   §b1 §aHot silicon monoxid §e(SiO)%   §b2 §aDistilled water §e(H₂O)%   §b1 §aOxygen §e(O₂)
+description.maatsmod:cable=
+description.maatsmod:cable0=
+description.maatsmod:cable1=
+description.maatsmod:cable2=
+description.maatsmod:cable3=
+description.maatsmod:cable4=
+description.maatsmod:cable5=
+description.maatsmod:crank=
