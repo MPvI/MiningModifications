@@ -208,7 +208,7 @@ public class NBTHelper
     public static ItemStack[] getInventoryFromNBT(NBTTagCompound cmpd){
         ArrayList<ItemStack> inventory = new ArrayList<ItemStack>();
         int i = 0;
-        while(cmpd.hasKey("Inventory"+i)){
+        while(cmpd.hasKey("Inventory"+i)) {
             inventory.add(ItemStack.loadItemStackFromNBT(cmpd.getCompoundTag("Inventory" + i)));
             i++;
         }
@@ -217,6 +217,20 @@ public class NBTHelper
         for (int j = 0; j < i; j++) {
             inv[j]=inventory.get(j);
         }
+        return inv;
+    }
+
+    public static void saveItemstackToNBT(NBTTagCompound cmpd,String g_string,ItemStack inv){
+        if(inv != null) {
+            NBTTagCompound tmp = new NBTTagCompound();
+            inv.writeToNBT(tmp);
+            cmpd.setTag(g_string , tmp);
+        }
+    }
+
+    public static ItemStack getItemstackFromNBT(NBTTagCompound cmpd, String g_string){
+        ItemStack inv;
+        inv = ItemStack.loadItemStackFromNBT(cmpd.getCompoundTag(g_string));
         return inv;
     }
 }

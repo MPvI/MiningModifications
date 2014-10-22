@@ -40,8 +40,8 @@ public class ItemRendererGrinder implements IItemRenderer {
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
 
         GL11.glPushMatrix();
-        GL11.glScalef(0.5F,0.5F,0.5F);
-        GL11.glRotatef(180,1,0,0);
+        GL11.glScalef(0.5F, 0.5F, 0.5F);
+        GL11.glRotatef(180, 1, 0, 0);
         Minecraft.getMinecraft().renderEngine.bindTexture(Models.Grinder);
 
         switch (type) {

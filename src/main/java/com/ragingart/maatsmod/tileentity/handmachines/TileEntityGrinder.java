@@ -2,7 +2,9 @@ package com.ragingart.maatsmod.tileentity.handmachines;
 
 
 import com.ragingart.maatsmod.generics.TileEntityMachinePP;
-import com.ragingart.maatsmod.util.RecipeHelper;
+import com.ragingart.maatsmod.ref.Recipes;
+import com.ragingart.maatsmod.tileentity.handmachines.recipe.RecipeGrinder;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -41,17 +43,24 @@ public class TileEntityGrinder extends TileEntityMachinePP {
 
     @Override
     public int receiveMusclePower(int amount){
-        if(inventory[0] != null && RecipeHelper.Grinder.checkItem(inventory[0].getItem()) && RecipeHelper.Grinder.getInputAmount(inventory[0].getItem()) <= inventory[0].stackSize){
-            remainingActiveTime = RecipeHelper.Grinder.getDuration(inventory[0].getItem());
-            if(inventory[1] != null && RecipeHelper.Grinder.getOutputByInput(inventory[0].getItem()) == inventory[1].getItem() && inventory[1].stackSize+RecipeHelper.Grinder.getOutputAmount(inventory[0].getItem()) <= 64)
-                inventory[1] = new ItemStack(inventory[1].getItem(), inventory[1].stackSize+RecipeHelper.Grinder.getOutputAmount(inventory[0].getItem()));
-            else
-                inventory[1] = new ItemStack(RecipeHelper.Grinder.getOutputByInput(inventory[0].getItem()), RecipeHelper.Grinder.getOutputAmount(inventory[0].getItem()));
-            if(inventory[0].stackSize == RecipeHelper.Grinder.getOutputAmount(inventory[0].getItem()))
-                inventory[0] = null;
-            else
-                inventory[0] = new ItemStack(inventory[0].getItem(), inventory[0].stackSize-RecipeHelper.Grinder.getInputAmount(inventory[0].getItem()));
-            return remainingActiveTime;
+        if(input != null) {
+            Item inp_item = input.getItem();
+            RecipeGrinder recipe = Recipes.grinder.getRecipe(inp_item);
+            if (recipe != null && recipe.getInputAmount() <= input.stackSize) {
+                if(output == null){
+                    output = new ItemStack(recipe.getOutputByInput(), recipe.getOutputAmount());
+                } else if(recipe.getOutputByInput() == output.getItem() && output.stackSize + recipe.getOutputAmount() <= 64){
+                    output = new ItemStack(output.getItem(), output.stackSize + recipe.getOutputAmount());
+                }else
+                    return 0;
+
+                if(input.stackSize == recipe.getInputAmount()){
+                    input = null;
+                }else{
+                    input = new ItemStack(input.getItem(), input.stackSize - recipe.getInputAmount());
+                }
+                return remainingActiveTime = recipe.getDuration();
+            }
         }
         return 0;
     }
