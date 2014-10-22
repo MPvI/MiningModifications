@@ -157,7 +157,7 @@ public abstract class TileEntityMachinePP extends TileEntityMM implements IMuscl
     public void readFromNBT(NBTTagCompound cmpd){
         super.readFromNBT(cmpd);
         input = NBTHelper.getItemstackFromNBT(cmpd, "input");
-        input = NBTHelper.getItemstackFromNBT(cmpd, "output");
+        output = NBTHelper.getItemstackFromNBT(cmpd, "output");
         facing = ForgeDirection.getOrientation(cmpd.getInteger("Facing"));
     }
 }
