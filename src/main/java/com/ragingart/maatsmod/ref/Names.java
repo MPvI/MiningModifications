@@ -32,6 +32,7 @@ public class Names {
         public static final String COMPACTOR = "compactor";
         public static final String SHARPENINGWHEEL = "sharpeningwheel";
         public static final String GRINDER = "grinder";
+        public static final String MACHINEBLOCK = "machineblock";
     }
     
     public static final class Items{

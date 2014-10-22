@@ -1,7 +1,10 @@
 package com.ragingart.maatsmod.init;
 
 import com.ragingart.maatsmod.ref.Names;
-import com.ragingart.maatsmod.tileentity.*;
+import com.ragingart.maatsmod.tileentity.TileEntityCable;
+import com.ragingart.maatsmod.tileentity.TileEntityCreativeEnergy;
+import com.ragingart.maatsmod.tileentity.TileEntityMachineBlock;
+import com.ragingart.maatsmod.tileentity.TileEntityPlatformBase;
 import com.ragingart.maatsmod.tileentity.handmachines.TileEntityCompactor;
 import com.ragingart.maatsmod.tileentity.handmachines.TileEntityCrank;
 import com.ragingart.maatsmod.tileentity.handmachines.TileEntityGrinder;
@@ -14,6 +17,8 @@ import cpw.mods.fml.common.registry.GameRegistry;
  */
 public class ModTiles {
     public static void init() {
+
+        GameRegistry.registerTileEntity(TileEntityMachineBlock.class,Names.Blocks.MACHINEBLOCK);
         GameRegistry.registerTileEntity(TileEntityCharger.class,Names.Blocks.CHARGER);
         GameRegistry.registerTileEntity(TileEntityWaterTurbine.class,Names.Blocks.WATERTURBINE);
         GameRegistry.registerTileEntity(TileEntityRFEnergyStorage.class,Names.Blocks.RFENERGYSTORAGE);
@@ -26,5 +31,6 @@ public class ModTiles {
         GameRegistry.registerTileEntity(TileEntityCompactor.class,Names.Blocks.COMPACTOR);
         GameRegistry.registerTileEntity(TileEntitySharpeningWheel.class,Names.Blocks.SHARPENINGWHEEL);
         GameRegistry.registerTileEntity(TileEntityGrinder.class,Names.Blocks.GRINDER);
+
     }
 }
