@@ -7,6 +7,7 @@ import com.ragingart.maatsmod.ref.Recipes;
 import com.ragingart.maatsmod.tileentity.handmachines.recipe.RecipeCompactor;
 import com.ragingart.maatsmod.tileentity.handmachines.recipe.RecipeGrinder;
 import com.ragingart.maatsmod.tileentity.handmachines.recipe.RecipeSharpeningWheel;
+import com.ragingart.maatsmod.util.RecipeHelper;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -65,14 +66,12 @@ public class ModRecipes {
         /* MachineRecipes*/
 
         //Compactor
-        Recipes.compactor = new RecipeCompactor(85, 2, 1, Items.iron_ingot, ModItems.plate_iron);
-
+        RecipeHelper.addCompactorRecipe(85, 2, 1, Items.iron_ingot, ModItems.plate_iron);
 
         //Sharpening Wheel
-        Recipes.sharpeningwheel = new RecipeSharpeningWheel(100, 1, 2, ModItems.ingot_nickel, ModItems.screw);
-
+        RecipeHelper.addScharpeningWheelRecipe(100, 1, 2, ModItems.ingot_nickel, ModItems.screw);
 
         //Grinder
-        Recipes.grinder = new RecipeGrinder(200, 2, 3, ItemBlockMM.getItemFromBlock(ModBlocks.Ore), ModItems.dust_nickel);
+        RecipeHelper.addGrinderRecipe(200, 2, 3, ItemBlockMM.getItemFromBlock(ModBlocks.Ore), ModItems.dust_nickel);
     }
 }
