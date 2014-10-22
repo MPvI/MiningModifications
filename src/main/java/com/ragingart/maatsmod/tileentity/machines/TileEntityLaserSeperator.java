@@ -7,12 +7,15 @@ import com.ragingart.maatsmod.generics.TileEntityMachineMultiBlockMM;
  */
 public class TileEntityLaserSeperator extends TileEntityMachineMultiBlockMM{
 
-    protected static int[][] mBase=new int[][]{{0,0,2,0,0},{2,3,1,3,2},{0,0,2,0,0}}; // 7 Parts;
-    protected static int[][] aMachinePart = new int[][]{{0,0,0,0,0},{0,0,2,0,0},{0,0,0,0,0}}; // 1 Part
-    protected static int[][] aConnectionPart = new int[][]{{0,0,0,0,0},{0,3,3,3,0},{0,0,0,0,0}}; // 3 Parts
+
 
     static{
+        int[][] mBase=new int[][]{{0,0,2,0,0},{2,3,1,3,2},{0,0,2,0,0}}; // 7 Parts;
+        int[][] aMachinePart = new int[][]{{0,0,0,0,0},{0,0,2,0,0},{0,0,0,0,0}}; // 1 Part
+        int[][] aConnectionPart = new int[][]{{0,0,0,0,0},{0,3,3,3,0},{0,0,0,0,0}}; // 3 Parts
+
         mStructure = new int[][][]{aMachinePart,aConnectionPart,mBase,aConnectionPart,aMachinePart};
+        mOffsets = new int[]{-2,-1,-2};
         mNumberOfParts = 15;
     }
 

@@ -1,7 +1,6 @@
 package com.ragingart.maatsmod.generics;
 
 import com.ragingart.maatsmod.api.IMultiBlockPart;
-import com.ragingart.maatsmod.util.LogHelper;
 import net.minecraft.block.Block;
 import net.minecraft.world.IBlockAccess;
 
@@ -10,9 +9,18 @@ import net.minecraft.world.IBlockAccess;
  */
 public class TileEntityMachineMultiBlockMM extends TileEntityMachineMM {
 
-    protected static int[][][] mStructure;
     protected static int mNumberOfParts;
+    protected static int[] mOffsets;
+    protected static int[][][] mStructure;
+    protected boolean completeStructure;
 
+    @Override
+    public void updateEntity() {
+        if(!worldObj.isRemote && (timer == -1 || timer%40==0)) {
+            completeStructure=checkStructure(worldObj,xCoord-mOffsets[0],yCoord-mOffsets[1],zCoord-mOffsets[2]);
+        }
+        super.updateEntity();
+    }
 
 
     public boolean checkStructure(IBlockAccess world, int x, int y, int z){
@@ -29,9 +37,10 @@ public class TileEntityMachineMultiBlockMM extends TileEntityMachineMM {
                 }
             }
         }
-        LogHelper.info(aNumberOfParts);
         return aNumberOfParts==mNumberOfParts;
     }
+
+
 
     @Override
     public int[] validPorts() {
