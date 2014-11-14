@@ -28,7 +28,6 @@ public class ItemRendererCable implements IItemRenderer {
             default:
                 return false;
         }
-
     }
 
     @Override

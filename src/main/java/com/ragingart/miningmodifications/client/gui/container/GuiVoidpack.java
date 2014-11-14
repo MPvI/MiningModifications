@@ -23,7 +23,8 @@ public class GuiVoidpack extends GuiMM{
         super(new ContainerVoidpack(inventory,aStack),new ResourceLocation(Reference.MOD_ID.toLowerCase(),"textures/gui/voidpack.png"));
         xSize = 176;
         ySize = 140;
-        name = ModItems.voidpack.getUnlocalizedName();
+        name = ModItems.voidpack.getUnlocalizedName()+".name";
+
     }
 
     @Override
@@ -34,6 +35,8 @@ public class GuiVoidpack extends GuiMM{
             int y = 15;
             if(this.inventorySlots instanceof ContainerInventoryItem) {
                 elements.add(new ElementToggleButton(this, x, y, i + "", xSize, 5, xSize, 10, xSize, 0, 14, 5, Reference.MOD_ID.toLowerCase() + ":textures/gui/voidpack.png", ItemVoidpack.isMetaState(((ContainerInventoryItem) this.inventorySlots).getContainerStack(), i)));
+
+                ((ElementToggleButton)elements.get(i)).setToolTip("description.miningmodifications:voidpackbutton");
             }
         }
     }

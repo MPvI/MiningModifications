@@ -40,6 +40,7 @@ public class ClientProxy extends CommonProxy{
 
         MinecraftForgeClient.registerItemRenderer(ModItems.spear,new ItemRendererSpear());
         MinecraftForgeClient.registerItemRenderer(ModItems.multitool,new ItemRendererMultitool());
+        MinecraftForgeClient.registerItemRenderer(ModItems.voidpack,new ItemRendererVoidpack());
         //MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.FluxField),new ItemRendererFluxField());
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.PlatformBase),new ItemRendererPlatformBase());
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.Cable),new ItemRendererCable());
