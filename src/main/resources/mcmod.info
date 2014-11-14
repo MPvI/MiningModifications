@@ -1,16 +1,16 @@
 [
 {
-  "modid": "MaatsMod",
-  "name": "Maats Mod",
+  "modid": "MiningModifications",
+  "name": "Mining Modifications",
   "description": "No Topic! Maybe use RF?!",
-  "version": "0.1",
+  "version": "0.4",
   "mcversion": "1.7.10",
   "url": "",
   "updateUrl": "",
   "authorList": [
     Ragingart
   ],
-  "credits": " to pahimar for LMRB",
+  "credits": "To VSWE for his tutorials and to pahimar for LMRB",
   "logoFile": "",
   "screenshots": [
   ],

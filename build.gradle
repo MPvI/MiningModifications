@@ -17,13 +17,19 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.7.10-0.3"
-group= "com.ragingart.maatsmod" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "MaatsMod"
+version = "1.7.10-0.4"
+group= "com.ragingart.miningmodifications" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "MiningModifications"
 
 minecraft {
-    version = "1.7.10-10.13.0.1208"
+    version = "1.7.10-10.13.2.1230"
     assetDir = "eclipse/assets"
+}
+
+jar {
+    manifest {
+        attributes 'FMLAT': 'accessTransformer.cfg'
+    }
 }
 
 processResources
