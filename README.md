@@ -1,2 +1,2 @@
-MaatsMod
+Mining Modifications
 ========
