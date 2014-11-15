@@ -1,10 +1,7 @@
 package com.ragingart.miningmodifications.network;
 
 
-import com.ragingart.miningmodifications.network.messages.MessageButtonClick;
-import com.ragingart.miningmodifications.network.messages.MessageItemCasing;
-import com.ragingart.miningmodifications.network.messages.MessageTileEntityMachineMM;
-import com.ragingart.miningmodifications.network.messages.MessageTileEntityMachinePP;
+import com.ragingart.miningmodifications.network.messages.*;
 import com.ragingart.miningmodifications.ref.Reference;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
@@ -21,5 +18,6 @@ public class PacketHandler {
         INSTANCE.registerMessage(MessageItemCasing.class,MessageItemCasing.class,1,Side.SERVER);
         INSTANCE.registerMessage(MessageTileEntityMachinePP.class,MessageTileEntityMachinePP.class,2,Side.CLIENT);
         INSTANCE.registerMessage(MessageButtonClick.class,MessageButtonClick.class,3,Side.SERVER);
+        INSTANCE.registerMessage(MessageLimitInput.class,MessageLimitInput.class,4,Side.SERVER);
     }
 }

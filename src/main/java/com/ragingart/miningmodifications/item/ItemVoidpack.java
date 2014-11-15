@@ -14,6 +14,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 
+import java.util.List;
+
 /**
  * Created by MaaT on 12.10.2014.
  */
@@ -28,16 +30,18 @@ public class ItemVoidpack extends ItemMM implements IInventoryContainerItem{
     @Override
     public void onUpdate(ItemStack itemStack, World world, Entity entity, int i, boolean b) {
         if(entity instanceof EntityPlayer) {
-            if (tick % 20 == 0 && isState(itemStack)) {
+            if (tick % 20 == 0 && getState(itemStack)) {
                 Item[] toErase = new Item[5];
                 int[] meErase = new int[5];
+                int[] nuErase = new int[5];
                 if (itemStack.hasTagCompound() && !itemStack.stackTagCompound.hasNoTags()) {
                     for (int j = 0; j < 5; j++) {
                         if (itemStack.stackTagCompound.hasKey("Slot" + j)) {
                             ItemStack aStack = ItemStack.loadItemStackFromNBT(itemStack.stackTagCompound.getCompoundTag("Slot" + j));
                             if (aStack != null) {
                                 toErase[j] = aStack.getItem();
-                                if(isMetaState(itemStack,j)) {
+                                nuErase[j] = getNumberToKeep(itemStack,j);
+                                if(getMetaState(itemStack, j)) {
                                     meErase[j] = aStack.getItemDamage();
                                 }else{
                                     meErase[j] = -1;
@@ -46,32 +50,55 @@ public class ItemVoidpack extends ItemMM implements IInventoryContainerItem{
                         }
                     }
                 }
-                ContainerVoidpack.doErase(toErase, meErase, ((EntityPlayer) entity).inventory);
+                ContainerVoidpack.doErase(toErase, meErase, nuErase,((EntityPlayer) entity).inventory);
                 tick = 0;
             }
             tick++;
         }
     }
 
-    public static boolean isState(ItemStack stack) {
-        return NBTHelper.hasTag(stack,"state") && NBTHelper.getBoolean(stack, "state");
+    @Override
+    public void addSpecialInfo(ItemStack itemStack, EntityPlayer entityPlayer, List list, boolean b) {
+        String s ="";
+        for (int i = 0; i < 5; i++) {
+            s+= ItemVoidpack.getNumberToKeep(itemStack,i);
+            s+= "-";
+            s+= ItemVoidpack.getMetaState(itemStack,i) ? "M" : "I";
+            if(i!=4)
+            s+= "~~";
+        }
+
+        list.add(s);
+
+        super.addSpecialInfo(itemStack, entityPlayer, list, b);
     }
+
+    public static boolean getState(ItemStack stack) {return NBTHelper.hasTag(stack,"state") && NBTHelper.getBoolean(stack, "state"); }
 
     public static void setState(boolean state,ItemStack stack) {
         NBTHelper.setBoolean(stack,"state",state);
     }
 
 
-    public static boolean isMetaState(ItemStack stack, int n) {
-        return NBTHelper.hasTag(stack,"meta"+n) && NBTHelper.getBoolean(stack, "meta"+n);
-    }
+    public static boolean getMetaState(ItemStack stack, int n) { return NBTHelper.hasTag(stack,"meta"+n) && NBTHelper.getBoolean(stack, "meta"+n); }
 
     public static void setMetaState(boolean state,ItemStack stack,int n) {
         NBTHelper.setBoolean(stack,"meta"+n,state);
     }
 
     public static void toggleMetaState(ItemStack aStack,int i){
-        setMetaState(!isMetaState(aStack,i),aStack,i);
+        setMetaState(!getMetaState(aStack, i),aStack,i);
+    }
+
+
+
+    public static void setNumberToKeep(ItemStack stack, int i, int n){
+        NBTHelper.setInteger(stack,"number"+i,n);
+    }
+
+    public static int getNumberToKeep(ItemStack stack, int i){
+            return NBTHelper.getInt(stack,"number"+i);
+
     }
 
 
@@ -89,9 +116,9 @@ public class ItemVoidpack extends ItemMM implements IInventoryContainerItem{
     @Override
     public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer entityPlayer) {
         if(entityPlayer.isSneaking()){
-            setState(!isState(itemStack),itemStack);
+            setState(!getState(itemStack),itemStack);
             if(!world.isRemote) {
-                entityPlayer.addChatMessage(new ChatComponentText(isState(itemStack)? "Activated":"Deactivated"));
+                entityPlayer.addChatMessage(new ChatComponentText(getState(itemStack)? "Activated":"Deactivated"));
             }
         }else {
             entityPlayer.openGui(MiningModifications.instance, Gui.ID.VOIDPACK.ordinal(), entityPlayer.worldObj, (int)entityPlayer.posX, (int)entityPlayer.posY, (int)entityPlayer.posZ);
@@ -103,4 +130,5 @@ public class ItemVoidpack extends ItemMM implements IInventoryContainerItem{
     public int getSizeInventory(ItemStack container) {
         return 5;
     }
+
 }

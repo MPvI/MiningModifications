@@ -26,7 +26,7 @@ public class ContainerVoidpack extends ContainerInventoryItem{
         addSlotToContainer(new SlotVoidpack(this.containerWrapper,3,95,22));
         addSlotToContainer(new SlotVoidpack(this.containerWrapper,4,110,22));
     }
-    public static void doErase(Item[] toErase,int[] meErase,InventoryPlayer inventory){
+    public static void doErase(Item[] toErase,int[] meErase,int[] nuErase,InventoryPlayer inventory){
         int[] nErase = new int[5];
         for (int i = 0; i < 36; i++) {
             for (int j = 0; j < toErase.length; j++) {
@@ -34,7 +34,7 @@ public class ContainerVoidpack extends ContainerInventoryItem{
                 if(aStack!=null && aStack.getItem()!=null){
                     if(meErase[j]==-1){
                         if(aStack.getItem()==toErase[j]) {
-                            if (nErase[j] >= 64) {
+                            if (nErase[j] >= nuErase[j]) {
                                 inventory.setInventorySlotContents(i, null);
                             } else {
                                 nErase[j] += aStack.stackSize;
@@ -42,7 +42,7 @@ public class ContainerVoidpack extends ContainerInventoryItem{
                         }
                     }else{
                         if(aStack.getItem()==toErase[j] && aStack.getItemDamage()==meErase[j]) {
-                            if (nErase[j] >= 64) {
+                            if (nErase[j] >= nuErase[j]) {
                                 inventory.setInventorySlotContents(i, null);
                             } else {
                                 nErase[j] += aStack.stackSize;

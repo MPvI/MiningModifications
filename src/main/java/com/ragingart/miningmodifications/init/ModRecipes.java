@@ -20,6 +20,7 @@ public class ModRecipes {
         GameRegistry.addRecipe(new ShapedOreRecipe(Component.MULTITOOL(),"r d"," s ","s  ",'s', Component.HANDLE,'r',Component.BATTERY(1),'d',Component.GEM));
         GameRegistry.addRecipe(new ShapedOreRecipe(Component.BATTERY(1)," g ","iri","iri",'g', Component.SMALL_GOLD,'i', Component.NORMAL_IRON,'r',Component.SMALL_RS));
         GameRegistry.addRecipe(new ShapedOreRecipe(Component.CASING(1),"sis","iri","sis",'s',Component.SCREW(1),'i',Component.PLATE_IRON,'r',Component.SMALL_RS));
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.voidpack),"iei","ifi","sis",'i',Component.PLATE_IRON,'e',Items.ender_eye,'f',Component.FLUXFIELD(1),'s',Component.SCREW(1)));
         // Shapeless
         GameRegistry.addRecipe(new ShapelessOreRecipe(Component.CASING_ENERGY(1),Component.CASING(1),Component.BATTERY(1),Component.SCREW(1)));
         GameRegistry.addRecipe(new ShapelessOreRecipe(Component.CASING_INPUT(1),Component.CASING(1),Blocks.chest,Component.SCREW(1)));
