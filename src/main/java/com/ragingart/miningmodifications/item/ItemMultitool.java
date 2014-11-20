@@ -89,7 +89,7 @@ public class ItemMultitool extends ItemToolMM
             consume += runningTick;
 
 
-            entityPlayer.addPotionEffect(new PotionEffect(1,5,3));
+            entityPlayer.addPotionEffect(new PotionEffect(1,5,1));
 
             MovingObjectPosition mOP = this.getMovingObjectPositionFromPlayer(entityPlayer.worldObj,entityPlayer,true);
 

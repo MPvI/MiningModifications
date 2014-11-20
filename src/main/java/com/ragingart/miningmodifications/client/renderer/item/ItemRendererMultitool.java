@@ -44,23 +44,33 @@ public class ItemRendererMultitool implements IItemRenderer {
         float anim;
 
         try{
-            anim = ((EntityPlayer)data[1]).isUsingItem()?((EntityPlayer)data[1]).getItemInUseDuration():0;
+            anim = 16*(((EntityPlayer)data[1]).isUsingItem()?((EntityPlayer)data[1]).getItemInUseDuration():0);
         } catch (Throwable e) {
             anim = 33;
         }
         GL11.glPushMatrix();
-        GL11.glRotatef(180,0,0,1);
-        GL11.glTranslatef(-1,0,0);
         Minecraft.getMinecraft().renderEngine.bindTexture(Models.Multitool);
         switch(type){
             case EQUIPPED:
+                /*
+                GL11.glRotatef(180,0,0,1);
+                GL11.glTranslatef(-1.7F,-0.4F,1.7F);
+                GL11.glRotatef(45,0,1,0);
+                GL11.glScalef(2,2,2);
+                */
                 tool.render(0.0625F, anim);
                 break;
             case EQUIPPED_FIRST_PERSON:
-                GL11.glTranslatef(-1,-0.5F,11);
+                GL11.glRotatef(45,0,1,0);
+                GL11.glRotatef(180,1,0,0);
+                GL11.glRotatef(10,0,0,-1);
+                GL11.glScalef(2,2,2);
+                GL11.glTranslatef(0,0,-1.0F);
                 tool.render(0.0625F, anim);
                 break;
             case INVENTORY:
+                GL11.glRotatef(180,0,0,1);
+                GL11.glTranslatef(-1,0,0);
                 tool.render(0.0625F, anim);
                 break;
             case ENTITY:

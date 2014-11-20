@@ -20,19 +20,24 @@ import net.minecraft.util.ResourceLocation;
  * Created by MaaT on 02.11.2014.
  */
 public class GuiVoidpack extends GuiMM{
-    private String texture=Reference.MOD_ID.toLowerCase() + ":textures/gui/voidpack.png";
-    private boolean limitInput;
-    private int limitIndex;
-    private String limitValue = "";
-    private int limitCounter = 0;
-    private int cID;
+
+    private int     cID;
+    private int     liCnt;
+    private int     liID;
+    private boolean liON;
+    private String  liVal;
+    private String  texture=Reference.MOD_ID.toLowerCase() + ":textures/gui/voidpack.png";
 
     public GuiVoidpack(InventoryPlayer inventory,ItemStack aStack) {
         super(new ContainerVoidpack(inventory,aStack),new ResourceLocation(Reference.MOD_ID.toLowerCase() + ":textures/gui/voidpack.png"));
-        xSize = 176;
-        ySize = 140;
-        name = ModItems.voidpack.getUnlocalizedName()+".name";
-        cID=inventory.currentItem;
+        xSize   = 176;
+        ySize   = 140;
+        name    = ModItems.voidpack.getUnlocalizedName()+".name";
+        cID     = inventory.currentItem;
+        liON    = false;
+        liCnt   = 0;
+        liVal   = "";
+        liID    = 0;
     }
 
     @Override
@@ -63,6 +68,8 @@ public class GuiVoidpack extends GuiMM{
                 if(aStack.getHasSubtypes()) {
                     elements.get(i).setEnabled(true);
                     ((ElementToggleButton) elements.get(i)).setToolTip("description.miningmodifications:voidpackbutton");
+                }else{
+                    elements.get(i).setEnabled(false);
                 }
             }
         }
@@ -79,46 +86,46 @@ public class GuiVoidpack extends GuiMM{
                 PacketHandler.INSTANCE.sendToServer(new MessageButtonClick(cID, i));
             }
         }else{
-            limitInput=true;
-            limitIndex=i-5;
+            liON =true;
+            liID =i-5;
         }
     }
 
     @Override
     protected void keyTyped(char characterTyped, int keyPressed) {
 
-        if(limitInput){
-            if(limitCounter < 3) {
+        if(liON){
+            if(liCnt < 3) {
                 if (characterTyped >= '0' && characterTyped <= '9') {
-                    limitValue += characterTyped;
-                    limitCounter++;
-                    ((ElementButtonLabeled)elements.get(limitIndex+5)).setLabel(limitValue);
+                    liVal += characterTyped;
+                    liCnt++;
+                    ((ElementButtonLabeled)elements.get(liID+5)).setLabel(liVal);
                 } else {
-                    limitCounter=3;
+                    liCnt =3;
                 }
             }
-            if(limitCounter==3){
-                int limitReturn;
+            if(liCnt ==3){
+                int liRe;
                 try {
-                    limitReturn = Integer.parseInt(limitValue);
+                    liRe = Integer.parseInt(liVal);
                 }catch (Exception e){
-                    limitReturn = 64;
+                    liRe = 64;
                 }
-                if (limitReturn < 0) {
-                    limitReturn = 0;
-                } else if (limitReturn > 99) {
-                    limitReturn = 99;
+                if (liRe < 0) {
+                    liRe = 0;
+                } else if (liRe > 99) {
+                    liRe = 99;
                 }
 
                 ItemStack containerStack = ((ContainerInventoryItem) this.inventorySlots).getContainerStack();
-                ItemVoidpack.setNumberToKeep(containerStack, limitIndex, limitReturn);
-                PacketHandler.INSTANCE.sendToServer(new MessageLimitInput(cID, limitIndex, limitReturn));
-                ((ElementButtonLabeled)elements.get(limitIndex+5)).setLabel(String.valueOf(limitReturn));
+                ItemVoidpack.setNumberToKeep(containerStack, liID, liRe);
+                PacketHandler.INSTANCE.sendToServer(new MessageLimitInput(cID, liID, liRe));
+                ((ElementButtonLabeled)elements.get(liID+5)).setLabel(String.valueOf(liRe));
 
-                limitInput = false;
-                limitCounter = 0;
-                limitValue = "";
-                limitIndex = 0;
+                liON = false;
+                liCnt = 0;
+                liVal = "";
+                liID = 0;
                 return;
             }
             return;
