@@ -10,7 +10,7 @@ public class TileEntityLaserSeperator extends TileEntityMachineMultiBlockMM{
 
 
     static{
-        int[][] mBase=new int[][]{{0,0,2,0,0},{2,3,1,3,2},{0,0,2,0,0}}; // 7 Parts;
+        int[][] mBase=new int[][]{{0,0,0,0,0},{2,3,1,3,2},{0,0,2,0,0}}; // 7 Parts;
         int[][] aMachinePart = new int[][]{{0,0,0,0,0},{0,0,2,0,0},{0,0,0,0,0}}; // 1 Part
         int[][] aConnectionPart = new int[][]{{0,0,0,0,0},{0,3,3,3,0},{0,0,0,0,0}}; // 3 Parts
 

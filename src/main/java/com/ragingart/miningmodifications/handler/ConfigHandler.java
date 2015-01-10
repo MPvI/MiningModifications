@@ -18,6 +18,7 @@ public class ConfigHandler {
     public static int maxPlatformSize = 608;
     public static int maxPlatformRadius = 14;
     public static int maxMiningTime;
+    public static int miningEnergyBase;
 
 
     public static void init(File configFile)
@@ -46,6 +47,7 @@ public class ConfigHandler {
         oreGenMax = config.getInt("oreGenMax",Configuration.CATEGORY_GENERAL,30,1,50,"max y layer for Népouit");
         oreGenMin = config.getInt("oreGenMin",Configuration.CATEGORY_GENERAL,6,1,30,"min y layer for Népouit");
 
+        miningEnergyBase = config.getInt("miningEnergyBase",Configuration.CATEGORY_GENERAL,45,20,100,"base energy use");
         miningEnergyModificator = config.getInt("miningEnergyModificator",Configuration.CATEGORY_GENERAL,2,1,10,"1 very low energy use - 10 very high energy use");
         miningSpeedModificator = config.getInt("miningSpeedModificator",Configuration.CATEGORY_GENERAL,2,1,10,"1 extreme fast mining - 10 extreme slow mining");
         maxMiningTime = config.getInt("maxMiningTime",Configuration.CATEGORY_GENERAL,240,60,4800,"Maximum time in ticks until the multitool will break a 3x3");

@@ -1,6 +1,6 @@
 package com.ragingart.miningmodifications.client.renderer.item;
 
-import com.ragingart.miningmodifications.client.renderer.model.ModelVoidpack;
+//import com.ragingart.miningmodifications.client.renderer.model.ModelVoidpack;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 
@@ -9,7 +9,7 @@ import net.minecraftforge.client.IItemRenderer;
  */
 public class ItemRendererVoidpack implements IItemRenderer {
 
-    public ModelVoidpack model = new ModelVoidpack();
+    //public ModelVoidpack model = new ModelVoidpack();
 
     @Override
     public boolean handleRenderType(ItemStack item, ItemRenderType type) {

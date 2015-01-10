@@ -75,3 +75,17 @@ public class MiningModifications {
     }
 
 }
+
+/*
+    finish laser seperator,
+    rework recipes and high end components
+    finish descriptions,
+
+    pipes:
+        receiver and transmitter in one block -> incoming energy pulse will emit shockwave
+        fullblock glass cable with 3 colors, red energy, blue shockwave for itemtransport, yellow controlsignal
+        moving items as entity - lock player pickup?
+    miner:
+        will also integrate a receiver and transmitter at some base block
+        needs very high energy input and emits all items once mined with mini shockwaves
+ */

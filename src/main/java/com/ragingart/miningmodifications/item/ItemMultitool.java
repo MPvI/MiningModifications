@@ -29,8 +29,8 @@ public class ItemMultitool extends ItemToolMM
 {
     private static final Set blocksEffectiveAgainst = Sets.newHashSet(ModBlocks.Ore);
     private static final String[] modes = new String[]{"Mining Mode","Wrench Mode","Rotation Mode"};
-    private int runningTick = 0;
-    private int consume = 45;
+    private int consume = ConfigHandler.miningEnergyBase;
+
 
     public ItemMultitool()
     {
@@ -49,7 +49,17 @@ public class ItemMultitool extends ItemToolMM
         return NBTHelper.getInt(itemStack, "Mode");
     }
 
+    public int getRunningTick(ItemStack itemStack){
+        return NBTHelper.getInt(itemStack,"runTick");
+    }
 
+    public void setRunningTick(ItemStack itemStack,int v){
+        NBTHelper.setInteger(itemStack,"runTick",v);
+    }
+
+    public void incRunTick(ItemStack itemStack){
+        setRunningTick(itemStack,getRunningTick(itemStack)+1);
+    }
 
     @Override
     public boolean onItemUse(ItemStack itemStack,EntityPlayer entityPlayer,World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ){
@@ -85,8 +95,8 @@ public class ItemMultitool extends ItemToolMM
             float hardness = 0;
             Block[] blocksToHarvest = new Block[9];
 
-            ++runningTick;
-            consume += runningTick;
+            incRunTick(itemStack);
+            consume += getRunningTick(itemStack);
 
 
             entityPlayer.addPotionEffect(new PotionEffect(1,5,1));
@@ -112,7 +122,7 @@ public class ItemMultitool extends ItemToolMM
                 maxTick=ConfigHandler.maxMiningTime;
             }
 
-            if(runningTick >= maxTick){
+            if(getRunningTick(itemStack) >= maxTick){
                 for (int i = 0; i < 9; i++) {
 
                     if(blocksToHarvest[i]!= Blocks.air && blocksToHarvest[i]!=Blocks.bedrock && blocksToHarvest[i]!=Blocks.lava && blocksToHarvest[i]!=Blocks.water) {
@@ -132,8 +142,8 @@ public class ItemMultitool extends ItemToolMM
                     entityPlayer.clearItemInUse();
                 }
 
-                runningTick = 0;
-                consume = 45;
+                setRunningTick(itemStack,0);
+                consume = ConfigHandler.miningEnergyBase;
             }
         }
 
@@ -153,7 +163,7 @@ public class ItemMultitool extends ItemToolMM
                     entityPlayer.addChatMessage(new ChatComponentText(modes[getMode(itemStack)]));
                 }
 
-            } else if (getMode(itemStack) == 0 && !entityPlayer.isUsingItem() && this.getEnergyStored(itemStack) > 0) {
+            } else if (getMode(itemStack) == 0 & !entityPlayer.isUsingItem() & this.getEnergyStored(itemStack) > 0) {
                 entityPlayer.setItemInUse(itemStack, this.getMaxItemUseDuration(itemStack));
             }
 
