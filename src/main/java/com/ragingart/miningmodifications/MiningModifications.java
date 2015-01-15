@@ -33,7 +33,7 @@ public class MiningModifications {
         PacketHandler.init();
         // config
         ConfigHandler.init(event.getSuggestedConfigurationFile());
-        // register Config to Eventbus
+        // register Handlers
         FMLCommonHandler.instance().bus().register(new ConfigHandler());
         MinecraftForge.EVENT_BUS.register(new EventHandler());
         // init items blocks

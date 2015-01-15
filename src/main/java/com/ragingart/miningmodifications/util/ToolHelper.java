@@ -1,68 +1,70 @@
 package com.ragingart.miningmodifications.util;
 
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+
 /**
  * Created by MaaT on 09.09.2014.
  */
 public class ToolHelper {
-    public static int[][] getHarvestField(int x,int y,int z,int side){
-        int[][] result = new int[9][3];
+    public static HFE[] getHarvestField(int x,int y,int z,int side,int r){
+        int d = (2*r+1);
+        HFE[] result = new HFE[d*d];
 
-        switch(side){
-            case 0:
-                return initTopBot(x,y,z,result);
-
-            case 1:
-                return initTopBot(x,y,z,result);
-
-            case 2:
-                return initNoSo(x,y,z,result);
-
-            case 3:
-                return initNoSo(x,y,z,result);
-
-            case 4:
-                return initWeEa(x,y,z,result);
-
-            case 5:
-                return initWeEa(x,y,z,result);
-
+        for (int i = 0; i < result.length; i++) {
+            result[i]=new HFE();
         }
-        return result;
+
+        return init(x,y,z,result,r,side);
     }
 
-    private static int[][] initTopBot(int x,int y,int z,int[][] result){
-        for (int i = -1; i < 2; i++) {
-            for (int j = -1; j < 2; j++) {
-                result[(i+1)*3+j+1][0]=x+i;
-                result[(i+1)*3+j+1][1]=y;
-                result[(i+1)*3+j+1][2]=z+j;
+
+    private static HFE[] init(int x,int y,int z,HFE[] result,int r,int side){
+        for (int i = -r; i <= r; i++) {
+            for (int j = -r; j <= r; j++) {
+                switch (side){
+                    case 0:
+                    case 1:
+                        result[f(i,j,r)].x=x+i;
+                        result[f(i,j,r)].y=y;
+                        result[f(i,j,r)].z=z+j;
+                        break;
+                    case 2:
+                    case 3:
+                        result[f(i,j,r)].x=x+i;
+                        result[f(i,j,r)].y=y+j;
+                        result[f(i,j,r)].z=z;
+                        break;
+                    case 4:
+                    case 5:
+                        result[f(i,j,r)].x=x;
+                        result[f(i,j,r)].y=y+i;
+                        result[f(i,j,r)].z=z+j;
+                        break;
+                    default:
+                        break;
+                }
             }
         }
         return result;
     }
 
-    //side 5 4
-    private static int[][] initWeEa(int x,int y,int z,int[][] result){
-        for (int i = -1; i < 2; i++) {
-            for (int j = -1; j < 2; j++) {
-                result[(i+1)*3+j+1][0]=x;
-                result[(i+1)*3+j+1][1]=y+i;
-                result[(i+1)*3+j+1][2]=z+j;
-            }
-        }
-        return result;
+    private static int f(int a,int b,int r){
+        return (a+r)*(2*r+1)+b+r;
     }
 
-       //side 2 3
-    private static int[][] initNoSo(int x,int y,int z,int[][] result){
-        for (int i = -1; i < 2; i++) {
-            for (int j = -1; j < 2; j++) {
-                result[(i+1)*3+j+1][0]=x+i;
-                result[(i+1)*3+j+1][1]=y+j;
-                result[(i+1)*3+j+1][2]=z;
-            }
+    public static class HFE {
+        public int x;
+        public int y;
+        public int z;
+        public Block mBlock;
+
+        public HFE(){
+            x=0;
+            y=0;
+            z=0;
+            mBlock=Blocks.air;
         }
-        return result;
     }
 }
 

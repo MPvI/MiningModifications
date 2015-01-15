@@ -7,10 +7,12 @@ import com.ragingart.miningmodifications.generics.ItemToolMM;
 import com.ragingart.miningmodifications.handler.ConfigHandler;
 import com.ragingart.miningmodifications.init.ModBlocks;
 import com.ragingart.miningmodifications.ref.Names;
+import com.ragingart.miningmodifications.util.LogHelper;
 import com.ragingart.miningmodifications.util.NBTHelper;
 import com.ragingart.miningmodifications.util.ToolHelper;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -30,6 +32,7 @@ public class ItemMultitool extends ItemToolMM
     private static final Set blocksEffectiveAgainst = Sets.newHashSet(ModBlocks.Ore);
     private static final String[] modes = new String[]{"Mining Mode","Wrench Mode","Rotation Mode"};
     private int consume = ConfigHandler.miningEnergyBase;
+    private int runTick=0;
 
 
     public ItemMultitool()
@@ -41,6 +44,11 @@ public class ItemMultitool extends ItemToolMM
         setHarvestLevel("axe",3);
     }
 
+    @Override
+    public void onUpdate(ItemStack p_77663_1_, World p_77663_2_, Entity p_77663_3_, int p_77663_4_, boolean p_77663_5_) {
+        runTick++;
+    }
+
     public void setMode(ItemStack itemStack,int mode){
         NBTHelper.setInteger(itemStack, "Mode", mode);
     }
@@ -49,22 +57,15 @@ public class ItemMultitool extends ItemToolMM
         return NBTHelper.getInt(itemStack, "Mode");
     }
 
-    public int getRunningTick(ItemStack itemStack){
-        return NBTHelper.getInt(itemStack,"runTick");
-    }
+    public long getStartTime(ItemStack itemStack){return NBTHelper.getLong(itemStack,"startTime");}
 
-    public void setRunningTick(ItemStack itemStack,int v){
-        NBTHelper.setInteger(itemStack,"runTick",v);
-    }
-
-    public void incRunTick(ItemStack itemStack){
-        setRunningTick(itemStack,getRunningTick(itemStack)+1);
-    }
 
     @Override
     public boolean onItemUse(ItemStack itemStack,EntityPlayer entityPlayer,World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ){
-        Block aBlock = world.getBlock(x, y, z);
-        if(entityPlayer.isSneaking()){
+
+        if(!world.isRemote && entityPlayer.isSneaking()){
+            LogHelper.info("mySide U");
+            Block aBlock = world.getBlock(x, y, z);
             switch(getMode(itemStack)){
                 case 0:
                     return false;
@@ -81,70 +82,65 @@ public class ItemMultitool extends ItemToolMM
                     return false;
             }
         }
+
         return false;
     }
 
 
     @Override
     public void onUsingTick(ItemStack itemStack, EntityPlayer entityPlayer, int count) {
-
         if(!entityPlayer.worldObj.isRemote) {
-            int[] x = new int[9];
-            int[] y = new int[9];
-            int[] z = new int[9];
-            float hardness = 0;
-            Block[] blocksToHarvest = new Block[9];
-
-            incRunTick(itemStack);
-            consume += getRunningTick(itemStack);
-
-
-            entityPlayer.addPotionEffect(new PotionEffect(1,5,1));
-
+            LogHelper.info("mySide UT");
             MovingObjectPosition mOP = this.getMovingObjectPositionFromPlayer(entityPlayer.worldObj,entityPlayer,true);
 
             if(mOP==null || mOP.typeOfHit != MovingObjectPosition.MovingObjectType.BLOCK){
                 return;
             }
 
-            int[][] harvestField = ToolHelper.getHarvestField(mOP.blockX,mOP.blockY,mOP.blockZ,mOP.sideHit);
+            int r = 2;
 
-            for (int i = 0; i < 9; i++) {
-                x[i] = harvestField[i][0];
-                y[i] = harvestField[i][1];
-                z[i] = harvestField[i][2];
-                blocksToHarvest[i]=entityPlayer.worldObj.getBlock(x[i],y[i],z[i]);
-                hardness += blocksToHarvest[i].getBlockHardness(entityPlayer.worldObj,0,0,0);
+            float hardness = 0;
+
+            entityPlayer.addPotionEffect(new PotionEffect(1,5,1));
+
+            ToolHelper.HFE[] HF = ToolHelper.getHarvestField(mOP.blockX,mOP.blockY,mOP.blockZ,mOP.sideHit,r);
+
+            for (ToolHelper.HFE aHF : HF) {
+                aHF.mBlock = entityPlayer.worldObj.getBlock(aHF.x,aHF.y,aHF.z);
+                hardness += aHF.mBlock.getBlockHardness(entityPlayer.worldObj,aHF.x,aHF.y,aHF.z);
             }
 
             int maxTick = (int)hardness*ConfigHandler.miningSpeedModificator/(EnchantmentHelper.getEfficiencyModifier(entityPlayer)+1);
+            /*
             if(maxTick>ConfigHandler.maxMiningTime){
                 maxTick=ConfigHandler.maxMiningTime;
             }
+            */
 
-            if(getRunningTick(itemStack) >= maxTick){
-                for (int i = 0; i < 9; i++) {
-
-                    if(blocksToHarvest[i]!= Blocks.air && blocksToHarvest[i]!=Blocks.bedrock && blocksToHarvest[i]!=Blocks.lava && blocksToHarvest[i]!=Blocks.water) {
-                        ArrayList<ItemStack> drops = blocksToHarvest[i].getDrops(entityPlayer.worldObj,x[i],y[i],z[i],blocksToHarvest[i].getDamageValue(entityPlayer.worldObj,x[i],y[i],z[i]),EnchantmentHelper.getFortuneModifier(entityPlayer));
-                        for(ItemStack drop :drops) {
-                            EntityItem dropEntity = new EntityItem(entityPlayer.worldObj,x[i],y[i],z[i],drop);
+            int runTick = (int)((System.currentTimeMillis()-getStartTime(itemStack))/50);
+            if(runTick >= maxTick){
+                for (ToolHelper.HFE aHF : HF) {
+                    if (aHF.mBlock != Blocks.air && aHF.mBlock != Blocks.bedrock && aHF.mBlock != Blocks.lava && aHF.mBlock != Blocks.water) {
+                        ArrayList<ItemStack> drops = aHF.mBlock.getDrops(entityPlayer.worldObj, aHF.x, aHF.y, aHF.z, aHF.mBlock.getDamageValue(entityPlayer.worldObj, aHF.x, aHF.y, aHF.z), EnchantmentHelper.getFortuneModifier(entityPlayer));
+                        for (ItemStack drop : drops) {
+                            EntityItem dropEntity = new EntityItem(entityPlayer.worldObj, aHF.x, aHF.y, aHF.z, drop);
                             entityPlayer.worldObj.spawnEntityInWorld(dropEntity);
                         }
-                        blocksToHarvest[i].removedByPlayer(entityPlayer.worldObj,entityPlayer,x[i],y[i],z[i],false);
+                        aHF.mBlock.removedByPlayer(entityPlayer.worldObj, entityPlayer, aHF.x, aHF.y, aHF.z, false);
                     }
                 }
-
-                consume *= ConfigHandler.miningEnergyModificator;
+                consume += runTick*ConfigHandler.miningEnergyModificator;
                 consume /= (EnchantmentHelper.getEnchantmentLevel(34,itemStack)+1);
 
-                if(consume > extractEnergy(itemStack,consume,false)){
+                if(entityPlayer.capabilities.isCreativeMode || consume > extractEnergy(itemStack,consume,false)){
                     entityPlayer.clearItemInUse();
                 }
 
-                setRunningTick(itemStack,0);
                 consume = ConfigHandler.miningEnergyBase;
+                NBTHelper.setLong(itemStack, "startTime", System.currentTimeMillis());
             }
+
+            //if(entityPlayer)
         }
 
     }
@@ -152,7 +148,6 @@ public class ItemMultitool extends ItemToolMM
     @Override
     public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer entityPlayer)
     {
-
             if (entityPlayer.isSneaking()) {
                 setMode(itemStack, getMode(itemStack) + 1);
 
@@ -163,16 +158,16 @@ public class ItemMultitool extends ItemToolMM
                     entityPlayer.addChatMessage(new ChatComponentText(modes[getMode(itemStack)]));
                 }
 
-            } else if (getMode(itemStack) == 0 & !entityPlayer.isUsingItem() & this.getEnergyStored(itemStack) > 0) {
+            }else if (getMode(itemStack) == 0 && !entityPlayer.isUsingItem() && this.getEnergyStored(itemStack) > 0) {
+                NBTHelper.setLong(itemStack,"startTime",System.currentTimeMillis());
                 entityPlayer.setItemInUse(itemStack, this.getMaxItemUseDuration(itemStack));
             }
-
         return itemStack;
     }
 
     @Override
     public int getMaxItemUseDuration(ItemStack itemStack) {
-        return 10000;
+        return 100000;
     }
 
 
@@ -182,8 +177,7 @@ public class ItemMultitool extends ItemToolMM
     }
 
     @Override
-    public void onPlayerStoppedUsing(ItemStack itemStack, World world, EntityPlayer entityPlayer, int p_77615_4_) {
+    public void onPlayerStoppedUsing(ItemStack itemStack, World world, EntityPlayer entityPlayer, int i) {
         entityPlayer.clearItemInUse();
     }
-
 }
