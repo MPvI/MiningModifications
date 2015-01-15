@@ -1,22 +1,23 @@
 package com.ragingart.miningmodifications.generics;
 
-import cofh.api.block.IDismantleable;
 import com.ragingart.miningmodifications.creativetab.CreativeTabMM;
 import com.ragingart.miningmodifications.ref.Names;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.ArrayList;
 
-public class BlockMM extends Block implements IDismantleable
+public class BlockMM extends Block
 {
 
     public BlockMM(Material material)
@@ -28,7 +29,8 @@ public class BlockMM extends Block implements IDismantleable
     public BlockMM(Material material,String name)
     {
         this(material);
-        this.setBlockName(name);
+
+        //this.setBlockName(name);
     }
 
     public BlockMM(String name)
@@ -37,11 +39,11 @@ public class BlockMM extends Block implements IDismantleable
     }
 
 
-    @Override
+
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconRegister)
     {
-        blockIcon = iconRegister.registerIcon(String.format("%s", Names.getUnwrappedUnlocalizedName(this.getUnlocalizedName())));
+        //blockIcon = iconRegister.registerIcon(String.format("%s", Names.getUnwrappedUnlocalizedName(this.getUnlocalizedName())));
     }
 
     // Names
@@ -52,10 +54,9 @@ public class BlockMM extends Block implements IDismantleable
     }
 
 
-    @Override
-    public boolean rotateBlock(World worldObj, int x, int y, int z, ForgeDirection face) {
+    public boolean rotateBlock(World worldObj, BlockPos pos, EnumFacing face) {
             if(!worldObj.isRemote) {
-                TileEntity aTile = worldObj.getTileEntity(x,y,z);
+                TileEntity aTile = worldObj.getTileEntity(pos);
                 if(aTile instanceof TileEntityMachineMM){
                     ((TileEntityMachineMM) aTile).getMachineHelper().rotatePortsDirectlyToFace(face);
                     return true;
@@ -66,16 +67,16 @@ public class BlockMM extends Block implements IDismantleable
             return false;
     }
 
-    @Override
-    public ArrayList<ItemStack> dismantleBlock(EntityPlayer player, World world, int x, int y, int z, boolean returnDrops) {
-        if(!world.isRemote) {
-            dropBlockAsItem(world, x, y, z, new ItemStack(this));
-            removedByPlayer(world, player, x, y, z, false);
+
+    public ArrayList<ItemStack> dismantleBlock(EntityPlayer playerIn, World worldIn, BlockPos pos,IBlockState state, boolean returnDrops) {
+        if(!worldIn.isRemote) {
+            dropBlockAsItem(worldIn,pos,state,0);
+            removedByPlayer(worldIn,pos,playerIn,false);
         }
         return null;
     }
 
-    @Override
+
     public boolean canDismantle(EntityPlayer player, World world, int x, int y, int z) {
         return true;
     }

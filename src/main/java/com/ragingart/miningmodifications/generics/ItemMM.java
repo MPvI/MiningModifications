@@ -2,9 +2,6 @@ package com.ragingart.miningmodifications.generics;
 
 import com.ragingart.miningmodifications.creativetab.CreativeTabMM;
 import com.ragingart.miningmodifications.ref.Names;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -38,13 +35,6 @@ public abstract class ItemMM extends Item
     public String getUnlocalizedName(ItemStack itemStack)
     {
         return String.format("item.%s%s", Names.MOD_PREFIX, Names.getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister iconRegister)
-    {
-        itemIcon = iconRegister.registerIcon(this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".") + 1));
     }
 
 

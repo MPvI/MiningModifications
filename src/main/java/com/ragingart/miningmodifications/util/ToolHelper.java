@@ -2,12 +2,11 @@ package com.ragingart.miningmodifications.util;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 
-/**
- * Created by MaaT on 09.09.2014.
- */
 public class ToolHelper {
-    public static HFE[] getHarvestField(int x,int y,int z,int side,int r){
+    public static HFE[] getHarvestField(BlockPos pos,EnumFacing side,int r){
         int d = (2*r+1);
         HFE[] result = new HFE[d*d];
 
@@ -15,7 +14,7 @@ public class ToolHelper {
             result[i]=new HFE();
         }
 
-        return init(x,y,z,result,r,side);
+        return init(pos.getX(),pos.getY(),pos.getZ(),result,r,side.ordinal());
     }
 
 
@@ -25,21 +24,15 @@ public class ToolHelper {
                 switch (side){
                     case 0:
                     case 1:
-                        result[f(i,j,r)].x=x+i;
-                        result[f(i,j,r)].y=y;
-                        result[f(i,j,r)].z=z+j;
+                        result[f(i,j,r)].mPos=new BlockPos(x+i,y,z+j);
                         break;
                     case 2:
                     case 3:
-                        result[f(i,j,r)].x=x+i;
-                        result[f(i,j,r)].y=y+j;
-                        result[f(i,j,r)].z=z;
+                        result[f(i,j,r)].mPos=new BlockPos(x+i,y+j,z);
                         break;
                     case 4:
                     case 5:
-                        result[f(i,j,r)].x=x;
-                        result[f(i,j,r)].y=y+i;
-                        result[f(i,j,r)].z=z+j;
+                        result[f(i,j,r)].mPos=new BlockPos(x,y+i,z+j);
                         break;
                     default:
                         break;
@@ -54,15 +47,11 @@ public class ToolHelper {
     }
 
     public static class HFE {
-        public int x;
-        public int y;
-        public int z;
+        public BlockPos mPos;
         public Block mBlock;
 
         public HFE(){
-            x=0;
-            y=0;
-            z=0;
+            mPos = new BlockPos(0,0,0);
             mBlock=Blocks.air;
         }
     }

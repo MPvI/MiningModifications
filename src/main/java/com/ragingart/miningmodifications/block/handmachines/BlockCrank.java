@@ -5,16 +5,14 @@ import com.ragingart.miningmodifications.generics.BlockMachinePP;
 import com.ragingart.miningmodifications.ref.Names;
 import com.ragingart.miningmodifications.ref.RenderIds;
 import com.ragingart.miningmodifications.tileentity.handmachines.TileEntityCrank;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 
-
-/**
- * Created by MaaT on 25.09.2014.
- */
 public class BlockCrank extends BlockMachinePP{
     public BlockCrank() {
         super(Names.Blocks.CRANK);
@@ -33,16 +31,12 @@ public class BlockCrank extends BlockMachinePP{
         return RenderIds.Crank;
     }
 
-    @Override
-    public boolean renderAsNormalBlock() {
-        return false;
-    }
 
     @Override
-    public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
-        TileEntity aTile = world.getTileEntity(x,y,z);
+    public void setBlockBoundsBasedOnState(IBlockAccess world, BlockPos pos) {
+        TileEntity aTile = world.getTileEntity(pos);
         if(aTile != null && aTile instanceof TileEntityCrank){
-            ForgeDirection dir = ((TileEntityCrank) aTile).checkLink();
+            EnumFacing dir = ((TileEntityCrank) aTile).checkLink();
             switch (dir){
                 case NORTH:
                     this.setBlockBounds(0.225F,0.35F,0,0.775F,0.9F,0.4F);
@@ -72,8 +66,8 @@ public class BlockCrank extends BlockMachinePP{
     }
 
     @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9)
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ)
     {
-        return ((TileEntityCrank)world.getTileEntity(x,y,z)).provideMusclePower();
+        return ((TileEntityCrank)worldIn.getTileEntity(pos)).provideMusclePower();
     }
 }

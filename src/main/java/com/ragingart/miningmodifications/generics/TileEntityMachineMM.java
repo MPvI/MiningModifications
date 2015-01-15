@@ -11,12 +11,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.IChatComponent;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.*;
-
-/**
- * Created by MaaT on 29.08.2014.
- */
 
 public abstract class TileEntityMachineMM extends TileEntityMM implements IEnergyHandler,ISidedInventory,IFluidHandler {
 
@@ -27,7 +25,7 @@ public abstract class TileEntityMachineMM extends TileEntityMM implements IEnerg
 
 
     protected int timer = -1;
-    @Override
+
     public void updateEntity(){
         if(!worldObj.isRemote && (timer == -1 || timer%10==0)) {
             PacketHandler.INSTANCE.sendToAll(new MessageTileEntityMachineMM(this));
@@ -78,7 +76,7 @@ public abstract class TileEntityMachineMM extends TileEntityMM implements IEnerg
 
     /**
      * Only determines if item is ready for extraction / machine ready for insertion
-     * @return
+     * @return boolean work is done
      */
     public abstract boolean isWorkDone();
 
@@ -132,25 +130,55 @@ public abstract class TileEntityMachineMM extends TileEntityMM implements IEnerg
     }
 
     @Override
-    public int[] getAccessibleSlotsFromSide(int side) {
-        if(machineHelper.hasPort(side,CasingHelper.Port.INPUT) || machineHelper.hasPort(side, CasingHelper.Port.OUTPUT)) {
+    public int[] getSlotsForFace(EnumFacing side) {
+        if(machineHelper.hasPort(side.getIndex(),CasingHelper.Port.INPUT) || machineHelper.hasPort(side.getIndex(), CasingHelper.Port.OUTPUT)) {
             return new int[]{0};
         }
         return new int[0];
     }
 
     @Override
-    public boolean canInsertItem(int slot, ItemStack item, int side) {
-        return isWorkDone() && isItemValidForSlot(slot, item) && machineHelper.hasPort(side, CasingHelper.Port.INPUT);
+    public boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction) {
+        return isWorkDone() && isItemValidForSlot(index, itemStackIn) && machineHelper.hasPort(direction.getIndex(), CasingHelper.Port.INPUT);
     }
 
     @Override
-    public boolean canExtractItem(int slot, ItemStack item, int side) {
-        return isWorkDone() && machineHelper.hasPort(side, CasingHelper.Port.OUTPUT);
+    public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) {
+        return isWorkDone() && machineHelper.hasPort(direction.getIndex(), CasingHelper.Port.OUTPUT);
     }
 
-
     /* IInventory */
+
+
+    @Override
+    public void clear() {
+
+    }
+
+    @Override
+    public void openInventory(EntityPlayer playerIn) {
+
+    }
+
+    @Override
+    public void closeInventory(EntityPlayer playerIn) {
+
+    }
+
+    @Override
+    public int getField(int id) {
+        return 0;
+    }
+
+    @Override
+    public void setField(int id, int value) {
+
+    }
+
+    @Override
+    public int getFieldCount() {
+        return 0;
+    }
 
     @Override
     public int getSizeInventory() {
@@ -201,15 +229,6 @@ public abstract class TileEntityMachineMM extends TileEntityMM implements IEnerg
         inventory = itemStack;
     }
 
-    @Override
-    public String getInventoryName() {
-        return worldObj.getBlock(xCoord,yCoord,zCoord).getLocalizedName();
-    }
-
-    @Override
-    public boolean hasCustomInventoryName() {
-        return false;
-    }
 
     @Override
     public int getInventoryStackLimit() {
@@ -221,48 +240,59 @@ public abstract class TileEntityMachineMM extends TileEntityMM implements IEnerg
         return true;
     }
 
-    @Override
-    public void openInventory() {}
+    /* IWorldNameable */
 
     @Override
-    public void closeInventory() {}
+    public String getName() {
+        return null;
+    }
+
+    @Override
+    public boolean hasCustomName() {
+        return false;
+    }
+
+    @Override
+    public IChatComponent getDisplayName() {
+        return null;
+    }
 
     /* IFluidHandler */
 
     @Override
-    public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
+    public FluidTankInfo[] getTankInfo(EnumFacing from) {
+        return new FluidTankInfo[0];
+    }
+
+    @Override
+    public int fill(EnumFacing from, FluidStack resource, boolean doFill) {
         if(machineHelper.hasPort(from.ordinal(),CasingHelper.Port.FINPUT))
             return tank.fill(resource,doFill);
         return 0;
     }
 
     @Override
-    public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
+    public FluidStack drain(EnumFacing from, FluidStack resource, boolean doDrain) {
         if(machineHelper.hasPort(from.ordinal(),CasingHelper.Port.FOUTPUT))
             return tank.drain(1000,doDrain);
         return null;
     }
 
     @Override
-    public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
+    public FluidStack drain(EnumFacing from, int maxDrain, boolean doDrain) {
         if(machineHelper.hasPort(from.ordinal(),CasingHelper.Port.FOUTPUT))
             return tank.drain(maxDrain>1000?1000:maxDrain,doDrain);
         return null;
     }
 
     @Override
-    public boolean canFill(ForgeDirection from, Fluid fluid) {
+    public boolean canFill(EnumFacing from, Fluid fluid) {
         return machineHelper.hasPort(from.ordinal(), CasingHelper.Port.FINPUT);
     }
 
     @Override
-    public boolean canDrain(ForgeDirection from, Fluid fluid) {
+    public boolean canDrain(EnumFacing from, Fluid fluid) {
         return machineHelper.hasPort(from.ordinal(), CasingHelper.Port.FOUTPUT);
-    }
-
-    @Override
-    public FluidTankInfo[] getTankInfo(ForgeDirection from) {
-        return new FluidTankInfo[0];
     }
 
     public int getFluidAmount(){return tank.getFluidAmount();}

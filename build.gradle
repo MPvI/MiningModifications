@@ -17,12 +17,12 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.7.10-0.4"
+version = "1.8-0.5"
 group= "com.ragingart.miningmodifications" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "MiningModifications"
 
 minecraft {
-    version = "1.7.10-10.13.2.1286"
+    version = "1.8-11.14.0.1287-1.8"
     assetDir = "eclipse/assets"
 }
 

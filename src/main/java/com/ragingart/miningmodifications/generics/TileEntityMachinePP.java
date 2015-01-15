@@ -8,16 +8,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraft.util.EnumFacing;
 
-/**
- * Created by XtraX on 18.10.2014.
- */
 public abstract class TileEntityMachinePP extends TileEntityMM implements IMusclePower,IInventory {
 
     protected ItemStack input;
     protected ItemStack output;
-    private ForgeDirection facing=ForgeDirection.EAST;
+    private EnumFacing facing=EnumFacing.EAST;
 
     protected int timer = -1;
 
@@ -25,7 +22,7 @@ public abstract class TileEntityMachinePP extends TileEntityMM implements IMuscl
         super();
     }
 
-    @Override
+
     public void updateEntity() {
         if(!worldObj.isRemote && (timer == -1 || timer%10==0)) {
             PacketHandler.INSTANCE.sendToAll(new MessageTileEntityMachinePP(this));
@@ -34,32 +31,62 @@ public abstract class TileEntityMachinePP extends TileEntityMM implements IMuscl
         timer++;
     }
 
-    public void setFacing(ForgeDirection forgeDirection){
-        switch(forgeDirection){
+    public void setFacing(EnumFacing dir){
+        switch(dir){
             case UP:
             case DOWN:
-                facing = facing.getRotation(forgeDirection);
+                facing = facing.rotateAround(dir.getAxis());
                 break;
             default:
-                facing = forgeDirection;
+                facing = dir;
                 break;
         }
 
     }
 
-    public ForgeDirection getFacing() {
+    public EnumFacing getFacing() {
         return facing;
     }
 
     /*IMusclePower*/
 
     @Override
-    public boolean canAcceptMusclePower(ForgeDirection from){
+    public boolean canAcceptMusclePower(EnumFacing from){
         return true;
     }
 
 
     /* IInventory */
+
+    @Override
+    public void clear() {
+
+    }
+
+    @Override
+    public void openInventory(EntityPlayer playerIn) {
+
+    }
+
+    @Override
+    public void closeInventory(EntityPlayer playerIn) {
+
+    }
+
+    @Override
+    public int getField(int id) {
+        return 0;
+    }
+
+    @Override
+    public void setField(int id, int value) {
+
+    }
+
+    @Override
+    public int getFieldCount() {
+        return 0;
+    }
 
     @Override
     public boolean isItemValidForSlot(int slot, ItemStack itemStack){return false;}
@@ -120,16 +147,6 @@ public abstract class TileEntityMachinePP extends TileEntityMM implements IMuscl
     }
 
     @Override
-    public String getInventoryName() {
-        return worldObj.getBlock(xCoord,yCoord,zCoord).getLocalizedName();
-    }
-
-    @Override
-    public boolean hasCustomInventoryName() {
-        return false;
-    }
-
-    @Override
     public int getInventoryStackLimit() {
         return 64;
     }
@@ -138,12 +155,6 @@ public abstract class TileEntityMachinePP extends TileEntityMM implements IMuscl
     public boolean isUseableByPlayer(EntityPlayer p_70300_1_) {
         return true;
     }
-
-    @Override
-    public void openInventory() {}
-
-    @Override
-    public void closeInventory() {}
 
     @Override
     public void writeToNBT(NBTTagCompound cmpd){
@@ -158,6 +169,8 @@ public abstract class TileEntityMachinePP extends TileEntityMM implements IMuscl
         super.readFromNBT(cmpd);
         input = NBTHelper.getItemstackFromNBT(cmpd, "input");
         output = NBTHelper.getItemstackFromNBT(cmpd, "output");
-        facing = ForgeDirection.getOrientation(cmpd.getInteger("Facing"));
+        facing = EnumFacing.getFront(cmpd.getInteger("Facing"));
     }
+
+
 }

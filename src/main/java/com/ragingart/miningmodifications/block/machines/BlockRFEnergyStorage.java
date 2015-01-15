@@ -9,9 +9,12 @@ import com.ragingart.miningmodifications.tileentity.machines.TileEntityRFEnergyS
 import com.ragingart.miningmodifications.util.CasingHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
 public class BlockRFEnergyStorage extends BlockMachineMM{
@@ -37,11 +40,11 @@ public class BlockRFEnergyStorage extends BlockMachineMM{
 
 
     @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9)
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ)
     {
 
-            if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityRFEnergyStorage) {
-                player.openGui(MiningModifications.instance, Gui.ID.RFENERGYSTORAGE.ordinal(), world, x, y, z);
+            if (!worldIn.isRemote && worldIn.getTileEntity(pos) instanceof TileEntityRFEnergyStorage) {
+                playerIn.openGui(MiningModifications.instance, Gui.ID.RFENERGYSTORAGE.ordinal(), worldIn, pos.getX(),pos.getY(),pos.getZ());
             }
             return true;
 

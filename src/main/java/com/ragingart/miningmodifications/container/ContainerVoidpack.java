@@ -3,18 +3,12 @@ package com.ragingart.miningmodifications.container;
 import cofh.lib.gui.container.ContainerInventoryItem;
 import cofh.lib.util.helpers.ItemHelper;
 import com.ragingart.miningmodifications.client.gui.slot.SlotVoidpack;
-import com.ragingart.miningmodifications.item.ItemVoidpack;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-import java.util.Iterator;
-
-/**
- * Created by MaaT on 02.11.2014.
- */
 public class ContainerVoidpack extends ContainerInventoryItem{
 
     public ContainerVoidpack(InventoryPlayer inventory,ItemStack stack) {
@@ -69,7 +63,7 @@ public class ContainerVoidpack extends ContainerInventoryItem{
             this.addSlotToContainer(new Slot(inventoryPlayer, actionBarSlotIndex, 8 + actionBarSlotIndex * 18, 116));
         }
     }
-
+    /*
     @Override
     public ItemStack slotClick(int slotIndex, int v, int mode, EntityPlayer player) {
 
@@ -90,21 +84,21 @@ public class ContainerVoidpack extends ContainerInventoryItem{
 
         if (mode == 5) {
             // Dragging only enabled within Playerinventory Index 0 to 35
-            /*
+
                 v = pressed,hold,released
                 v = 0,1,2 L-Dragging
                 v = 4,5,6 R-Dragging
-            */
+
             if(slotIndex < 36) {
                 onDrag(slotIndex, v, inventoryPlayer);
             }
         } else if (this.field_94536_g != 0) {
             this.func_94533_d();
         } else {
-            /*
+
                 v = left,right click
                 v = 0,1
-            */
+
 
             Slot aSlot;
             int aStackSize;
@@ -115,9 +109,9 @@ public class ContainerVoidpack extends ContainerInventoryItem{
                     dropItem(v,inventoryPlayer);
                 } else if (mode == 1) {
                     // Shift v-klick
-                    /*
+
                         If within Playerinventory do nothing, else Clear the Setup
-                     */
+
                     if (slotIndex < 36) {
                         return null;
                     } else {
@@ -245,9 +239,9 @@ public class ContainerVoidpack extends ContainerInventoryItem{
                     }
                 }
             } else if (mode == 3 && player.capabilities.isCreativeMode && inventoryPlayer.getItemStack() == null && slotIndex >= 0) {
-                /*
+
                     Middleclick
-                 */
+
                 aSlot = (Slot) this.inventorySlots.get(slotIndex);
 
                 if (aSlot != null && aSlot.getHasStack()) {
@@ -256,9 +250,9 @@ public class ContainerVoidpack extends ContainerInventoryItem{
                     inventoryPlayer.setItemStack(aStack);
                 }
             } else if (mode == 4 && inventoryPlayer.getItemStack() == null && slotIndex >= 0) {
-                /*
+
                     Slotclick with q
-                 */
+
                 aSlot = (Slot) this.inventorySlots.get(slotIndex);
 
                 if (aSlot != null && aSlot.getHasStack() && aSlot.canTakeStack(player)) {
@@ -269,7 +263,7 @@ public class ContainerVoidpack extends ContainerInventoryItem{
             } else if (mode == 6 && slotIndex >= 0) {
                 /*
                     Doubleclick
-                 */
+
                 aSlot = (Slot) this.inventorySlots.get(slotIndex);
                 aStack = inventoryPlayer.getItemStack();
 
@@ -299,7 +293,10 @@ public class ContainerVoidpack extends ContainerInventoryItem{
             }
         }
         return rStack;
+
     }
+ */
+
 
     @Override
     protected boolean mergeItemStack(ItemStack stack, int slotMin, int slotMax, boolean ascending) {
@@ -362,7 +359,7 @@ public class ContainerVoidpack extends ContainerInventoryItem{
     public ItemStack transferStackInSlot(EntityPlayer player, int slotIndex) {
         return null;
     }
-
+    /*
     private void onDrag(int sId,int mode,InventoryPlayer inv){
         int l = this.field_94536_g;
         this.field_94536_g = func_94532_c(mode);
@@ -426,19 +423,19 @@ public class ContainerVoidpack extends ContainerInventoryItem{
         }
 
     }
-
+    */
     private void dropItem(int v,InventoryPlayer inv){
         if (inv.getItemStack() != null) {
             if (v == 0) {
                 player.dropPlayerItemWithRandomChoice(inv.getItemStack(), true);
-                inv.setItemStack((ItemStack) null);
+                inv.setItemStack(null);
             }
 
             if (v == 1) {
                 player.dropPlayerItemWithRandomChoice(inv.getItemStack().splitStack(1), true);
 
                 if (inv.getItemStack().stackSize == 0) {
-                    inv.setItemStack((ItemStack) null);
+                    inv.setItemStack(null);
                 }
             }
         }

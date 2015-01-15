@@ -7,15 +7,12 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import org.lwjgl.opengl.GL11;
 
-/**
- * Created by MaaT on 19.10.2014.
- */
-public class TileRendererSharpeningWheel extends TileEntitySpecialRenderer {
+public class TileRendererSharpeningWheel extends TileEntitySpecialRenderer{
 
     ModelSharpeningWheel model = new ModelSharpeningWheel();
 
     @Override
-    public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float tick) {
+    public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float tick, int p_180535_9_) {
         if(tileEntity instanceof TileEntitySharpeningWheel) {
             GL11.glPushMatrix();
             GL11.glTranslated(x + 0.5, y + 0.0625, z + 0.5);

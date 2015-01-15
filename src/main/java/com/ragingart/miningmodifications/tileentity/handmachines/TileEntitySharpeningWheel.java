@@ -6,11 +6,9 @@ import com.ragingart.miningmodifications.ref.Recipes;
 import com.ragingart.miningmodifications.tileentity.handmachines.recipe.RecipeSharpeningWheel;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.IChatComponent;
 
-/**
- * Created by MaaT on 16.10.2014.
- */
 public class TileEntitySharpeningWheel extends TileEntityMachinePP {
 
     public TileEntitySharpeningWheel(){
@@ -41,8 +39,8 @@ public class TileEntitySharpeningWheel extends TileEntityMachinePP {
     /*IMusclePower*/
 
     @Override
-    public boolean canAcceptMusclePower(ForgeDirection from){
-        return from==ForgeDirection.UP;
+    public boolean canAcceptMusclePower(EnumFacing from){
+        return from==EnumFacing.UP;
     }
 
     @Override
@@ -79,5 +77,21 @@ public class TileEntitySharpeningWheel extends TileEntityMachinePP {
     @Override
     public int getInventoryStackLimit() {
         return 64;
+    }
+
+
+    @Override
+    public String getName() {
+        return null;
+    }
+
+    @Override
+    public boolean hasCustomName() {
+        return false;
+    }
+
+    @Override
+    public IChatComponent getDisplayName() {
+        return null;
     }
 }

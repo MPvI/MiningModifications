@@ -7,16 +7,14 @@ import com.ragingart.miningmodifications.ref.Names;
 import com.ragingart.miningmodifications.ref.RenderIds;
 import com.ragingart.miningmodifications.tileentity.machines.TileEntityLaserSeperator;
 import com.ragingart.miningmodifications.util.LogHelper;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-/**
- * Created by MaaT on 18.10.2014.
- */
 public class BlockLaserSeperator extends BlockMachineMM  implements IMultiBlockPart {
     public BlockLaserSeperator() {
         super(Names.Blocks.LS);
@@ -24,17 +22,10 @@ public class BlockLaserSeperator extends BlockMachineMM  implements IMultiBlockP
     }
 
     @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int side, float hitX, float hitY, float hitZ) {
-        boolean result = ((TileEntityMachineMultiBlockMM)world.getTileEntity(x,y,z)).checkStructure(world,x-2,y-1,z-2);
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ) {
+        boolean result = ((TileEntityMachineMultiBlockMM)worldIn.getTileEntity(pos)).checkStructure(worldIn,pos.add(-2,-1,-2));
         LogHelper.info(result);
         return result;
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public int getRenderBlockPass()
-    {
-        return 0;
     }
 
     @Override
@@ -59,12 +50,6 @@ public class BlockLaserSeperator extends BlockMachineMM  implements IMultiBlockP
     public boolean isOpaqueCube()
     {
         return false;
-    }
-
-    @Override
-    public boolean renderAsNormalBlock()
-    {
-        return true;
     }
 
     @Override

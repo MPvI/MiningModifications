@@ -2,15 +2,13 @@ package com.ragingart.miningmodifications.item;
 
 import com.ragingart.miningmodifications.generics.ItemToolMM;
 import com.ragingart.miningmodifications.ref.Names;
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
-/**
- * Created by MaaT on 04.09.2014.
- */
 public class ItemSpear extends ItemToolMM {
     public ItemSpear(){
         super(Names.Items.WEAPON_SPEAR,10.0F);
@@ -18,10 +16,6 @@ public class ItemSpear extends ItemToolMM {
     }
 
 
-    @Override
-    public float getDigSpeed(ItemStack stack, Block block, int meta) {
-        return 0.0F;
-    }
 
     @Override
     public int getMaxItemUseDuration(ItemStack p_77626_1_) {
@@ -31,7 +25,7 @@ public class ItemSpear extends ItemToolMM {
 
     @Override
     public EnumAction getItemUseAction(ItemStack p_77661_1_) {
-        return EnumAction.bow;
+        return EnumAction.BOW;
     }
 
     @Override
@@ -46,7 +40,7 @@ public class ItemSpear extends ItemToolMM {
     }
 
     @Override
-    public boolean onItemUse(ItemStack itemStack,EntityPlayer entityPlayer,World world, int x, int y, int z, int meta, float hitX, float hitY, float hitZ){
+    public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ){
         return false;
     }
 

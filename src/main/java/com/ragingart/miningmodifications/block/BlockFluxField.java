@@ -5,18 +5,19 @@ import com.ragingart.miningmodifications.ref.Names;
 import com.ragingart.miningmodifications.ref.RenderIds;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
-/**
- * Created by MaaT on 25.09.2014.
- */
 public class BlockFluxField extends BlockMM {
     public BlockFluxField() {
         super(Names.Blocks.FLUXFIELD);
@@ -36,33 +37,27 @@ public class BlockFluxField extends BlockMM {
         return RenderIds.FluxField;
     }
 
+
     @Override
-    public boolean renderAsNormalBlock() {
-        return false;
+    public void breakBlock(World world, BlockPos pos, IBlockState state) {
+        super.breakBlock(world,pos,state);
+        world.setBlockToAir(pos);
     }
 
     @Override
-    public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
-        super.breakBlock(world, x, y, z, block, meta);
-        world.setBlockToAir(x,y,z);
+    public void harvestBlock(World worldIn, EntityPlayer playerIn, BlockPos pos, IBlockState state, TileEntity te) {
     }
 
     @Override
-    public void harvestBlock(World p_149636_1_, EntityPlayer p_149636_2_, int p_149636_3_, int p_149636_4_, int p_149636_5_, int p_149636_6_) {
-
-    }
-
-    @Override
-    public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_) {
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return new Item();
     }
 
     @Override
-    public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
+    public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
         return new ArrayList<ItemStack>();
     }
 
-    @Override
     @SideOnly(Side.CLIENT)
     public int getRenderBlockPass()
     {

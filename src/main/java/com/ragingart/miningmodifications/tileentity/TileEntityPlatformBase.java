@@ -6,14 +6,12 @@ import com.ragingart.miningmodifications.handler.ConfigHandler;
 import com.ragingart.miningmodifications.init.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
 
-/**
- * Created by MaaT on 26.09.2014.
- */
 public class TileEntityPlatformBase extends TileEntityMM {
     private int animationTimer = 0;
     private boolean isExtracted = false;
@@ -27,7 +25,6 @@ public class TileEntityPlatformBase extends TileEntityMM {
         return isExtracted;
     }
 
-    @Override
     public void updateEntity() {
         animationTimer++;
     }
@@ -63,7 +60,7 @@ public class TileEntityPlatformBase extends TileEntityMM {
         String parts[] = string.split("_");
         for (int i = 1; i < parts.length; i++) {
             String coords[] = parts[i].split(":");
-            platform.add(Vec3.createVectorHelper(Double.parseDouble(coords[0]),Double.parseDouble(coords[1]),Double.parseDouble(coords[2])));
+            platform.add(new Vec3(Double.parseDouble(coords[0]),Double.parseDouble(coords[1]),Double.parseDouble(coords[2])));
         }
     }
 
@@ -81,12 +78,10 @@ public class TileEntityPlatformBase extends TileEntityMM {
     public void destroyPlatform(){
         for (int i = 1; i < platform.size(); i++) {
             Vec3 target = platform.get(i);
-            int x = (int)target.xCoord;
-            int y = (int)target.yCoord;
-            int z = (int)target.zCoord;
-            Block aBlock = worldObj.getBlock(x,y,z);
+            BlockPos blockPos = new BlockPos(target.xCoord,target.yCoord,target.zCoord);
+            Block aBlock = worldObj.getBlockState(blockPos).getBlock();
             if(aBlock instanceof BlockFluxField) {
-                aBlock.breakBlock(worldObj, x, y, z, aBlock, 0);
+                aBlock.breakBlock(worldObj,blockPos,worldObj.getBlockState(blockPos));
             }
 
         }
@@ -95,7 +90,7 @@ public class TileEntityPlatformBase extends TileEntityMM {
     }
 
     private void createPlatform(){
-        Vec3 center = Vec3.createVectorHelper(this.xCoord, this.yCoord, this.zCoord);
+        Vec3 center = new Vec3(pos.getX(),pos.getY(),pos.getZ());
         platform.add(center);
         fillAdjAirBlocks(this.worldObj, center);
         isExtracted = true;
@@ -104,13 +99,11 @@ public class TileEntityPlatformBase extends TileEntityMM {
     public void fillAdjAirBlocks(World world,Vec3 center){
         for (int i = -1; i <= 1; i++) {
             for (int j = -1; j <= 1; j++) {
-                int x = (int)center.xCoord+i;
-                int y = (int)center.yCoord;
-                int z = (int)center.zCoord+j;
-                if(world.getBlock(x,y,z).isReplaceable(world,x,y,z)){
-                    Vec3 target = Vec3.createVectorHelper(x,y,z);
+                BlockPos blockPos = new BlockPos(center.xCoord+i,center.yCoord,center.zCoord+j);
+                if(world.getBlockState(blockPos).getBlock().isReplaceable(world,blockPos)){
+                    Vec3 target = new Vec3(blockPos.getX(),blockPos.getY(),blockPos.getZ());
                     if(platform.get(0).distanceTo(target)< ConfigHandler.maxPlatformRadius && platform.size()<= ConfigHandler.maxPlatformSize) {
-                        world.setBlock(x, y, z, ModBlocks.FluxField);
+                        world.setBlockState(blockPos,ModBlocks.FluxField.getDefaultState());
                         platform.add(target);
                         fillAdjAirBlocks(world,target);
                     }

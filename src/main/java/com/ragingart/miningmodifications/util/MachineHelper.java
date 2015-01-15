@@ -3,6 +3,7 @@ package com.ragingart.miningmodifications.util;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
  */
 public class MachineHelper {
     protected CasingHelper.Port[] mPorts = new CasingHelper.Port[6];
-    protected ForgeDirection facing = ForgeDirection.EAST;
+    protected EnumFacing facing = EnumFacing.EAST;
     protected boolean hasInventory=false;
     protected int state = 0;
 
@@ -43,7 +44,7 @@ public class MachineHelper {
     public CasingHelper.Port setPort(int side,int port){
         if(port == 6){
             mPorts[side]=null;
-            facing=ForgeDirection.getOrientation(side);
+            facing=EnumFacing.getFront(side);
             return null;
         }else{
             CasingHelper.Port oldPort = mPorts[side];
@@ -52,35 +53,35 @@ public class MachineHelper {
         }
 
     }
-    public void rotatePortsDirectlyToFace(ForgeDirection face){
+    public void rotatePortsDirectlyToFace(EnumFacing face){
         if(face==facing.getOpposite()){
             switch (face) {
                 case UP:
                 case DOWN:
-                    rotatePortsToFacing(ForgeDirection.NORTH);
+                    rotatePortsToFacing(EnumFacing.NORTH);
                     break;
                 case NORTH:
                 case SOUTH:
-                    rotatePortsToFacing(ForgeDirection.EAST);
+                    rotatePortsToFacing(EnumFacing.EAST);
                     break;
                 case WEST:
                 case EAST:
-                    rotatePortsToFacing(ForgeDirection.NORTH);
+                    rotatePortsToFacing(EnumFacing.NORTH);
                     break;
             }
         }
         rotatePortsToFacing(face);
     }
-    public void rotatePortsToFacing(ForgeDirection facing){
-        rotatePortsAroundAxis(this.facing.getRotation(facing));
+    public void rotatePortsToFacing(EnumFacing facing){
+        rotatePortsAroundAxis(this.facing.rotateAround(facing.getAxis()));
     }
 
-    public void rotatePortsAroundAxis(ForgeDirection axis){
+    public void rotatePortsAroundAxis(EnumFacing axis){
         CasingHelper.Port[] aHelper = new CasingHelper.Port[6];
         for (int i = 0; i < 6; i++) {
-            CasingHelper.Port tmp = mPorts[ForgeDirection.getOrientation(i).getRotation(axis).ordinal()];
+            CasingHelper.Port tmp = mPorts[EnumFacing.getFront(i).rotateAround(axis.getAxis()).ordinal()];
             if(tmp==null){
-                facing = ForgeDirection.getOrientation(i);
+                facing = EnumFacing.getFront(i);
             }
             aHelper[i]=tmp;
         }
@@ -98,7 +99,7 @@ public class MachineHelper {
 
 
     // Facing
-    public ForgeDirection getFacing(){
+    public EnumFacing getFacing(){
         return this.facing;
     }
 
@@ -121,7 +122,7 @@ public class MachineHelper {
     // Reading
     public void getPortsFromNBT(NBTTagCompound cmpd){
         state = cmpd.getInteger("State");
-        facing = ForgeDirection.values()[cmpd.getInteger("Facing")];
+        facing = EnumFacing.values()[cmpd.getInteger("Facing")];
         if(cmpd.hasKey("Ports")){
             NBTTagCompound Ports = cmpd.getCompoundTag("Ports");
             for(int i=0;i<mPorts.length;i++) {
@@ -150,7 +151,7 @@ public class MachineHelper {
         }
     }
 
-    public void setFacing(ForgeDirection facing) {
+    public void setFacing(EnumFacing facing) {
         this.facing = facing;
     }
 

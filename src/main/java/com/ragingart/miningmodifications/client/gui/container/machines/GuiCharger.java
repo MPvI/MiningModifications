@@ -25,7 +25,7 @@ public class GuiCharger extends GuiContainer {
     @Override
     protected void drawGuiContainerForegroundLayer(int x, int y)
     {
-        String containerName = tileEntityCharger.getInventoryName();
+        String containerName = tileEntityCharger.getName();
         fontRendererObj.drawString(containerName, xSize / 2 - fontRendererObj.getStringWidth(containerName) / 2, 6, 4210752);
         fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 93, 4210752);
         fontRendererObj.drawString(String.valueOf(tileEntityCharger.getEnergyStored(ForgeDirection.UNKNOWN)), xSize / 2 - fontRendererObj.getStringWidth(String.valueOf(tileEntityCharger.getEnergyStored(ForgeDirection.UNKNOWN))) / 2, 45, 4210752);

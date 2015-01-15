@@ -4,16 +4,15 @@ import com.ragingart.miningmodifications.generics.BlockMM;
 import com.ragingart.miningmodifications.ref.Names;
 import com.ragingart.miningmodifications.ref.RenderIds;
 import com.ragingart.miningmodifications.tileentity.TileEntityPlatformBase;
-import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
-/**
- * Created by MaaT on 25.09.2014.
- */
 public class BlockPlatformBase extends BlockMM implements ITileEntityProvider {
 
     public BlockPlatformBase() {
@@ -31,18 +30,13 @@ public class BlockPlatformBase extends BlockMM implements ITileEntityProvider {
     }
 
     @Override
-    public boolean renderAsNormalBlock() {
-        return false;
-    }
-
-    @Override
     public boolean isOpaqueCube() {
         return false;
     }
 
     @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int side, float hitX, float hitY, float hitZ) {
-        TileEntity aTile = world.getTileEntity(x,y,z);
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ) {
+        TileEntity aTile = worldIn.getTileEntity(pos);
         if(aTile instanceof TileEntityPlatformBase) {
             ((TileEntityPlatformBase) aTile).togglePlatform();
             return true;
@@ -51,10 +45,10 @@ public class BlockPlatformBase extends BlockMM implements ITileEntityProvider {
     }
 
     @Override
-    public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
-        if(hasTileEntity(meta) && world.getTileEntity(x,y,z) instanceof TileEntityPlatformBase){
-            ((TileEntityPlatformBase) world.getTileEntity(x,y,z)).destroyPlatform();
-            world.removeTileEntity(x,y,z);
+    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+        if(hasTileEntity(state) && worldIn.getTileEntity(pos) instanceof TileEntityPlatformBase){
+            ((TileEntityPlatformBase) worldIn.getTileEntity(pos)).destroyPlatform();
+            worldIn.removeTileEntity(pos);
         }
     }
 

@@ -1,13 +1,11 @@
 package com.ragingart.miningmodifications.api;
 
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraft.util.EnumFacing;
 
-/**
- * Created by XtraX on 18.10.2014.
- */
+
 public abstract interface IMusclePower {
 
-    public abstract boolean canAcceptMusclePower(ForgeDirection from);
+    public abstract boolean canAcceptMusclePower(EnumFacing from);
 
     public abstract int receiveMusclePower(int amount);
 

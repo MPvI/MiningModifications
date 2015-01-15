@@ -1,8 +1,8 @@
 package com.ragingart.miningmodifications.item;
 
 
-import cofh.api.block.IDismantleable;
 import com.google.common.collect.Sets;
+import com.ragingart.miningmodifications.generics.BlockMM;
 import com.ragingart.miningmodifications.generics.ItemToolMM;
 import com.ragingart.miningmodifications.handler.ConfigHandler;
 import com.ragingart.miningmodifications.init.ModBlocks;
@@ -19,12 +19,13 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 public class ItemMultitool extends ItemToolMM
@@ -32,8 +33,6 @@ public class ItemMultitool extends ItemToolMM
     private static final Set blocksEffectiveAgainst = Sets.newHashSet(ModBlocks.Ore);
     private static final String[] modes = new String[]{"Mining Mode","Wrench Mode","Rotation Mode"};
     private int consume = ConfigHandler.miningEnergyBase;
-    private int runTick=0;
-
 
     public ItemMultitool()
     {
@@ -61,22 +60,22 @@ public class ItemMultitool extends ItemToolMM
 
 
     @Override
-    public boolean onItemUse(ItemStack itemStack,EntityPlayer entityPlayer,World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ){
+    public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ){
 
-        if(!world.isRemote && entityPlayer.isSneaking()){
+        if(!worldIn.isRemote && playerIn.isSneaking()){
             LogHelper.info("mySide U");
-            Block aBlock = world.getBlock(x, y, z);
-            switch(getMode(itemStack)){
+            Block aBlock = worldIn.getBlockState(pos).getBlock();
+            switch(getMode(stack)){
                 case 0:
                     return false;
                 case 1:
-                    if(aBlock instanceof IDismantleable){
-                        ((IDismantleable) aBlock).dismantleBlock(entityPlayer,world, x, y, z,true);
+                    if(aBlock instanceof BlockMM){
+                        ((BlockMM) aBlock).dismantleBlock(playerIn,worldIn,pos,worldIn.getBlockState(pos),true);
                         return true;
                     }
                     return false;
                 case 2:
-                    aBlock.rotateBlock(world, x, y, z, ForgeDirection.getOrientation(side));
+                    aBlock.rotateBlock(worldIn,pos,side);
                     return true;
                 default:
                     return false;
@@ -88,10 +87,10 @@ public class ItemMultitool extends ItemToolMM
 
 
     @Override
-    public void onUsingTick(ItemStack itemStack, EntityPlayer entityPlayer, int count) {
-        if(!entityPlayer.worldObj.isRemote) {
+    public void onUsingTick(ItemStack stack, EntityPlayer playerIn, int count) {
+        if(!playerIn.worldObj.isRemote) {
             LogHelper.info("mySide UT");
-            MovingObjectPosition mOP = this.getMovingObjectPositionFromPlayer(entityPlayer.worldObj,entityPlayer,true);
+            MovingObjectPosition mOP = this.getMovingObjectPositionFromPlayer(playerIn.worldObj,playerIn,true);
 
             if(mOP==null || mOP.typeOfHit != MovingObjectPosition.MovingObjectType.BLOCK){
                 return;
@@ -101,43 +100,43 @@ public class ItemMultitool extends ItemToolMM
 
             float hardness = 0;
 
-            entityPlayer.addPotionEffect(new PotionEffect(1,5,1));
+            playerIn.addPotionEffect(new PotionEffect(1, 5, 1));
 
-            ToolHelper.HFE[] HF = ToolHelper.getHarvestField(mOP.blockX,mOP.blockY,mOP.blockZ,mOP.sideHit,r);
+            ToolHelper.HFE[] HF = ToolHelper.getHarvestField(mOP.func_178782_a(),mOP.field_178784_b,r);
 
             for (ToolHelper.HFE aHF : HF) {
-                aHF.mBlock = entityPlayer.worldObj.getBlock(aHF.x,aHF.y,aHF.z);
-                hardness += aHF.mBlock.getBlockHardness(entityPlayer.worldObj,aHF.x,aHF.y,aHF.z);
+                aHF.mBlock = playerIn.worldObj.getBlockState(aHF.mPos).getBlock();
+                hardness += aHF.mBlock.getBlockHardness(playerIn.worldObj,aHF.mPos);
             }
 
-            int maxTick = (int)hardness*ConfigHandler.miningSpeedModificator/(EnchantmentHelper.getEfficiencyModifier(entityPlayer)+1);
+            int maxTick = (int)hardness*ConfigHandler.miningSpeedModificator/(EnchantmentHelper.getEfficiencyModifier(playerIn)+1);
             /*
             if(maxTick>ConfigHandler.maxMiningTime){
                 maxTick=ConfigHandler.maxMiningTime;
             }
             */
 
-            int runTick = (int)((System.currentTimeMillis()-getStartTime(itemStack))/50);
+            int runTick = (int)((System.currentTimeMillis()-getStartTime(stack))/50);
             if(runTick >= maxTick){
-                for (ToolHelper.HFE aHF : HF) {
-                    if (aHF.mBlock != Blocks.air && aHF.mBlock != Blocks.bedrock && aHF.mBlock != Blocks.lava && aHF.mBlock != Blocks.water) {
-                        ArrayList<ItemStack> drops = aHF.mBlock.getDrops(entityPlayer.worldObj, aHF.x, aHF.y, aHF.z, aHF.mBlock.getDamageValue(entityPlayer.worldObj, aHF.x, aHF.y, aHF.z), EnchantmentHelper.getFortuneModifier(entityPlayer));
+                for (ToolHelper.HFE aHFE : HF) {
+                    if (aHFE.mBlock != Blocks.air && aHFE.mBlock != Blocks.bedrock && aHFE.mBlock != Blocks.lava && aHFE.mBlock != Blocks.water) {
+                        List<ItemStack> drops = aHFE.mBlock.getDrops(playerIn.worldObj,aHFE.mPos,playerIn.worldObj.getBlockState(aHFE.mPos),EnchantmentHelper.getFortuneModifier(playerIn));
                         for (ItemStack drop : drops) {
-                            EntityItem dropEntity = new EntityItem(entityPlayer.worldObj, aHF.x, aHF.y, aHF.z, drop);
-                            entityPlayer.worldObj.spawnEntityInWorld(dropEntity);
+                            EntityItem dropEntity = new EntityItem(playerIn.worldObj,aHFE.mPos.getX(),aHFE.mPos.getY(),aHFE.mPos.getZ(),drop);
+                            playerIn.worldObj.spawnEntityInWorld(dropEntity);
                         }
-                        aHF.mBlock.removedByPlayer(entityPlayer.worldObj, entityPlayer, aHF.x, aHF.y, aHF.z, false);
+                        aHFE.mBlock.removedByPlayer(playerIn.worldObj,aHFE.mPos,playerIn,false);
                     }
                 }
                 consume += runTick*ConfigHandler.miningEnergyModificator;
-                consume /= (EnchantmentHelper.getEnchantmentLevel(34,itemStack)+1);
+                consume /= (EnchantmentHelper.getEnchantmentLevel(34,stack)+1);
 
-                if(entityPlayer.capabilities.isCreativeMode || consume > extractEnergy(itemStack,consume,false)){
-                    entityPlayer.clearItemInUse();
+                if(playerIn.capabilities.isCreativeMode || consume > extractEnergy(stack,consume,false)){
+                    playerIn.clearItemInUse();
                 }
 
                 consume = ConfigHandler.miningEnergyBase;
-                NBTHelper.setLong(itemStack, "startTime", System.currentTimeMillis());
+                NBTHelper.setLong(stack, "startTime", System.currentTimeMillis());
             }
 
             //if(entityPlayer)
@@ -173,7 +172,7 @@ public class ItemMultitool extends ItemToolMM
 
     @Override
     public EnumAction getItemUseAction(ItemStack itemStack) {
-        return EnumAction.bow;
+        return EnumAction.BOW;
     }
 
     @Override

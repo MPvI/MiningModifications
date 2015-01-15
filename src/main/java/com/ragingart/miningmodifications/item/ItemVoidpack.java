@@ -11,14 +11,13 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
 import java.util.List;
 
-/**
- * Created by MaaT on 12.10.2014.
- */
 public class ItemVoidpack extends ItemMM implements IInventoryContainerItem{
 
     public ItemVoidpack() {
@@ -34,10 +33,10 @@ public class ItemVoidpack extends ItemMM implements IInventoryContainerItem{
                 Item[] toErase = new Item[5];
                 int[] meErase = new int[5];
                 int[] nuErase = new int[5];
-                if (itemStack.hasTagCompound() && !itemStack.stackTagCompound.hasNoTags()) {
+                if (itemStack.hasTagCompound() && !itemStack.getTagCompound().hasNoTags()) {
                     for (int j = 0; j < 5; j++) {
-                        if (itemStack.stackTagCompound.hasKey("Slot" + j)) {
-                            ItemStack aStack = ItemStack.loadItemStackFromNBT(itemStack.stackTagCompound.getCompoundTag("Slot" + j));
+                        if (itemStack.getTagCompound().hasKey("Slot" + j)) {
+                            ItemStack aStack = ItemStack.loadItemStackFromNBT(itemStack.getTagCompound().getCompoundTag("Slot" + j));
                             if (aStack != null) {
                                 toErase[j] = aStack.getItem();
                                 nuErase[j] = getNumberToKeep(itemStack,j);
@@ -104,12 +103,12 @@ public class ItemVoidpack extends ItemMM implements IInventoryContainerItem{
 
 
     @Override
-    public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
+    public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ) {
         return false;
     }
 
     @Override
-    public boolean onItemUse(ItemStack p_77648_1_, EntityPlayer p_77648_2_, World p_77648_3_, int p_77648_4_, int p_77648_5_, int p_77648_6_, int p_77648_7_, float p_77648_8_, float p_77648_9_, float p_77648_10_) {
+    public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ) {
         return false;
     }
 

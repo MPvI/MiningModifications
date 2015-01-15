@@ -5,14 +5,11 @@ import cpw.mods.fml.common.IWorldGenerator;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 
 import java.util.Random;
-
-/**
- * Created by MaaT on 25.09.2014.
- */
 
 public class ModWorldgen implements IWorldGenerator {
 
@@ -42,8 +39,8 @@ public class ModWorldgen implements IWorldGenerator {
     }
 
     public void setBlock(World world,int x,int y,int z,Block block){
-        if(world.getBlock(x,y,z)==Blocks.stone){
-            world.setBlock(x,y,z,block);
+        if(world.getBlockState(new BlockPos(x, y, z)).getBlock()==Blocks.stone){
+            world.setBlockState(new BlockPos(x, y, z),block.getDefaultState());
         }
     }
 

@@ -15,6 +15,7 @@ import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
 public class GuiHandler implements IGuiHandler {
@@ -22,7 +23,7 @@ public class GuiHandler implements IGuiHandler {
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
 
-        TileEntity tileEntity = world.getTileEntity(x, y, z);
+        TileEntity tileEntity = world.getTileEntity(new BlockPos(x, y, z));
         ItemStack itemStack = player.getHeldItem();
         if (ID == Gui.ID.CHARGER.ordinal()){
             return new ContainerCharger(player.inventory, tileEntity);
@@ -56,7 +57,7 @@ public class GuiHandler implements IGuiHandler {
 
     @Override
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-        TileEntity tileEntity = world.getTileEntity(x, y, z);
+        TileEntity tileEntity = world.getTileEntity(new BlockPos(x, y, z));
         ItemStack itemStack = player.getHeldItem();
         if (ID == Gui.ID.CHARGER.ordinal()){
             return new GuiCharger(player.inventory,tileEntity);

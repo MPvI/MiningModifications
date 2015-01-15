@@ -2,17 +2,16 @@ package com.ragingart.miningmodifications.generics;
 
 import com.ragingart.miningmodifications.util.MachineHelper;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.List;
 
-/**
- * Created by MaaT on 16.10.2014.
- */
 public class ItemBlockMachineMM extends ItemBlockMM {
 
 
@@ -32,14 +31,14 @@ public class ItemBlockMachineMM extends ItemBlockMM {
     }
 
     @Override
-    public boolean placeBlockAt(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metadata) {
-        boolean result = super.placeBlockAt(itemStack, player, world, x, y, z, side, hitX, hitY, hitZ, metadata);
+    public boolean placeBlockAt(ItemStack itemStack, EntityPlayer player, World world,BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ, IBlockState metadata) {
+        boolean result = super.placeBlockAt(itemStack, player, world, pos, side, hitX, hitY, hitZ, metadata);
         if(!world.isRemote && result) {
-            MachineHelper aHelper = ((TileEntityMachineMM) world.getTileEntity(x, y, z)).getMachineHelper();
+            MachineHelper aHelper = ((TileEntityMachineMM) world.getTileEntity(pos)).getMachineHelper();
             if(MachineHelper.isHelperSavedToItemStack(itemStack)){
                 aHelper.getPortsFromNBT(itemStack.getTagCompound());
-            }else if (side != 5) {
-                aHelper.rotatePortsDirectlyToFace(ForgeDirection.getOrientation(side));
+            }else if (side != EnumFacing.getFront(5)) {
+                aHelper.rotatePortsDirectlyToFace(side);
             }
         }
         return result;

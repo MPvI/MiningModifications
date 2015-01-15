@@ -25,7 +25,7 @@ public class GuiSharpeningWheel extends GuiContainer {
     @Override
     protected void drawGuiContainerForegroundLayer(int x, int y)
     {
-        String containerName = tileEntitySharpeningWheel.getInventoryName();
+        String containerName = tileEntitySharpeningWheel.getName();
         fontRendererObj.drawString(containerName, xSize / 2 - fontRendererObj.getStringWidth(containerName) / 2, 6, 4210752);
         fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 93, 4210752);
     }

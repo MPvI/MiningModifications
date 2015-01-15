@@ -1,17 +1,12 @@
 package com.ragingart.miningmodifications.client.renderer.block;
 
-import com.ragingart.miningmodifications.init.ModBlocks;
 import com.ragingart.miningmodifications.ref.RenderIds;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
 import org.lwjgl.opengl.GL11;
 
-/**
- * Created by MaaT on 20.10.2014.
- */
 public class BlockRendererFluxField implements ISimpleBlockRenderingHandler {
 
     @Override
@@ -37,12 +32,13 @@ public class BlockRendererFluxField implements ISimpleBlockRenderingHandler {
         if(inside){
             a = 1;
         }
+        /*
         float uMin = world.getBlock(x, y, z).getIcon(0, 0).getMinU();
         float uMax = world.getBlock(x, y, z).getIcon(0, 0).getMaxU();
         float vMin = world.getBlock(x, y, z).getIcon(0, 0).getMinV();
         float vMax = world.getBlock(x, y, z).getIcon(0, 0).getMaxV();
 
-        Tessellator t = Tessellator.instance;
+        Tessellator t = Tessellator.getInstance();
 
         t.setColorRGBA(255,255,255,130);
         t.addTranslation(x, y, z);
@@ -91,6 +87,7 @@ public class BlockRendererFluxField implements ISimpleBlockRenderingHandler {
         }
 
         t.addTranslation(-x, -y, -z);
+        */
     }
 
     @Override

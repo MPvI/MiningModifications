@@ -10,9 +10,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-/**
- * Created by MaaT on 16.10.2014.
- */
 public class BlockCable extends BlockMM implements ITileEntityProvider,IMultiBlockPart{
     public BlockCable() {
         super(Material.circuits, Names.Blocks.CABLE);
@@ -33,11 +30,6 @@ public class BlockCable extends BlockMM implements ITileEntityProvider,IMultiBlo
     @Override
     public int getRenderType() {
         return RenderIds.Cable;
-    }
-
-    @Override
-    public boolean renderAsNormalBlock() {
-        return false;
     }
 
     @Override

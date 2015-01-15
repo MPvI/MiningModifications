@@ -8,10 +8,8 @@ import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.util.BlockPos;
 
-/**
- * Created by MaaT on 02.09.2014.
- */
 public class MessageItemCasing implements IMessage,IMessageHandler<MessageItemCasing,IMessage> {
 
     public int side;
@@ -53,7 +51,7 @@ public class MessageItemCasing implements IMessage,IMessageHandler<MessageItemCa
     @Override
     public IMessage onMessage(MessageItemCasing message, MessageContext ctx) {
         EntityPlayerMP player = ctx.getServerHandler().playerEntity;
-        TileEntityMachineMM aTile = (TileEntityMachineMM) player.worldObj.getTileEntity(message.x, message.y, message.z);
+        TileEntityMachineMM aTile = (TileEntityMachineMM) player.worldObj.getTileEntity(new BlockPos(message.x, message.y, message.z));
 
         if (message.side != aTile.getMachineHelper().getFacing().ordinal()){
             if (PlayerInventoryHelper.decrItem(player.inventory,CasingHelper.Port.getItemFromPort(message.port))) {

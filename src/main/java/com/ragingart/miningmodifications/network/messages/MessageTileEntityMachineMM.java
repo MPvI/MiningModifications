@@ -9,12 +9,11 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
 
-/**
- * Created by MaaT on 02.09.2014.
- */
 public class MessageTileEntityMachineMM implements IMessage,IMessageHandler<MessageTileEntityMachineMM,IMessage>{
 
     private MachineHelper aHelper;
@@ -30,9 +29,9 @@ public class MessageTileEntityMachineMM implements IMessage,IMessageHandler<Mess
     }
 
     public MessageTileEntityMachineMM(TileEntityMachineMM te){
-        x=te.xCoord;
-        y=te.yCoord;
-        z=te.zCoord;
+        x=te.getPos().getX();
+        y=te.getPos().getY();
+        z=te.getPos().getZ();
         energy=te.getEnergyStored(ForgeDirection.UNKNOWN);
         aHelper=te.getMachineHelper();
         famount = te.getFluidAmount();
@@ -48,7 +47,7 @@ public class MessageTileEntityMachineMM implements IMessage,IMessageHandler<Mess
         famount =buf.readInt();
         fid = buf.readInt();
         aHelper.setState(buf.readInt());
-        aHelper.setFacing(ForgeDirection.getOrientation(buf.readInt()));
+        aHelper.setFacing(EnumFacing.getFront(buf.readInt()));
         for (int i = 0; i < 6; i++) {
             aHelper.setPort(i, buf.readInt());
         }
@@ -76,7 +75,7 @@ public class MessageTileEntityMachineMM implements IMessage,IMessageHandler<Mess
     @Override
     public IMessage onMessage(MessageTileEntityMachineMM message, MessageContext ctx) {
         Minecraft aClient = FMLClientHandler.instance().getClient();
-        TileEntity aTile = aClient.theWorld.getTileEntity(message.x,message.y,message.z);
+        TileEntity aTile = aClient.theWorld.getTileEntity(new BlockPos(message.x,message.y,message.z));
 
         if(aTile instanceof TileEntityMachineMM){
 
@@ -85,7 +84,7 @@ public class MessageTileEntityMachineMM implements IMessage,IMessageHandler<Mess
             ((TileEntityMachineMM) aTile).getTank().setFluid(new FluidStack(message.fid,message.famount));
 
             ((TileEntityMachineMM) aTile).setEnergy(message.energy);
-            aClient.theWorld.markBlockForUpdate(message.x,message.y,message.z);
+            aClient.theWorld.markBlockForUpdate(new BlockPos(message.x,message.y,message.z));
         }
         return null;
     }

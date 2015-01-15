@@ -5,11 +5,8 @@ import com.ragingart.miningmodifications.init.ModBlocks;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraft.util.EnumFacing;
 
-/**
- * Created by MaaT on 16.10.2014.
- */
 public class TileEntityCrank extends TileEntity implements IMusclePower{
 
     public TileEntityCrank(){
@@ -19,9 +16,7 @@ public class TileEntityCrank extends TileEntity implements IMusclePower{
     private int animTimer = 0;
     private int remainingActiveTime = 0;
 
-    @Override
     public void updateEntity() {
-        super.updateEntity();
 
         if(remainingActiveTime > 0){
             animTimer++;
@@ -31,9 +26,9 @@ public class TileEntityCrank extends TileEntity implements IMusclePower{
         if(animTimer == 100){
             animTimer=0;
         }
-        if(!worldObj.isRemote && checkLink()==ForgeDirection.UNKNOWN){
-            worldObj.setBlockToAir(xCoord,yCoord,zCoord);
-            worldObj.spawnEntityInWorld(new EntityItem(worldObj,xCoord,yCoord,zCoord,new ItemStack(ModBlocks.Crank)));
+        if(!worldObj.isRemote && checkLink()==null){
+            worldObj.setBlockToAir(pos);
+            worldObj.spawnEntityInWorld(new EntityItem(worldObj,pos.getX(),pos.getY(),pos.getZ(),new ItemStack(ModBlocks.Crank)));
         }
     }
 
@@ -41,28 +36,25 @@ public class TileEntityCrank extends TileEntity implements IMusclePower{
         return animTimer;
     }
 
-    public ForgeDirection checkLink(){
-        for(ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS){
-            int x=this.xCoord+dir.offsetX;
-            int y=this.yCoord+dir.offsetY;
-            int z=this.zCoord+dir.offsetZ;
+    public EnumFacing checkLink(){
+        for(EnumFacing dir : EnumFacing.values()){
 
-            TileEntity aTile = worldObj.getTileEntity(x,y,z);
+            TileEntity aTile = worldObj.getTileEntity(pos.offset(dir));
             if(aTile instanceof IMusclePower){
                 if(((IMusclePower) aTile).canAcceptMusclePower(dir.getOpposite())){
                     return dir;
                 }
             }
         }
-        return ForgeDirection.UNKNOWN;
+        return null;
     }
 
     public boolean provideMusclePower()
     {
         if(remainingActiveTime == 0) {
-            ForgeDirection dir = checkLink();
-            if (dir != ForgeDirection.UNKNOWN) {
-                remainingActiveTime=((IMusclePower) worldObj.getTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ)).receiveMusclePower(1);
+            EnumFacing dir = checkLink();
+            if (dir != null) {
+                remainingActiveTime=((IMusclePower) worldObj.getTileEntity(pos.offset(dir))).receiveMusclePower(1);
                 return true;
             }
         }
@@ -70,7 +62,7 @@ public class TileEntityCrank extends TileEntity implements IMusclePower{
     }
 
     @Override
-    public boolean canAcceptMusclePower(ForgeDirection from){
+    public boolean canAcceptMusclePower(EnumFacing from){
         return false;
     }
 

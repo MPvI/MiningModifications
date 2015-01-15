@@ -10,9 +10,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.ForgeDirection;
 import org.lwjgl.opengl.GL11;
 
-/**
- * Created by XtraX on 07.10.2014.
- */
 public class GuiWaterTurbine extends GuiContainer {
 
     private TileEntityWaterTurbine tileEntityWaterTurbine;
@@ -27,7 +24,7 @@ public class GuiWaterTurbine extends GuiContainer {
     @Override
     protected void drawGuiContainerForegroundLayer(int x, int y)
     {
-        String containerName = tileEntityWaterTurbine.getInventoryName();
+        String containerName = tileEntityWaterTurbine.getName();
         fontRendererObj.drawString(containerName, xSize / 2 - fontRendererObj.getStringWidth(containerName) / 2, 6, 4210752);
 
         String astring = "HHWater: "+String.valueOf(tileEntityWaterTurbine.getFluidAmount())+"/"+String.valueOf(tileEntityWaterTurbine.getFluidCapacity());

@@ -8,14 +8,12 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 
-/**
- * Created by MaaT on 19.10.2014.
- */
 public class MessageTileEntityMachinePP implements IMessage,IMessageHandler<MessageTileEntityMachinePP,IMessage> {
 
-    private ForgeDirection facing;
+    private EnumFacing facing;
     private int x;
     private int y;
     private int z;
@@ -26,14 +24,14 @@ public class MessageTileEntityMachinePP implements IMessage,IMessageHandler<Mess
 
     public MessageTileEntityMachinePP(TileEntityMachinePP aTile) {
         facing = aTile.getFacing();
-        x = aTile.xCoord;
-        y = aTile.yCoord;
-        z = aTile.zCoord;
+        x = aTile.getPos().getX();
+        y = aTile.getPos().getY();
+        z = aTile.getPos().getZ();
     }
 
     @Override
     public void fromBytes(ByteBuf buf) {
-        facing = ForgeDirection.getOrientation(buf.readInt());
+        facing = EnumFacing.getFront(buf.readInt());
         x = buf.readInt();
         y = buf.readInt();
         z = buf.readInt();
@@ -51,7 +49,7 @@ public class MessageTileEntityMachinePP implements IMessage,IMessageHandler<Mess
     public IMessage onMessage(MessageTileEntityMachinePP message, MessageContext ctx) {
 
         Minecraft aClient = FMLClientHandler.instance().getClient();
-        TileEntity aTile = aClient.theWorld.getTileEntity(message.x,message.y,message.z);
+        TileEntity aTile = aClient.theWorld.getTileEntity(new BlockPos(message.x,message.y,message.z));
 
         if(aTile instanceof TileEntityMachinePP){
             ((TileEntityMachinePP) aTile).setFacing(message.facing);
