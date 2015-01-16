@@ -5,15 +5,14 @@ import cofh.api.energy.IEnergyContainerItem;
 import cofh.api.energy.IEnergyHandler;
 import com.ragingart.miningmodifications.network.PacketHandler;
 import com.ragingart.miningmodifications.network.messages.MessageTileEntityMachineMM;
-import com.ragingart.miningmodifications.util.CasingHelper;
 import com.ragingart.miningmodifications.util.MachineHelper;
+import com.ragingart.miningmodifications.util.Port;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IChatComponent;
-import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.*;
 
 public abstract class TileEntityMachineMM extends TileEntityMM implements IEnergyHandler,ISidedInventory,IFluidHandler {
@@ -91,35 +90,38 @@ public abstract class TileEntityMachineMM extends TileEntityMM implements IEnerg
 
     /* IEnergyHandler */
 
+
+
     @Override
-    public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate) {
+    public int receiveEnergy(EnumFacing from, int maxReceive, boolean simulate) {
         return energy.receiveEnergy(maxReceive,simulate);
     }
 
     @Override
-    public int extractEnergy(ForgeDirection from, int maxExtract, boolean simulate) {
+    public int extractEnergy(EnumFacing from, int maxExtract, boolean simulate) {
         return energy.extractEnergy(maxExtract,simulate);
     }
 
     @Override
-    public int getEnergyStored(ForgeDirection from) {
+    public int getEnergyStored(EnumFacing from) {
 
         return energy.getEnergyStored();
 
     }
 
     @Override
-    public int getMaxEnergyStored(ForgeDirection from) {
+    public int getMaxEnergyStored(EnumFacing from) {
 
         return energy.getMaxEnergyStored();
 
     }
 
+
     /* IEnergyConnection */
 
     @Override
-    public boolean canConnectEnergy(ForgeDirection from) {
-        return machineHelper.hasPort(from.ordinal(), CasingHelper.Port.ENERGY);
+    public boolean canConnectEnergy(EnumFacing from) {
+        return machineHelper.hasPort(from.ordinal(), Port.ENERGY);
     }
 
     /* ISidedInventory */
@@ -131,7 +133,7 @@ public abstract class TileEntityMachineMM extends TileEntityMM implements IEnerg
 
     @Override
     public int[] getSlotsForFace(EnumFacing side) {
-        if(machineHelper.hasPort(side.getIndex(),CasingHelper.Port.INPUT) || machineHelper.hasPort(side.getIndex(), CasingHelper.Port.OUTPUT)) {
+        if(machineHelper.hasPort(side.getIndex(),Port.INPUT) || machineHelper.hasPort(side.getIndex(), Port.OUTPUT)) {
             return new int[]{0};
         }
         return new int[0];
@@ -139,12 +141,12 @@ public abstract class TileEntityMachineMM extends TileEntityMM implements IEnerg
 
     @Override
     public boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction) {
-        return isWorkDone() && isItemValidForSlot(index, itemStackIn) && machineHelper.hasPort(direction.getIndex(), CasingHelper.Port.INPUT);
+        return isWorkDone() && isItemValidForSlot(index, itemStackIn) && machineHelper.hasPort(direction.getIndex(), Port.INPUT);
     }
 
     @Override
     public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) {
-        return isWorkDone() && machineHelper.hasPort(direction.getIndex(), CasingHelper.Port.OUTPUT);
+        return isWorkDone() && machineHelper.hasPort(direction.getIndex(), Port.OUTPUT);
     }
 
     /* IInventory */
@@ -244,7 +246,7 @@ public abstract class TileEntityMachineMM extends TileEntityMM implements IEnerg
 
     @Override
     public String getName() {
-        return null;
+        return "charger";
     }
 
     @Override
@@ -266,33 +268,33 @@ public abstract class TileEntityMachineMM extends TileEntityMM implements IEnerg
 
     @Override
     public int fill(EnumFacing from, FluidStack resource, boolean doFill) {
-        if(machineHelper.hasPort(from.ordinal(),CasingHelper.Port.FINPUT))
+        if(machineHelper.hasPort(from.ordinal(),Port.FINPUT))
             return tank.fill(resource,doFill);
         return 0;
     }
 
     @Override
     public FluidStack drain(EnumFacing from, FluidStack resource, boolean doDrain) {
-        if(machineHelper.hasPort(from.ordinal(),CasingHelper.Port.FOUTPUT))
+        if(machineHelper.hasPort(from.ordinal(),Port.FOUTPUT))
             return tank.drain(1000,doDrain);
         return null;
     }
 
     @Override
     public FluidStack drain(EnumFacing from, int maxDrain, boolean doDrain) {
-        if(machineHelper.hasPort(from.ordinal(),CasingHelper.Port.FOUTPUT))
+        if(machineHelper.hasPort(from.ordinal(),Port.FOUTPUT))
             return tank.drain(maxDrain>1000?1000:maxDrain,doDrain);
         return null;
     }
 
     @Override
     public boolean canFill(EnumFacing from, Fluid fluid) {
-        return machineHelper.hasPort(from.ordinal(), CasingHelper.Port.FINPUT);
+        return machineHelper.hasPort(from.ordinal(), Port.FINPUT);
     }
 
     @Override
     public boolean canDrain(EnumFacing from, Fluid fluid) {
-        return machineHelper.hasPort(from.ordinal(), CasingHelper.Port.FOUTPUT);
+        return machineHelper.hasPort(from.ordinal(), Port.FOUTPUT);
     }
 
     public int getFluidAmount(){return tank.getFluidAmount();}

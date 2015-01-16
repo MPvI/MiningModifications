@@ -2,19 +2,18 @@ package com.ragingart.miningmodifications.network.messages;
 
 import com.ragingart.miningmodifications.generics.TileEntityMachineMM;
 import com.ragingart.miningmodifications.util.MachineHelper;
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
-import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fml.client.FMLClientHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public class MessageTileEntityMachineMM implements IMessage,IMessageHandler<MessageTileEntityMachineMM,IMessage>{
+public class MessageTileEntityMachineMM implements IMessage,IMessageHandler<MessageTileEntityMachineMM,IMessage> {
 
     private MachineHelper aHelper;
     private int x;
@@ -32,7 +31,7 @@ public class MessageTileEntityMachineMM implements IMessage,IMessageHandler<Mess
         x=te.getPos().getX();
         y=te.getPos().getY();
         z=te.getPos().getZ();
-        energy=te.getEnergyStored(ForgeDirection.UNKNOWN);
+        //energy=te.getEnergyStored(EnumFacing.UP);
         aHelper=te.getMachineHelper();
         famount = te.getFluidAmount();
         fid = te.getFluidID();
@@ -43,7 +42,7 @@ public class MessageTileEntityMachineMM implements IMessage,IMessageHandler<Mess
         x=buf.readInt();
         y=buf.readInt();
         z=buf.readInt();
-        energy=buf.readInt();
+        //energy=buf.readInt();
         famount =buf.readInt();
         fid = buf.readInt();
         aHelper.setState(buf.readInt());
@@ -58,7 +57,7 @@ public class MessageTileEntityMachineMM implements IMessage,IMessageHandler<Mess
         buf.writeInt(x);
         buf.writeInt(y);
         buf.writeInt(z);
-        buf.writeInt(energy);
+        //buf.writeInt(energy);
         buf.writeInt(famount);
         buf.writeInt(fid);
         buf.writeInt(aHelper.getState());

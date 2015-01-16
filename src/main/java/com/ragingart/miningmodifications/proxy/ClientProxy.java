@@ -1,34 +1,21 @@
 package com.ragingart.miningmodifications.proxy;
 
-import com.ragingart.miningmodifications.client.renderer.block.BlockRendererFluxField;
 import com.ragingart.miningmodifications.client.renderer.item.*;
 import com.ragingart.miningmodifications.client.renderer.tileentity.*;
 import com.ragingart.miningmodifications.init.ModBlocks;
 import com.ragingart.miningmodifications.init.ModItems;
-import com.ragingart.miningmodifications.ref.RenderIds;
 import com.ragingart.miningmodifications.tileentity.TileEntityCable;
 import com.ragingart.miningmodifications.tileentity.TileEntityPlatformBase;
 import com.ragingart.miningmodifications.tileentity.handmachines.TileEntityCompactor;
 import com.ragingart.miningmodifications.tileentity.handmachines.TileEntityCrank;
 import com.ragingart.miningmodifications.tileentity.handmachines.TileEntityGrinder;
 import com.ragingart.miningmodifications.tileentity.handmachines.TileEntitySharpeningWheel;
-import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.client.registry.RenderingRegistry;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 
 public class ClientProxy extends CommonProxy{
     public void registerModels(){
-        RenderIds.PlatformBase = RenderingRegistry.getNextAvailableRenderId();
-        RenderIds.FluxField = RenderingRegistry.getNextAvailableRenderId();
-        RenderIds.Cable = RenderingRegistry.getNextAvailableRenderId();
-        RenderIds.Compactor = RenderingRegistry.getNextAvailableRenderId();
-        RenderIds.Crank = RenderingRegistry.getNextAvailableRenderId();
-        RenderIds.Grinder = RenderingRegistry.getNextAvailableRenderId();
-        RenderIds.LSC = RenderingRegistry.getNextAvailableRenderId();
-
-        RenderingRegistry.registerBlockHandler(RenderIds.FluxField,new BlockRendererFluxField());
-        RenderingRegistry.registerBlockHandler(RenderIds.LSC,new BlockRendererFluxField());
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPlatformBase.class, new TileRendererPlatformBase());
         //ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFluxField.class,new TileRendererFluxField());

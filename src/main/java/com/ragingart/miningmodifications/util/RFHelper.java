@@ -6,7 +6,7 @@ import cofh.api.energy.IEnergyHandler;
 import cofh.lib.util.helpers.EnergyHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraft.util.EnumFacing;
 
 /**
  * Created by MaaT on 11.10.2014.
@@ -49,19 +49,19 @@ public class RFHelper {
             int num_consum = 0;
             int id_consum[] = new int[6];
             for (int i = 0; i < 6; i++) {
-                if (EnergyHelper.isAdjacentEnergyHandlerFromSide(aTile, i) && ((IEnergyHandler)aTile).canConnectEnergy(ForgeDirection.values()[i])) {
+                if (EnergyHelper.isAdjacentEnergyHandlerFromSide(aTile, i) && ((IEnergyHandler)aTile).canConnectEnergy(EnumFacing.values()[i])) {
                     id_consum[num_consum] = i;
                     num_consum++;
                 }
             }
-            if (num_consum > 0 && ((IEnergyHandler)aTile).getEnergyStored(ForgeDirection.UNKNOWN) >= perTick * num_consum) {
+            if (num_consum > 0 && ((IEnergyHandler)aTile).getEnergyStored(EnumFacing.UP) >= perTick * num_consum) {
                 for (int i = 0; i < num_consum; i++) {
-                    ((IEnergyHandler)aTile).extractEnergy(ForgeDirection.UNKNOWN, EnergyHelper.insertEnergyIntoAdjacentEnergyHandler(aTile, id_consum[i], perTick, false), false);
+                    ((IEnergyHandler)aTile).extractEnergy(EnumFacing.UP, EnergyHelper.insertEnergyIntoAdjacentEnergyHandler(aTile, id_consum[i], perTick, false), false);
                 }
             } else if (num_consum > 0) {
-                int max_output = ((IEnergyHandler)aTile).getEnergyStored(ForgeDirection.UNKNOWN) / num_consum;
+                int max_output = ((IEnergyHandler)aTile).getEnergyStored(EnumFacing.UP) / num_consum;
                 for (int i = 0; i < num_consum; i++) {
-                    ((IEnergyHandler)aTile).extractEnergy(ForgeDirection.UNKNOWN, EnergyHelper.insertEnergyIntoAdjacentEnergyHandler(aTile, id_consum[i], max_output, false), false);
+                    ((IEnergyHandler)aTile).extractEnergy(EnumFacing.UP, EnergyHelper.insertEnergyIntoAdjacentEnergyHandler(aTile, id_consum[i], max_output, false), false);
                 }
             }
         }

@@ -1,22 +1,13 @@
 package com.ragingart.miningmodifications.client.renderer.block;
 
 import com.ragingart.miningmodifications.ref.RenderIds;
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.world.IBlockAccess;
 import org.lwjgl.opengl.GL11;
 
-public class BlockRendererFluxField implements ISimpleBlockRenderingHandler {
+public class BlockRendererFluxField {
 
-    @Override
-    public void renderInventoryBlock(Block block, int metadata, int modelId, RenderBlocks renderer) {
-
-    }
-
-
-    @Override
-    public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
+    public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId) {
 
         GL11.glPushMatrix();
         GL11.glEnable(GL11.GL_BLEND);
@@ -90,12 +81,10 @@ public class BlockRendererFluxField implements ISimpleBlockRenderingHandler {
         */
     }
 
-    @Override
     public boolean shouldRender3DInInventory(int modelId) {
         return false;
     }
 
-    @Override
     public int getRenderId() {
         return RenderIds.LSC;
     }

@@ -4,7 +4,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.EnumFacing;
-import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.List;
 
@@ -13,42 +12,42 @@ import java.util.List;
  * Created by MaaT on 01.09.2014.
  */
 public class MachineHelper {
-    protected CasingHelper.Port[] mPorts = new CasingHelper.Port[6];
+    protected Port[] mPorts = new Port[6];
     protected EnumFacing facing = EnumFacing.EAST;
     protected boolean hasInventory=false;
     protected int state = 0;
 
 
     public MachineHelper(){
-        this(new CasingHelper.Port[]{CasingHelper.Port.BLANK, CasingHelper.Port.BLANK, CasingHelper.Port.BLANK, CasingHelper.Port.BLANK, CasingHelper.Port.BLANK,null});
+        this(new Port[]{Port.BLANK, Port.BLANK, Port.BLANK, Port.BLANK, Port.BLANK,null});
     }
 
-    public MachineHelper(CasingHelper.Port[] ports){
+    public MachineHelper(Port[] ports){
         this(ports,false);
     }
 
-    public MachineHelper(CasingHelper.Port[] ports,boolean hasInventory){
+    public MachineHelper(Port[] ports,boolean hasInventory){
         this.mPorts = ports;
         this.hasInventory=hasInventory;
     }
 
     // Ports
-    public boolean hasPort(int side,CasingHelper.Port port){
+    public boolean hasPort(int side,Port port){
         return side != facing.ordinal() && mPorts[side] == port;
     }
 
-    public CasingHelper.Port getPort(int side){
+    public Port getPort(int side){
         return mPorts[side];
     }
 
-    public CasingHelper.Port setPort(int side,int port){
+    public Port setPort(int side,int port){
         if(port == 6){
             mPorts[side]=null;
             facing=EnumFacing.getFront(side);
             return null;
         }else{
-            CasingHelper.Port oldPort = mPorts[side];
-            mPorts[side] = CasingHelper.Port.values()[port];
+            Port oldPort = mPorts[side];
+            mPorts[side] = Port.values()[port];
             return oldPort;
         }
 
@@ -77,9 +76,9 @@ public class MachineHelper {
     }
 
     public void rotatePortsAroundAxis(EnumFacing axis){
-        CasingHelper.Port[] aHelper = new CasingHelper.Port[6];
+        Port[] aHelper = new Port[6];
         for (int i = 0; i < 6; i++) {
-            CasingHelper.Port tmp = mPorts[EnumFacing.getFront(i).rotateAround(axis.getAxis()).ordinal()];
+            Port tmp = mPorts[EnumFacing.getFront(i).rotateAround(axis.getAxis()).ordinal()];
             if(tmp==null){
                 facing = EnumFacing.getFront(i);
             }
@@ -146,7 +145,7 @@ public class MachineHelper {
             String key = "Port " + i;
             int k = Ports.getInteger(key);
             if (k < 6 && k > 0) {
-                list.add(EnumChatFormatting.values()[3 + i] + ForgeDirection.getOrientation(i).toString() + ": " + EnumChatFormatting.values()[9 + k] + CasingHelper.Port.values()[k].toString());
+                list.add(EnumChatFormatting.values()[3 + i] + EnumFacing.getFront(i).toString() + ": " + EnumChatFormatting.values()[9 + k] + Port.values()[k].toString());
             }
         }
     }

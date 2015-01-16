@@ -3,7 +3,7 @@ package com.ragingart.miningmodifications.tileentity;
 import cofh.api.energy.IEnergyConnection;
 import cofh.lib.util.helpers.EnergyHelper;
 import com.ragingart.miningmodifications.generics.TileEntityMM;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraft.util.EnumFacing;
 
 public class TileEntityCreativeEnergy extends TileEntityMM implements IEnergyConnection{
 
@@ -16,7 +16,7 @@ public class TileEntityCreativeEnergy extends TileEntityMM implements IEnergyCon
     }
 
     @Override
-    public boolean canConnectEnergy(ForgeDirection forgeDirection) {
+    public boolean canConnectEnergy(EnumFacing side) {
         return true;
     }
 }

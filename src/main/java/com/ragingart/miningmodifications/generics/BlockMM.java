@@ -2,12 +2,9 @@ package com.ragingart.miningmodifications.generics;
 
 import com.ragingart.miningmodifications.creativetab.CreativeTabMM;
 import com.ragingart.miningmodifications.ref.Names;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -20,38 +17,23 @@ import java.util.ArrayList;
 public class BlockMM extends Block
 {
 
-    public BlockMM(Material material)
+    public BlockMM(Material material, String name)
     {
         super(material);
         this.setCreativeTab(CreativeTabMM.MM_TAB);
+        setUnlocalizedName(name);
     }
 
-    public BlockMM(Material material,String name)
-    {
-        this(material);
-
-        //this.setBlockName(name);
-    }
-
-    public BlockMM(String name)
-    {
+    public BlockMM(String name){
         this(Material.rock,name);
     }
 
-
-
-    @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister iconRegister)
-    {
-        //blockIcon = iconRegister.registerIcon(String.format("%s", Names.getUnwrappedUnlocalizedName(this.getUnlocalizedName())));
-    }
-
-    // Names
     @Override
     public String getUnlocalizedName()
     {
         return String.format("tile.%s%s", Names.MOD_PREFIX, Names.getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
     }
+
 
 
     public boolean rotateBlock(World worldObj, BlockPos pos, EnumFacing face) {

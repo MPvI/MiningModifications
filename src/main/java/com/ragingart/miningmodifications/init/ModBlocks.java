@@ -14,7 +14,7 @@ import com.ragingart.miningmodifications.item.handmachines.ItemBlockGrinder;
 import com.ragingart.miningmodifications.item.handmachines.ItemBlockSharpeningWheel;
 import com.ragingart.miningmodifications.item.machines.*;
 import com.ragingart.miningmodifications.ref.Names;
-import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ModBlocks {
     public static final BlockMM Ore = new BlockPecoraitOre();
@@ -36,7 +36,7 @@ public class ModBlocks {
 
     public static void init()
     {
-        GameRegistry.registerBlock(Ore,ItemBlockPecoraitOre.class ,Names.Blocks.ORE);
+        GameRegistry.registerBlock(Ore, ItemBlockPecoraitOre.class, Names.Blocks.ORE);
 
         GameRegistry.registerBlock(Charger,ItemBlockCharger.class,Names.Blocks.CHARGER);
         GameRegistry.registerBlock(Discharger, ItemBlockDischarger.class,Names.Blocks.DISCHARGER);

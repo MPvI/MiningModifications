@@ -3,7 +3,7 @@ package com.ragingart.miningmodifications.tileentity.machines;
 import cofh.api.energy.IEnergyContainerItem;
 import com.ragingart.miningmodifications.generics.TileEntityMachineMM;
 import com.ragingart.miningmodifications.util.RFHelper;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraft.util.EnumFacing;
 
 public class TileEntityDischarger extends TileEntityMachineMM {
 
@@ -55,7 +55,7 @@ public class TileEntityDischarger extends TileEntityMachineMM {
     }
 
     @Override
-    public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate){
+    public int receiveEnergy(EnumFacing from, int maxReceive, boolean simulate){
         return 0;
     }
 

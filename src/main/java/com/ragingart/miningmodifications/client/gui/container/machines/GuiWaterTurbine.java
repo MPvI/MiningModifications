@@ -6,8 +6,8 @@ import com.ragingart.miningmodifications.tileentity.machines.TileEntityWaterTurb
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.util.ForgeDirection;
 import org.lwjgl.opengl.GL11;
 
 public class GuiWaterTurbine extends GuiContainer {
@@ -30,7 +30,7 @@ public class GuiWaterTurbine extends GuiContainer {
         String astring = "HHWater: "+String.valueOf(tileEntityWaterTurbine.getFluidAmount())+"/"+String.valueOf(tileEntityWaterTurbine.getFluidCapacity());
         fontRendererObj.drawString(astring, (xSize/2) - (fontRendererObj.getStringWidth(astring)/2), 35, 4210752);
 
-        astring = "RF: "+String.valueOf(tileEntityWaterTurbine.getEnergyStored(ForgeDirection.UNKNOWN))+"/"+String.valueOf(tileEntityWaterTurbine.getMaxEnergyStored(ForgeDirection.UNKNOWN));
+        astring = "RF: "+String.valueOf(tileEntityWaterTurbine.getEnergyStored(EnumFacing.UP))+"/"+String.valueOf(tileEntityWaterTurbine.getMaxEnergyStored(EnumFacing.UP));
         fontRendererObj.drawString(astring, (xSize/2) - (fontRendererObj.getStringWidth(astring)/2), 45, 4210752);
     }
 

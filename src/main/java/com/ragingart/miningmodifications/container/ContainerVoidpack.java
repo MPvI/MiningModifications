@@ -1,7 +1,6 @@
 package com.ragingart.miningmodifications.container;
 
 import cofh.lib.gui.container.ContainerInventoryItem;
-import cofh.lib.util.helpers.ItemHelper;
 import com.ragingart.miningmodifications.client.gui.slot.SlotVoidpack;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -312,7 +311,7 @@ public class ContainerVoidpack extends ContainerInventoryItem{
                 slot = (Slot) this.inventorySlots.get(k);
                 stackInSlot = slot.getStack();
 
-                if (slot.isItemValid(stack) && ItemHelper.itemsEqualWithMetadata(stack, stackInSlot, true)) {
+                if (slot.isItemValid(stack)) {
                     int l = stackInSlot.stackSize + stack.stackSize;
                     int slotLimit = Math.min(stack.getMaxStackSize(), slot.getSlotStackLimit());
 
@@ -341,7 +340,7 @@ public class ContainerVoidpack extends ContainerInventoryItem{
                 stackInSlot = slot.getStack();
 
                 if (slot.isItemValid(stack) && stackInSlot == null) {
-                    slot.putStack(ItemHelper.cloneStack(stack, Math.min(stack.stackSize, slot.getSlotStackLimit())));
+                    //slot.putStack(ItemHelper.cloneStack(stack, Math.min(stack.stackSize, slot.getSlotStackLimit())));
                     slot.onSlotChanged();
 
                     if (slot.getStack() != null) {

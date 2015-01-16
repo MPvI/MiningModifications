@@ -2,7 +2,7 @@ package com.ragingart.miningmodifications.tileentity.machines;
 
 import com.ragingart.miningmodifications.generics.TileEntityEnergyGen;
 import com.ragingart.miningmodifications.ref.Fluids;
-import com.ragingart.miningmodifications.util.CasingHelper;
+import com.ragingart.miningmodifications.util.Port;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
@@ -31,7 +31,7 @@ public class TileEntityWaterTurbine extends TileEntityEnergyGen {
         int aMeta = aBlock.getMetaFromState(worldObj.getBlockState(pos.offsetDown()));
 
         if(tank.getFluidAmount() != 0 && tank.getFluid().getFluid().getID() == Fluids.ID.HIGHHELDWATER.ordinal()) {
-            if (machineHelper.hasPort(0, CasingHelper.Port.FOUTPUT) && (aBlock.getMaterial() == Material.air || aBlock.getMaterial() == Material.water)) {
+            if (machineHelper.hasPort(0, Port.FOUTPUT) && (aBlock.getMaterial() == Material.air || aBlock.getMaterial() == Material.water)) {
                 machineHelper.setState(2);
                 worldObj.setBlockState(pos.offsetDown(), Blocks.flowing_water.getDefaultState());
                 worldObj.markBlockForUpdate(pos.offsetDown());
@@ -53,7 +53,7 @@ public class TileEntityWaterTurbine extends TileEntityEnergyGen {
     private void checkWaterFlow(){
         Block aBlock = worldObj.getBlockState(pos.offsetUp()).getBlock();
         int aMeta = aBlock.getMetaFromState(worldObj.getBlockState(pos.offsetUp()));
-        if(machineHelper.hasPort(1,CasingHelper.Port.FINPUT) && aMeta >= 8  && aBlock.getMaterial()== Material.water && tank.getFluidAmount() == 0) {
+        if(machineHelper.hasPort(1,Port.FINPUT) && aMeta >= 8  && aBlock.getMaterial()== Material.water && tank.getFluidAmount() == 0) {
             machineHelper.setState(1);
 
             int waterAbove = 1;

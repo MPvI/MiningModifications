@@ -11,12 +11,12 @@ import com.ragingart.miningmodifications.container.handmachines.ContainerGrinder
 import com.ragingart.miningmodifications.container.handmachines.ContainerSharpeningWheel;
 import com.ragingart.miningmodifications.container.machines.*;
 import com.ragingart.miningmodifications.ref.Gui;
-import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.IGuiHandler;
 
 public class GuiHandler implements IGuiHandler {
 

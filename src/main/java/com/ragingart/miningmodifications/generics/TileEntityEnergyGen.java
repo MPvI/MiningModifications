@@ -2,7 +2,7 @@ package com.ragingart.miningmodifications.generics;
 
 import com.ragingart.miningmodifications.util.RFHelper;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraft.util.EnumFacing;
 
 public abstract class TileEntityEnergyGen extends TileEntityMachineMM {
 
@@ -19,7 +19,7 @@ public abstract class TileEntityEnergyGen extends TileEntityMachineMM {
     }
 
     @Override
-    public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate){
+    public int receiveEnergy(EnumFacing from, int maxReceive, boolean simulate){
         return 0;
     }
 

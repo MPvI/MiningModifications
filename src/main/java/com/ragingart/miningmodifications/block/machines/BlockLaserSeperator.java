@@ -12,7 +12,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 public class BlockLaserSeperator extends BlockMachineMM  implements IMultiBlockPart {
@@ -26,11 +25,6 @@ public class BlockLaserSeperator extends BlockMachineMM  implements IMultiBlockP
         boolean result = ((TileEntityMachineMultiBlockMM)worldIn.getTileEntity(pos)).checkStructure(worldIn,pos.add(-2,-1,-2));
         LogHelper.info(result);
         return result;
-    }
-
-    @Override
-    public IIcon getIcon(int side, int meta) {
-        return super.getIcon(side, meta);
     }
 
     @Override

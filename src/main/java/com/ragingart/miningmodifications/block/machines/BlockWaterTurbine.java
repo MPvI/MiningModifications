@@ -6,12 +6,8 @@ import com.ragingart.miningmodifications.generics.BlockMachineMM;
 import com.ragingart.miningmodifications.ref.Gui;
 import com.ragingart.miningmodifications.ref.Names;
 import com.ragingart.miningmodifications.tileentity.machines.TileEntityWaterTurbine;
-import com.ragingart.miningmodifications.util.CasingHelper;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
@@ -25,13 +21,6 @@ public class BlockWaterTurbine extends BlockMachineMM{
         super(Names.Blocks.WATERTURBINE);
         this.setHardness(7.0F);
         this.setHarvestLevel("wrench", 4);
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister iR)
-    {
-        mCasingHelper = new CasingHelper(iR,Names.Textures.Blocks.WaterTurbine.FRONT);
     }
 
     @Override

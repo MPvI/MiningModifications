@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class ItemVoidpack extends ItemMM implements IInventoryContainerItem{
+public class ItemVoidpack extends ItemMM implements IInventoryContainerItem {
 
     public ItemVoidpack() {
         super(Names.Items.VOIDPACK);

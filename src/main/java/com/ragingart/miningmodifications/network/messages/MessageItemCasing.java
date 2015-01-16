@@ -1,14 +1,14 @@
 package com.ragingart.miningmodifications.network.messages;
 
 import com.ragingart.miningmodifications.generics.TileEntityMachineMM;
-import com.ragingart.miningmodifications.util.CasingHelper;
 import com.ragingart.miningmodifications.util.PlayerInventoryHelper;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import com.ragingart.miningmodifications.util.Port;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.BlockPos;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class MessageItemCasing implements IMessage,IMessageHandler<MessageItemCasing,IMessage> {
 
@@ -54,9 +54,9 @@ public class MessageItemCasing implements IMessage,IMessageHandler<MessageItemCa
         TileEntityMachineMM aTile = (TileEntityMachineMM) player.worldObj.getTileEntity(new BlockPos(message.x, message.y, message.z));
 
         if (message.side != aTile.getMachineHelper().getFacing().ordinal()){
-            if (PlayerInventoryHelper.decrItem(player.inventory,CasingHelper.Port.getItemFromPort(message.port))) {
-                CasingHelper.Port oldPort = aTile.getMachineHelper().setPort(message.side, message.port);
-                if (oldPort != null)player.inventory.addItemStackToInventory(CasingHelper.Port.getItemFromPort(oldPort));
+            if (PlayerInventoryHelper.decrItem(player.inventory, Port.getItemFromPort(message.port))) {
+                Port oldPort = aTile.getMachineHelper().setPort(message.side, message.port);
+                if (oldPort != null)player.inventory.addItemStackToInventory(Port.getItemFromPort(oldPort));
             }
         }
 

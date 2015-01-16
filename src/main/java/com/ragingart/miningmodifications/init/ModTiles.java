@@ -10,15 +10,12 @@ import com.ragingart.miningmodifications.tileentity.handmachines.TileEntityCrank
 import com.ragingart.miningmodifications.tileentity.handmachines.TileEntityGrinder;
 import com.ragingart.miningmodifications.tileentity.handmachines.TileEntitySharpeningWheel;
 import com.ragingart.miningmodifications.tileentity.machines.*;
-import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
-/**
- * Created by MaaT on 28.08.2014.
- */
 public class ModTiles {
     public static void init() {
 
-        GameRegistry.registerTileEntity(TileEntityMachineBlock.class,Names.Blocks.MACHINEBLOCK);
+        GameRegistry.registerTileEntity(TileEntityMachineBlock.class, Names.Blocks.MACHINEBLOCK);
         GameRegistry.registerTileEntity(TileEntityCharger.class,Names.Blocks.CHARGER);
         GameRegistry.registerTileEntity(TileEntityWaterTurbine.class,Names.Blocks.WATERTURBINE);
         GameRegistry.registerTileEntity(TileEntityRFEnergyStorage.class,Names.Blocks.RFENERGYSTORAGE);

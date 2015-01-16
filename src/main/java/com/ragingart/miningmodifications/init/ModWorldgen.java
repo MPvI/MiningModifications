@@ -1,20 +1,20 @@
 package com.ragingart.miningmodifications.init;
 
 import com.ragingart.miningmodifications.handler.ConfigHandler;
-import cpw.mods.fml.common.IWorldGenerator;
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraftforge.fml.common.IWorldGenerator;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.Random;
 
 public class ModWorldgen implements IWorldGenerator {
 
     public ModWorldgen(){
-        GameRegistry.registerWorldGenerator(this,5);
+        GameRegistry.registerWorldGenerator(this, 5);
     }
 
     @Override

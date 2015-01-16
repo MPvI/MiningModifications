@@ -1,13 +1,12 @@
 package com.ragingart.miningmodifications.init;
 
-import cofh.api.modhelpers.ThermalExpansionHelper;
 import com.ragingart.miningmodifications.generics.ItemBlockMM;
 import com.ragingart.miningmodifications.ref.Component;
 import com.ragingart.miningmodifications.util.RecipeHelper;
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
@@ -17,7 +16,7 @@ public class ModRecipes {
     {
         /* Items */
         // Shaped
-        GameRegistry.addRecipe(new ShapedOreRecipe(Component.MULTITOOL(),"r d"," s ","s  ",'s', Component.HANDLE,'r',Component.BATTERY(1),'d',Component.GEM));
+        GameRegistry.addRecipe(new ShapedOreRecipe(Component.MULTITOOL(), "r d", " s ", "s  ", 's', Component.HANDLE, 'r', Component.BATTERY(1), 'd', Component.GEM));
         GameRegistry.addRecipe(new ShapedOreRecipe(Component.BATTERY(1)," g ","iri","iri",'g', Component.SMALL_GOLD,'i', Component.NORMAL_IRON,'r',Component.SMALL_RS));
         GameRegistry.addRecipe(new ShapedOreRecipe(Component.CASING(1),"sis","iri","sis",'s',Component.SCREW(1),'i',Component.PLATE_IRON,'r',Component.SMALL_RS));
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.voidpack),"iei","ifi","sis",'i',Component.PLATE_IRON,'e',Items.ender_eye,'f',Component.FLUXFIELD(1),'s',Component.SCREW(1)));
@@ -53,11 +52,11 @@ public class ModRecipes {
 
         /* Thermal Expansion */
         /* Pulverizer */
-        ThermalExpansionHelper.addPulverizerRecipe(1000,new ItemStack(ModBlocks.Ore), new ItemStack(ModItems.dust_nickel,2));
+        //ThermalExpansionHelper.addPulverizerRecipe(1000,new ItemStack(ModBlocks.Ore), new ItemStack(ModItems.dust_nickel,2));
 
         /* Furnace */
-        ThermalExpansionHelper.addFurnaceRecipe(500, new ItemStack(ModItems.dust_nickel), new ItemStack(ModItems.ingot_nickel));
-        ThermalExpansionHelper.addFurnaceRecipe(1000, new ItemStack(ModBlocks.Ore), new ItemStack(ModItems.ingot_nickel));
+        //ThermalExpansionHelper.addFurnaceRecipe(500, new ItemStack(ModItems.dust_nickel), new ItemStack(ModItems.ingot_nickel));
+        //ThermalExpansionHelper.addFurnaceRecipe(1000, new ItemStack(ModBlocks.Ore), new ItemStack(ModItems.ingot_nickel));
 
 
         /* MachineRecipes*/

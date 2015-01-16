@@ -7,9 +7,6 @@ import com.ragingart.miningmodifications.tileentity.TileEntityMachineBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-/**
- * Created by MaaT on 22.10.2014.
- */
 public class BlockMachineBlock extends BlockMachineMM implements IMultiBlockPart {
     public BlockMachineBlock(){
         super(Names.Blocks.MACHINEBLOCK);

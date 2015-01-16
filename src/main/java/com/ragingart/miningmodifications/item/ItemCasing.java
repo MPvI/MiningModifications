@@ -6,7 +6,7 @@ import com.ragingart.miningmodifications.generics.TileEntityMachineMM;
 import com.ragingart.miningmodifications.network.PacketHandler;
 import com.ragingart.miningmodifications.network.messages.MessageItemCasing;
 import com.ragingart.miningmodifications.ref.Names;
-import com.ragingart.miningmodifications.util.CasingHelper;
+import com.ragingart.miningmodifications.util.Port;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -14,7 +14,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
@@ -22,8 +21,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class ItemCasing extends ItemMM {
-
-    protected IIcon[] casing_textures = new IIcon[CasingHelper.Port.values().length];
 
     public ItemCasing() {
         super(Names.Items.CASING[0]);
@@ -33,7 +30,7 @@ public class ItemCasing extends ItemMM {
 
     @Override
     public void getSubItems(Item item, CreativeTabs p_150895_2_, List list) {
-        for (int i = 0; i < CasingHelper.Port.values().length; i++) {
+        for (int i = 0; i < Port.values().length; i++) {
             list.add(new ItemStack(item,1,i));
         }
     }

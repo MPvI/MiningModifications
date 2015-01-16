@@ -4,7 +4,7 @@ import com.ragingart.miningmodifications.generics.ItemMM;
 import com.ragingart.miningmodifications.generics.ItemToolMM;
 import com.ragingart.miningmodifications.item.*;
 import com.ragingart.miningmodifications.ref.Names;
-import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ModItems {
     //Tools

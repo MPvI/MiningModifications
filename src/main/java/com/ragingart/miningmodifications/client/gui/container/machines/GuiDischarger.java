@@ -6,9 +6,9 @@ import com.ragingart.miningmodifications.tileentity.machines.TileEntityDischarge
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
-import net.minecraftforge.common.util.ForgeDirection;
 import org.lwjgl.opengl.GL11;
 
 public class GuiDischarger extends GuiContainer {
@@ -28,7 +28,7 @@ public class GuiDischarger extends GuiContainer {
         String containerName = tileEntityDischarger.getName();
         fontRendererObj.drawString(containerName, xSize / 2 - fontRendererObj.getStringWidth(containerName) / 2, 6, 4210752);
         fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 93, 4210752);
-        fontRendererObj.drawString(String.valueOf(tileEntityDischarger.getEnergyStored(ForgeDirection.UNKNOWN)), xSize / 2 - fontRendererObj.getStringWidth(String.valueOf(tileEntityDischarger.getEnergyStored(ForgeDirection.UNKNOWN))) / 2, 45, 4210752);
+        fontRendererObj.drawString(String.valueOf(tileEntityDischarger.getEnergyStored(EnumFacing.UP)), xSize / 2 - fontRendererObj.getStringWidth(String.valueOf(tileEntityDischarger.getEnergyStored(EnumFacing.UP))) / 2, 45, 4210752);
     }
 
     @Override

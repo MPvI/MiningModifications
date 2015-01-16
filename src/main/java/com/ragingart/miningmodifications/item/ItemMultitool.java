@@ -12,7 +12,6 @@ import com.ragingart.miningmodifications.util.NBTHelper;
 import com.ragingart.miningmodifications.util.ToolHelper;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -41,11 +40,6 @@ public class ItemMultitool extends ItemToolMM
         setHarvestLevel("pickaxe",3);
         setHarvestLevel("shovel",3);
         setHarvestLevel("axe",3);
-    }
-
-    @Override
-    public void onUpdate(ItemStack p_77663_1_, World p_77663_2_, Entity p_77663_3_, int p_77663_4_, boolean p_77663_5_) {
-        runTick++;
     }
 
     public void setMode(ItemStack itemStack,int mode){

@@ -2,11 +2,7 @@ package com.ragingart.miningmodifications.client.gui.element;
 
 import cofh.lib.gui.GuiBase;
 import cofh.lib.gui.element.ElementButton;
-import cofh.lib.render.RenderHelper;
 
-/**
- * Created by MaaT on 14.11.2014.
- */
 public class ElementToggleButton extends ElementButton {
 
     int sheetX;
@@ -50,7 +46,7 @@ public class ElementToggleButton extends ElementButton {
     @Override
     public void drawBackground(int mouseX, int mouseY, float gameTicks) {
 
-        RenderHelper.bindTexture(texture);
+        //RenderHelper.bindTexture(texture);
         if(!isEnabled()){
             drawTexturedModalRect(posX, posY, disabledX, disabledY+15, sizeX, sizeY);
         }else if(intersectsWith(mouseX, mouseY)) {
