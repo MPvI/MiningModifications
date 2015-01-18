@@ -3,8 +3,8 @@ package com.ragingart.miningmodifications.block.handmachines;
 
 import com.ragingart.miningmodifications.MiningModifications;
 import com.ragingart.miningmodifications.generics.BlockMachinePP;
+import com.ragingart.miningmodifications.itemblock.handmachines.ItemBlockSharpeningWheel;
 import com.ragingart.miningmodifications.ref.Gui;
-import com.ragingart.miningmodifications.ref.Names;
 import com.ragingart.miningmodifications.ref.RenderIds;
 import com.ragingart.miningmodifications.tileentity.handmachines.TileEntitySharpeningWheel;
 import net.minecraft.block.state.IBlockState;
@@ -15,8 +15,9 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
 public class BlockSharpeningWheel extends BlockMachinePP{
+
     public BlockSharpeningWheel() {
-        super(Names.Blocks.SHARPENINGWHEEL);
+        super("sharpeningwheel", ItemBlockSharpeningWheel.class);
         this.setHarvestLevel("wrench", 4);
         this.setHardness(7.0F);
     }

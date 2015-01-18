@@ -3,8 +3,8 @@ package com.ragingart.miningmodifications.block.machines;
 
 import com.ragingart.miningmodifications.MiningModifications;
 import com.ragingart.miningmodifications.generics.BlockMachineMM;
+import com.ragingart.miningmodifications.itemblock.machines.ItemBlockWaterTurbine;
 import com.ragingart.miningmodifications.ref.Gui;
-import com.ragingart.miningmodifications.ref.Names;
 import com.ragingart.miningmodifications.tileentity.machines.TileEntityWaterTurbine;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -18,7 +18,7 @@ public class BlockWaterTurbine extends BlockMachineMM{
 
     public BlockWaterTurbine()
     {
-        super(Names.Blocks.WATERTURBINE);
+        super("waterturbine", ItemBlockWaterTurbine.class);
         this.setHardness(7.0F);
         this.setHarvestLevel("wrench", 4);
     }

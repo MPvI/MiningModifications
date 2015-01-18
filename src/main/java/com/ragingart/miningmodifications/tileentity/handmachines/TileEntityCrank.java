@@ -46,7 +46,7 @@ public class TileEntityCrank extends TileEntity implements IMusclePower{
                 }
             }
         }
-        return null;
+        return EnumFacing.DOWN;
     }
 
     public boolean provideMusclePower()

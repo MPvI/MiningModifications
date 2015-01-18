@@ -5,7 +5,6 @@ import com.ragingart.miningmodifications.MiningModifications;
 import com.ragingart.miningmodifications.container.ContainerVoidpack;
 import com.ragingart.miningmodifications.generics.ItemMM;
 import com.ragingart.miningmodifications.ref.Gui;
-import com.ragingart.miningmodifications.ref.Names;
 import com.ragingart.miningmodifications.util.NBTHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,7 +20,7 @@ import java.util.List;
 public class ItemVoidpack extends ItemMM implements IInventoryContainerItem {
 
     public ItemVoidpack() {
-        super(Names.Items.VOIDPACK);
+        super("voidpack");
     }
 
     private int tick=0;

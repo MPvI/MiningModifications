@@ -1,7 +1,6 @@
 package com.ragingart.miningmodifications.item;
 
 import com.ragingart.miningmodifications.generics.ItemToolMM;
-import com.ragingart.miningmodifications.ref.Names;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
@@ -10,12 +9,11 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
 public class ItemSpear extends ItemToolMM {
+
     public ItemSpear(){
-        super(Names.Items.WEAPON_SPEAR,10.0F);
+        super("spear",10.0F);
         this.setFull3D();
     }
-
-
 
     @Override
     public int getMaxItemUseDuration(ItemStack p_77626_1_) {

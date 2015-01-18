@@ -1,8 +1,9 @@
 package com.ragingart.miningmodifications.block;
 
 import com.ragingart.miningmodifications.generics.BlockMM;
-import com.ragingart.miningmodifications.ref.Names;
+import com.ragingart.miningmodifications.itemblock.ItemBlockFluxField;
 import com.ragingart.miningmodifications.ref.RenderIds;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -19,8 +20,9 @@ import java.util.List;
 import java.util.Random;
 
 public class BlockFluxField extends BlockMM {
+
     public BlockFluxField() {
-        super(Names.Blocks.FLUXFIELD);
+        super(Material.rock,"fluxfield", ItemBlockFluxField.class);
         this.setBlockBounds(0, 0.9F, 0, 1, 1, 1);
         this.setHardness(-1);
         this.setLightOpacity(0);

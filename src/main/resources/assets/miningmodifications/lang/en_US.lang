@@ -16,8 +16,8 @@ item.miningmodifications:ingot_nickel.name= Nickel Ingot
 item.miningmodifications:plate_iron.name= Iron Plate
 
 //Blocks
-tile.miningmodifications:laserseparator=Laser seperator
-tile.miningmodifications:machineblock=Machine block
+tile.miningmodifications:laserseparator.name=Laser seperator
+tile.miningmodifications:machineblock.name=Machine block
 tile.miningmodifications:fluxfield.name=Fluxfield
 tile.miningmodifications:platformBase.name=Platform
 tile.miningmodifications:pecorait_ore.name=Pecorait

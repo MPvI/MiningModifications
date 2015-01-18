@@ -1,6 +1,7 @@
 package com.ragingart.miningmodifications.generics;
 
 import net.minecraft.block.ITileEntityProvider;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -12,8 +13,8 @@ import java.util.ArrayList;
 
 public abstract class BlockMachineMM extends BlockMM implements ITileEntityProvider{
 
-    public BlockMachineMM(String name){
-        super(name);
+    public BlockMachineMM(String aName,Class<? extends ItemBlockMM> aClass){
+        super(Material.rock,aName,aClass);
     }
 
     @Override

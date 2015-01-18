@@ -1,7 +1,7 @@
 package com.ragingart.miningmodifications.block;
 
 import com.ragingart.miningmodifications.generics.BlockMM;
-import com.ragingart.miningmodifications.ref.Names;
+import com.ragingart.miningmodifications.itemblock.ItemBlockPlatformBase;
 import com.ragingart.miningmodifications.ref.RenderIds;
 import com.ragingart.miningmodifications.tileentity.TileEntityPlatformBase;
 import net.minecraft.block.ITileEntityProvider;
@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 public class BlockPlatformBase extends BlockMM implements ITileEntityProvider {
 
     public BlockPlatformBase() {
-        super(Material.circuits,Names.Blocks.PLATFORM_BASE);
+        super(Material.circuits,"platform", ItemBlockPlatformBase.class);
     }
 
     @Override

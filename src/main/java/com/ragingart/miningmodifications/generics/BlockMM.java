@@ -11,30 +11,35 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.ArrayList;
 
 public class BlockMM extends Block
 {
+    public Class<? extends ItemBlockMM> myItemBlockClass;
+    public String myName;
 
-    public BlockMM(Material material, String name)
+
+    public BlockMM(Material material,String aName, Class<? extends ItemBlockMM> aItemBlockClass)
     {
         super(material);
+        this.myName = aName;
+        this.myItemBlockClass = aItemBlockClass;
         this.setCreativeTab(CreativeTabMM.MM_TAB);
-        setUnlocalizedName(name);
+        this.setUnlocalizedName(myName);
+        GameRegistry.registerBlock(this,myItemBlockClass,myName);
     }
 
-    public BlockMM(String name){
-        this(Material.rock,name);
+    public String getName(){
+        return Names.getUnwrappedUnlocalizedName(super.getUnlocalizedName());
     }
 
     @Override
     public String getUnlocalizedName()
     {
-        return String.format("tile.%s%s", Names.MOD_PREFIX, Names.getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
+        return String.format("tile.%s%s", Names.MOD_PREFIX, getName());
     }
-
-
 
     public boolean rotateBlock(World worldObj, BlockPos pos, EnumFacing face) {
             if(!worldObj.isRemote) {
@@ -49,7 +54,6 @@ public class BlockMM extends Block
             return false;
     }
 
-
     public ArrayList<ItemStack> dismantleBlock(EntityPlayer playerIn, World worldIn, BlockPos pos,IBlockState state, boolean returnDrops) {
         if(!worldIn.isRemote) {
             dropBlockAsItem(worldIn,pos,state,0);
@@ -58,8 +62,4 @@ public class BlockMM extends Block
         return null;
     }
 
-
-    public boolean canDismantle(EntityPlayer player, World world, int x, int y, int z) {
-        return true;
-    }
 }

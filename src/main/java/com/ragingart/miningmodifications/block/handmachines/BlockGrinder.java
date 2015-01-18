@@ -3,8 +3,8 @@ package com.ragingart.miningmodifications.block.handmachines;
 
 import com.ragingart.miningmodifications.MiningModifications;
 import com.ragingart.miningmodifications.generics.BlockMachinePP;
+import com.ragingart.miningmodifications.itemblock.handmachines.ItemBlockGrinder;
 import com.ragingart.miningmodifications.ref.Gui;
-import com.ragingart.miningmodifications.ref.Names;
 import com.ragingart.miningmodifications.ref.RenderIds;
 import com.ragingart.miningmodifications.tileentity.handmachines.TileEntityGrinder;
 import net.minecraft.block.ITileEntityProvider;
@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 public class BlockGrinder extends BlockMachinePP implements ITileEntityProvider {
 
     public BlockGrinder() {
-        super(Names.Blocks.GRINDER);
+        super("grinder", ItemBlockGrinder.class);
         this.setHarvestLevel("wrench", 4);
         this.setHardness(7.0F);
     }

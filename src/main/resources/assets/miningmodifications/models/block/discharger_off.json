@@ -1,0 +1,8 @@
+{
+	"parent": "block/orientable",
+	"textures": {
+        "front": "miningmodifications:blocks/discharger_front_off",
+        "side": "miningmodifications:items/casing",
+	  	"top": "miningmodifications:items/casing"
+	}
+}

@@ -3,8 +3,8 @@ package com.ragingart.miningmodifications.block.machines;
 
 import com.ragingart.miningmodifications.MiningModifications;
 import com.ragingart.miningmodifications.generics.BlockMachineMM;
+import com.ragingart.miningmodifications.itemblock.machines.ItemBlockDischarger;
 import com.ragingart.miningmodifications.ref.Gui;
-import com.ragingart.miningmodifications.ref.Names;
 import com.ragingart.miningmodifications.tileentity.machines.TileEntityDischarger;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,9 +17,19 @@ public class BlockDischarger extends BlockMachineMM{
 
     public BlockDischarger()
     {
-        super(Names.Blocks.DISCHARGER);
+        super("discharger", ItemBlockDischarger.class);
         this.setHardness(7.0F);
         this.setHarvestLevel("wrench", 4);
+    }
+
+    @Override
+    public boolean isOpaqueCube() {
+        return true;
+    }
+
+    @Override
+    public int getRenderType() {
+        return 0;
     }
 
     @Override

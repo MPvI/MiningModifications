@@ -3,7 +3,7 @@ package com.ragingart.miningmodifications.block.machines;
 import com.ragingart.miningmodifications.api.IMultiBlockPart;
 import com.ragingart.miningmodifications.generics.BlockMachineMM;
 import com.ragingart.miningmodifications.generics.TileEntityMachineMultiBlockMM;
-import com.ragingart.miningmodifications.ref.Names;
+import com.ragingart.miningmodifications.itemblock.machines.ItemBlockLaserSeperator;
 import com.ragingart.miningmodifications.ref.RenderIds;
 import com.ragingart.miningmodifications.tileentity.machines.TileEntityLaserSeperator;
 import com.ragingart.miningmodifications.util.LogHelper;
@@ -15,8 +15,9 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
 public class BlockLaserSeperator extends BlockMachineMM  implements IMultiBlockPart {
+
     public BlockLaserSeperator() {
-        super(Names.Blocks.LS);
+        super("laserseperator", ItemBlockLaserSeperator.class);
         this.setBlockBounds(0,0.9F,0,1,1,1);
     }
 

@@ -1,4 +1,4 @@
-package com.ragingart.miningmodifications.item.handmachines;
+package com.ragingart.miningmodifications.itemblock.handmachines;
 
 import com.ragingart.miningmodifications.generics.ItemBlockMM;
 import net.minecraft.block.Block;

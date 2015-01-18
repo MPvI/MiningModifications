@@ -2,7 +2,7 @@ package com.ragingart.miningmodifications.block.handmachines;
 
 
 import com.ragingart.miningmodifications.generics.BlockMachinePP;
-import com.ragingart.miningmodifications.ref.Names;
+import com.ragingart.miningmodifications.itemblock.handmachines.ItemBlockCrank;
 import com.ragingart.miningmodifications.ref.RenderIds;
 import com.ragingart.miningmodifications.tileentity.handmachines.TileEntityCrank;
 import net.minecraft.block.state.IBlockState;
@@ -14,8 +14,9 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockCrank extends BlockMachinePP{
+
     public BlockCrank() {
-        super(Names.Blocks.CRANK);
+        super("crank",ItemBlockCrank.class);
         this.setHarvestLevel("wrench", 4);
         this.setHardness(7.0F);
     }

@@ -11,4 +11,5 @@ public class RenderIds {
     public static int Crank;
     public static int Grinder;
     public static int LSC;
+    public static int Discharger;
 }

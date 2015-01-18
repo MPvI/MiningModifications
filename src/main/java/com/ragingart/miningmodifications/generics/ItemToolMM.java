@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import org.lwjgl.input.Keyboard;
 
 import java.util.Collections;
@@ -21,19 +22,26 @@ public abstract class ItemToolMM extends ItemTool implements IEnergyContainerIte
     private int cap;
     private int maxIn;
     private int maxOut;
+    public String myName;
 
-    public ItemToolMM(String name,float dmg){
-        this(dmg,ToolMaterial.EMERALD,null);
-        setUnlocalizedName(name);
+    public ItemToolMM(String aName,float dmg){
+        this(aName,dmg,ToolMaterial.EMERALD,null);
     }
 
-    public ItemToolMM(float dmgVsEntity, Item.ToolMaterial  material, Set blocksEffectiveAgainst)
+    public ItemToolMM(String aName,float dmgVsEntity, Item.ToolMaterial  material, Set blocksEffectiveAgainst)
     {
         super(dmgVsEntity,material,blocksEffectiveAgainst);
+        this.myName=aName;
         this.setCreativeTab(CreativeTabMM.MM_TAB);
         this.cap=30000;
         this.maxIn=500;
         this.maxOut=500;
+        this.setUnlocalizedName(myName);
+        GameRegistry.registerItem(this,getName());
+    }
+
+    public String getName(){
+        return myName;
     }
 
     @Override

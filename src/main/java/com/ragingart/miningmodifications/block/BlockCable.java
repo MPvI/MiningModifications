@@ -2,7 +2,7 @@ package com.ragingart.miningmodifications.block;
 
 import com.ragingart.miningmodifications.api.IMultiBlockPart;
 import com.ragingart.miningmodifications.generics.BlockMM;
-import com.ragingart.miningmodifications.ref.Names;
+import com.ragingart.miningmodifications.itemblock.ItemBlockCable;
 import com.ragingart.miningmodifications.ref.RenderIds;
 import com.ragingart.miningmodifications.tileentity.TileEntityCable;
 import net.minecraft.block.ITileEntityProvider;
@@ -11,8 +11,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 public class BlockCable extends BlockMM implements ITileEntityProvider,IMultiBlockPart{
+
     public BlockCable() {
-        super(Material.circuits, Names.Blocks.CABLE);
+        super(Material.circuits,"cable", ItemBlockCable.class);
         this.setBlockBounds(6.0F/16.0F,6.0F/16.0F,6.0F/16.0F,10.0F/16.0F,10.0F/16.0F,10.0F/16.0F);
     }
 

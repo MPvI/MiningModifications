@@ -6,7 +6,6 @@ import com.ragingart.miningmodifications.generics.BlockMM;
 import com.ragingart.miningmodifications.generics.ItemToolMM;
 import com.ragingart.miningmodifications.handler.ConfigHandler;
 import com.ragingart.miningmodifications.init.ModBlocks;
-import com.ragingart.miningmodifications.ref.Names;
 import com.ragingart.miningmodifications.util.LogHelper;
 import com.ragingart.miningmodifications.util.NBTHelper;
 import com.ragingart.miningmodifications.util.ToolHelper;
@@ -35,8 +34,7 @@ public class ItemMultitool extends ItemToolMM
 
     public ItemMultitool()
     {
-        super(3.0F, ToolMaterial.EMERALD, blocksEffectiveAgainst);
-        this.setUnlocalizedName(Names.Items.MULTITOOL);
+        super("multitool",3.0F, ToolMaterial.EMERALD, blocksEffectiveAgainst);
         setHarvestLevel("pickaxe",3);
         setHarvestLevel("shovel",3);
         setHarvestLevel("axe",3);

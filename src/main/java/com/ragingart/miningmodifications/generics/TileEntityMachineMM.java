@@ -246,7 +246,7 @@ public abstract class TileEntityMachineMM extends TileEntityMM implements IEnerg
 
     @Override
     public String getName() {
-        return "charger";
+        return ((BlockMM)this.worldObj.getBlockState(pos).getBlock()).getName();
     }
 
     @Override

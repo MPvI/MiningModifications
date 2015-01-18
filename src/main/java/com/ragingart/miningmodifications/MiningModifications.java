@@ -59,7 +59,7 @@ public class MiningModifications {
 
         proxy.registerModels();
         //
-        ModOreDict.init();
+        //ModOreDict.init();
         //Recipes
         ModRecipes.init();
         //Tile Entities

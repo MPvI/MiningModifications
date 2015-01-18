@@ -3,8 +3,8 @@ package com.ragingart.miningmodifications.block.handmachines;
 
 import com.ragingart.miningmodifications.MiningModifications;
 import com.ragingart.miningmodifications.generics.BlockMachinePP;
+import com.ragingart.miningmodifications.itemblock.handmachines.ItemBlockCompactor;
 import com.ragingart.miningmodifications.ref.Gui;
-import com.ragingart.miningmodifications.ref.Names;
 import com.ragingart.miningmodifications.ref.RenderIds;
 import com.ragingart.miningmodifications.tileentity.handmachines.TileEntityCompactor;
 import net.minecraft.block.state.IBlockState;
@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 public class BlockCompactor extends BlockMachinePP{
 
     public BlockCompactor() {
-        super(Names.Blocks.COMPACTOR);
+        super("compactor",ItemBlockCompactor.class);
         this.setHarvestLevel("wrench", 4);
         this.setHardness(7.0F);
     }

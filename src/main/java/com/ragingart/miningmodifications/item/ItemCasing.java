@@ -23,7 +23,7 @@ import java.util.List;
 public class ItemCasing extends ItemMM {
 
     public ItemCasing() {
-        super(Names.Items.CASING[0]);
+        super("casing");
         setHasSubtypes(true);
     }
 
@@ -37,7 +37,7 @@ public class ItemCasing extends ItemMM {
 
     @Override
     public String getUnlocalizedName(ItemStack itemStack) {
-        return "item."+Names.MOD_PREFIX+Names.Items.CASING[itemStack.getItemDamage()];
+        return "item."+Names.MOD_PREFIX+myName;
     }
 
     @Override

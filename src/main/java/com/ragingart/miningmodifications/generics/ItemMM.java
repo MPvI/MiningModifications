@@ -7,6 +7,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import org.lwjgl.input.Keyboard;
 
 import java.util.Collections;
@@ -14,27 +15,30 @@ import java.util.List;
 
 public abstract class ItemMM extends Item
 {
-    public ItemMM()
-    {
+    public String myName;
+
+    public ItemMM(String aName){
         super();
+        this.myName = aName;
         this.setCreativeTab(CreativeTabMM.MM_TAB);
+        this.setUnlocalizedName(myName);
+        GameRegistry.registerItem(this,getName());
     }
 
-    public ItemMM(String name){
-        this();
-        this.setUnlocalizedName(name);
+    public String getName(){
+        return myName;
     }
 
     @Override
     public String getUnlocalizedName()
     {
-        return String.format("item.%s%s", Names.MOD_PREFIX, Names.getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
+        return String.format("item.%s%s", Names.MOD_PREFIX, getName());
     }
 
     @Override
     public String getUnlocalizedName(ItemStack itemStack)
     {
-        return String.format("item.%s%s", Names.MOD_PREFIX, Names.getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
+        return String.format("item.%s%s", Names.MOD_PREFIX, getName());
     }
 
 

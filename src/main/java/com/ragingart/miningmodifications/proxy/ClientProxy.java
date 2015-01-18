@@ -4,12 +4,17 @@ import com.ragingart.miningmodifications.client.renderer.item.*;
 import com.ragingart.miningmodifications.client.renderer.tileentity.*;
 import com.ragingart.miningmodifications.init.ModBlocks;
 import com.ragingart.miningmodifications.init.ModItems;
+import com.ragingart.miningmodifications.ref.Reference;
 import com.ragingart.miningmodifications.tileentity.TileEntityCable;
 import com.ragingart.miningmodifications.tileentity.TileEntityPlatformBase;
 import com.ragingart.miningmodifications.tileentity.handmachines.TileEntityCompactor;
 import com.ragingart.miningmodifications.tileentity.handmachines.TileEntityCrank;
 import com.ragingart.miningmodifications.tileentity.handmachines.TileEntityGrinder;
 import com.ragingart.miningmodifications.tileentity.handmachines.TileEntitySharpeningWheel;
+import com.ragingart.miningmodifications.tileentity.machines.TileEntityDischarger;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.ItemModelMesher;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -17,6 +22,14 @@ import net.minecraftforge.fml.client.registry.ClientRegistry;
 public class ClientProxy extends CommonProxy{
     public void registerModels(){
 
+        ItemModelMesher IMM = Minecraft.getMinecraft().getRenderItem().getItemModelMesher();
+
+        //IMM.register(Item.getItemFromBlock(ModBlocks.Charger), 0, new ModelResourceLocation(Reference.MOD_ID + ":" + ModBlocks.Charger.getName()));
+        IMM.register(Item.getItemFromBlock(ModBlocks.Discharger), 0, new ModelResourceLocation(Reference.MOD_ID + ":" + ModBlocks.Discharger.getName()));
+        IMM.register(ModItems.casing, 0, new ModelResourceLocation(Reference.MOD_ID + ":" + ModItems.casing.getName()));
+
+
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDischarger.class,new TileRendererBlock());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPlatformBase.class, new TileRendererPlatformBase());
         //ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFluxField.class,new TileRendererFluxField());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCable.class,new TileRendererCable());
