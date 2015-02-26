@@ -3,34 +3,34 @@ item.miningmodifications:multitool.name=Multitool
 item.miningmodifications:weapon_spear.name=Fluxspear
 item.miningmodifications:voidpack.name=Voidpack
 // Items
-item.miningmodifications:battery.name=Redstonebattery
+item.miningmodifications:battery.name=Redstone Battery
 item.miningmodifications:casing.name=Casing: Blank
-item.miningmodifications:casing_energy.name=Casing: Energylink
-item.miningmodifications:casing_input.name=Casing: Inputgrate
-item.miningmodifications:casing_output.name=Casing: Outputgrate
-item.miningmodifications:casing_finput.name=Casing: Inputvalve
-item.miningmodifications:casing_foutput.name=Casing: Outputvalve
+item.miningmodifications:casing_energy.name=Casing: Energy Link
+item.miningmodifications:casing_input.name=Casing: Input Grate
+item.miningmodifications:casing_output.name=Casing: Output Grate
+item.miningmodifications:casing_finput.name=Casing: Input Valve
+item.miningmodifications:casing_foutput.name=Casing: Output Valve
 item.miningmodifications:screw_nickel.name= Nickel Screw
 item.miningmodifications:dust_nickel.name= Nickel Dust
 item.miningmodifications:ingot_nickel.name= Nickel Ingot
 item.miningmodifications:plate_iron.name= Iron Plate
 
 //Blocks
-tile.miningmodifications:laserseparator=Laser seperator
-tile.miningmodifications:machineblock=Machine block
+tile.miningmodifications:laserseparator.name=Laser Separator
+tile.miningmodifications:machineblock.name=Machine Block
 tile.miningmodifications:fluxfield.name=Fluxfield
 tile.miningmodifications:platformBase.name=Platform
 tile.miningmodifications:pecorait_ore.name=Pecorait
 tile.miningmodifications:charger.name=Charger
 tile.miningmodifications:discharger.name=Discharger
 tile.miningmodifications:waterturbine.name=Water Turbine
-tile.miningmodifications:crenergy.name=Creative energy source
-tile.miningmodifications:rfenergystorage.name=Energy storage
-tile.miningmodifications:cable.name=Energy cabel
-tile.miningmodifications:sharpeningwheel.name=Sharpening wheel
-tile.miningmodifications:grinder.name=Ore grinder
+tile.miningmodifications:crenergy.name=Creative Energy Source
+tile.miningmodifications:rfenergystorage.name=Energy Storage
+tile.miningmodifications:cable.name=Energy Cable
+tile.miningmodifications:sharpeningwheel.name=Sharpening Wheel
+tile.miningmodifications:grinder.name=Ore Grinder
 tile.miningmodifications:crank.name=Crank
-tile.miningmodifications:compactor.name=Plate roll
+tile.miningmodifications:compactor.name=Plate Roll
 
 
 // Creative Tab
@@ -38,12 +38,12 @@ itemGroup.miningmodifications=Mining Modifications
 
 // Machine Descriptions
 description.miningmodifications:charger=A block that charges any RF container!
-description.miningmodifications:fluxfield=Component for platform.%Cannot be placed in the world!
+description.miningmodifications:fluxfield=Component for crafting.%Cannot be placed in the world!
 description.miningmodifications:platformBase=Creates a cohesive circular area%out of redstone to form a platform.%Rightclick to activate!%Radius: 5,10,15
-description.miningmodifications:discharger=A block that emptys any RF container!
-description.miningmodifications:waterturbine=Generates RF based on waterfall height.%Place water source at least 2 blocks above turbine.%Requires inputvalve at top and outputvalve at bottom to work!
+description.miningmodifications:discharger=A block that will empty any RF container!
+description.miningmodifications:waterturbine=Generates RF based on waterfall height.%Place water source %2 blocks or more above turbine.%Requires input valve at top %and output valve at bottom to work!
 description.miningmodifications:rfenergystorage=A block to store RF.
-description.miningmodifications:pecorait_ore=§eNi₃Si₂O₅(OH)₄%§7Furnace:%   §c1 §aIngot §e(Ni)%§7Pulverizer:%   §c2 §aDust §e(Ni)%§7Laser Seperator:%   §c1 §aDust §e(Ni)%   §c1 §aOlivin §e(Ni₂SiO₄)%   §b1 §aHot silicon monoxid §e(SiO)%   §b2 §aDistilled water §e(H₂O)%   §b1 §aOxygen §e(O₂)
+description.miningmodifications:pecorait_ore=§eNi₃Si₂O₅(OH)₄%§7Furnace:%   §c1 §aIngot §e(Ni)%§7Oregrinder:% §c1.5 §aDust §e(Ni)%§7Pulverizer:%   §c2 §aDust §e(Ni)%§7Laser Seperator:%   §c1 §aDust §e(Ni)%   §c1 §aOlivin §e(Ni₂SiO₄)%   §b1 §aHot silicon monoxid §e(SiO)%   §b2 §aDistilled water §e(H₂O)%   §b1 §aOxygen §e(O₂)
 description.miningmodifications:casing=Can be placed on Machines.
 description.miningmodifications:casing.0=Will set a side to blank.
 description.miningmodifications:casing.1=Allows RF import/export.
@@ -56,4 +56,13 @@ description.miningmodifications:sharpeningwheel=§7Will shape grind §c1 §7ingo
 description.miningmodifications:grinder=§7Will grind §c2 §7ores into §c3 §7dust.%This device is powered by hand.
 description.miningmodifications:compactor=§7Will roll §c2 §7ingots into §c1 §7plate.%This device is powered by hand.
 description.miningmodifications:voidpackbutton=Use Meta
-
+description.miningmodifications:cable=Transports RF %This is actually a TileEntity there is no EnergyNet.%You shouldn't use this unless %you dont have any other RF-Cables.%In other words,% this will probably generate some lag :P
+description.miningmodifications:multitool=Will mine everything. Works while flying.
+description.miningmodifications:battery=Stores RF.
+description.miningmodifications:screw_nickel=Component
+description.miningmodifications:plate_iron=Component
+description.miningmodifications:ingot_nickel=Component
+description.miningmodifications:dust_nickel=Component
+description.miningmodifications:voidpack=Will clear your inventory from any items%you configure in the GUI,%which you can open by right-clicking.%Shift-right-clicking will activate%or deactivate the voidpack.%You can toggle the use of metadata.%You can also set a limit up to 99.
+description.miningmodifications:laserseparator=Enhanced machine to split up Pecorait[WIP].
+description.miningmodifications:machineblock=Multiblock component, accepts Casings.

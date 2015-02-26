@@ -9,9 +9,6 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
 import org.lwjgl.opengl.GL11;
 
-/**
- * Created by MaaT on 20.10.2014.
- */
 public class BlockRendererFluxField implements ISimpleBlockRenderingHandler {
 
     @Override
@@ -100,6 +97,6 @@ public class BlockRendererFluxField implements ISimpleBlockRenderingHandler {
 
     @Override
     public int getRenderId() {
-        return RenderIds.LSC;
+        return RenderIds.FluxField;
     }
 }

@@ -36,6 +36,14 @@ public class MachineHelper {
         return side != facing.ordinal() && mPorts[side] == port;
     }
 
+    public boolean hasPort(CasingHelper.Port port){
+        boolean result = false;
+        for (int i = 0; i < 5; i++) {
+            result = result || hasPort(i,port);
+        }
+        return result;
+    }
+
     public CasingHelper.Port getPort(int side){
         return mPorts[side];
     }

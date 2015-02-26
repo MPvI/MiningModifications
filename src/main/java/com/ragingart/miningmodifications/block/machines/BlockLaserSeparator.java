@@ -5,7 +5,7 @@ import com.ragingart.miningmodifications.generics.BlockMachineMM;
 import com.ragingart.miningmodifications.generics.TileEntityMachineMultiBlockMM;
 import com.ragingart.miningmodifications.ref.Names;
 import com.ragingart.miningmodifications.ref.RenderIds;
-import com.ragingart.miningmodifications.tileentity.machines.TileEntityLaserSeperator;
+import com.ragingart.miningmodifications.tileentity.machines.TileEntityLaserSeparator;
 import com.ragingart.miningmodifications.util.LogHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -14,11 +14,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-/**
- * Created by MaaT on 18.10.2014.
- */
-public class BlockLaserSeperator extends BlockMachineMM  implements IMultiBlockPart {
-    public BlockLaserSeperator() {
+public class BlockLaserSeparator extends BlockMachineMM  implements IMultiBlockPart {
+    public BlockLaserSeparator() {
         super(Names.Blocks.LS);
         this.setBlockBounds(0,0.9F,0,1,1,1);
     }
@@ -44,7 +41,7 @@ public class BlockLaserSeperator extends BlockMachineMM  implements IMultiBlockP
 
     @Override
     public TileEntity createNewTileEntity(World world, int meta) {
-        return new TileEntityLaserSeperator();
+        return new TileEntityLaserSeparator();
     }
 
 

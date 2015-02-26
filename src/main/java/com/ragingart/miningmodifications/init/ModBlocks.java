@@ -27,7 +27,7 @@ public class ModBlocks {
     public static final BlockMM RFEnergyStorage = new BlockRFEnergyStorage();
     public static final BlockMM Discharger = new BlockDischarger();
     public static final BlockMM Cable = new BlockCable();
-    public static final BlockMM LS = new BlockLaserSeperator();
+    public static final BlockMM LS = new BlockLaserSeparator();
     public static final BlockMM MachineBlock = new BlockMachineBlock();
     public static final BlockMM Crank = new BlockCrank();
     public static final BlockMM Compactor = new BlockCompactor();

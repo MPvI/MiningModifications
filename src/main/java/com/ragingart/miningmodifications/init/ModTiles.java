@@ -12,9 +12,6 @@ import com.ragingart.miningmodifications.tileentity.handmachines.TileEntitySharp
 import com.ragingart.miningmodifications.tileentity.machines.*;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-/**
- * Created by MaaT on 28.08.2014.
- */
 public class ModTiles {
     public static void init() {
 
@@ -26,7 +23,7 @@ public class ModTiles {
         GameRegistry.registerTileEntity(TileEntityCreativeEnergy.class,Names.Blocks.CENERGY);
         GameRegistry.registerTileEntity(TileEntityPlatformBase.class,Names.Blocks.PLATFORM_BASE);
         GameRegistry.registerTileEntity(TileEntityCable.class,Names.Blocks.CABLE);
-        GameRegistry.registerTileEntity(TileEntityLaserSeperator.class,Names.Blocks.LS);
+        GameRegistry.registerTileEntity(TileEntityLaserSeparator.class,Names.Blocks.LS);
         GameRegistry.registerTileEntity(TileEntityCrank.class,Names.Blocks.CRANK);
         GameRegistry.registerTileEntity(TileEntityCompactor.class,Names.Blocks.COMPACTOR);
         GameRegistry.registerTileEntity(TileEntitySharpeningWheel.class,Names.Blocks.SHARPENINGWHEEL);

@@ -16,9 +16,6 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-/**
- * Created by MaaT on 12.10.2014.
- */
 public class ItemVoidpack extends ItemMM implements IInventoryContainerItem{
 
     public ItemVoidpack() {
@@ -29,6 +26,13 @@ public class ItemVoidpack extends ItemMM implements IInventoryContainerItem{
 
     @Override
     public void onUpdate(ItemStack itemStack, World world, Entity entity, int i, boolean b) {
+        // Setting all meta to match values
+        if(itemStack.getTagCompound().hasKey("setupComplete") && !itemStack.getTagCompound().getBoolean("setupComplete")){
+            for (int j = 0; j < 5; j++) {
+                setMetaState(true,itemStack,j);
+            }
+            itemStack.getTagCompound().setBoolean("setupComplete",true);
+        }
         if(entity instanceof EntityPlayer) {
             if (tick % 20 == 0 && getState(itemStack)) {
                 Item[] toErase = new Item[5];
@@ -99,18 +103,6 @@ public class ItemVoidpack extends ItemMM implements IInventoryContainerItem{
     public static int getNumberToKeep(ItemStack stack, int i){
             return NBTHelper.getInt(stack,"number"+i);
 
-    }
-
-
-
-    @Override
-    public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
-        return false;
-    }
-
-    @Override
-    public boolean onItemUse(ItemStack p_77648_1_, EntityPlayer p_77648_2_, World p_77648_3_, int p_77648_4_, int p_77648_5_, int p_77648_6_, int p_77648_7_, float p_77648_8_, float p_77648_9_, float p_77648_10_) {
-        return false;
     }
 
     @Override

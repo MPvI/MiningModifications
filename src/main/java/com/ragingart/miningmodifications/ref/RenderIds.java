@@ -1,8 +1,5 @@
 package com.ragingart.miningmodifications.ref;
 
-/**
- * Created by MaaT on 26.09.2014.
- */
 public class RenderIds {
     public static int PlatformBase;
     public static int FluxField;

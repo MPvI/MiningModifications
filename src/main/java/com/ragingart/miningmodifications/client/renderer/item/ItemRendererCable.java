@@ -7,9 +7,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 
-/**
- * Created by MaaT on 16.10.2014.
- */
 public class ItemRendererCable implements IItemRenderer {
 
     private ModelCable model = new ModelCable();
@@ -41,24 +38,27 @@ public class ItemRendererCable implements IItemRenderer {
             case EQUIPPED:
                 GL11.glPushMatrix();
                 Minecraft.getMinecraft().renderEngine.bindTexture(Models.Cable);
-                model.render(0.07F,null);
+                model.render(0.07F);
                 GL11.glPopMatrix();
+                break;
             case EQUIPPED_FIRST_PERSON:
                 GL11.glPushMatrix();
-                GL11.glTranslatef(0,1,0.5F);
                 Minecraft.getMinecraft().renderEngine.bindTexture(Models.Cable);
-                model.render(0.07F,null);
+                model.render(0.07F);
                 GL11.glPopMatrix();
+                break;
             case INVENTORY:
                 GL11.glPushMatrix();
                 Minecraft.getMinecraft().renderEngine.bindTexture(Models.Cable);
-                model.render(0.07F,null);
+                model.render(0.07F);
                 GL11.glPopMatrix();
+                break;
             case ENTITY:
                 GL11.glPushMatrix();
                 Minecraft.getMinecraft().renderEngine.bindTexture(Models.Cable);
-                model.render(0.07F,null);
+                model.render(0.07F);
                 GL11.glPopMatrix();
+                break;
             default:
                 break;
         }

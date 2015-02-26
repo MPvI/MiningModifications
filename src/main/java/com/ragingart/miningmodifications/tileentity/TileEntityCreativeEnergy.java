@@ -11,7 +11,7 @@ public class TileEntityCreativeEnergy extends TileEntityMM implements IEnergyCon
     public void updateEntity(){
         if(!worldObj.isRemote) {
             for (int i = 0; i < 5; i++) {
-                 EnergyHelper.insertEnergyIntoAdjacentEnergyHandler(this, i, 10000, false);
+                 EnergyHelper.insertEnergyIntoAdjacentEnergyReceiver(this, i, 10000, false);
             }
         }
     }

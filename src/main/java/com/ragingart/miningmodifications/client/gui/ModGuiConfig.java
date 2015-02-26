@@ -1,5 +1,4 @@
 package com.ragingart.miningmodifications.client.gui;
-//TODO
 
 import com.ragingart.miningmodifications.handler.ConfigHandler;
 import com.ragingart.miningmodifications.ref.Reference;

@@ -12,9 +12,6 @@ import net.minecraft.item.ItemStack;
 
 import java.util.Iterator;
 
-/**
- * Created by MaaT on 02.11.2014.
- */
 public class ContainerVoidpack extends ContainerInventoryItem{
 
     public ContainerVoidpack(InventoryPlayer inventory,ItemStack stack) {
@@ -154,7 +151,7 @@ public class ContainerVoidpack extends ContainerInventoryItem{
                                         aSlot.putStack(cursorStack.splitStack(aStackSize));
                                     }
                                     if (cursorStack.stackSize == 0) {
-                                        inventoryPlayer.setItemStack((ItemStack) null);
+                                        inventoryPlayer.setItemStack(null);
                                     }
                                 }
                             }else if(cursorStack != null){
@@ -167,7 +164,7 @@ public class ContainerVoidpack extends ContainerInventoryItem{
                                 inventoryPlayer.setItemStack(anotherStack);
 
                                 if (aStack.stackSize == 0) {
-                                    aSlot.putStack((ItemStack) null);
+                                    aSlot.putStack(null);
                                 }
                                 aSlot.onPickupFromSlot(player, inventoryPlayer.getItemStack());
                             } else if (aSlot.isItemValid(cursorStack)) {
@@ -184,7 +181,7 @@ public class ContainerVoidpack extends ContainerInventoryItem{
                                     cursorStack.splitStack(aStackSize);
 
                                     if (cursorStack.stackSize == 0) {
-                                        inventoryPlayer.setItemStack((ItemStack) null);
+                                        inventoryPlayer.setItemStack(null);
                                     }
                                     aStack.stackSize += aStackSize;
                                     aSlot.putStack(aStack);
@@ -202,7 +199,7 @@ public class ContainerVoidpack extends ContainerInventoryItem{
                                     aStack = aSlot.decrStackSize(aStackSize);
 
                                     if (aStack.stackSize == 0) {
-                                        aSlot.putStack((ItemStack) null);
+                                        aSlot.putStack(null);
                                     }
                                     aSlot.onPickupFromSlot(player, inventoryPlayer.getItemStack());
                                 }
@@ -221,7 +218,7 @@ public class ContainerVoidpack extends ContainerInventoryItem{
 
                     if (!flag) {
                         aStackSize = inventoryPlayer.getFirstEmptyStack();
-                        flag |= aStackSize > -1;
+                        flag = aStackSize > -1;
                     }
                     if (aSlot.getHasStack() && flag) {
                         anotherStack = aSlot.getStack();
@@ -231,7 +228,7 @@ public class ContainerVoidpack extends ContainerInventoryItem{
                             if (aStackSize > -1) {
                                 inventoryPlayer.addItemStackToInventory(aStack);
                                 aSlot.decrStackSize(anotherStack.stackSize);
-                                aSlot.putStack((ItemStack) null);
+                                aSlot.putStack(null);
                                 aSlot.onPickupFromSlot(player, anotherStack);
                             }
                         } else {
@@ -240,7 +237,7 @@ public class ContainerVoidpack extends ContainerInventoryItem{
                             aSlot.onPickupFromSlot(player, anotherStack);
                         }
                     } else if (!aSlot.getHasStack() && aStack != null && aSlot.isItemValid(aStack)) {
-                        inventoryPlayer.setInventorySlotContents(v, (ItemStack) null);
+                        inventoryPlayer.setInventorySlotContents(v, null);
                         aSlot.putStack(aStack);
                     }
                 }
@@ -288,7 +285,7 @@ public class ContainerVoidpack extends ContainerInventoryItem{
                                 aStack.stackSize += k1;
 
                                 if (itemstack2.stackSize <= 0) {
-                                    slot3.putStack((ItemStack) null);
+                                    slot3.putStack(null);
                                 }
                                 slot3.onPickupFromSlot(player, itemstack2);
                             }
@@ -431,14 +428,14 @@ public class ContainerVoidpack extends ContainerInventoryItem{
         if (inv.getItemStack() != null) {
             if (v == 0) {
                 player.dropPlayerItemWithRandomChoice(inv.getItemStack(), true);
-                inv.setItemStack((ItemStack) null);
+                inv.setItemStack(null);
             }
 
             if (v == 1) {
                 player.dropPlayerItemWithRandomChoice(inv.getItemStack().splitStack(1), true);
 
                 if (inv.getItemStack().stackSize == 0) {
-                    inv.setItemStack((ItemStack) null);
+                    inv.setItemStack(null);
                 }
             }
         }

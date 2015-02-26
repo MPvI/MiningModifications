@@ -7,12 +7,10 @@ import com.ragingart.miningmodifications.generics.ItemToolMM;
 import com.ragingart.miningmodifications.handler.ConfigHandler;
 import com.ragingart.miningmodifications.init.ModBlocks;
 import com.ragingart.miningmodifications.ref.Names;
-import com.ragingart.miningmodifications.util.LogHelper;
 import com.ragingart.miningmodifications.util.NBTHelper;
 import com.ragingart.miningmodifications.util.ToolHelper;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -32,7 +30,6 @@ public class ItemMultitool extends ItemToolMM
     private static final Set blocksEffectiveAgainst = Sets.newHashSet(ModBlocks.Ore);
     private static final String[] modes = new String[]{"Mining Mode","Wrench Mode","Rotation Mode"};
     private int consume = ConfigHandler.miningEnergyBase;
-    private int runTick=0;
 
 
     public ItemMultitool()
@@ -42,11 +39,6 @@ public class ItemMultitool extends ItemToolMM
         setHarvestLevel("pickaxe",3);
         setHarvestLevel("shovel",3);
         setHarvestLevel("axe",3);
-    }
-
-    @Override
-    public void onUpdate(ItemStack p_77663_1_, World p_77663_2_, Entity p_77663_3_, int p_77663_4_, boolean p_77663_5_) {
-        runTick++;
     }
 
     public void setMode(ItemStack itemStack,int mode){
@@ -59,12 +51,16 @@ public class ItemMultitool extends ItemToolMM
 
     public long getStartTime(ItemStack itemStack){return NBTHelper.getLong(itemStack,"startTime");}
 
+    @Override
+    public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
+
+        return false;
+    }
 
     @Override
     public boolean onItemUse(ItemStack itemStack,EntityPlayer entityPlayer,World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ){
 
-        if(!world.isRemote && entityPlayer.isSneaking()){
-            LogHelper.info("mySide U");
+        if(!world.isRemote){
             Block aBlock = world.getBlock(x, y, z);
             switch(getMode(itemStack)){
                 case 0:
@@ -72,32 +68,27 @@ public class ItemMultitool extends ItemToolMM
                 case 1:
                     if(aBlock instanceof IDismantleable){
                         ((IDismantleable) aBlock).dismantleBlock(entityPlayer,world, x, y, z,true);
-                        return true;
                     }
-                    return false;
                 case 2:
                     aBlock.rotateBlock(world, x, y, z, ForgeDirection.getOrientation(side));
-                    return true;
                 default:
-                    return false;
+                    return true;
             }
         }
-
-        return false;
+        return entityPlayer.isSneaking();
     }
 
 
     @Override
     public void onUsingTick(ItemStack itemStack, EntityPlayer entityPlayer, int count) {
         if(!entityPlayer.worldObj.isRemote) {
-            LogHelper.info("mySide UT");
             MovingObjectPosition mOP = this.getMovingObjectPositionFromPlayer(entityPlayer.worldObj,entityPlayer,true);
 
             if(mOP==null || mOP.typeOfHit != MovingObjectPosition.MovingObjectType.BLOCK){
                 return;
             }
 
-            int r = 2;
+            int r = 1;
 
             float hardness = 0;
 
@@ -111,11 +102,7 @@ public class ItemMultitool extends ItemToolMM
             }
 
             int maxTick = (int)hardness*ConfigHandler.miningSpeedModificator/(EnchantmentHelper.getEfficiencyModifier(entityPlayer)+1);
-            /*
-            if(maxTick>ConfigHandler.maxMiningTime){
-                maxTick=ConfigHandler.maxMiningTime;
-            }
-            */
+
 
             int runTick = (int)((System.currentTimeMillis()-getStartTime(itemStack))/50);
             if(runTick >= maxTick){
@@ -140,28 +127,26 @@ public class ItemMultitool extends ItemToolMM
                 NBTHelper.setLong(itemStack, "startTime", System.currentTimeMillis());
             }
 
-            //if(entityPlayer)
         }
 
     }
 
     @Override
-    public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer entityPlayer)
-    {
-            if (entityPlayer.isSneaking()) {
-                setMode(itemStack, getMode(itemStack) + 1);
+    public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer entityPlayer) {
+        if (getMode(itemStack) == 0 && !entityPlayer.isUsingItem() && this.getEnergyStored(itemStack) > 0) {
+            NBTHelper.setLong(itemStack, "startTime", System.currentTimeMillis());
+            entityPlayer.setItemInUse(itemStack, this.getMaxItemUseDuration(itemStack));
+        } else if (entityPlayer.isSneaking()) {
+            setMode(itemStack, getMode(itemStack) + 1);
 
-                if (getMode(itemStack) > modes.length-1) {
-                    setMode(itemStack, 0);
-                }
-                if(!world.isRemote) {
-                    entityPlayer.addChatMessage(new ChatComponentText(modes[getMode(itemStack)]));
-                }
-
-            }else if (getMode(itemStack) == 0 && !entityPlayer.isUsingItem() && this.getEnergyStored(itemStack) > 0) {
-                NBTHelper.setLong(itemStack,"startTime",System.currentTimeMillis());
-                entityPlayer.setItemInUse(itemStack, this.getMaxItemUseDuration(itemStack));
+            if (getMode(itemStack) > modes.length - 1) {
+                setMode(itemStack, 0);
             }
+            if (!world.isRemote) {
+                entityPlayer.addChatMessage(new ChatComponentText(modes[getMode(itemStack)]));
+            }
+
+        }
         return itemStack;
     }
 

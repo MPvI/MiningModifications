@@ -1,6 +1,7 @@
 package com.ragingart.miningmodifications.network.messages;
 
 import com.ragingart.miningmodifications.generics.TileEntityMachineMM;
+import com.ragingart.miningmodifications.tileentity.TileEntityMachineBlock;
 import com.ragingart.miningmodifications.util.CasingHelper;
 import com.ragingart.miningmodifications.util.PlayerInventoryHelper;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
@@ -9,9 +10,6 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayerMP;
 
-/**
- * Created by MaaT on 02.09.2014.
- */
 public class MessageItemCasing implements IMessage,IMessageHandler<MessageItemCasing,IMessage> {
 
     public int side;
@@ -54,11 +52,19 @@ public class MessageItemCasing implements IMessage,IMessageHandler<MessageItemCa
     public IMessage onMessage(MessageItemCasing message, MessageContext ctx) {
         EntityPlayerMP player = ctx.getServerHandler().playerEntity;
         TileEntityMachineMM aTile = (TileEntityMachineMM) player.worldObj.getTileEntity(message.x, message.y, message.z);
-
-        if (message.side != aTile.getMachineHelper().getFacing().ordinal()){
-            if (PlayerInventoryHelper.decrItem(player.inventory,CasingHelper.Port.getItemFromPort(message.port))) {
+        if(!(aTile instanceof TileEntityMachineBlock)) {
+            if (message.side != aTile.getMachineHelper().getFacing().ordinal()) {
+                if (PlayerInventoryHelper.decrItem(player.inventory, CasingHelper.Port.getItemFromPort(message.port))) {
+                    CasingHelper.Port oldPort = aTile.getMachineHelper().setPort(message.side, message.port);
+                    if (oldPort != null)
+                        player.inventory.addItemStackToInventory(CasingHelper.Port.getItemFromPort(oldPort));
+                }
+            }
+        }else{
+            if (PlayerInventoryHelper.decrItem(player.inventory, CasingHelper.Port.getItemFromPort(message.port))) {
                 CasingHelper.Port oldPort = aTile.getMachineHelper().setPort(message.side, message.port);
-                if (oldPort != null)player.inventory.addItemStackToInventory(CasingHelper.Port.getItemFromPort(oldPort));
+                if (oldPort != null)
+                    player.inventory.addItemStackToInventory(CasingHelper.Port.getItemFromPort(oldPort));
             }
         }
 
