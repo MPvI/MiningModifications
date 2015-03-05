@@ -12,4 +12,5 @@ public interface IMultiBlockPart {
      */
 
     public int getID();
+
 }

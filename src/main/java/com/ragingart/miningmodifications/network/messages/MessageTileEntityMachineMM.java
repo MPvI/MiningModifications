@@ -12,9 +12,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
 
-/**
- * Created by MaaT on 02.09.2014.
- */
 public class MessageTileEntityMachineMM implements IMessage,IMessageHandler<MessageTileEntityMachineMM,IMessage>{
 
     private MachineHelper aHelper;

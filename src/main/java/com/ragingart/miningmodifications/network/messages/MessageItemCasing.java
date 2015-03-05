@@ -1,7 +1,7 @@
 package com.ragingart.miningmodifications.network.messages;
 
 import com.ragingart.miningmodifications.generics.TileEntityMachineMM;
-import com.ragingart.miningmodifications.tileentity.TileEntityMachineBlock;
+import com.ragingart.miningmodifications.tileentity.machines.TileEntityMachineBlock;
 import com.ragingart.miningmodifications.util.CasingHelper;
 import com.ragingart.miningmodifications.util.PlayerInventoryHelper;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;

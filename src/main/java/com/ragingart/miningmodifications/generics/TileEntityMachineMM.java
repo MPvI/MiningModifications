@@ -26,14 +26,18 @@ public abstract class TileEntityMachineMM extends TileEntityMM implements IEnerg
     protected ItemStack inventory;
 
 
-    protected int timer = -1;
+    protected byte timer = -1;
     @Override
     public void updateEntity(){
-        if(!worldObj.isRemote && (timer == -1 || timer%10==0)) {
-            PacketHandler.INSTANCE.sendToAll(new MessageTileEntityMachineMM(this));
-            timer=0;
+        if(!worldObj.isRemote) {
+            if((timer == -1 || timer%10==0)) {
+                PacketHandler.INSTANCE.sendToAll(new MessageTileEntityMachineMM(this));
+            }
+            if(timer >= 104){
+                timer=0;
+            }
+            timer++;
         }
-        timer++;
     }
 
     @Override
@@ -231,23 +235,17 @@ public abstract class TileEntityMachineMM extends TileEntityMM implements IEnerg
 
     @Override
     public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
-        if(machineHelper.hasPort(from.ordinal(),CasingHelper.Port.FINPUT))
-            return tank.fill(resource,doFill);
-        return 0;
+        return tank.fill(resource,doFill);
     }
 
     @Override
     public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
-        if(machineHelper.hasPort(from.ordinal(),CasingHelper.Port.FOUTPUT))
-            return tank.drain(1000,doDrain);
-        return null;
+        return tank.drain(1000,doDrain);
     }
 
     @Override
     public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
-        if(machineHelper.hasPort(from.ordinal(),CasingHelper.Port.FOUTPUT))
-            return tank.drain(maxDrain>1000?1000:maxDrain,doDrain);
-        return null;
+        return tank.drain(maxDrain,doDrain);
     }
 
     @Override

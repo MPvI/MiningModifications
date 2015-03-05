@@ -27,7 +27,7 @@ public class ItemVoidpack extends ItemMM implements IInventoryContainerItem{
     @Override
     public void onUpdate(ItemStack itemStack, World world, Entity entity, int i, boolean b) {
         // Setting all meta to match values
-        if(itemStack.getTagCompound().hasKey("setupComplete") && !itemStack.getTagCompound().getBoolean("setupComplete")){
+        if(itemStack.hasTagCompound() && itemStack.getTagCompound().hasKey("setupComplete") && !itemStack.getTagCompound().getBoolean("setupComplete")){
             for (int j = 0; j < 5; j++) {
                 setMetaState(true,itemStack,j);
             }

@@ -7,6 +7,7 @@ import com.ragingart.miningmodifications.init.*;
 import com.ragingart.miningmodifications.network.PacketHandler;
 import com.ragingart.miningmodifications.proxy.IProxy;
 import com.ragingart.miningmodifications.ref.Reference;
+import com.ragingart.miningmodifications.util.LogHelper;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -15,6 +16,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fluids.FluidRegistry;
 
 @Mod(modid= Reference.MOD_ID,name = Reference.MOD_NAME,version = Reference.VERSION,guiFactory = Reference.GUI_FACTORY,dependencies = Reference.DEPENDENCIES)
 public class MiningModifications {
@@ -71,6 +73,10 @@ public class MiningModifications {
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event)
     {
+        for (int i = 0; i < FluidRegistry.getMaxID(); i++) {
+            LogHelper.info(i+": "+FluidRegistry.getFluidName(i));
+        }
+
         // stuff
     }
 

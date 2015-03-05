@@ -13,7 +13,8 @@ public class Gui {
         COMPACTOR,
         SHARPENINGWHEEL,
         GRINDER,
-        VOIDPACK
+        VOIDPACK,
+        MBLOCK
     }
 
 }

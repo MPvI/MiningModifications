@@ -3,7 +3,7 @@ package com.ragingart.miningmodifications.init;
 import com.ragingart.miningmodifications.ref.Names;
 import com.ragingart.miningmodifications.tileentity.TileEntityCable;
 import com.ragingart.miningmodifications.tileentity.TileEntityCreativeEnergy;
-import com.ragingart.miningmodifications.tileentity.TileEntityMachineBlock;
+import com.ragingart.miningmodifications.tileentity.machines.TileEntityMachineBlock;
 import com.ragingart.miningmodifications.tileentity.TileEntityPlatformBase;
 import com.ragingart.miningmodifications.tileentity.handmachines.TileEntityCompactor;
 import com.ragingart.miningmodifications.tileentity.handmachines.TileEntityCrank;

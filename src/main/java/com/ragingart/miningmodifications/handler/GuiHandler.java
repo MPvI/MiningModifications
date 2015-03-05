@@ -51,6 +51,9 @@ public class GuiHandler implements IGuiHandler {
         else if(ID == Gui.ID.VOIDPACK.ordinal()){
             return new ContainerVoidpack(player.inventory,itemStack);
         }
+        else if(ID == Gui.ID.MBLOCK.ordinal()){
+            return new ContainerMachineBlock(player.inventory,tileEntity);
+        }
         return 0;
     }
 
@@ -84,6 +87,9 @@ public class GuiHandler implements IGuiHandler {
         }
         else if(ID == Gui.ID.VOIDPACK.ordinal()){
             return new GuiVoidpack(player.inventory,itemStack);
+        }
+        else if(ID == Gui.ID.MBLOCK.ordinal()){
+            return new GuiMachineBlock(player.inventory,tileEntity);
         }
         return 0;
     }

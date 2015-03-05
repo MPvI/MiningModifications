@@ -19,11 +19,11 @@ public class MachineHelper {
 
 
     public MachineHelper(){
-        this(new CasingHelper.Port[]{CasingHelper.Port.BLANK, CasingHelper.Port.BLANK, CasingHelper.Port.BLANK, CasingHelper.Port.BLANK, CasingHelper.Port.BLANK,null});
+        this(false);
     }
 
-    public MachineHelper(CasingHelper.Port[] ports){
-        this(ports,false);
+    public MachineHelper(boolean hasInventory){
+        this(new CasingHelper.Port[]{CasingHelper.Port.BLANK, CasingHelper.Port.BLANK, CasingHelper.Port.BLANK, CasingHelper.Port.BLANK, CasingHelper.Port.BLANK,null},hasInventory);
     }
 
     public MachineHelper(CasingHelper.Port[] ports,boolean hasInventory){
@@ -33,12 +33,16 @@ public class MachineHelper {
 
     // Ports
     public boolean hasPort(int side,CasingHelper.Port port){
-        return side != facing.ordinal() && mPorts[side] == port;
+        if(side==6){
+            return hasPort(port);
+        }else {
+            return side != facing.ordinal() && mPorts[side] == port;
+        }
     }
 
     public boolean hasPort(CasingHelper.Port port){
         boolean result = false;
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 6; i++) {
             result = result || hasPort(i,port);
         }
         return result;
