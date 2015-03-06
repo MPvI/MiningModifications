@@ -38,7 +38,8 @@ public class ClientProxy extends CommonProxy{
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGrinder.class,new TileRendererGrinder());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityLaserSeparator.class,new TileRendererLaserSeparator());
 
-        MinecraftForgeClient.registerItemRenderer(ModItems.spear,new ItemRendererSpear());
+
+        //MinecraftForgeClient.registerItemRenderer(ModItems.spear,new ItemRendererSpear());
         MinecraftForgeClient.registerItemRenderer(ModItems.multitool,new ItemRendererMultitool());
         MinecraftForgeClient.registerItemRenderer(ModItems.voidpack,new ItemRendererVoidpack());
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.PlatformBase),new ItemRendererPlatformBase());
@@ -47,6 +48,7 @@ public class ClientProxy extends CommonProxy{
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.SharpeningWheel),new ItemRendererSharpeningWheel());
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.Crank),new ItemRendererCrank());
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.Grinder),new ItemRendererGrinder());
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.LS),new ItemRendererLS());
 
     }
 }

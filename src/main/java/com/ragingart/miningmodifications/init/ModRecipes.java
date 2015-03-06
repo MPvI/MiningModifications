@@ -35,6 +35,8 @@ public class ModRecipes {
 
         /* Blocks */
         //Shaped
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.LS),"oeo","ebe","oeo",'o',new ItemStack(Blocks.obsidian),'e',"gemEmerald",'b',new ItemStack(ModBlocks.MachineBlock)));
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.MachineBlock),"ppp","pbp","ppp",'p',"plateIron",'b',Component.BATTERY(1)));
         GameRegistry.addRecipe(new ShapedOreRecipe(Component.PLATFORM(1),"cec","ebe","cec",'b',Component.CIRCUIT(),'e',Component.FLUXFIELD(1),'c',Component.CASING(1)));
         GameRegistry.addRecipe(new ShapedOreRecipe(Component.FLUXFIELD(1),"rrr","rbr","rrr",'r',Component.BIG_RS,'b',Component.BATTERY(1)));
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.Charger),"gcc","src","ncc",'c',Component.CASING(1),'r',Component.BIG_RS,'g',Component.SMALL_GOLD,'n',Component.SCREW(1),'s',Component.CIRCUIT()));
