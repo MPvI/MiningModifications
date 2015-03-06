@@ -17,6 +17,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 
 @Mod(modid= Reference.MOD_ID,name = Reference.MOD_NAME,version = Reference.VERSION,guiFactory = Reference.GUI_FACTORY,dependencies = Reference.DEPENDENCIES)
 public class MiningModifications {
@@ -77,6 +78,11 @@ public class MiningModifications {
             LogHelper.info(i+": "+FluidRegistry.getFluidName(i));
         }
 
+        String[] names = OreDictionary.getOreNames();
+
+        for (String name : names) {
+            LogHelper.info(name);
+        }
         // stuff
     }
 

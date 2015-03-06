@@ -6,25 +6,23 @@ import com.ragingart.miningmodifications.generics.TileEntityMachineMultiBlockMM;
 import com.ragingart.miningmodifications.ref.Names;
 import com.ragingart.miningmodifications.ref.RenderIds;
 import com.ragingart.miningmodifications.tileentity.machines.TileEntityLaserSeparator;
-import com.ragingart.miningmodifications.util.LogHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockLaserSeparator extends BlockMachineMM  implements IMultiBlockPart {
     public BlockLaserSeparator() {
         super(Names.Blocks.LS);
-        this.setBlockBounds(0,0.9F,0,1,1,1);
+        this.setBlockBounds(0,0,0,1,1,1);
     }
 
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int side, float hitX, float hitY, float hitZ) {
-        boolean result = ((TileEntityMachineMultiBlockMM)world.getTileEntity(x,y,z)).checkStructure(world,x-2,y-1,z-2);
-        LogHelper.info(result);
-        return result;
+        return ((TileEntityMachineMultiBlockMM)world.getTileEntity(x,y,z)).checkStructure(world,x-2,y-1,z-2);
     }
 
     @Override
@@ -44,7 +42,17 @@ public class BlockLaserSeparator extends BlockMachineMM  implements IMultiBlockP
         return new TileEntityLaserSeparator();
     }
 
-
+    @Override
+    public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
+        if(world.getTileEntity(x,y,z) instanceof TileEntityLaserSeparator ){
+            TileEntityLaserSeparator aTile = (TileEntityLaserSeparator) world.getTileEntity(x,y,z);
+            if(aTile.isCompleteStructure()){
+                this.setBlockBounds(-1,0,-1,2,1,2);
+            }else{
+                this.setBlockBounds(0,0,0,1,1,1);
+            }
+        }
+    }
 
     @Override
     public int getRenderType()
@@ -61,7 +69,7 @@ public class BlockLaserSeparator extends BlockMachineMM  implements IMultiBlockP
     @Override
     public boolean renderAsNormalBlock()
     {
-        return true;
+        return false;
     }
 
     @Override

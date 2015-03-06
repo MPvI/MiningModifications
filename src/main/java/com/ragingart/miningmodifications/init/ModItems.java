@@ -20,13 +20,19 @@ public class ModItems {
     public static final ItemMM dust_nickel = new ItemDustNickel();
     //
     public static final ItemMM voidpack = new ItemVoidpack();
-
+    public static final ItemMM gem_olivine = new ItemOlivine();
+    public static final ItemMM silicon = new ItemSilicon();
+    public static final ItemMM circuit_wire = new ItemCircuitWire();
+    public static final ItemMM circuit = new ItemCircuit();
+    public static final ItemMM multitoolblade = new ItemMultitoolBlade();
+    public static final ItemMM multitoolhandle = new ItemMultitoolHandle();
 
 
     public static void init()
     {
         //Tools
         GameRegistry.registerItem(multitool, Names.Items.MULTITOOL);
+        GameRegistry.registerItem(voidpack,Names.Items.VOIDPACK);
         //GameRegistry.registerItem(spear,Names.Items.WEAPON_SPEAR);
         //Parts
         GameRegistry.registerItem(battery,Names.Items.BATTERY);
@@ -36,8 +42,11 @@ public class ModItems {
         //Worldgen
         GameRegistry.registerItem(ingot_nickel,Names.Items.INGOT_NICKEL);
         GameRegistry.registerItem(dust_nickel,Names.Items.DUST_NICKEL);
-        //
-        GameRegistry.registerItem(voidpack,Names.Items.VOIDPACK);
-
+        GameRegistry.registerItem(gem_olivine,Names.Items.OLIVINE);
+        GameRegistry.registerItem(silicon,Names.Items.SILICON);
+        GameRegistry.registerItem(circuit_wire,Names.Items.CIRCUIT_WIRE);
+        GameRegistry.registerItem(circuit,Names.Items.CIRCUIT);
+        GameRegistry.registerItem(multitoolblade,Names.Items.MULTITOOLBLADE);
+        GameRegistry.registerItem(multitoolhandle,Names.Items.MULTITOOLHANDLE);
     }
 }

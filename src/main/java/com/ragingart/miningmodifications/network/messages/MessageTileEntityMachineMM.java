@@ -8,6 +8,8 @@ import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
@@ -21,6 +23,8 @@ public class MessageTileEntityMachineMM implements IMessage,IMessageHandler<Mess
     private int energy;
     private int famount;
     private int fid;
+    private ItemStack inv;
+    private boolean wD;
 
     public MessageTileEntityMachineMM(){
         aHelper=new MachineHelper();
@@ -34,6 +38,8 @@ public class MessageTileEntityMachineMM implements IMessage,IMessageHandler<Mess
         aHelper=te.getMachineHelper();
         famount = te.getFluidAmount();
         fid = te.getFluidID();
+        inv = te.getStackInSlot(0);
+        wD = te.isWorkDone();
     }
 
     @Override
@@ -49,6 +55,12 @@ public class MessageTileEntityMachineMM implements IMessage,IMessageHandler<Mess
         for (int i = 0; i < 6; i++) {
             aHelper.setPort(i, buf.readInt());
         }
+        try{
+            inv = new ItemStack(Item.getItemById(buf.readShort()),buf.readByte(),buf.readShort());
+        }catch (Exception e){
+            inv = null;
+        }
+        wD=buf.readBoolean();
     }
 
     @Override
@@ -68,6 +80,12 @@ public class MessageTileEntityMachineMM implements IMessage,IMessageHandler<Mess
                 buf.writeInt(aHelper.getPort(i).ordinal());
             }
         }
+        if(inv!=null) {
+            buf.writeShort(Item.getIdFromItem(inv.getItem()));
+            buf.writeByte(inv.stackSize);
+            buf.writeShort(inv.getItemDamage());
+        }
+        buf.writeBoolean(wD);
     }
 
     @Override
@@ -82,6 +100,11 @@ public class MessageTileEntityMachineMM implements IMessage,IMessageHandler<Mess
             ((TileEntityMachineMM) aTile).getTank().setFluid(new FluidStack(message.fid,message.famount));
 
             ((TileEntityMachineMM) aTile).setEnergy(message.energy);
+
+            ((TileEntityMachineMM) aTile).setInventorySlotContents(0,message.inv);
+
+            ((TileEntityMachineMM) aTile).setWorkDone(message.wD);
+
             aClient.theWorld.markBlockForUpdate(message.x,message.y,message.z);
         }
         return null;

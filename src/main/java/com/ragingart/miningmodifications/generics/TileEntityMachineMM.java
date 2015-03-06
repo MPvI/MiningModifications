@@ -14,16 +14,14 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.*;
 
-/**
- * Created by MaaT on 29.08.2014.
- */
 
 public abstract class TileEntityMachineMM extends TileEntityMM implements IEnergyHandler,ISidedInventory,IFluidHandler {
 
     protected EnergyStorage energy = new EnergyStorage(100000);
     protected FluidTank tank = new FluidTank(50000);
     protected MachineHelper machineHelper = new MachineHelper();
-    protected ItemStack inventory;
+    protected ItemStack inventory = null;
+    protected boolean isWorkDone = true;
 
 
     protected byte timer = -1;
@@ -84,7 +82,17 @@ public abstract class TileEntityMachineMM extends TileEntityMM implements IEnerg
      * Only determines if item is ready for extraction / machine ready for insertion
      * @return
      */
-    public abstract boolean isWorkDone();
+    public boolean isWorkDone(){
+        return isWorkDone;
+    }
+
+    public void setWorkDone(boolean isWorkDone) {
+        this.isWorkDone = isWorkDone;
+    }
+
+    public byte getTimer() {
+        return timer;
+    }
 
     public boolean canAcceptPort(int i){
         for(int p:validPorts()){

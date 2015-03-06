@@ -12,5 +12,7 @@ public class ModOreDict {
         OreDictionary.registerOre("ingotNickel",ModItems.ingot_nickel);
         OreDictionary.registerOre("oreNickel",ModBlocks.Ore);
         OreDictionary.registerOre("plateIron",ModItems.plate_iron);
+        OreDictionary.registerOre("gemOlivine",ModItems.gem_olivine);
+        OreDictionary.registerOre("itemSilicon",ModItems.silicon);
     }
 }

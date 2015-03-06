@@ -38,7 +38,7 @@ public class RFHelper {
     }
 
     public static void transferEnergyToAdjacent(TileEntity aTile){
-        transferEnergyToAdjacent(aTile,10);
+        transferEnergyToAdjacent(aTile,1000);
     }
 
     public static void transferEnergyToAdjacent(TileEntity aTile,int perTick){

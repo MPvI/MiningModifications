@@ -53,6 +53,12 @@ public class Names {
 
         public static final String WEAPON_SPEAR = "weapon_spear";
         public static final String VOIDPACK = "voidpack";
+        public static final String OLIVINE = "olivine";
+        public static final String SILICON = "silicon";
+        public static final String CIRCUIT_WIRE = "circuit_wire";
+        public static final String CIRCUIT = "circuit";
+        public static final String MULTITOOLBLADE = "multitoolblade";
+        public static final String MULTITOOLHANDLE = "multitoolhandle";
     }
     
     public static final class Textures {

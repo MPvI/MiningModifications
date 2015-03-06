@@ -12,6 +12,7 @@ import com.ragingart.miningmodifications.tileentity.handmachines.TileEntityCompa
 import com.ragingart.miningmodifications.tileentity.handmachines.TileEntityCrank;
 import com.ragingart.miningmodifications.tileentity.handmachines.TileEntityGrinder;
 import com.ragingart.miningmodifications.tileentity.handmachines.TileEntitySharpeningWheel;
+import com.ragingart.miningmodifications.tileentity.machines.TileEntityLaserSeparator;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import net.minecraft.item.Item;
@@ -28,20 +29,18 @@ public class ClientProxy extends CommonProxy{
         RenderIds.LSC = RenderingRegistry.getNextAvailableRenderId();
 
         RenderingRegistry.registerBlockHandler(RenderIds.FluxField,new BlockRendererFluxField());
-        RenderingRegistry.registerBlockHandler(RenderIds.LSC,new BlockRendererFluxField());
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPlatformBase.class, new TileRendererPlatformBase());
-        //ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFluxField.class,new TileRendererFluxField());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCable.class,new TileRendererCable());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCompactor.class,new TileRendererCompactor());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCrank.class,new TileRendererCrank());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySharpeningWheel.class,new TileRendererSharpeningWheel());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGrinder.class,new TileRendererGrinder());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityLaserSeparator.class,new TileRendererLaserSeparator());
 
         MinecraftForgeClient.registerItemRenderer(ModItems.spear,new ItemRendererSpear());
         MinecraftForgeClient.registerItemRenderer(ModItems.multitool,new ItemRendererMultitool());
         MinecraftForgeClient.registerItemRenderer(ModItems.voidpack,new ItemRendererVoidpack());
-        //MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.FluxField),new ItemRendererFluxField());
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.PlatformBase),new ItemRendererPlatformBase());
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.Cable),new ItemRendererCable());
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.Compactor),new ItemRendererCompactor());

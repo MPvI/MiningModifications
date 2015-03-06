@@ -25,6 +25,7 @@ public class BlockRendererFluxField implements ISimpleBlockRenderingHandler {
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA,GL11.GL_ONE_MINUS_SRC_ALPHA);
                drawPlatform(world, x, y, z,false);
                drawPlatform(world, x, y, z,true);
+        GL11.glDisable(GL11.GL_BLEND);
         GL11.glPopMatrix();
         return true;
     }

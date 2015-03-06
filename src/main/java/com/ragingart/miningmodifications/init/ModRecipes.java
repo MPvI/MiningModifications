@@ -17,10 +17,14 @@ public class ModRecipes {
     {
         /* Items */
         // Shaped
-        GameRegistry.addRecipe(new ShapedOreRecipe(Component.MULTITOOL(),"r d"," s ","s  ",'s', Component.HANDLE,'r',Component.BATTERY(1),'d',Component.GEM));
+        GameRegistry.addRecipe(new ShapedOreRecipe(Component.MULTITOOLBLADE()," d ","dsd","   ",'d',"gemDiamond",'s',Component.SCREW(1)));
+        GameRegistry.addRecipe(new ShapedOreRecipe(Component.MULTITOOLHANDLE(),"www","o o"," o ",'w',"plankWood",'o',new ItemStack(Blocks.obsidian)));
+        GameRegistry.addRecipe(new ShapedOreRecipe(Component.MULTITOOL(),"bdb","oco"," h ",'b',Component.MULTITOOLBLADE(),'d',"gemDiamond",'o',Component.GEM,'h',Component.MULTITOOLHANDLE(),'c',Component.CIRCUIT()));
         GameRegistry.addRecipe(new ShapedOreRecipe(Component.BATTERY(1)," g ","iri","iri",'g', Component.SMALL_GOLD,'i', Component.NORMAL_IRON,'r',Component.SMALL_RS));
         GameRegistry.addRecipe(new ShapedOreRecipe(Component.CASING(1),"sis","iri","sis",'s',Component.SCREW(1),'i',"plateIron",'r',Component.SMALL_RS));
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.voidpack),"iei","ifi","sis",'i',"plateIron",'e',Items.ender_eye,'f',Component.FLUXFIELD(1),'s',Component.SCREW(1)));
+        GameRegistry.addRecipe(new ShapedOreRecipe(Component.CIRCUIT(),"www","rsr","www",'w',Component.CIRCUITWIRE(1),'r',Component.SMALL_RS,'s',Component.GEM));
+        GameRegistry.addRecipe(new ShapedOreRecipe(Component.CIRCUITWIRE(24),"sss","gng","sss",'s',"itemSilicon",'n',Component.NORMAL_NICKEL,'g',Component.SMALL_GOLD));
         // Shapeless
         GameRegistry.addRecipe(new ShapelessOreRecipe(Component.CASING_ENERGY(1),Component.CASING(1),Component.BATTERY(1),Component.SCREW(1)));
         GameRegistry.addRecipe(new ShapelessOreRecipe(Component.CASING_INPUT(1),Component.CASING(1),Blocks.chest,Component.SCREW(1)));
@@ -31,10 +35,10 @@ public class ModRecipes {
 
         /* Blocks */
         //Shaped
-        GameRegistry.addRecipe(new ShapedOreRecipe(Component.PLATFORM(1),"cec","ebe","cec",'b',Component.BATTERY(1),'e',Component.FLUXFIELD(1),'c',Component.CASING(1)));
+        GameRegistry.addRecipe(new ShapedOreRecipe(Component.PLATFORM(1),"cec","ebe","cec",'b',Component.CIRCUIT(),'e',Component.FLUXFIELD(1),'c',Component.CASING(1)));
         GameRegistry.addRecipe(new ShapedOreRecipe(Component.FLUXFIELD(1),"rrr","rbr","rrr",'r',Component.BIG_RS,'b',Component.BATTERY(1)));
-        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.Charger),"gcc"," rc","ncc",'c',Component.CASING(1),'r',Component.BIG_RS,'g',Component.SMALL_GOLD,'n',Component.SCREW(1)));
-        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.Discharger),"ncc"," rc","gcc",'c',Component.CASING(1),'r',Component.BIG_RS,'g',Component.SMALL_GOLD,'n',Component.SCREW(1)));
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.Charger),"gcc","src","ncc",'c',Component.CASING(1),'r',Component.BIG_RS,'g',Component.SMALL_GOLD,'n',Component.SCREW(1),'s',Component.CIRCUIT()));
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.Discharger),"ncc","src","gcc",'c',Component.CASING(1),'r',Component.BIG_RS,'g',Component.SMALL_GOLD,'n',Component.SCREW(1),'s',Component.CIRCUIT()));
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.WaterTurbine),"bcc"," rc","bcc",'c',Component.CASING(1),'r',Component.BIG_RS,'b',Items.bucket));
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.RFEnergyStorage),"bcc"," rc","bcc",'c',Component.CASING(1),'r',Component.BIG_RS,'b',Component.BATTERY(1)));
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.Cable,16),"rgr","nnn","rgr",'r',Component.BIG_RS,'g',Component.SMALL_GOLD,'n',Component.NORMAL_NICKEL));

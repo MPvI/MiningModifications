@@ -9,7 +9,6 @@ import com.ragingart.miningmodifications.item.ItemBlockPecoraitOre;
 import com.ragingart.miningmodifications.util.CasingHelper;
 import com.ragingart.miningmodifications.util.MachineHelper;
 import net.minecraft.block.Block;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -21,7 +20,7 @@ public class TileEntityLaserSeparator extends TileEntityMachineMultiBlockMM {
 
 
     static{
-        int[][] mBase=new int[][]{{0,0,0,0,0},{2,3,1,3,2},{0,0,2,0,0}}; // 6 Parts;
+        int[][] mBase=new int[][]{{0,0,2,0,0},{2,3,1,3,2},{0,0,0,0,0}}; // 6 Parts;
         int[][] aMachinePart = new int[][]{{0,0,0,0,0},{0,0,2,0,0},{0,0,0,0,0}}; // 1 Part
         int[][] aConnectionPart = new int[][]{{0,0,0,0,0},{0,3,3,3,0},{0,0,0,0,0}}; // 3 Parts
 
@@ -31,8 +30,8 @@ public class TileEntityLaserSeparator extends TileEntityMachineMultiBlockMM {
     }
 
     private long processTimer=0L;
-    private boolean isWorkDone=true;
     private boolean readyForSeparation=false;
+    private boolean completeStructure=false;
 
     public MultiBlockPort energy = null;
     public MultiBlockPort input = null;
@@ -44,12 +43,17 @@ public class TileEntityLaserSeparator extends TileEntityMachineMultiBlockMM {
     @Override
     public void updateEntity() {
         super.updateEntity();
-        if(!worldObj.isRemote && (timer==-1 || timer%50==0)) {
-            if(checkStructure(worldObj,xCoord-mOffsets[0],yCoord-mOffsets[1],zCoord-mOffsets[2])) {
-                process();
+        if(timer==-1 || timer%50==0) {
+            completeStructure = checkStructure(worldObj, xCoord - mOffsets[0], yCoord - mOffsets[1], zCoord - mOffsets[2]);
+            if (!worldObj.isRemote) {
+                if (completeStructure) {
+                    process();
+                }
             }
         }
     }
+
+
 
     @Override
     public boolean checkStructure(World world, int x, int y, int z) {
@@ -111,6 +115,10 @@ public class TileEntityLaserSeparator extends TileEntityMachineMultiBlockMM {
         }
     }
 
+    public boolean isCompleteStructure() {
+        return completeStructure;
+    }
+
     // 2x SiO -> Si + SiO2
     // 1x Si + O2 -> SiO2
     // 4x H20 + O2 -> 2x H2O2 + 2 coolingH2O
@@ -128,7 +136,8 @@ public class TileEntityLaserSeparator extends TileEntityMachineMultiBlockMM {
         }
 
         if(readyForSeparation) {
-            this.setInventorySlotContents(0, input.getTile(worldObj).decrStackSize(0, 1));
+            input.getTile(worldObj).decrStackSize(0, 1);
+            this.setInventorySlotContents(0,new ItemStack(ModBlocks.Ore));
             if (energy.getTile(worldObj).extractEnergy(ForgeDirection.UNKNOWN, 100000, false) == 100000) {
                 processTimer = System.currentTimeMillis();
                 isWorkDone = false;
@@ -140,16 +149,25 @@ public class TileEntityLaserSeparator extends TileEntityMachineMultiBlockMM {
             if (System.currentTimeMillis() - processTimer >= 25000) {
                 this.setInventorySlotContents(0, null);
                 output1.getTile(worldObj).setInventorySlotContents(0, new ItemStack(ModItems.dust_nickel));
-                output2.getTile(worldObj).setInventorySlotContents(0, new ItemStack(ModItems.dust_nickel));
+                output2.getTile(worldObj).setInventorySlotContents(0, new ItemStack(ModItems.gem_olivine));
                 foutput.getTile(worldObj).fill(ForgeDirection.UNKNOWN, new FluidStack(1, 1000), true);
                 if(foutput.getTile(worldObj).getFluidAmount() == 2000){
-                    foutput.getTile(worldObj).drain(ForgeDirection.UNKNOWN,2000,true);
-                    worldObj.spawnEntityInWorld(new EntityItem(worldObj,xCoord,yCoord+1,zCoord,new ItemStack(ModBlocks.Ore)));
+                    foutput.getTile(worldObj).drain(ForgeDirection.UNKNOWN, 2000, true);
+                    if(foutput.getTile(worldObj).getStackInSlot(0)==null) {
+                        foutput.getTile(worldObj).setInventorySlotContents(0, new ItemStack(ModItems.silicon));
+                    }else{
+                        ItemStack aStack = foutput.getTile(worldObj).getStackInSlot(0);
+                        aStack.stackSize++;
+                        foutput.getTile(worldObj).setInventorySlotContents(0,aStack);
+                    }
                 }
                 isWorkDone = true;
-            } else {
-                System.out.println(System.currentTimeMillis() - processTimer);
             }
+        }
+
+        if(foutput.getTile(worldObj).getStackInSlot(0)!=null && output2.getTile(worldObj).getStackInSlot(0)==null){
+            output2.getTile(worldObj).setInventorySlotContents(0,foutput.getTile(worldObj).getStackInSlot(0));
+            foutput.getTile(worldObj).setInventorySlotContents(0,null);
         }
     }
 
