@@ -3,6 +3,7 @@ package com.ragingart.miningmodifications.block.machines;
 import com.ragingart.miningmodifications.api.IMultiBlockPart;
 import com.ragingart.miningmodifications.generics.BlockMachineMM;
 import com.ragingart.miningmodifications.generics.TileEntityMachineMultiBlockMM;
+import com.ragingart.miningmodifications.proxy.ClientProxy;
 import com.ragingart.miningmodifications.ref.Names;
 import com.ragingart.miningmodifications.ref.RenderIds;
 import com.ragingart.miningmodifications.tileentity.machines.TileEntityLaserSeparator;
@@ -29,7 +30,7 @@ public class BlockLaserSeparator extends BlockMachineMM  implements IMultiBlockP
     @SideOnly(Side.CLIENT)
     public int getRenderBlockPass()
     {
-        return 0;
+        return 1;
     }
 
     @Override
@@ -55,6 +56,12 @@ public class BlockLaserSeparator extends BlockMachineMM  implements IMultiBlockP
     }
 
     @Override
+    public boolean canRenderInPass(int pass) {
+        ClientProxy.renderPass = pass;
+        return true;
+    }
+
+    @Override
     public int getRenderType()
     {
         return RenderIds.LSC;
@@ -71,6 +78,8 @@ public class BlockLaserSeparator extends BlockMachineMM  implements IMultiBlockP
     {
         return false;
     }
+
+
 
     @Override
     public int getID() {

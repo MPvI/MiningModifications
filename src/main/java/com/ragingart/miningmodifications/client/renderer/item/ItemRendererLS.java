@@ -42,7 +42,7 @@ public class ItemRendererLS implements IItemRenderer {
                 Minecraft.getMinecraft().renderEngine.bindTexture(Models.LaserSeparator);
 
                 GL11.glRotatef(180, -1.0F, 0.0F, 0.0F);
-                model.renderMain(0.0625F);
+                model.renderBase(0.0625F);
 
                 GL11.glPopMatrix();
                 break;
@@ -53,7 +53,7 @@ public class ItemRendererLS implements IItemRenderer {
                 Minecraft.getMinecraft().renderEngine.bindTexture(Models.LaserSeparator);
 
                 GL11.glRotatef(180, -1.0F, 0.0F, 0.0F);
-                model.renderMain(0.0625F);
+                model.renderBase(0.0625F);
 
                 GL11.glPopMatrix();
                 break;
@@ -64,7 +64,7 @@ public class ItemRendererLS implements IItemRenderer {
                 Minecraft.getMinecraft().renderEngine.bindTexture(Models.LaserSeparator);
 
                 GL11.glRotatef(180, -1.0F, 0.0F, 0.0F);
-                model.renderMain(0.0625F);
+                model.renderBase(0.0625F);
 
                 GL11.glPopMatrix();
                 break;
@@ -76,7 +76,7 @@ public class ItemRendererLS implements IItemRenderer {
 
                 GL11.glRotatef(180, -1.0F, 0.0F, 0.0F);
 
-                model.renderMain(0.0625F);
+                model.renderBase(0.0625F);
 
                 GL11.glPopMatrix();
                 break;

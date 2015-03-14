@@ -19,6 +19,8 @@ import net.minecraft.item.Item;
 import net.minecraftforge.client.MinecraftForgeClient;
 
 public class ClientProxy extends CommonProxy{
+    public static int renderPass;
+
     public void registerModels(){
         RenderIds.PlatformBase = RenderingRegistry.getNextAvailableRenderId();
         RenderIds.FluxField = RenderingRegistry.getNextAvailableRenderId();

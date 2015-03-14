@@ -5,16 +5,17 @@ import com.ragingart.miningmodifications.api.IMultiBlockPart;
 import com.ragingart.miningmodifications.generics.TileEntityMachineMultiBlockMM;
 import com.ragingart.miningmodifications.init.ModBlocks;
 import com.ragingart.miningmodifications.init.ModItems;
-import com.ragingart.miningmodifications.item.ItemBlockPecoraitOre;
 import com.ragingart.miningmodifications.util.CasingHelper;
 import com.ragingart.miningmodifications.util.MachineHelper;
 import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class TileEntityLaserSeparator extends TileEntityMachineMultiBlockMM {
 
@@ -128,7 +129,7 @@ public class TileEntityLaserSeparator extends TileEntityMachineMultiBlockMM {
 
         if(isWorkDone()) {
             energyBufferFilled = energy.getTile(worldObj).getMaxEnergyStored(ForgeDirection.UNKNOWN) == energy.getTile(worldObj).getEnergyStored(ForgeDirection.UNKNOWN);
-            inputMaterialPresent = input.getTile(worldObj).getStackInSlot(0) != null && input.getTile(worldObj).getStackInSlot(0).getItem() instanceof ItemBlockPecoraitOre;
+            inputMaterialPresent = input.getTile(worldObj).getStackInSlot(0) != null && OreDictionary.getOreName(Item.getIdFromItem(input.getTile(worldObj).getStackInSlot(0).getItem())).equals("oreNickel");
             outputsHaveSpace = output1.getTile(worldObj).getStackInSlot(0) == null && output2.getTile(worldObj).getStackInSlot(0) == null;
             coolerIsReady = foutput.getTile(worldObj).getFluidAmount() <= 1000;
 

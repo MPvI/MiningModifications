@@ -27,15 +27,15 @@ public abstract class TileEntityMachineMM extends TileEntityMM implements IEnerg
     protected byte timer = -1;
     @Override
     public void updateEntity(){
-        if(!worldObj.isRemote) {
-            if((timer == -1 || timer%10==0)) {
+        if((timer == -1 || timer%10==0)) {
+            if(!worldObj.isRemote) {
                 PacketHandler.INSTANCE.sendToAll(new MessageTileEntityMachineMM(this));
             }
-            if(timer >= 104){
-                timer=0;
-            }
-            timer++;
         }
+        if(timer >= 120){
+            timer=0;
+        }
+        timer++;
     }
 
     @Override
